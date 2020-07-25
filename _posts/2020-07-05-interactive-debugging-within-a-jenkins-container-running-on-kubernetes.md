@@ -1,14 +1,11 @@
 ---
-title: Interactive debugging within a Jenkins container running on Kubernetes
+title: Machine Learning.
 description: Interactive debugging within a Jenkins container running on Kubernetes
 categories:
   - machine-learning
 tags:
-  - kubernetes
-  - jenkins
-  - packer
-  - ansible
-  - debug
+  - machine-learning
+  #- jenkins
 toc: true
 toc_sticky: true
 comments: true
@@ -23,108 +20,82 @@ excerpt: |
 
 ## Introduction
 
-Popular DevOps tools like Packer and Ansible come with the ability to do interactive debugging, which is essential
-when troubleshooting issues quickly.
+(Notes from a reading of [Cohen and Welling: Steerable CNNs][steerable-cnn].)
 
-However, what happens when you're running your CI pipelines on Kubernetes?
+Consider $$\mathbb{R}^2$$ as an affine hyperplane in $$\mathbb{R}^3$$, embedded via the map $$x\mapsto (x,1)$$. Then the Euclidean motion group $$\tilde G = \mathbb{R}^2\ltimes O(2)$$ has a convenient matrix representation. Let $$r$$ be a rotation and $$t$$ a translation. Then
 
-## Problem
+\\[
+\begin{split}
+r &= \begin{pmatrix} R & 0 \\\\ 0 & 1 \\\\ \end{pmatrix} \\\\\\\\
+t &= \begin{pmatrix} I & T \\\\ 0 & 1 \\\\ \end{pmatrix}
+\end{split}
+\\]
 
-The problem with running your CI pipelines on Kubernetes is that tools like Packer and Ansible dont allow
-interactive debugging within containers using standard configuration, meaning "pause on error" functionality will
-not work.
+where $$R\in O(2)$$ and $$T\in \mathbb{R}^2$$. Given $$x\in \mathbb{R}^2$$, we may identify it with a translation map in $$\tilde G$$ via
 
-I'm not sure the exact reason why, but suspect it's to do with not having a terminal session attached, along with
-other missing environment settings.
+$$\bar x = \begin{pmatrix} I & x \\ 0 & 1 \\ \end{pmatrix}.$$
 
-I've even seen issues where interactive debugging doesn't work *outside* of containers, like the
-"[-on-error=ask and -debug doesn't prompt when using WSL](https://github.com/hashicorp/packer/issues/9170)" issue I
-logged for Packer.
+In image recognition, $$\mathbb{Z}^2$$ parametrizes the pixels of an image with infinite width and height, and a discrete subgroup $$G$$ of $$\tilde G$$ acts on this parametrization. In particular, $$G = \mathbb{Z}^2\ltimes D_4$$, so that our parametrization is the homogeneous space $$\mathbb{Z}^2 = G/D_4$$. Let’s call this parametrization the *pixel space*.
 
-## Why debug within the pipeline?
+Images are described by *feature maps*, which are functions  $$f:G/D_4 \rightarrow \mathbb{R}^K$$, with each dimension of the target interpreted as a color channel. For example, $$K=3$$ may correspond to an RGB image, and $$K=4$$ may correspond to a CMYK image. A feature map typically takes non-negative rational values, and these values correspond to pixel intensities. A representation of a real-world image would thus be a compactly supported feature map.
 
-Some may suggest the answer is to run these tools locally. Sure, both Packer and Ansible can run locally in your
-favourite console without issue, but, what if your CI pipeline has several stages that change the environment
-_before_ Packer and Ansible are used?
+Over the pixel space, we have a homogeneous vector bundle $$G\times_{D_4} \mathbb{R}^K$$ with an action by the discrete motion group given by $$ g'\cdot(g,v) = (g'g, v)$$. Let $$\mathcal{F} = \Gamma(G\times_{D_4} \mathbb{R}^K)$$ be the space of all feature maps. $$G$$ acts on it by left translation:
+$$ \pi(tr) f(xD_4) = (tr)\cdot f((tr)^{-1}\cdot xD_4).$$
 
-You can create scripts to mimick what your CI pipelines stages do, and prepare the environment accordingly, but
-this will quickly become out-of-date, so just becomes extra maintainance.
+Let $$\Psi: \mathcal{F}\rightarrow \mathbb{R}^{K’}$$ be a *filter bank*. This can be thought of as a collection of $$K'$$ linear functionals on the space of feature maps. Each linear functional is an operation that is performed on the value of a fixed pixel (which we may as well assume is the origin). Each linear functional outputs a weighted sum of the value associated to the fixed pixel and its neighbors. By translating pixels to the origin, we can construct a feature map $$\Psi\ast f\in \mathcal{F}’$$, where $$\mathcal{F}’ = \Gamma(G\times_{D_4} \mathbb{R}^{K’})$$ is another space of feature maps. This is defined as follows:
 
-## Scenario
+$$(\Psi\ast f)(x) = \Psi(\pi(\bar x)^{-1} f).$$
 
-I was working on a CI pipeline to build Golden Images, which could take an hour or more between builds. This was
-painfully slow to develop and troubleshoot, as there were limited build attempts per day.
+Thus we get a map $$\Phi:\mathcal{F}\rightarrow \mathcal{F}’$$ via $$\Phi(f) = \Psi\ast f$$. This map is called a *convolutional neural network*.
 
-So, I started investigating methods on interactive debugging within a Kubernetes pipeline. My Google-fu failed me.
-There was simple nothing out there.
+Let $$(\mathbb{R}^{K’},\rho)$$ be a representation of $$D_4$$ on the model fiber of $$\mathcal{F}’$$. Our objective is to construct a representation $$(\mathcal{F}’,\pi’)$$ such that if the filter bank $$\Psi$$ intertwines the dihedral group representations $$(\mathcal{F},\pi)$$ and $$(\mathbb{R}^{K'},\rho)$$, then the convolutional neural network $$\Phi$$ intertwines the discrete motion group representations $$(\mathcal{F},\pi)$$ and $$(\mathcal{F}',\pi')$$. First we need some algebra:
 
-## Solution
+**Lemma.** Let $$r$$ be a rotation, $$t$$ a translation, and $$\bar x$$ the translation corresponding to the position $$x\in\mathbb{R}^2$$. Then
 
-Here is the solution I came up with:
+$$ (tr)^{-1} \bar x^{-1} r = \overline{(tr)^{-1}\cdot x}. $$
 
-1. Install a terminal multiplexer (like `Screen`) within the build container, which allowed sessions you can attach to:
+The proof is a straightforward application of the given matrix representation. This result leads to the following equivariance rule.
 
-    ```bash
-    # part of Dockerfile
-    # Install dependencies and utils
-    apt-get update && apt-get install -y Screen
-    ```
+**Proposition.** Let $$r$$ be a rotation, $$t$$ a translation, and $$\bar x$$ the translation corresponding to the position $$x\in\mathbb{Z}^2$$. If $$\Psi\pi(r) = \rho(r)\Psi$$ for all $$r\in D_4$$, then
 
-1. Use Packer's new [`error-cleanup-provisioner`](https://www.packer.io/docs/templates/provisioners#on-error-provisioner)
-to pause the build if an error occurs:  
-(**NOTE**: This provisioner will not run unless the normal provisioning run fails)
+$$ (\Psi\ast \pi(tr) f)(x) = \rho(r)(\Psi\ast f)((tr)^{-1}\cdot x).$$
 
-    ```json
-    "error-cleanup-provisioner": {
-        "type": "shell-local",
-        "inline": [
-            "echo 'Running [error-cleanup-provisioner] as an error occurred...'",
-            "echo 'Sleeping for 2h...'",
-            "sleep 2h"
-        ]
-    }
-    ```
+*Proof.* By using an identity trick, we can exploit our two versions of the same map to produce the equivariance law:
 
-1. Connect to the build container within Kubernetes:
+\\[
+\begin{split}
+(\Psi\ast \pi(tr) f)(x) &= \Psi(\pi(\bar x)^{-1}\pi(tr)f)\\\\ &= \rho(r)\Psi(\pi(r)\pi(r)^{-1}\pi(\bar x)^{-1}\pi(tr)f) \\\\ &= \rho(r)\Psi(\pi(r^{-1}\bar x^{-1}tr)f)\\\\ &= \rho(r)\Psi(\pi((tr)^{-1}\bar xr)^{-1}f)\\\\ &= \rho(r)\Psi(\pi(\overline{(tr)^{-1}\cdot x})^{-1}f)\\\\ &= \rho(r)(\Psi\ast f)((tr)^{-1}\cdot x)
+\end{split}
+\\]
 
-    ```bash
-    # find Jenkins pod name
-    podname=$(kubectl get pod --namespace jenkins -l jenkins=slave -o jsonpath="{.items[0].metadata.name}")
+With this calculation in mind, we are now in a position to define a representation of $$G$$ on $$\mathcal{F}'$$:
 
-    # enter container shell
-    kubectl exec --namespace jenkins -it "$podname" -- /bin/sh
-    ```
+$$ \pi'(tr)(\Psi\ast f)(x) = \rho(x)(\Psi\ast f)((tr)^{-1}\cdot x). $$
 
-1. Attach to the Screen session:  
-(**NOTE**: Initially, when you enter the container shell, you won't see any CI job environment changes)
+To verify this, we note that one checks the relation $$f(t_1r_1t_2r_2) = f(t_1r_1)f(t_2r_2)$$ by using the fact that the conjugate of a translation by a rotation is again a translation, and that
 
-    ```bash
-    # show env vars
-    # note the Jenkinfile job env vars are missing (eg: CI_DEBUG_ENABLED, and PACKER_*)
-    printenv | sort | grep -E "CI_|PACKER"
+$$ t_1r_1t_2r_2 = t_1r_1t_2r_1^{-1}r_1r_2. $$
 
-    # list Screen sessions
-    screen -ls
+As a consequence, we get an *intertwining property*:
 
-    # attach detached session
-    screen -r
+**Corollary.** If $$\Psi\pi(r) = \rho(r)\Psi$$ for all $$r\in D_4$$, then $$ \Phi\, \pi(g) = \pi'(g)\, \Phi $$ for all $$g\in G$$.
 
-    # show env vars
-    # now Jenkins job env vars exist
-    printenv | sort | grep -E "CI_|PACKER"
-    ```
+Whenever we can find representations $$(\mathcal{F},\pi)$$ and $$(\mathcal{F}',\pi')$$ for which $$\Phi$$ is an intertwiner, we say that $$\Phi$$ is a *steerable convolutional neural network*.
 
-1. Use an interactive debugger, like the [Ansible playbook debugger](https://docs.ansible.com/ansible/latest/user_guide/playbooks_debugger.html).
+To determine the homogeneous vector bundle of which  $$\Psi\ast f$$ is a section, it is enough to calculate the action of $$D_4$$ on $$(\Psi\ast f)(0)$$:
 
-    ```bash
-    # set config
-    export ANSIBLE_CONFIG="./ansible/ansible.cfg"
+\\[\pi'(r)(\Psi\ast f)(0) = \rho(r)(\Psi\ast f)(\pi(r)^{-1}\cdot 0) = \rho(r)(\Psi\ast f)(0).\\]
 
-    # simple ping check
-    ansible all -m ping --check --user packer -i /tmp/packer-provisioner-*
+This means that $$ \Psi\ast f\in \Gamma(G\times_\rho \mathbb{R}^{K'})$$. From representation theory, we know that
 
-    # run playbook
-    ansible-playbook ./ansible/playbook-with-error.yml -i /tmp/packer-provisioner-*
-    ```
+$$\Gamma(G\times_\rho \mathbb{R}^{K'}) \cong Ind_{D_4}^G(\rho)$$
 
-Visit my [debug-k8s-pipeline](https://github.com/adamrushuk/debug-k8s-pipeline) repo for the full code examples.
+thus we may interpret $$ \Phi$$ as a map into an induced representation of the discrete motion group. Moreover, we can treat $$ \Gamma(G\times_{D_4} \mathbb{R}^K)$$ as an induced representation as well.
+
+On $$ \mathcal{F}$$, the action of $$ D_4$$ should only rotate the pixel of the image; there should be no linear transformations within fibers (i.e. no transformations of color channels). This means that $$ D_4$$ has a trivial action on the value of $$ f$$ at the origin. Hence we are regarding $$ \mathcal{F}$$ as $$ \Gamma(G\times_{\rho_0} \mathbb{R}^K)$$, where $$ \rho_0$$ denotes the trivial representation of $$ D_4$$. To summarize,
+\\[\Gamma(G\times_{\rho_0} \mathbb{R}^K)\cong Ind_{D_4}^G(\rho_0)\cong C(\mathbb{Z}^2).\\]
+We can now restate this picture in a representation theoretic context.
+
+**Theorem.** Let $$ (\mathbb{R}^K,\rho_0)$$ be a trivial representation of $$ D_4$$ and $$ Ind_{D_4}^G(\rho_0)$$ a space of feature maps. Let $$ \Psi : Ind_{D_4}^G(\rho_0) \rightarrow \mathbb{R}^{K'}$$ be a $$ D_4$$-equivariant filter with respect to $$ (\mathbb{R}^{K'},\rho)$$. Then \\[\Phi: Ind_{D_4}^G(\rho_0) \rightarrow Ind_{D_4}^G(\rho)\\] is a steerable convolutional neural network.
+
+[steerable-cnn]: https://arxiv.org/abs/1612.08498
