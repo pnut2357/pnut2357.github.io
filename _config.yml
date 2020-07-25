@@ -97,7 +97,7 @@ analytics:
 # Site Author
 author:
   name             : "Jae H. Choi"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "/images/profile.jpeg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "Yesterday is history, tomorrow is a mystery, but today is a gift. That's why it's called present."
   location         : "Tempe, AZ"
   email            :
