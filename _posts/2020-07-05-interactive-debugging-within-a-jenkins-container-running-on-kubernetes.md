@@ -1,8 +1,8 @@
 ---
 title: Interactive debugging within a Jenkins container running on Kubernetes
 description: Interactive debugging within a Jenkins container running on Kubernetes
-categories: 
-  - kubernetes
+categories:
+  - machine-learning
 tags:
   - kubernetes
   - jenkins
