@@ -1,2 +1,6 @@
-source "https://rubygems.org"
-gemspec
+source 'https://rubygems.org'
+gem 'github-pages'
+gem 'jemoji'
+gem 'rouge'
+gem 'jekyll-gist'
+gem 'jekyll-include-cache'

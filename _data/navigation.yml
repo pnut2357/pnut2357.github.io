@@ -1,14 +1,51 @@
 # main links
 main:
   - title: "About"
-    url: /about/ #https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/
-  - title: "Machine Learning"
-    url: /machine-learning/
-  # - title: "About"
-  #   url: https://mmistakes.github.io/minimal-mistakes/about/
-  # - title: "Sample Posts"
-  #   url: /year-archive/
-  # - title: "Sample Collections"
-  #   url: /collection-archive/
-  # - title: "Sitemap"
-  #   url: /sitemap/
+    url: /about/
+  # - title: "The Pipeline"
+  #   url: /pipeline/introduction/
+  - title: "Categories"
+    url: /categories/
+  - title: "Tags"
+    url: /tags/
+  - title: "Cheatsheets"
+    url: /cheatsheets/introduction/
+  - title: "Old Blog"
+    url: http://www.virtuallyimpossible.co.uk/
+ # - title: "Sitemap"
+ #   url: /sitemap/
+
+# cheatsheets links
+cheatsheets:
+ - title: Applications
+   children:
+     - title: "Chocolatey"
+       url: /cheatsheets/chocolatey/
+     - title: "Packer"
+       url: /cheatsheets/packer/
+     - title: "Vagrant"
+       url: /cheatsheets/vagrant/
+     - title: "VirtualBox"
+       url: /cheatsheets/virtualbox/
+ # - title: Title2
+ #   children:
+ #     - title: "Configuration"
+ #       url: /cheatsheets/configuration/
+
+# pipeline links
+# pipeline:
+#  - title: The Pipeline
+#  - title: Source
+#  - title: Build
+#    children:
+#      - title: "Packer"
+#        url: /pipeline/packer/
+#      - title: "Packer Example for Windows"
+#        url: /pipeline/packer-example-windows/
+#  - title: Testing
+#  - title: Release
+
+ # - title: Title2
+ #   children:
+ #     - title: "Configuration"
+ #       url: /cheatsheets/configuration/
