@@ -1,6 +1,6 @@
 ---
 title: Machine Learning.
-description: Interactive debugging within a Jenkins container running on Kubernetes
+description:
 categories:
   - machine-learning
 tags:
@@ -10,9 +10,7 @@ toc: true
 toc_sticky: true
 comments: true
 excerpt: |
-  Popular DevOps tools like Packer and Ansible come with the ability to do interactive debugging, which is
-  essential when troubleshooting issues quickly. However, what happens when you're running your CI pipelines on
-  Kubernetes?
+  example of mathmatics expressions. 
 # header:
 #   image: /assets/images/logos/logo-text-8c3ba8a6.svg
 #   teaser: /assets/images/logos/image.png
