@@ -10,8 +10,8 @@ main:
     url: /tags/
   - title: "Cheatsheets"
     url: /cheatsheets/introduction/
-  - title: "Old Blog"
-    url: http://www.virtuallyimpossible.co.uk/
+  #- title: "Old Blog"
+  #  url: http://www.virtuallyimpossible.co.uk/
  # - title: "Sitemap"
  #   url: /sitemap/
 
