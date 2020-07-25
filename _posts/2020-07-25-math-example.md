@@ -10,7 +10,7 @@ toc: true
 toc_sticky: true
 comments: true
 excerpt: |
-  example of mathmatics expressions. 
+  example of mathmatics expressions.
 # header:
 #   image: /assets/images/logos/logo-text-8c3ba8a6.svg
 #   teaser: /assets/images/logos/image.png
