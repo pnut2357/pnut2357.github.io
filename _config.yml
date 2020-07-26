@@ -110,7 +110,7 @@ author:
   avatar           : "/assets/images/profile.jpeg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "Yesterday is history, tomorrow is a mystery, but today is a gift. That's why it's called the present."
   location         : "Tempe, AZ"
-  # email            : "adamrushuk@gmail.com"
+  # email            : "jaehyuk0325@gmail.com"
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
