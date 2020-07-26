@@ -1,35 +1,25 @@
 ---
-title: An Example Azure DevOps Release Pipeline for PowerShell modules
-description: An example Azure DevOps Release Pipeline for PowerShell modules
-categories: 
-  - azure-devops
+title: Machine Learning Basic_1
+description: ML fundamentals
+categories:
+  - machine-learning
 tags:
-  - azure-devops
-  - azure
-  - ci-cd
-  - powershell
 toc: true
 toc_sticky: true
 comments: true
 excerpt: |
-  In the previous post I went over an example Azure DevOps Build Pipeline for PowerShell modules. This post will
-  continue from where we left off and discuss the Azure DevOps Release Pipeline for PowerShell modules.
+  Key Terminology
 # header:
 #   image: /assets/images/logos/logo-text-8c3ba8a6.svg
 ---
 
 ## Introduction
 
-In the previous post I went over an [example Azure DevOps Build Pipeline for PowerShell modules](https://adamrushuk.github.io/example-azure-devops-build-pipeline-for-powershell-modules/).
-This post will continue from where we left off and discuss the Azure DevOps Release Pipeline for PowerShell modules.
+Why machine learning? Many industry companies use machine learning to be specialized and differentiated by intelligent applications. For instance, early days, Amazon disrupted the retail market by introducing product recommendations to their website, Google disrupted the advertising market by targeting the new customers who have similar behaviors to the existing customers, and Uber disrupted the taxi industry by optimizing how to connect drivers with customers in real time. Such tech made their products special.
 
-I'll go over the different stages, and explain how the PowerShell modules are released to multiple internal
-Artifact feeds.
+## Machine Learning Pipeline
 
-## Azure DevOps Release Pipeline
-
-First, let's look at the [example Azure DevOps Release Pipeline for my PowerShell module](https://dev.azure.com/adamrushuk/PoC/_release?definitionId=1&view=mine&_a=releases).
-My Azure DevOps project visibility is public for all to see, so you shouldn't be prompted for a login.
+ML pipeline is simply to train a model. Machine learning pipelines iteratively and  as every step is repeated to continuously improve the accuracy of the model and achieve a successful algorithm. To build better machine learning models, and get the most value from them, accessible, scalable and durable storage solutions are imperative, paving the way for on-premises object storage.
 
 The purpose of this Release Pipeline is to take Artifacts from the Build Pipeline, and release them to a stage.
 Here's an [example release](https://dev.azure.com/adamrushuk/PoC/_releaseProgress?_a=release-pipeline-progress&releaseId=30)
@@ -84,12 +74,12 @@ test results.
 
 The final task is responsible for running a PowerShell script called `Publish-AzDOArtifactFeed.ps1`, which takes
 two parameters: `AzDOArtifactFeedName` and `AzDOPat`:
-  
+
 ![Publish Module Task](/assets/images/powershell-release-pipeline/publish-module-task.png)
 
 The Arguments field shown above references Pipeline Variables `$(artifact_feed_name)` and `$(artifact_feed_pat)`,
 shown below:
-  
+
 ![Pipeline Variables](/assets/images/powershell-release-pipeline/pipeline-variables.png)
 
 ## Publish-AzDOArtifactFeed.ps1
@@ -106,5 +96,5 @@ The code below has comments throughout, but the main steps are:
 
 Once the PowerShell module has been published by the `Publish-AzDOArtifactFeed.ps1` script, the new NuGet package
 is available within the specified Azure Artifacts feed (eg. prod):
-  
+
 ![Azure Artifacts Feed](/assets/images/powershell-release-pipeline/azure-artifacts-feed.png)
