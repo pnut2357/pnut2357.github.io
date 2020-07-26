@@ -6,7 +6,7 @@ main:
   #   url: /pipeline/introduction/
   - title: "Categories"
     url: /categories/
-  - title: "Tags"
+  - title: "Personal Interests"
     url: /tags/
   - title: "Cheatsheets"
     url: /cheatsheets/introduction/

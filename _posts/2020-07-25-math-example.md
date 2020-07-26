@@ -4,7 +4,7 @@ description:
 categories:
   - machine-learning
 tags:
-  - machine-learning
+  #- machine-learning
   #- jenkins
 toc: true
 toc_sticky: true
