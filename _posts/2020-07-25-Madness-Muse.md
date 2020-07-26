@@ -47,7 +47,8 @@ Yes I know I can be wrong
 Baby, you're too headstrong
 Our love is
 
-(Ma-ma-ma-ma-ma-ma-ma-ma mad mad mad)x3
-Ma-ma-ma-ma-ma--ma--ma madness
+(ma-ma-ma-ma-ma-ma-ma-ma mad mad mad)x3
+
+ma-ma-ma-ma-ma-ma-ma madness
 
 {% include youtubePlayer.html id="Ek0SgwWmF9w" %}
