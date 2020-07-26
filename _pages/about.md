@@ -10,7 +10,7 @@ toc_sticky: true
 
 ## Personal Info.
 
-I'm a grad student in AI/ML at ASU. I've experienced how to design and develop, train, and deploy models in deep learning, statistics, Computer Vision and Natural Language Processing.
+I'm a grad student in AI/ML at ASU. I've experienced how to design, develop, train, and deploy models in deep learning, statistics, Computer Vision and Natural Language Processing.
 
 My current focus areas are:
 
