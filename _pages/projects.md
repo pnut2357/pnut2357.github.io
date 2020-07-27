@@ -1,9 +1,9 @@
 ---
 #layout: archive
-layout: categories
-taxonomy: projects
 title: "Projects"
+layout: categories
 author_profile: true
+taxonomy: projects
 ---
 personally recommended links.
 
