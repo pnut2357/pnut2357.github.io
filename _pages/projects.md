@@ -2,7 +2,7 @@
 layout: archive
 permalink: /projects/
 title: projects
-author_profile: false
+author_profile: true
 #sidebar:
 #  - image: "/assets/images/only-human-cover.jpg"
 description: "test"
