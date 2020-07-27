@@ -1,8 +1,8 @@
 ---
 #layout: archive
 permalink: /projects/
-taxonomy: blog
 layout: categories
+taxonomy: projects
 title: "Projects"
 author_profile: true
 ---
