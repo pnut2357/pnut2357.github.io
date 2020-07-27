@@ -21,9 +21,9 @@ Why machine learning? Many industry companies use machine learning to be special
 
 ML pipeline is simply to train a model. Machine learning pipelines iteratively improves the current model that you created. Data proliferation tremendously affect your decision-making valued or misvalued, depending on your approach and data manipulation.
 
-| ![ML Pipeline](/assets/images/ml_basic1/pl.png){:height="700px" width="400px"} |  
-|:--:|
-| *ML Pipeline* |
+|  <td> ![ML Pipeline](/assets/images/ml_basic1/pl.png){:height="700px" width="400px"} |  
+| <td> :--:|
+| <td> *ML Pipeline* |
 
 
 ## Terminology
