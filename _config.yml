@@ -345,6 +345,9 @@ collections:
     permalink: /:collection/:path/
     toc: true
     toc_sticky: true
+  projects:
+    output: true
+    permalink: /:categories/:title/
   # pipeline:
   #   output: true
   #   permalink: /:collection/:path/
