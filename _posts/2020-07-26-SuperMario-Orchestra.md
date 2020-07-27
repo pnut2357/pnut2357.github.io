@@ -17,10 +17,11 @@ excerpt: |
 
 ## Concert Program
 
-- SuperMario World
+# SuperMario World
 
-[01] Opening Theme (0:00) \
-[02] Overworld (1:00)
+01. Opening Theme (0:00)
+
+02. Overworld (1:00)
 
 [03] Level Clear (2:21)
 
@@ -28,7 +29,7 @@ excerpt: |
 
 [10] Ending Theme (12:00)
 
-- SuperMario 64
+# SuperMario 64
 
 [05] Bob-Omb Battlefield (3:54)
 
