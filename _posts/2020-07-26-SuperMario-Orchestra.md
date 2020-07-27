@@ -15,13 +15,13 @@ excerpt: |
   SuperMario World / SuperMario 64 Orchestra.
 ---
 
-## Concert Program
+# Concert Program
 
-# SuperMario World
+## SuperMario World
 
-01. Opening Theme (0:00)
+[01] Opening Theme (0:00)
 
-02. Overworld (1:00)
+[02] Overworld (1:00)
 
 [03] Level Clear (2:21)
 
