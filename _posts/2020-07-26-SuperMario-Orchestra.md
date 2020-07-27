@@ -18,17 +18,19 @@ excerpt: |
 ## Concert Program
 
 - SuperMario World
-1. Opening Theme (0:00)
-2. Overworld (1:00)
-3. Level Clear (2:21)
-4. Boss (2:33)
+
+01. Opening Theme (0:00)
+02. Overworld (1:00)
+03. Level Clear (2:21)
+04. Boss (2:33)
 10. Ending Theme (12:00)
 
 - SuperMario 64
-5. Bob-Omb Battlefield (3:54)
-6. Slide (5:47)
-7. Dire, Dire Docks (6:43)
-8. Bowser's Road (+Theme) (8:18)
-9. Staff Roll (10:14)
+
+05. Bob-Omb Battlefield (3:54)
+06. Slide (5:47)
+07. Dire, Dire Docks (6:43)
+08. Bowser's Road (+Theme) (8:18)
+09. Staff Roll (10:14)
 
 {% include youtubePlayer.html id="p3LsCo0LPzg" %}
