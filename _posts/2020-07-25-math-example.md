@@ -2,7 +2,7 @@
 title: Machine Learning.
 description:
 categories:
-  - machine-learning
+  - machine-learning-concept
 tags:
   #- machine-learning
   #- jenkins
