@@ -1,7 +1,7 @@
 ---
 layout: archive
 permalink: /projects/
-title: projects
+title: Projects
 author_profile: true
 #sidebar:
 #  - image: "/assets/images/only-human-cover.jpg"
