@@ -1,8 +1,7 @@
 ---
 title: test
 description: test
-#categories:
-#  - powershell
+categories: projects
 #tags:
 #  - powershell
 #  - msi
