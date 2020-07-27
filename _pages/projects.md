@@ -1,6 +1,5 @@
 ---
 #layout: archive
-permalink: /projects/
 layout: categories
 taxonomy: projects
 title: "Projects"
