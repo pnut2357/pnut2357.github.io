@@ -2,6 +2,6 @@
 title: "Posts by Year"
 layout: posts
 permalink: /year-archive/
-category: project
+categories: project
 author_profile: true
 ---
