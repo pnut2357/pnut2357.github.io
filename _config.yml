@@ -292,16 +292,18 @@ compress_html:
 # Defaults
 defaults:
   # _projects
-  - scope:
-      path: ""
-      type: projects
-    values:
-      layout: article
-      author_profile: true
-      read_time: true
-      comments: true
-      share: true
-      related: true
+  # - scope:
+  #     path: ""
+  #     type: projects
+  #   values:
+  #     layout: article
+  #     author_profile: true
+  #     read_time: true
+  #     comments: true
+  #     share: true
+  #     related: true
+  #     toc: true
+  #     to
   # _posts
   - scope:
       path: ""
@@ -345,9 +347,6 @@ collections:
     permalink: /:collection/:path/
     toc: true
     toc_sticky: true
-  projects:
-    output: true
-    permalink: /:categories/:title/
-  # pipeline:
+  # projects:
   #   output: true
-  #   permalink: /:collection/:path/
+  #   permalink: /:collection/:title/
