@@ -19,8 +19,7 @@ excerpt: |
 
 - SuperMario World
 
-[01] Opening Theme (0:00)
-
+[01] Opening Theme (0:00) \n
 [02] Overworld (1:00)
 
 [03] Level Clear (2:21)
