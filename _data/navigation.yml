@@ -8,7 +8,7 @@ main:
   # - title: "Projects"
   #   url: /projects/
     #url: /year-archive/
-  - title: "Categories"
+  - title: "Portfolio"
     url: /categories/
   - title: "Personal Interests"
     url: /tags/
