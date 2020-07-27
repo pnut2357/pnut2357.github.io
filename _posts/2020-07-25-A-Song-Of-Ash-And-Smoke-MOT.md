@@ -15,7 +15,9 @@ excerpt: |
   A Song Of Ash And Smoke.
 ---
 
-## Lyrics
+{% include youtubePlayer.html id="TDfBXrirv8c" %}
+
+# Lyrics
 
 재로 덮힌 하얀 마을에
 재로 지은 하얀 집에
@@ -72,5 +74,3 @@ have dispersed with the song of ash and smoke.
 In a pale town covered with ashes,
 tonight, as usual, the white ashes
 whitely falling like snow.
-
-{% include youtubePlayer.html id="TDfBXrirv8c" %}

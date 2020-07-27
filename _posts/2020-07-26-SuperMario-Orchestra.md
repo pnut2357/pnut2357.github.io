@@ -15,6 +15,8 @@ excerpt: |
   SuperMario World / SuperMario 64 Orchestra.
 ---
 
+{% include youtubePlayer.html id="p3LsCo0LPzg" %}
+
 # Concert Program
 
 ## SuperMario World
@@ -40,5 +42,3 @@ excerpt: |
 [08] Bowser's Road (+Theme) (8:18)
 
 [09] Staff Roll (10:14)
-
-{% include youtubePlayer.html id="p3LsCo0LPzg" %}

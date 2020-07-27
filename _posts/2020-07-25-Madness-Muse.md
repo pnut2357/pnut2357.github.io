@@ -12,8 +12,9 @@ excerpt: |
   Madness.
 ---
 
-## Lyrics
+{% include youtubePlayer.html id="Ek0SgwWmF9w" %}
 
+# Lyrics
 
 I, I can't get these memories out of my mind
 And some kind of madness has started to evolve,
@@ -54,5 +55,3 @@ Come on and rescue me
 Yes I know I can be wrong
 Maybe, you're too headstrong
 Our love is madness
-
-{% include youtubePlayer.html id="Ek0SgwWmF9w" %}
