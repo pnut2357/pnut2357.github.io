@@ -3,7 +3,6 @@ title: Get Product ID GUID Directly From MSI File
 description: Easily get the Product ID / GUID directly from an MSI file, without installing it first.
 categories:
   - powershell
-  - project
 tags:
   - powershell
   - msi
