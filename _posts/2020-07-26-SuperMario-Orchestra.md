@@ -29,11 +29,11 @@ excerpt: |
 
 [10] Ending Theme (12:00)
 
-# SuperMario 64
+## SuperMario 64
 
-05. Bob-Omb Battlefield (3:54)
+[05] Bob-Omb Battlefield (3:54)
 
-06. Slide (5:47)
+[06] Slide (5:47)
 
 [07] Dire, Dire Docks (6:43)
 
