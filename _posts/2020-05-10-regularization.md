@@ -514,7 +514,7 @@ ridge_fig = weight_versus_alpha_plot(ridge_weight, alphas, features)
 ```
 
 
-![png](/assets/images/regularization/output_12_0.png){:height="600px" width="800px"} 
+![png](/assets/images/regularization/output_12_0.png){:height="500px" width="600px"}
 
 
 
@@ -536,7 +536,7 @@ lasso_fig = weight_versus_alpha_plot(lasso_weight, alphas, features)
 
 
 
-![png](/assets/images/regularization/output_12_0.png){:height="600px" width="800px"}
+![png](/assets/images/regularization/output_12_0.png){:height="500px" width="600px"}
 
 
 ## Visualizing Regularization
@@ -548,7 +548,7 @@ From the result above, we can see that as the penalty value, $$\alpha$$ increase
 
 To get a sense of why this is happening, the visualization below depicts what happens when we apply the two different regularization. The general idea is that we are restricting the allowed values of our coefficients to a certain "region" and within that region, we wish to find the coefficients that result in the best model.
 
-![Lasso and Ridge Coefficient Plots](/assets/images/regularization/lasso_ridge_coefficients.png){:height="800px" width="1000px"}  
+![Lasso and Ridge Coefficient Plots](/assets/images/regularization/lasso_ridge_coefficients.png){:height="800px" width="800px"}  
 | Fig3. Lasso and Ridge Coefficient Plots|
 
 In this diagram, we are fitting a linear regression model with two features, $$x_1$$ and $$x_2$$.
