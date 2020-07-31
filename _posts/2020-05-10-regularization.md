@@ -1,3 +1,18 @@
+---
+title: Regularization
+description: Regularization
+categories:
+  - machine-learning-project
+tags:
+toc: true
+toc_sticky: true
+comments: true
+excerpt: |
+  sdsd/sdsd
+# header:
+#   image: /assets/images/logos/logo-text-8c3ba8a6.svg
+---
+
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
