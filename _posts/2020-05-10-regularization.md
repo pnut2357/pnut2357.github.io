@@ -1,5 +1,5 @@
 ---
-title: Regularization
+title: Demystifying Regularization
 description: Regularization
 categories:
   - machine-learning-project
@@ -8,12 +8,12 @@ toc: true
 toc_sticky: true
 comments: true
 excerpt: |
-  sdsd/sdsd
+  Regularization / Comparison between Ridge and Lasso Regression / bias-variance tradeoff
 # header:
 #   image: /assets/images/logos/logo-text-8c3ba8a6.svg
 ---
 
-# Regularization
+# Demystify Regularization
 
 Before discussing about regularization, we'll do a quick recap on the notion of **overfitting** and the **bias-variance tradeoff**.
 
