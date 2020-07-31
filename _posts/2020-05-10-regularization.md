@@ -12,6 +12,25 @@ excerpt: |
 # header:
 #   image: /assets/images/logos/logo-text-8c3ba8a6.svg
 ---
+
+# Regularization
+
+Before discussing about regularization, we'll do a quick recap on the notion of **overfitting** and the **bias-variance tradeoff**.
+
+**Overfitting:** So what is overfitting? Well, to put it in more simple terms it's when we built a model that is too complex that it matches the training data "too closely" or we can say that the model has started to learn not only the signal, but also the noise in the data. The result of this is that our model will do well on the training data, but won't generalize to out-of-sample data, data that we have not seen before.
+
+**Bias-Variance tradeoff:** When we discuss prediction models, prediction errors can be decomposed into two main subcomponents we care about: error due to "bias" and error due to "variance". Understanding these two types of error can help us diagnose model results and avoid the mistake of over/under fitting. A typical graph of discussing this is shown below:
+
+![Bias-variance tradeoff](/assets/images/regularization/bias_variance.png){:height="700px" width="400px"}  
+| Fig1. Bias-variance tradeoff|
+
+- **Bias:** The red line, measures how far off in general our models' predictions are from the correct value. Thus as our model gets more and more complex we will become more and more accurate about our predictions (Error steadily decreases).
+- **Variance:** The cyan line, measures how different can our model be from one to another, as we're looking at different possible data sets. If the estimated model will vary dramatically from one data set to the other, then we will have very erratic predictions, because our prediction will be extremely sensitive to what data set we obtain. As the complexity of our model rises, variance becomes our primary concern.
+
+When creating a model, our goal is to locate the optimum model complexity. If our model complexity exceeds this sweet spot, we are in effect overfitting our model; while if our complexity falls short of the sweet spot, we are underfitting the model. With all of that in mind, the notion of **regularization** is simply a useful technique to use when we think our model is too complex (models that have low bias, but high variance). It is a method for "constraining" or "regularizing" the **size of the coefficients** ("shrinking" them towards zero). The specific regularization techniques we'll be discussing are **Ridge Regression** and **Lasso Regression**.
+
+For those interested, the following link contains a nice infogprahics on Bias-Variance Tradeoff. [Blog: Bias-Variance Tradeoff Infographic](https://elitedatascience.com/bias-variance-tradeoff)
+
 ```python
 # code for loading the format for the notebook
 import os
@@ -294,22 +313,7 @@ from sklearn.model_selection import train_test_split
     sklearn 0.23.1
 
 
-# Regularization
 
-Before discussing about regularization, we'll do a quick recap on the notion of **overfitting** and the **bias-variance tradeoff**.
-
-**Overfitting:** So what is overfitting? Well, to put it in more simple terms it's when we built a model that is too complex that it matches the training data "too closely" or we can say that the model has started to learn not only the signal, but also the noise in the data. The result of this is that our model will do well on the training data, but won't generalize to out-of-sample data, data that we have not seen before.
-
-**Bias-Variance tradeoff:** When we discuss prediction models, prediction errors can be decomposed into two main subcomponents we care about: error due to "bias" and error due to "variance". Understanding these two types of error can help us diagnose model results and avoid the mistake of over/under fitting. A typical graph of discussing this is shown below:
-
-![Bias-variance tradeoff](images/bias_variance.png)
-
-- **Bias:** The red line, measures how far off in general our models' predictions are from the correct value. Thus as our model gets more and more complex we will become more and more accurate about our predictions (Error steadily decreases).
-- **Variance:** The cyan line, measures how different can our model be from one to another, as we're looking at different possible data sets. If the estimated model will vary dramatically from one data set to the other, then we will have very erratic predictions, because our prediction will be extremely sensitive to what data set we obtain. As the complexity of our model rises, variance becomes our primary concern.
-
-When creating a model, our goal is to locate the optimum model complexity. If our model complexity exceeds this sweet spot, we are in effect overfitting our model; while if our complexity falls short of the sweet spot, we are underfitting the model. With all of that in mind, the notion of **regularization** is simply a useful technique to use when we think our model is too complex (models that have low bias, but high variance). It is a method for "constraining" or "regularizing" the **size of the coefficients** ("shrinking" them towards zero). The specific regularization techniques we'll be discussing are **Ridge Regression** and **Lasso Regression**.
-
-For those interested, the following link contains a nice infogprahics on Bias-Variance Tradeoff. [Blog: Bias-Variance Tradeoff Infographic](https://elitedatascience.com/bias-variance-tradeoff)
 
 ## Ridge and Lasso Regression
 
@@ -319,7 +323,8 @@ $$Y = \beta_0 + \beta_1X_1 + ... + \beta_pX_p$$
 
 We would estimate its coefficients using the least squares criterion, which minimizes the residual sum of squares (RSS). Or graphically, we're fitting the blue line to our data (the black points) that minimizes the sum of the distances between the points and the blue line (sum of the red lines) as shown below.
 
-![Estimating coefficients](images/estimating_coefficients.png)
+![Estimating coefficients](/assets/images/regularization/estimating_coefficients.png){:height="700px" width="400px"}  
+| Fig2. Bias-variance tradeoff|
 
 Mathematically, this can be denoted as:
 
@@ -516,7 +521,7 @@ ridge_fig = weight_versus_alpha_plot(ridge_weight, alphas, features)
 ```
 
 
-![png](output_12_0.png)
+![png](/assets/images/regularization/output_12_0.png)
 
 
 
@@ -538,7 +543,7 @@ lasso_fig = weight_versus_alpha_plot(lasso_weight, alphas, features)
 
 
 
-![png](output_13_1.png)
+![png](/assets/images/regularization/output_12_0.png)
 
 
 ## Visualizing Regularization
@@ -550,7 +555,8 @@ From the result above, we can see that as the penalty value, $\alpha$ increases:
 
 To get a sense of why this is happening, the visualization below depicts what happens when we apply the two different regularization. The general idea is that we are restricting the allowed values of our coefficients to a certain "region" and within that region, we wish to find the coefficients that result in the best model.
 
-![Lasso and Ridge Coefficient Plots](images/lasso_ridge_coefficients.png)
+![Lasso and Ridge Coefficient Plots](/assets/images/regularization/lasso_ridge_coefficients.png){:height="700px" width="400px"}  
+| Fig3. Lasso and Ridge Coefficient Plots|
 
 In this diagram, we are fitting a linear regression model with two features, $x_1$ and $x_2$.
 
@@ -739,8 +745,3 @@ To sum it up, overfitting is when we build a predictive model that fits the data
 - [Notebook: Regularization](http://nbviewer.jupyter.org/github/justmarkham/DAT8/blob/master/notebooks/20_regularization.ipynb)
 - [Blog: Understanding the Bias-Variance Tradeoff](http://scott.fortmann-roe.com/docs/BiasVariance.html)
 - [Blog: Selecting good features – Part II: linear models and regularization](http://blog.datadive.net/selecting-good-features-part-ii-linear-models-and-regularization/)
-
-
-```python
-
-```
