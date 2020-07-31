@@ -265,12 +265,6 @@ load_style(plot_style = False)
 
 
 
-
-```python
-
-```
-
-
 ```python
 os.chdir(path)
 
@@ -314,7 +308,6 @@ from sklearn.model_selection import train_test_split
 
 
 
-
 ## Ridge and Lasso Regression
 
 Recall that for a normal linear regression model of:
@@ -332,12 +325,12 @@ $$RSS = \sum_{i=1}^n \left( y_i - ( \beta_0 + \sum_{j=1}^p \beta_jx_{ij} ) \righ
 
 Where:
 
-- $n$ is the **total number of observations (data)**.
-- $y_i$ is the **actual output value of the observation (data)**.
-- $p$ is the **total number of features**.
-- $\beta_j$ is a **model's coefficient**.
-- $x_{ij}$ is the **$i_{th}$ observation, $j_{th}$ feature's value**.
-- $\beta_0 + \sum_{j=1}^p \beta_jx_{ij}$ is the **predicted output of each observation**.
+- $$n$$ is the total number of observations (data).
+- $$y_i$$ is the actual output value of the observation (data).
+- $$p$$ is the total number of features.
+- $$\beta_j$$ is a model's coefficient.
+- $$x_{ij}$$ is the $$i_{th}$$ observation, $$j_{th}$$ feature's value.
+- $$\beta_0 + \sum_{j=1}^p \beta_jx_{ij}$$ is the predicted output of each observation.
 
 Regularized linear regression models are very similar to least squares, except that the coefficients are estimated by minimizing a slightly different objective function. we **minimize the sum of RSS and a "penalty term"** that penalizes coefficient size.
 
@@ -349,16 +342,16 @@ $$\text{RSS} + \alpha \sum_{j=1}^p \beta_j^2$$
 
 $$\text{RSS} + \alpha \sum_{j=1}^p \lvert \beta_j \rvert$$
 
-Where $\alpha$ is a **tuning parameter** that seeks to balance between the fit of the model to the data and the magnitude of the model's coefficients:
+Where $$\alpha$$ is a **tuning parameter** that seeks to balance between the fit of the model to the data and the magnitude of the model's coefficients:
 
-- A tiny $\alpha$ imposes no penalty on the coefficient size, and is equivalent to a normal linear regression.
-- Increasing $\alpha$ penalizes the coefficients and thus shrinks them towards zero.
+- A tiny $$\alpha$$ imposes no penalty on the coefficient size, and is equivalent to a normal linear regression.
+- Increasing $$\alpha$$ penalizes the coefficients and thus shrinks them towards zero.
 
 Thus you can think of it as, we're balancing two things to measure the model's total quality. The RSS, measures how well the model is going to fit the data, and then the magnitude of the coefficients, which can be problematic if they become too big.
 
-Let's look at some examples. In the following section, we'll load the [Boston Housing Dataset](http://facweb.cs.depaul.edu/mobasher/classes/CSC478/Data/housing-dscr.txt), which contains some dataset about the housing values in suburbs of Boston. We'll choose the first few features, train a ridge and lasso regression separately at look at the estimated coefficients' weight for different $\alpha$ parameter.
+Let's look at some examples. In the following section, we'll load the [Boston Housing Dataset](http://facweb.cs.depaul.edu/mobasher/classes/CSC478/Data/housing-dscr.txt), which contains some dataset about the housing values in suburbs of Boston. We'll choose the first few features, train a ridge and lasso regression separately at look at the estimated coefficients' weight for different $$\alpha$$ parameter.
 
-Note that we're choosing the first few features because we'll later use a plot to show the affect of the $\alpha$ parameter on the estimated coefficients' weight and too many features will make the plot pretty unappealing. The model's interpreability or performance is not the main focus here.
+Note that we're choosing the first few features because we'll later use a plot to show the affect of the $$\alpha$$ parameter on the estimated coefficients' weight and too many features will make the plot pretty unappealing. The model's interpreability or performance is not the main focus here.
 
 
 ```python
@@ -548,7 +541,7 @@ lasso_fig = weight_versus_alpha_plot(lasso_weight, alphas, features)
 
 ## Visualizing Regularization
 
-From the result above, we can see that as the penalty value, $\alpha$ increases:
+From the result above, we can see that as the penalty value, $$\alpha$$ increases:
 
 - **Lasso regression** shrinks coefficients all the way to zero, thus removing them from the model.
 - **Ridge regression** shrinks coefficients toward zero, but they rarely reach zero.
@@ -558,22 +551,22 @@ To get a sense of why this is happening, the visualization below depicts what ha
 ![Lasso and Ridge Coefficient Plots](/assets/images/regularization/lasso_ridge_coefficients.png){:height="700px" width="400px"}  
 | Fig3. Lasso and Ridge Coefficient Plots|
 
-In this diagram, we are fitting a linear regression model with two features, $x_1$ and $x_2$.
+In this diagram, we are fitting a linear regression model with two features, $$x_1$$ and $$x_2$$.
 
-- $\hat\beta$ represents the set of two coefficients, $\beta_1$ and $\beta_2$, which minimize the RSS for the **unregularized model**.
-- The ellipses that are centered around $\hat\beta$ represent **regions of constant RSS**. In other words, all of the points on a given ellipse share a common value of the RSS, despite the fact that they may have different values for $\beta_1$ and $\beta_2$. As the ellipses expand away from the least squares coefficient estimates, the RSS increases.
-- Regularization restricts the allowed positions of $\hat\beta$ to the **blue constraint region**. In this case, $\hat\beta$ is **not** within the blue constraint region. Thus, we need to move $\hat\beta$ until it intersects the blue region, while increasing the RSS as little as possible.
+- $$\hat\beta$$ represents the set of two coefficients, $$\beta_1$$ and $$\beta_2$$, which minimize the RSS for the **unregularized model**.
+- The ellipses that are centered around $$\hat\beta$$ represent **regions of constant RSS**. In other words, all of the points on a given ellipse share a common value of the RSS, despite the fact that they may have different values for $$\beta_1$$ and $$\beta_2$$. As the ellipses expand away from the least squares coefficient estimates, the RSS increases.
+- Regularization restricts the allowed positions of $$\hat\beta$$ to the **blue constraint region**. In this case, $$\hat\beta$$ is **not** within the blue constraint region. Thus, we need to move $$\hat\beta$$ until it intersects the blue region, while increasing the RSS as little as possible.
     - For **ridge**, this region is a **circle** because it constrains the square of the coefficients. Thus the intersection will not generally occur on an axis, and so the coefficient estimates will be typically be non-zero.
-    - For **lasso**, this region is a **diamond** because it constrains the absolute value of the coefficients. Because the constraint has corners at each of the axes, and so the ellipse will often intersect the constraint region at an axis. When this occurs, one of the coefficients will equal zero. In higher dimensions, many of the coefficient estimates may equal zero simultaneously. In the figure above, the intersection occurs at $\beta_1 = 0$, and so the resulting model will only include $\beta_2$.
-- The **size of the blue constraint region** is determined by $\alpha$, with a smaller $\alpha$ resulting in a larger region:
-    - When $\alpha$ is zero, the blue region is infinitely large, and thus the coefficient sizes are not constrained.
-    - When $\alpha$ increases, the blue region gets smaller and smaller.
+    - For **lasso**, this region is a **diamond** because it constrains the absolute value of the coefficients. Because the constraint has corners at each of the axes, and so the ellipse will often intersect the constraint region at an axis. When this occurs, one of the coefficients will equal zero. In higher dimensions, many of the coefficient estimates may equal zero simultaneously. In the figure above, the intersection occurs at $$\beta_1 = 0$$, and so the resulting model will only include $$\beta_2$$.
+- The **size of the blue constraint region** is determined by $$\alpha$$, with a smaller $$\alpha$$ resulting in a larger region:
+    - When $$\alpha$$ is zero, the blue region is infinitely large, and thus the coefficient sizes are not constrained.
+    - When $$\alpha$$ increases, the blue region gets smaller and smaller.
 
 ## Advice For Applying Regularization
 
 **Signs and causes of overfitting in the original regression model**
 
-- Linear models can overfit if you include irrelevant features, meaning features that are unrelated to the response. Or if you include highly correlated features, meaning two or more predictor variables are closely related to one another. Because it will learn a coefficient for every feature you include in the model, regardless of whether that feature has the signal or the noise. This is especially a problem when $p$ (number of features) is close to $n$ (number of observations).
+- Linear models can overfit if you include irrelevant features, meaning features that are unrelated to the response. Or if you include highly correlated features, meaning two or more predictor variables are closely related to one another. Because it will learn a coefficient for every feature you include in the model, regardless of whether that feature has the signal or the noise. This is especially a problem when $$p$$ (number of features) is close to $$n$$ (number of observations).
 - Linear models that have large estimated coefficients is a sign that the model may be overfitting the data. The larger the absolute value of the coefficient, the more power it has to change the predicted response, resulting in a higher variance.
 
 **Should features be standardized?**
@@ -587,7 +580,7 @@ Yes, because L1 and L2 regularizers of linear models assume that all features ar
 - Lasso regression is preferred if we want a sparse model, meaning that we believe many features are irrelevant to the output.
 - When the dataset includes collinear features, Lasso regression is unstable in a similar way as unregularized linear models are, meaning that the coefficients (and thus feature ranks) can vary significantly even on small data changes. We will elaborate on this point in the following section.
 
-When using L2-norm, since the coefficients are squared in the penalty expression, it has a different effect from L1-norm, namely it forces the coefficient values to be spread out more equally. When the dataset at hand contains correlated features, it means that these features should get similar coefficients. Using an example of a linear model $Y = X1 + X2$, with strongly correlated feature of $X1$ and $X2$, then for L1-norm, the penalty is the same whether the learned model is $Y=1∗X1+1∗X2$ or $Y=2∗X1+0∗X2$. In both cases the penalty is $2∗α$. For L2-norm, however, the first model's penalty is $1^2+1^2=2α$, while for the second model is penalized with $2^2+0^2=4α$.
+When using L2-norm, since the coefficients are squared in the penalty expression, it has a different effect from L1-norm, namely it forces the coefficient values to be spread out more equally. When the dataset at hand contains correlated features, it means that these features should get similar coefficients. Using an example of a linear model $$Y = X1 + X2$$, with strongly correlated feature of $$X1$$ and $$X2$$, then for L1-norm, the penalty is the same whether the learned model is $$Y=1∗X1+1∗X2$$ or $$Y=2∗X1+0∗X2$$. In both cases the penalty is $$2∗α$$. For L2-norm, however, the first model's penalty is $$1^2+1^2=2α$$, while for the second model is penalized with $$2^2+0^2=4α$$.
 
 The effect of this is that models are much more stable (coefficients do not fluctuate on small data changes as is the case with unregularized or L1 models). So while L2 regularization does not perform feature selection the same way as L1 does, it is more useful for feature interpretation due to its stability and the fact that useful features still tend to have non-zero coefficients. But again, please do remove collinear features to prevent a bunch of downstream headaches.
 
@@ -681,13 +674,13 @@ for seed in range(10):
 
 
 
-**How do we choose the $\alpha$ parameter?**
+**How do we choose the $$\alpha$$ parameter?**
 
 We can either use a validation set if we have lots of data or use cross validation for smaller data sets. See a quick examples below that uses cross validation with `RidgeCV` and `LassoCV`, which is function that performs ridge regression and lasso regression with built-in cross-validation of the alpha parameter.
 
 > From R's [glmnet package vignette](https://web.stanford.edu/~hastie/glmnet/glmnet_alpha.html)
 >
-> It is known that the ridge penalty shrinks the coefficients of correlated predictors towards each other while the lasso tends to pick one of them and discard the others. The elastic-net penalty mixes these two; if predictors are correlated in groups, an $\alpha = 0.5$ tends to select the groups in or out together. This is a higher level parameter, and users might pick a value upfront, else experiment with a few different values. One use of $\alpha$ is for numerical stability; for example, the elastic net with $\alpha = 1−\epsilon$ for some small $\epsilon > 0$ performs much like the lasso, but removes any degeneracies and wild behavior caused by extreme correlations.
+> It is known that the ridge penalty shrinks the coefficients of correlated predictors towards each other while the lasso tends to pick one of them and discard the others. The elastic-net penalty mixes these two; if predictors are correlated in groups, an $$\alpha = 0.5$$ tends to select the groups in or out together. This is a higher level parameter, and users might pick a value upfront, else experiment with a few different values. One use of $$\alpha$$ is for numerical stability; for example, the elastic net with $$\alpha = 1−\epsilon$$ for some small $$\epsilon > 0$$ performs much like the lasso, but removes any degeneracies and wild behavior caused by extreme correlations.
 
 
 ```python
