@@ -1,5 +1,5 @@
 ---
-title: Regression Overview
+title: Classification
 description: ML fundamentals 6
 categories:
   - machine-learning

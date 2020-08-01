@@ -1,5 +1,5 @@
 ---
-title: Regression Overview
+title: Generative Models
 description: ML fundamentals 7
 categories:
   - machine-learning
