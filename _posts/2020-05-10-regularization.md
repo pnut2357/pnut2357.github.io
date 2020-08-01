@@ -13,7 +13,7 @@ excerpt: |
 #   image: /assets/images/logos/logo-text-8c3ba8a6.svg
 ---
 
-# Demystify Regularization
+# Regularization
 
 Before discussing about regularization, we'll do a quick recap on the notion of **overfitting** and the **bias-variance tradeoff**.
 
