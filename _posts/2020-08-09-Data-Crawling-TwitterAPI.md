@@ -30,7 +30,7 @@ Then, you should see Apps when you place your cursor on the account (right top c
 From your Twitter Apps page, click `+ create App` and you are ready to go.
 
 ![tw_acc](/assets/images/Data-Crawling-TwitterAPI/tw_acc.png){:height="800px" width="400px"}  
-| Fig2. Twitter Developer Portal|
+| Fig2. Twitter Developer Apps Page|
 
 ## Open Source Libraries
 The following libararies are open-source Python libraries for accessing Twitter API. I personally started with `tweepy`.
@@ -286,7 +286,7 @@ class MyStreamListener(tweepy.StreamListener):
         print("Error detected")
 ```
 
-The live tweets streaming was started after permission of accessing Twitter APIs by authetificating with consumer_key and access_key. To grasping the only tweets related to the keywords 'trump', `filter()` was set for the keyword 'trump' tracker and language ('en').
+The live tweets streaming was started after permission of accessing Twitter APIs by using Consumer and Access keys that authenticate the user. To grab the only tweets related to the keywords 'trump', `filter()` was set for the keyword 'trump' tracker and language ('en').
 
 ```python
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
@@ -310,7 +310,7 @@ with open(OUTPUT_FILE, "r") as tweets_file:
         tweet = json.loads(line)
         tweets_data.append(tweet)
 ```
-The `id_extractor()`
+The `id_extractor()` is defined to extract the live user names who tweeted about the keyword 'trump' so that if you are interested in who wrote the tweet texts, you can search.
 
 ```python
 def id_extractor(data: list):
@@ -322,9 +322,6 @@ def id_extractor(data: list):
 user_names = id_extractor(tweets_data)
 user_names
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -396,19 +393,19 @@ user_names
 </table>
 </div>
 
-
-
+The `clean_tweet()` is defined to clean a tweet text by removing special characters so that NLP packages like TextBlob or NLTK Vader can read it corrextly.
 
 ```python
 def clean_tweet(tweet):
         '''
-        To clean tweet text by removing links, special characters
+        To clean tweet text by removing special characters
         '''
         cleaned_tweet = ' '.join(re.sub("(@[A-Za-z0-9]+) | ([^0-9A-Za-z \t]) | (\w+:\/\/\S+)",
                                         " ", tweet).split())
         return cleaned_tweet
 ```
 
+The `full_text_extractor()` is defined to extract a full tweet text. Remember the saved file is in a JSON format; mixture of list and dictionary. I grabbed created date (created_at), language (lang), tweet text (text), and user's name (user_name). If contents of a tweet text is longer, such tweet texts are cut off. Thus, the `full_text_extractor()` can snatch them for you.
 
 ```python
 def full_text_extractor(data: list):
@@ -432,13 +429,13 @@ def full_text_extractor(data: list):
     return pd.DataFrame(full_text_list)
 ```
 
+The following shows the full texts of the 'trump' that the `full_text_extractor()` snatched.
 
 ```python
 # To check what the full_texts is.
 full_texts=full_text_extractor(tweets_data)
 print(full_texts)
 ```
-
                                                         0
     0   Speaking of yard signs- i’ve been seeing Trump...
     1   RT @catturd2: President Trump owned the Democr...
@@ -452,8 +449,7 @@ print(full_texts)
     9   RT @RyanAFournier: Trump: Authorizes $430 mill...
     10  RT @thekjohnston: This is why trump built appr...
 
-
-
+From the selective columns of created date (created_at), language (lang), tweet text (text), and user's name (user_name), I replaced the cut-off tweet texts with the full texts and inserted user_name column and its corresponding values. The `df.text[5]` shows its full text.
 ```python
 df = pd.DataFrame(tweets_data, columns=['created_at','lang', 'text'])
 # store user names
@@ -465,13 +461,65 @@ df['created_at'] = pd.to_datetime(df.created_at)
 df.text[5]
 ```
 
-
-
-
     'RT @TweetSusieTweet: Trump on Mount Rushmore. Cheers from Australia! Credit: @moir_alan'
 
+```python
+print(len(df))
+df.head(3)
+```
+    11
 
+    <div>
+    <style scoped>
+        .dataframe tbody tr th:only-of-type {
+            vertical-align: middle;
+        }
 
+        .dataframe tbody tr th {
+            vertical-align: top;
+        }
+
+        .dataframe thead th {
+            text-align: right;
+        }
+    </style>
+    <table border="1" class="dataframe">
+      <thead>
+        <tr style="text-align: right;">
+          <th></th>
+          <th>created_at</th>
+          <th>lang</th>
+          <th>text</th>
+          <th>user_name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>0</th>
+          <td>2020-08-10 06:57:25+00:00</td>
+          <td>en</td>
+          <td>Speaking of yard signs- i’ve been seeing Trump...</td>
+          <td>DrRickF</td>
+        </tr>
+        <tr>
+          <th>1</th>
+          <td>2020-08-10 06:57:25+00:00</td>
+          <td>en</td>
+          <td>RT @catturd2: President Trump owned the Democr...</td>
+          <td>PauliePops1</td>
+        </tr>
+        <tr>
+          <th>2</th>
+          <td>2020-08-10 06:57:25+00:00</td>
+          <td>en</td>
+          <td>Every single eligible American should have the...</td>
+          <td>TheRealAZJhawks</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+The `textblob_analyzer()` is defined to classify a tweet into three categories of emotions: positive, negative, or neutral to identify the tweeters' sentiments toward the keyword 'trump'.
 
 ```python
 def textblob_analyzer(tweet):
@@ -481,8 +529,6 @@ def textblob_analyzer(tweet):
         # create TextBlob object of passed tweet text
         analysis = TextBlob(tweet)
 
-        #analysis = TextBlob(self.clean_tweet(tweet), analyzer=NaiveBayesAnalyzer())
-
         # set sentiment
         if analysis.sentiment.polarity > 0:
             return 'positive'
@@ -491,7 +537,7 @@ def textblob_analyzer(tweet):
         elif analysis.sentiment.polarity == 0:
             return 'neutral'
 ```
-
+Similarly, the `vader_analyzer()` is defined to compare its performance with TextBlob. The neutrality condition is if score is between -0.05 and 0.05 (i.e. $$-0.5 \leq \text{score} \leq 0.5$$).
 
 ```python
 sid = SentimentIntensityAnalyzer()
@@ -500,8 +546,6 @@ def get_vader_score(tweet):
     score = sid.polarity_scores(tweet)
     return score
 ```
-
-
 ```python
 def vader_analyzer(tweet):
         '''
@@ -519,70 +563,7 @@ def vader_analyzer(tweet):
             return 'neutral'
 ```
 
-
-```python
-print(len(df))
-df.head(3)
-```
-
-    11
-
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>created_at</th>
-      <th>lang</th>
-      <th>text</th>
-      <th>user_name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2020-08-10 06:57:25+00:00</td>
-      <td>en</td>
-      <td>Speaking of yard signs- i’ve been seeing Trump...</td>
-      <td>DrRickF</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2020-08-10 06:57:25+00:00</td>
-      <td>en</td>
-      <td>RT @catturd2: President Trump owned the Democr...</td>
-      <td>PauliePops1</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2020-08-10 06:57:25+00:00</td>
-      <td>en</td>
-      <td>Every single eligible American should have the...</td>
-      <td>TheRealAZJhawks</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
+Both functions are applied to the 'text' column in the dataframe 'df' and results were added to new columns 'TextBlob' and 'Vader'.
 
 ```python
 # See how the df looks.
@@ -590,9 +571,6 @@ df['TextBlob']=df['text'].apply(lambda tweet: textblob_analyzer(tweet))
 df['Vader']=df['text'].apply(lambda tweet: vader_analyzer(tweet))
 df
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -724,79 +702,41 @@ df
 </table>
 </div>
 
-
-
+The following code snippet is to grab the classified values. Those if conditions are in the case that a value for any of group can be zero.
 
 ```python
 # Two analysis
 textBlob_results=df.TextBlob.value_counts().sort_index(ascending=False)
-if textBlob_results.__contains__('positive')==False:
-    textBlob_results['positive'] = 0
-if textBlob_results.__contains__('negative')==False:
-    textBlob_results['negative'] = 0
-if textBlob_results.__contains__('neutral')==False:
-    textBlob_results['neutral'] = 0
-if textBlob_results.positive == len(df):
-    textBlob_results['negative'] = 0
-    textBlob_results['neutral'] = 0
-if textBlob_results.negative == len(df):
-    textBlob_results['positve'] = 0
-    textBlob_results['neutral'] = 0
-if textBlob_results.neutral == len(df):
-    textBlob_results['positve'] = 0
-    textBlob_results['neutral'] = 0
-
+if Cond_TextBlob:
+    textBlob_results['positive']=(df['TextBlob']=='positive').values.sum()
+    textBlob_results['neutral']=(df['TextBlob']=='neutral').values.sum()
+    textBlob_results['negative']=(df['TextBlob']=='negative').values.sum()
 
 Vader_results=df.Vader.value_counts().sort_index(ascending=False)
-if Vader_results.__contains__('positive')==False:
-    Vader_results['positive'] = 0
-if Vader_results.__contains__('negative')==False:
-    Vader_results['negative'] = 0
-if Vader_results.__contains__('neutral')==False:
-    Vader_results['neutral'] = 0
-if Vader_results.positive == len(df):
-    Vader_results['negative'] = 0
-    Vader_results['neutral'] = 0
-if Vader_results.negative == len(df):
-    Vader_results['positve'] = 0
-    Vader_results['neutral'] = 0
-if Vader_results.neutral == len(df):
-    Vader_results['positve'] = 0
-    Vader_results['neutral'] = 0
-
-
+Cond_Vader= (Vader_results.positive == 0) or (Vader_results.neutral == 0) or (Vader_results.negative == 0)
+if Cond_Vader:
+    Vader_results['positive']=(df['Vader']=='positive').values.sum()
+    Vader_results['neutral']=(df['Vader']=='neutral').values.sum()
+    Vader_results['negative']=(df['Vader']=='negative').values.sum()
 ```
-
+Here, you can see the values for each group.  
 
 ```python
 textBlob_results
 ```
-
-
-
-
     positive    4
     neutral     4
     negative    3
     Name: TextBlob, dtype: int64
-
-
-
-
 ```python
 Vader_results
 ```
-
-
-
-
     positive    7
     neutral     1
     negative    3
     Name: Vader, dtype: int64
 
-
-
+Pie plot is used to compare the performance of both TextBlob and Vader.
 
 ```python
 #plot Pie plot.
@@ -819,31 +759,22 @@ if len(df) != 0:
     plt.show()
 ```
 
+![Comparison](/assets/images/Data-Crawling-TwitterAPI/output_22_0.png){:height="600px" width="400px"}  
+| Fig3. Comparison between TextBlob and Vader|
 
-![png](output_22_0.png)
-
-
+Let's group the data into three, based on Vader, and check some samples if they are reasonably classified.
 
 ```python
-# tested some samples and relaized that vader is
-# generally better for sentiment analysis.
-# so, group the people who have the similar opinions on
+# Group the people who have the similar opinions on
 # keyword.
 pos_group=df[df['Vader']=='positive']
 neg_group=df[df['Vader']=='negative']
 neut_group=df[df['Vader']=='neutral']
-
-# want to
 ```
-
 
 ```python
 pos_group
 ```
-
-
-
-
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -939,20 +870,16 @@ pos_group
 </div>
 
 
-
+Check a tweet text sample in the positive group, which seems more like neutral rather than positive.
 
 ```python
 # Check a text in the positive group
 pos_group.text[2]
 ```
 
-
-
-
     "Every single eligible American should have the opportunity to vote-by-mail this November. If it's good enough for Donald Trump then it's good enough for you and me."
 
-
-
+I measured scores and process time, using the functions shown below.
 
 ```python
 Vstart = time.time()
@@ -974,8 +901,6 @@ Nend = time.time()
     vs
     TextBlob w/ NB: Sentiment(classification='pos', p_pos=0.7772960377509671, p_neg=0.22270396224903263)
 
-
-
 ```python
 print(f'Vader: {Vend-Vstart} s, TextBlob: {Tend-Tstart} s, TextBlob: {Nend-Nstart} s')
 ```
@@ -983,15 +908,11 @@ print(f'Vader: {Vend-Vstart} s, TextBlob: {Tend-Tstart} s, TextBlob: {Nend-Nstar
     Vader: 0.0016090869903564453 s, TextBlob: 0.0011258125305175781 s, TextBlob: 4.698314905166626 s
 
 
-The text can be positive, but more like neutral. If the condition is changed for neutrality, Vader seems better. Moreover, despite the duration TextBlob without NB is the fastest, Vader is useful for the sentiment analysis tasks like movie review or book review.
-
+The tweet text sample is classified positive for all the cases, but scores are different. If neutrality condition is differently set up, Vader can be better. Moreover, despite the duration TextBlob without NB is the fastest, Vader is useful for the sentiment analysis tasks like movie reviews or book reviews.
 
 ```python
 neg_group.text
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -1052,24 +973,15 @@ neg_group.text
 </div>
 
 
-
-
+The tweet text samples from the negative group. The text can be neutral or negative. Vader seems better for analysis.
 ```python
 words=neg_group.text[6]
 words
 ```
 
-
-
-
     'Trump is about to cut out the middlemen in pharmaceutical markets. This is huge Right after announcing that, he says “So I have a lot of enemies out there, this may be the last time you see me for awhile.” Is he saying big pharma is plotting to kill him?'
 
-
-
-The text can be neutral or negative. Vader seems better for analysis.
-
-Let's look at what the user of this guys who wrote above think.
-
+Let's look at what the user of this guys who wrote above think, using the `wordcloud`.
 
 ```python
 stopwords = set(STOPWORDS) # pre-defined words to ignore
@@ -1085,13 +997,7 @@ plt.figure(figsize=(15,10)) # make the plot bigger
 plt.imshow(wordcloud, interpolation='bilinear')
 plt.axis("off")
 ```
+![Wordcloud](/assets/images/Data-Crawling-TwitterAPI/output_33_1.png){:height="600px" width="400px"}  
+| Fig4. Wordcloud of a specific Twitter User about Trump|
 
-
-
-
-    (-0.5, 399.5, 199.5, -0.5)
-
-
-
-
-![png](output_33_1.png)
+Likewise, you can use any cases to know what people think and contact them via Twitter, changing 'KEYWORDS' and 'THRESHOLD'. 
