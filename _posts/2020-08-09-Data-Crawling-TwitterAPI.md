@@ -54,14 +54,16 @@ access_key = "???"
 # Access token secret == access_secret
 access_secret = "???"
 ```
-#Practice1: World Sentiment Comparison (Superman vs. Batman)
+
+# Practice1: World Sentiment Comparison (Superman vs. Batman)
+
 Practice1 is to see how live twitters think about two keywords. The program captures the real-time tweets related to two keywords that you can set up. In this time, let's compare Superman with Batman.
 
 ![sup_bat](/assets/images/Data-Crawling-TwitterAPI/sup_bat.png){:height="800px" width="200px"}  
 
 ## Streaming
 First, I imported the necessary libraries and set the credentials (Consumer Key and Access Key).
-> consumer_key (variable) is set as API key and access_key (variable) is set as Access token. Consumer API keys and Access token & access token secret) to authenticate with the API:
+> consumer_key (variable) is set as API key and access_key (variable) is set as Access token.
 
 ```python
 import tweepy
@@ -74,6 +76,7 @@ from secrets import consumer_key, consumer_secret, access_key, access_secret
 auth= tweepy.AppAuthHandler(consumer_key, consumer_secret)
 api = tweepy.API(auth)
 ```
+## Functions Defined: get, clean, classify, and measure.
 
 'get_tweets()' is to stream the 10 live tweets related to the 'keyword' you will set, 'clean_tweets()' is to clean the parsed tweets that contain non-alphabetical characters, 'get_sentiment()' is to measure and return the score of argument 'tweets', and 'generate_average_sentiment_score()' is to generate the average scores of two keywords for comparison
 
@@ -104,6 +107,8 @@ def generate_average_sentiment_score(keyword: str) -> int:
     average_score = statistics.mean(sentiment_scores)
     return average_score
 ```
+
+## Main
 
 The main started with asking two keywords to check which keyword the live twitters prefer. I inserted 'superman' and 'batman' to compare.
 
@@ -190,13 +195,924 @@ sentiment_scores
     0.8,
     0.22083333333333333]
 
-The score goes from -1 (negative) to 1 (positive). That tells how each tweeter feel on the keyword 'superman'. The 9th tweet 'Great Moments in Villainy' was scored 0.8, which means that the tweeter feeled extremely positive on 'superman' at that time. However, (s)he actually talks about 'villainy', not 'superman'. Now, we know that it is misclassified. Practice2 will show performance of sentiment analysis between TextBlob and NLTK Vader. I chose these two packages because they are fast and accurate enough for a tremendous amount of text data. If you interested in more details on performance comparison over Vader, IBM Watson, or TextBlob, check [here](https://medium.com/@Intellica.AI/vader-ibm-watson-or-textblob-which-is-better-for-unsupervised-sentiment-analysis-db4143a39445).
+The score goes from -1 (negative) to 1 (positive). That tells how each tweeter feel on the keyword 'superman'. The 9th tweet 'Great Moments in Villainy' was scored 0.8, which means that the tweeter felt extremely positive on 'superman' at that time. However, (s)he actually talks about 'villainy', not 'superman'. Now, we know that it is misclassified. Practice2 will show performance of sentiment analysis between TextBlob and NLTK Vader. I chose these two packages because they are fast and accurate enough for a tremendous amount of text data. If you interested in more details on performance comparison over Vader, IBM Watson, or TextBlob, check [here](https://medium.com/@Intellica.AI/vader-ibm-watson-or-textblob-which-is-better-for-unsupervised-sentiment-analysis-db4143a39445).
 
-#Practice2: Twitter Data Crawling and Visualizing (Trump)
-Practice2 is to see how live twitters think about two keywords. The program captures the real-time tweets related to two keywords that you can set up. In this time, let's compare Superman with Batman.
+If you want to see the code, check [here]()
+
+# Practice2: Twitter Streaming and Visualizing (Trump)
+Practice2 is to see how live twitters think about the keyword and we will compare performance of NLTK Vader and TextBlob. The program captures the real-time tweets related to the keyword that you can set up. In this time, let's check how people think of President Trump (i.e. keyword='Trump').
 
 ![trump](/assets/images/Data-Crawling-TwitterAPI/trump.png){:height="800px" width="200px"}  
 
+## Streaming
+Similar to Practice1, I imported the necessary libraries and set the credentials (Consumer Key and Access Key).
+
+```python
+import csv
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns; sns.set(style='whitegrid')
+import re
+import json
+import time
+import warnings
+from wordcloud import WordCloud, STOPWORDS
+## NLP operation on text
+import nltk
+nltk.download('vader_lexicon')
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+# To consume Twitter's API
+import tweepy
+from tweepy import Stream
+from tweepy import StreamListener
+from secrets import consumer_key, consumer_secret, access_key, access_secret
+# To identify the sentiment of text
+from textblob import TextBlob
+from textblob.sentiments import NaiveBayesAnalyzer
+# ignoring all the warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+
+%matplotlib inline
+```
+
+I entered the keyword 'trump' to see
 
 
-If you are interested in more detail information, please visit the following websites: [API](https://www.altexsoft.com/blog/engineering/what-is-api-definition-types-specifications-documentation/), [Web](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/How_the_Web_works)
+```python
+print('Which keyword you want to check on real-time twitter?')
+KEYWORDS = input()
+```
+
+    Which keyword you want to check on real-time twitter?
+    e.g. if you are looking for opinions on iphone 12,
+    insert such as iphone AND galaxy
+
+
+     Trump
+
+
+
+```python
+KEYWORDS
+```
+
+
+
+
+    'Trump'
+
+
+
+
+```python
+# rename the output file.
+OUTPUT_NAME=re.sub("AND | OR", "_", KEYWORDS.replace('"',"")).replace(' ', "")
+OUTPUT_FILE = OUTPUT_NAME+".csv"
+# number of tweets to capture.
+TWEETS_TO_CAPTURE = 10
+```
+
+
+```python
+class MyStreamListener(tweepy.StreamListener):
+    def __init__(self, api=None):
+        super(MyStreamListener, self).__init__()
+        self.num_tweets = 0
+        self.file = open(OUTPUT_FILE, 'w')
+
+    def on_status(self, status):
+        tweet = status._json
+        self.file.write(json.dumps(tweet)+'\n')
+        self.num_tweets += 1
+
+        # Stops streaming when it reaches the limit
+        if self.num_tweets <= TWEETS_TO_CAPTURE:
+            if self.num_tweets %100 ==0:
+                print(f'Numbers of tweets caught so far: {self.num_tweets}')
+            return True
+        else:
+            return False
+        self.file.close()
+
+    def on_error(self, status):
+        print("Error detected")
+
+```
+
+
+```python
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_key, access_secret)
+api = tweepy.API(auth, wait_on_rate_limit=True,
+                wait_on_rate_limit_notify=True)
+tweets_listener = MyStreamListener()
+stream = tweepy.Stream(api.auth, tweets_listener)
+```
+
+
+```python
+stream.filter(track=[KEYWORDS], languages=["en"])
+
+```
+
+
+```python
+# Initialize empty list to store tweets
+tweets_data = []
+
+# Open connection to file
+with open(OUTPUT_FILE, "r") as tweets_file:
+    # Read in tweets and store in list
+    for line in tweets_file:
+        tweet = json.loads(line)
+        tweets_data.append(tweet)
+
+```
+
+
+```python
+def id_extractor(data: list):
+    name_list = []
+    for i in range (len(data)):
+        name_list.append(data[i]['user']['screen_name'])
+    return pd.DataFrame(name_list)
+```
+
+
+```python
+user_names = id_extractor(tweets_data)
+user_names
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>DrRickF</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>PauliePops1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>TheRealAZJhawks</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>PainterMom101</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>YouEndorse</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>ICBubbleGum</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>tahitianspecial</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>CrystalScurr</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Qnited_We_Stand</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>SassyP100</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>CynthiaMsnene</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+def clean_tweet(tweet):
+        '''
+        To clean tweet text by removing links, special characters
+        '''
+        cleaned_tweet = ' '.join(re.sub("(@[A-Za-z0-9]+) | ([^0-9A-Za-z \t]) | (\w+:\/\/\S+)",
+                                        " ", tweet).split())
+        return cleaned_tweet
+```
+
+
+```python
+def full_text_extractor(data: list):
+    '''
+    To extract full text from each user.
+    '''
+    full_text_list = []
+    for i in range (len(data)):
+        # if there is 'extended_tweet', clean the full_text and append it to the full_text_list.
+        if tweets_data[i].__contains__('extended_tweet'):
+            full_text_list.append(clean_tweet(tweets_data[i]['extended_tweet']['full_text']))
+        # if there is 'retweeted_status' and extended_tweet in it, clean the full_text and  
+        # append it to the full_text_list. Otherwise, clean and append the text.
+        elif tweets_data[i].__contains__('retweeted_status'):
+            if tweets_data[i]['retweeted_status'].__contains__('extended_tweet'):
+                full_text_list.append(clean_tweet(clean_tweet(tweets_data[i]['retweeted_status']['extended_tweet']['full_text'])))
+            else:
+                full_text_list.append(clean_tweet(clean_tweet(tweets_data[i]['text'])))
+        else:
+            full_text_list.append(clean_tweet(tweets_data[i]['text']))
+    return pd.DataFrame(full_text_list)
+```
+
+
+```python
+# To check what the full_texts is.
+full_texts=full_text_extractor(tweets_data)
+print(full_texts)
+```
+
+                                                        0
+    0   Speaking of yard signs- i’ve been seeing Trump...
+    1   RT @catturd2: President Trump owned the Democr...
+    2   Every single eligible American should have the...
+    3   From a friend: An anguished question from a Tr...
+    4   RT @TheOnion: Trump Slaughters Dozens Of Ameri...
+    5   RT @TweetSusieTweet: Trump on Mount Rushmore. ...
+    6   Trump is about to cut out the middlemen in pha...
+    7                                  No matter what YES
+    8   RT @RealBrysonGray: Keep sharing this to make ...
+    9   RT @RyanAFournier: Trump: Authorizes $430 mill...
+    10  RT @thekjohnston: This is why trump built appr...
+
+
+
+```python
+df = pd.DataFrame(tweets_data, columns=['created_at','lang', 'text'])
+# store user names
+df['user_name']=user_names
+# replace texts with full texts if there is any
+df['text']=full_texts
+# convert to datetime
+df['created_at'] = pd.to_datetime(df.created_at)
+df.text[5]
+```
+
+
+
+
+    'RT @TweetSusieTweet: Trump on Mount Rushmore. Cheers from Australia! Credit: @moir_alan'
+
+
+
+
+```python
+def textblob_analyzer(tweet):
+        '''
+        To classify sentiment positive, negative, or neutral  
+        '''
+        # create TextBlob object of passed tweet text
+        analysis = TextBlob(tweet)
+
+        #analysis = TextBlob(self.clean_tweet(tweet), analyzer=NaiveBayesAnalyzer())
+
+        # set sentiment
+        if analysis.sentiment.polarity > 0:
+            return 'positive'
+        elif analysis.sentiment.polarity < 0:
+            return 'negative'
+        elif analysis.sentiment.polarity == 0:
+            return 'neutral'
+```
+
+
+```python
+sid = SentimentIntensityAnalyzer()
+def get_vader_score(tweet):
+    # Polarity score returns dictionary
+    score = sid.polarity_scores(tweet)
+    return score
+```
+
+
+```python
+def vader_analyzer(tweet):
+        '''
+        To classify sentiment positive, negative, or neutral  
+        '''
+        # create TextBlob object of passed tweet text  
+        score = get_vader_score(tweet)['compound']
+
+        # set sentiment
+        if score >= 0.05:
+            return 'positive'
+        elif score <= -0.05:
+            return 'negative'
+        else:
+            return 'neutral'
+```
+
+
+```python
+print(len(df))
+df.head(3)
+```
+
+    11
+
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>created_at</th>
+      <th>lang</th>
+      <th>text</th>
+      <th>user_name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2020-08-10 06:57:25+00:00</td>
+      <td>en</td>
+      <td>Speaking of yard signs- i’ve been seeing Trump...</td>
+      <td>DrRickF</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2020-08-10 06:57:25+00:00</td>
+      <td>en</td>
+      <td>RT @catturd2: President Trump owned the Democr...</td>
+      <td>PauliePops1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2020-08-10 06:57:25+00:00</td>
+      <td>en</td>
+      <td>Every single eligible American should have the...</td>
+      <td>TheRealAZJhawks</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+# See how the df looks.
+df['TextBlob']=df['text'].apply(lambda tweet: textblob_analyzer(tweet))
+df['Vader']=df['text'].apply(lambda tweet: vader_analyzer(tweet))
+df
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>created_at</th>
+      <th>lang</th>
+      <th>text</th>
+      <th>user_name</th>
+      <th>TextBlob</th>
+      <th>Vader</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2020-08-10 06:57:25+00:00</td>
+      <td>en</td>
+      <td>Speaking of yard signs- i’ve been seeing Trump...</td>
+      <td>DrRickF</td>
+      <td>positive</td>
+      <td>positive</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2020-08-10 06:57:25+00:00</td>
+      <td>en</td>
+      <td>RT @catturd2: President Trump owned the Democr...</td>
+      <td>PauliePops1</td>
+      <td>positive</td>
+      <td>negative</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2020-08-10 06:57:25+00:00</td>
+      <td>en</td>
+      <td>Every single eligible American should have the...</td>
+      <td>TheRealAZJhawks</td>
+      <td>positive</td>
+      <td>positive</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2020-08-10 06:57:25+00:00</td>
+      <td>en</td>
+      <td>From a friend: An anguished question from a Tr...</td>
+      <td>PainterMom101</td>
+      <td>negative</td>
+      <td>positive</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2020-08-10 06:57:25+00:00</td>
+      <td>en</td>
+      <td>RT @TheOnion: Trump Slaughters Dozens Of Ameri...</td>
+      <td>YouEndorse</td>
+      <td>neutral</td>
+      <td>positive</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2020-08-10 06:57:25+00:00</td>
+      <td>en</td>
+      <td>RT @TweetSusieTweet: Trump on Mount Rushmore. ...</td>
+      <td>ICBubbleGum</td>
+      <td>neutral</td>
+      <td>positive</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2020-08-10 06:57:25+00:00</td>
+      <td>en</td>
+      <td>Trump is about to cut out the middlemen in pha...</td>
+      <td>tahitianspecial</td>
+      <td>positive</td>
+      <td>negative</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2020-08-10 06:57:25+00:00</td>
+      <td>en</td>
+      <td>No matter what YES</td>
+      <td>CrystalScurr</td>
+      <td>neutral</td>
+      <td>positive</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2020-08-10 06:57:25+00:00</td>
+      <td>en</td>
+      <td>RT @RealBrysonGray: Keep sharing this to make ...</td>
+      <td>Qnited_We_Stand</td>
+      <td>negative</td>
+      <td>positive</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2020-08-10 06:57:25+00:00</td>
+      <td>en</td>
+      <td>RT @RyanAFournier: Trump: Authorizes $430 mill...</td>
+      <td>SassyP100</td>
+      <td>negative</td>
+      <td>negative</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2020-08-10 06:57:25+00:00</td>
+      <td>en</td>
+      <td>RT @thekjohnston: This is why trump built appr...</td>
+      <td>CynthiaMsnene</td>
+      <td>neutral</td>
+      <td>neutral</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+# Two analysis
+textBlob_results=df.TextBlob.value_counts().sort_index(ascending=False)
+if textBlob_results.__contains__('positive')==False:
+    textBlob_results['positive'] = 0
+if textBlob_results.__contains__('negative')==False:
+    textBlob_results['negative'] = 0
+if textBlob_results.__contains__('neutral')==False:
+    textBlob_results['neutral'] = 0
+if textBlob_results.positive == len(df):
+    textBlob_results['negative'] = 0
+    textBlob_results['neutral'] = 0
+if textBlob_results.negative == len(df):
+    textBlob_results['positve'] = 0
+    textBlob_results['neutral'] = 0
+if textBlob_results.neutral == len(df):
+    textBlob_results['positve'] = 0
+    textBlob_results['neutral'] = 0
+
+
+Vader_results=df.Vader.value_counts().sort_index(ascending=False)
+if Vader_results.__contains__('positive')==False:
+    Vader_results['positive'] = 0
+if Vader_results.__contains__('negative')==False:
+    Vader_results['negative'] = 0
+if Vader_results.__contains__('neutral')==False:
+    Vader_results['neutral'] = 0
+if Vader_results.positive == len(df):
+    Vader_results['negative'] = 0
+    Vader_results['neutral'] = 0
+if Vader_results.negative == len(df):
+    Vader_results['positve'] = 0
+    Vader_results['neutral'] = 0
+if Vader_results.neutral == len(df):
+    Vader_results['positve'] = 0
+    Vader_results['neutral'] = 0
+
+
+```
+
+
+```python
+textBlob_results
+```
+
+
+
+
+    positive    4
+    neutral     4
+    negative    3
+    Name: TextBlob, dtype: int64
+
+
+
+
+```python
+Vader_results
+```
+
+
+
+
+    positive    7
+    neutral     1
+    negative    3
+    Name: Vader, dtype: int64
+
+
+
+
+```python
+#plot Pie plot.
+if len(df) != 0:
+    fig, ax = plt.subplots(1,2)
+    label_list=['positive','neutral','negative']
+    colors_emotion = ['cyan','yellow','tomato']
+    explodes_emotion = [0,0,0]
+    #axis 1 for TextBlob analyzer
+    ax[0].pie(list(textBlob_results),labels=label_list,colors=colors_emotion,explode=explodes_emotion,
+            autopct='%1.1f%%', shadow=False)
+    ax[0].set_title(f'TextBlob Analyzer on {KEYWORDS}')
+    ax[0].axis('equal')
+    #axis 2 for Vader analyzer
+    ax[1].pie(list(Vader_results),labels=label_list,colors=colors_emotion,explode=explodes_emotion,
+            autopct='%1.1f%%', shadow=False)
+    ax[1].set_title(f'Vader Analyzer on {KEYWORDS}')
+    ax[1].axis('equal')
+    fig.tight_layout(pad=4.0)
+    plt.show()
+```
+
+
+![png](output_22_0.png)
+
+
+
+```python
+# tested some samples and relaized that vader is
+# generally better for sentiment analysis.
+# so, group the people who have the similar opinions on
+# keyword.
+pos_group=df[df['Vader']=='positive']
+neg_group=df[df['Vader']=='negative']
+neut_group=df[df['Vader']=='neutral']
+
+# want to
+```
+
+
+```python
+pos_group
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>created_at</th>
+      <th>lang</th>
+      <th>text</th>
+      <th>user_name</th>
+      <th>TextBlob</th>
+      <th>Vader</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2020-08-10 06:57:25+00:00</td>
+      <td>en</td>
+      <td>Speaking of yard signs- i’ve been seeing Trump...</td>
+      <td>DrRickF</td>
+      <td>positive</td>
+      <td>positive</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2020-08-10 06:57:25+00:00</td>
+      <td>en</td>
+      <td>Every single eligible American should have the...</td>
+      <td>TheRealAZJhawks</td>
+      <td>positive</td>
+      <td>positive</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2020-08-10 06:57:25+00:00</td>
+      <td>en</td>
+      <td>From a friend: An anguished question from a Tr...</td>
+      <td>PainterMom101</td>
+      <td>negative</td>
+      <td>positive</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2020-08-10 06:57:25+00:00</td>
+      <td>en</td>
+      <td>RT @TheOnion: Trump Slaughters Dozens Of Ameri...</td>
+      <td>YouEndorse</td>
+      <td>neutral</td>
+      <td>positive</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2020-08-10 06:57:25+00:00</td>
+      <td>en</td>
+      <td>RT @TweetSusieTweet: Trump on Mount Rushmore. ...</td>
+      <td>ICBubbleGum</td>
+      <td>neutral</td>
+      <td>positive</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2020-08-10 06:57:25+00:00</td>
+      <td>en</td>
+      <td>No matter what YES</td>
+      <td>CrystalScurr</td>
+      <td>neutral</td>
+      <td>positive</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2020-08-10 06:57:25+00:00</td>
+      <td>en</td>
+      <td>RT @RealBrysonGray: Keep sharing this to make ...</td>
+      <td>Qnited_We_Stand</td>
+      <td>negative</td>
+      <td>positive</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+# Check a text in the positive group
+pos_group.text[2]
+```
+
+
+
+
+    "Every single eligible American should have the opportunity to vote-by-mail this November. If it's good enough for Donald Trump then it's good enough for you and me."
+
+
+
+
+```python
+Vstart = time.time()
+print(f'Vader: {get_vader_score(pos_group.text[2])}')
+Vend = time.time()
+print('vs')
+Tstart = time.time()
+print(f'TextBlob: {TextBlob(pos_group.text[2]).sentiment}')
+Tend = time.time()
+print('vs')
+Nstart = time.time()
+print(f'TextBlob w/ NB: {TextBlob(pos_group.text[2], analyzer=NaiveBayesAnalyzer()).sentiment}')
+Nend = time.time()
+```
+
+    Vader: {'neg': 0.0, 'neu': 0.736, 'pos': 0.264, 'compound': 0.8225}
+    vs
+    TextBlob: Sentiment(polarity=0.22142857142857142, subjectivity=0.40238095238095245)
+    vs
+    TextBlob w/ NB: Sentiment(classification='pos', p_pos=0.7772960377509671, p_neg=0.22270396224903263)
+
+
+
+```python
+print(f'Vader: {Vend-Vstart} s, TextBlob: {Tend-Tstart} s, TextBlob: {Nend-Nstart} s')
+```
+
+    Vader: 0.0016090869903564453 s, TextBlob: 0.0011258125305175781 s, TextBlob: 4.698314905166626 s
+
+
+The text can be positive, but more like neutral. If the condition is changed for neutrality, Vader seems better. Moreover, despite the duration TextBlob without NB is the fastest, Vader is useful for the sentiment analysis tasks like movie review or book review.
+
+
+```python
+neg_group.text
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>created_at</th>
+      <th>lang</th>
+      <th>text</th>
+      <th>user_name</th>
+      <th>TextBlob</th>
+      <th>Vader</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>2020-08-10 06:57:25+00:00</td>
+      <td>en</td>
+      <td>RT @catturd2: President Trump owned the Democr...</td>
+      <td>PauliePops1</td>
+      <td>positive</td>
+      <td>negative</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2020-08-10 06:57:25+00:00</td>
+      <td>en</td>
+      <td>Trump is about to cut out the middlemen in pha...</td>
+      <td>tahitianspecial</td>
+      <td>positive</td>
+      <td>negative</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2020-08-10 06:57:25+00:00</td>
+      <td>en</td>
+      <td>RT @RyanAFournier: Trump: Authorizes $430 mill...</td>
+      <td>SassyP100</td>
+      <td>negative</td>
+      <td>negative</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+words=neg_group.text[6]
+words
+```
+
+
+
+
+    'Trump is about to cut out the middlemen in pharmaceutical markets. This is huge Right after announcing that, he says “So I have a lot of enemies out there, this may be the last time you see me for awhile.” Is he saying big pharma is plotting to kill him?'
+
+
+
+The text can be neutral or negative. Vader seems better for analysis.
+
+Let's look at what the user of this guys who wrote above think.
+
+
+```python
+stopwords = set(STOPWORDS) # pre-defined words to ignore
+# adding extra words to ignore:
+# many tweets contain RT in the text, and we know the tweets are about Donald Trump
+stopwords.update([KEYWORDS])
+wordcloud = (WordCloud(background_color="white", # easier to read
+                      max_words=50, # let's no polute it too much
+                      stopwords=stopwords) # define words to ignore
+                      .generate(words)) # generate the wordcloud with text
+plt.figure(figsize=(15,10)) # make the plot bigger
+# Show the plot (interpolation='bilinear' makes it better looking)
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis("off")
+```
+
+
+
+
+    (-0.5, 399.5, 199.5, -0.5)
+
+
+
+
+![png](output_33_1.png)
