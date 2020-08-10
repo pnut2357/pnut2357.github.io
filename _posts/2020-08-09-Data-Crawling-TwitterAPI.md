@@ -23,10 +23,12 @@ If you want access to Twitter’s APIs, you should create a twitter account (if 
 If you want a help for steps in order to prevent to be banned, I recommend this [youtube instruction](https://www.youtube.com/watch?v=vlvtqp44xoQ)
 
 Then, you should see Apps when you place your cursor on the account (right top corner in the figure shown below).
+
 ![tw_webpage](/assets/images/Data-Crawling-TwitterAPI/tw_webpage.png){:height="800px" width="600px"}  
 | Fig1. Twitter Developer Portal|
 
 From your Twitter Apps page, click `+ create App` and you are ready to go.
+
 ![tw_acc](/assets/images/Data-Crawling-TwitterAPI/tw_acc.png){:height="800px" width="400px"}  
 | Fig2. Twitter Developer Portal|
 
@@ -61,7 +63,7 @@ Practice1 is to see how live twitters think about two keywords. The program capt
 
 ![sup_bat](/assets/images/Data-Crawling-TwitterAPI/sup_bat.png){:height="800px" width="200px"}  
 
-## Streaming
+## Importing
 First, I imported the necessary libraries and set the credentials (Consumer Key and Access Key).
 > consumer_key (variable) is set as API key and access_key (variable) is set as Access token.
 
@@ -76,9 +78,9 @@ from secrets import consumer_key, consumer_secret, access_key, access_secret
 auth= tweepy.AppAuthHandler(consumer_key, consumer_secret)
 api = tweepy.API(auth)
 ```
-## Functions Defined: get, clean, classify, and measure.
+## Streaming and Functions Defined: get, clean, classify, and measure.
 
-'get_tweets()' is to stream the 10 live tweets related to the 'keyword' you will set, 'clean_tweets()' is to clean the parsed tweets that contain non-alphabetical characters, 'get_sentiment()' is to measure and return the score of argument 'tweets', and 'generate_average_sentiment_score()' is to generate the average scores of two keywords for comparison
+`get_tweets()` is to stream the 10 live tweets related to the 'keyword' you will set, `clean_tweets()` is to clean the parsed tweets that contain non-alphabetical characters, `get_sentiment()` is to measure and return the score of argument 'tweets', and `generate_average_sentiment_score()` is to generate the average scores of two keywords for comparison. The Cursor object helps you to get access to Twitter APIs.
 
 ```python
 def get_tweets(keyword: str) -> List[str]:
@@ -204,7 +206,7 @@ Practice2 is to see how live twitters think about the keyword and we will compar
 
 ![trump](/assets/images/Data-Crawling-TwitterAPI/trump.png){:height="800px" width="200px"}  
 
-## Streaming
+## Importing
 Similar to Practice1, I imported the necessary libraries and set the credentials (Consumer Key and Access Key).
 
 ```python
@@ -230,13 +232,11 @@ from secrets import consumer_key, consumer_secret, access_key, access_secret
 from textblob import TextBlob
 from textblob.sentiments import NaiveBayesAnalyzer
 # ignoring all the warnings
-warnings.filterwarnings("ignore", category=DeprecationWarning)
+warnings.filterwarnings("ignore",category=DeprecationWarning)
 
 %matplotlib inline
 ```
-
-I entered the keyword 'trump' to see
-
+I entered the keyword 'trump' to see what emotional tweets about President Trump the live twitters have.
 
 ```python
 print('Which keyword you want to check on real-time twitter?')
@@ -244,34 +244,22 @@ KEYWORDS = input()
 ```
 
     Which keyword you want to check on real-time twitter?
-    e.g. if you are looking for opinions on iphone 12,
-    insert such as iphone AND galaxy
-
 
      Trump
 
-
-
-```python
-KEYWORDS
-```
-
-
-
-
-    'Trump'
-
-
-
+Then, I defined the filename in the constant 'OUTPUT_NAME' added to '.csv' to output a csv file. Since streaming goes forever unless you don't command when to stop, a limit of 10 (value of the constant 'THRESHOLD' can be flexible depending on user).
 
 ```python
 # rename the output file.
 OUTPUT_NAME=re.sub("AND | OR", "_", KEYWORDS.replace('"',"")).replace(' ', "")
 OUTPUT_FILE = OUTPUT_NAME+".csv"
 # number of tweets to capture.
-TWEETS_TO_CAPTURE = 10
+THRESHOLD = 10
 ```
+## Streaming and Saving Live Streaming Data
 
+Now, the class `MyStreamListener()` was built to the tweet listener class. I customized the class to make it enable to inherit from the `tweepy.StreamListener`, count number of tweets it is currently storing to limit, and store it in a JSON format.
+> Whenever 10 tweets are saved, it prints to show it is working.
 
 ```python
 class MyStreamListener(tweepy.StreamListener):
@@ -286,8 +274,8 @@ class MyStreamListener(tweepy.StreamListener):
         self.num_tweets += 1
 
         # Stops streaming when it reaches the limit
-        if self.num_tweets <= TWEETS_TO_CAPTURE:
-            if self.num_tweets %100 ==0:
+        if self.num_tweets <= THRESHOLD:
+            if self.num_tweets %10 ==0:
                 print(f'Numbers of tweets caught so far: {self.num_tweets}')
             return True
         else:
@@ -296,9 +284,9 @@ class MyStreamListener(tweepy.StreamListener):
 
     def on_error(self, status):
         print("Error detected")
-
 ```
 
+The live tweets streaming was started after permission of accessing Twitter APIs by authetificating with consumer_key and access_key. To grasping the only tweets related to the keywords 'trump', `filter()` was set for the keyword 'trump' tracker and language ('en').
 
 ```python
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
@@ -307,28 +295,22 @@ api = tweepy.API(auth, wait_on_rate_limit=True,
                 wait_on_rate_limit_notify=True)
 tweets_listener = MyStreamListener()
 stream = tweepy.Stream(api.auth, tweets_listener)
-```
-
-
-```python
 stream.filter(track=[KEYWORDS], languages=["en"])
-
 ```
-
+## Loading and Cleaning the Data
+The following code snippet is for loading the Twitter live data that saved in a JSON format.
 
 ```python
 # Initialize empty list to store tweets
 tweets_data = []
-
 # Open connection to file
 with open(OUTPUT_FILE, "r") as tweets_file:
     # Read in tweets and store in list
     for line in tweets_file:
         tweet = json.loads(line)
         tweets_data.append(tweet)
-
 ```
-
+The `id_extractor()`
 
 ```python
 def id_extractor(data: list):
@@ -336,10 +318,7 @@ def id_extractor(data: list):
     for i in range (len(data)):
         name_list.append(data[i]['user']['screen_name'])
     return pd.DataFrame(name_list)
-```
 
-
-```python
 user_names = id_extractor(tweets_data)
 user_names
 ```
