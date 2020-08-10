@@ -759,7 +759,7 @@ if len(df) != 0:
     plt.show()
 ```
 
-![Comparison](/assets/images/Data-Crawling-TwitterAPI/output_22_0.png){:height="600px" width="400px"}  
+![Comparison](/assets/images/Data-Crawling-TwitterAPI/output_22_0.png){:height="800px" width="400px"}  
 | Fig3. Comparison between TextBlob and Vader|
 
 Let's group the data into three, based on Vader, and check some samples if they are reasonably classified.
@@ -997,7 +997,7 @@ plt.figure(figsize=(15,10)) # make the plot bigger
 plt.imshow(wordcloud, interpolation='bilinear')
 plt.axis("off")
 ```
-![Wordcloud](/assets/images/Data-Crawling-TwitterAPI/output_33_1.png){:height="600px" width="400px"}  
+![Wordcloud](/assets/images/Data-Crawling-TwitterAPI/output_33_1.png){:height="800px" width="400px"}  
 | Fig4. Wordcloud of a specific Twitter User about Trump|
 
-Likewise, you can use any cases to know what people think and contact them via Twitter, changing 'KEYWORDS' and 'THRESHOLD'. 
+Likewise, you can use any cases to know what people think and contact them via Twitter, changing 'KEYWORDS' and 'THRESHOLD'.
