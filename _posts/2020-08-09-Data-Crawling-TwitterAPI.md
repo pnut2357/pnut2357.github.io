@@ -9,7 +9,7 @@ toc: true
 toc_sticky: true
 comments: true
 excerpt: |
-  API / Web / Data Crawling / Twitter
+  API / Web / Data Crawling / Twitter / Sentiment Analysis / NLP
 #header:
 #  image: /assets/images/logos/logo-text-8c3ba8a6.svg
 ---
@@ -31,13 +31,33 @@ From your Twitter Apps page, click `+ create App` and you are ready to go.
 | Fig2. Twitter Developer Portal|
 
 ## Open Source Libraries
-The following libararies are open-source Python libraries for accessing Twitter API. I personally started with `tweepy`. 
+The following libararies are open-source Python libraries for accessing Twitter API. I personally started with `tweepy`.
 - python-twitter by the Python-Twitter Developers
 - tweepy by the tweepy Developers
 - twitter by the Python Twitter Tools developer team
 - TwitterSearch by @ckoepp
 - twython by @ryanmcgrath and @mikehelmick
 - TwitterAPI by @geduldig
+
+# Practice
+## Save Consumer Key and Access Key
+
+The following code is secrete.py file that I separately saved Consumer Key and Access Key.
+
+```python
+# API key == consumer_key
+consumer_key = "???"
+# API secret key == consumer_secrets
+consumer_secret =  "???"
+# Access token == access_key
+access_key = "???"
+# Access token secret == access_secret
+access_secret = "???"
+```
+#Practice1: World Sentiment Comparison (Superman vs. Batman)
+Practice1 is to see how live twitters think about two keywords. The program captures the real-time tweets related to two keywords that you can set up. In this time, let's compare Superman with Batman.
+
+![sup_bat](/assets/images/Data-Crawling-TwitterAPI/sup_bat.png){:height="800px" width="200px"}  
 
 ## Streaming
 First, I imported the necessary libraries and set the credentials (Consumer Key and Access Key).
@@ -49,32 +69,13 @@ from textblob import TextBlob
 import preprocessor as prep
 import statistics
 from typing import List
-```
-
-
-```python
 from secrets import consumer_key, consumer_secret, access_key, access_secret
-# try doing this now:
+# Authentication:
 auth= tweepy.AppAuthHandler(consumer_key, consumer_secret)
 api = tweepy.API(auth)
 ```
 
-
-```python
-# for status in tweepy.Cursor(api.user_timeline, id='MACcosmetics', tweet_mode='extended').items():
-#     print(status.full_text)
-# auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-# auth.set_access_token(access_key, access_secret)
-# api = tweepy.API(auth)
-
-```
-
-
-```python
-# tweets = api.mentions_timeline()
-# print(tweets)
-```
-
+'get_tweets()' is to stream the 10 live tweets related to the 'keyword' you will set, 'clean_tweets()' is to clean the parsed tweets that contain non-alphabetical characters, 'get_sentiment()' is to measure and return the score of argument 'tweets', and 'generate_average_sentiment_score()' is to generate the average scores of two keywords for comparison
 
 ```python
 def get_tweets(keyword: str) -> List[str]:
@@ -102,9 +103,9 @@ def generate_average_sentiment_score(keyword: str) -> int:
     sentiment_scores = get_sentiment(tweets_clean)
     average_score = statistics.mean(sentiment_scores)
     return average_score
-
 ```
 
+The main started with asking two keywords to check which keyword the live twitters prefer. I inserted 'superman' and 'batman' to compare.
 
 ```python
 if __name__ == '__main__':
@@ -121,6 +122,7 @@ if __name__ == '__main__':
         print(f'the humanity prefers {second_thing} over {first_thing}')
 
 ```
+As the result shows, the live twitters, at the moment, prefer batman to superman.
 
     What does the world prefer?
 
@@ -132,15 +134,13 @@ if __name__ == '__main__':
 
     the humanity prefers batman over superman
 
-
+Let's go further how accurately TextBlob classifies positive, negative, and neutral on each text. That is called Sentiment Analysis. using the function 'get_tweets()', I saved all the live tweets in variable 'tweets'.
 
 ```python
 tweets = get_tweets('superman')
 tweets
 ```
-
-
-
+The following tweets shows the live tweets on the first keyword 'superman' at that moment.
 
     ['RT @CristianT__T: The Best #superman 🧤🧤 https://t.co/UmXiDDQ4c4',
      '@DanSlott WATCHMEN\nPERSEPOLIS\nMAUS\nBATMAN YEAR ONE\nX-MEN GOD LOVES, MAN KILLS\nSECRET WARS\nIDENTITY CRISIS\nBATMAN BLACK MIRROR\nSPIDER-MAN SAGA OF THE ALIEN COSTUME\nALL-STAR SUPERMAN',
@@ -153,16 +153,14 @@ tweets
      'Great Moments in Villainy\n\n#Superman https://t.co/c3kiDO213F',
      'My superman T-shirt for for me on my birthday by my sweet little strawberry pie cup I love you dear https://t.co/GCrjm5nz69']
 
-
-
+Next step was to clean the tweets, using the function 'clean_tweets()' and save cleaned tweets in variable 'tweets_clean'.
 
 ```python
 tweets_clean=clean_tweets(tweets)
 tweets_clean
 ```
 
-
-
+The following cleaned tweets are shown.
 
     [': The Best',
      'WATCHMENPERSEPOLISMAUSBATMAN YEAR ONEX-MEN GOD LOVES, MAN KILLSSECRET WARSIDENTITY CRISISBATMAN BLACK MIRRORSPIDER-MAN SAGA OF THE ALIEN COSTUMEALL-STAR SUPERMAN',
@@ -174,6 +172,30 @@ tweets_clean
      'Frankly its the only parts of Snyders Superman I like. The flying scene in the arctic with soaring score. Then the rest happened.',
      'Great Moments in Villainy',
      'My superman T-shirt for for me on my birthday by my sweet little strawberry pie cup I love you dear']
+
+Can you see the 9th tweet 'Great Moments in Villainy'? What do you think of its classification, positive or negative? Let's check how the function get_sentiment() classifies it.
+
+```python
+sentiment_scores = get_sentiment(tweets_clean)
+sentiment_scores
+```
+    [1.0,
+    -0.20833333333333331,
+    0.17954545454545456,
+    -0.275,
+    0.0,
+    0.24318181818181817,
+    0.8,
+    0.0,
+    0.8,
+    0.22083333333333333]
+
+The score goes from -1 (negative) to 1 (positive). That tells how each tweeter feel on the keyword 'superman'. The 9th tweet 'Great Moments in Villainy' was scored 0.8, which means that the tweeter feeled extremely positive on 'superman' at that time. However, (s)he actually talks about 'villainy', not 'superman'. Now, we know that it is misclassified. Practice2 will show performance of sentiment analysis between TextBlob and NLTK Vader. I chose these two packages because they are fast and accurate enough for a tremendous amount of text data. If you interested in more details on performance comparison over Vader, IBM Watson, or TextBlob, check [here](https://medium.com/@Intellica.AI/vader-ibm-watson-or-textblob-which-is-better-for-unsupervised-sentiment-analysis-db4143a39445).
+
+#Practice2: Twitter Data Crawling and Visualizing (Trump)
+Practice2 is to see how live twitters think about two keywords. The program captures the real-time tweets related to two keywords that you can set up. In this time, let's compare Superman with Batman.
+
+![trump](/assets/images/Data-Crawling-TwitterAPI/trump.png){:height="800px" width="200px"}  
 
 
 
