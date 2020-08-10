@@ -41,6 +41,13 @@ The following libararies are open-source Python libraries for accessing Twitter 
 - twython by @ryanmcgrath and @mikehelmick
 - TwitterAPI by @geduldig
 
+> **NOTE** API and Libraries are different; while API is defined to interact softwares, library is a chunk of running codes for development reusability. So, an API can be embedded in a library.
+|Library |API|
+|-----|--------|
+|A reusable chunk of codes|interaction between running codes|
+|not an API by itself  |can be made of several libraries |
+
+
 # Practice
 ## Save Consumer Key and Access Key
 
