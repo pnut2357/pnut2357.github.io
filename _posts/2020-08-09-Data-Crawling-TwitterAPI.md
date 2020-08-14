@@ -16,7 +16,7 @@ excerpt: |
 # Introduction
 In the earlier post, I briefly introduced about how API and web work. In this post, let me talk about the practical usage of API: data crawling using Twitter API.
 
-## Get Consumer Key (API key) and Access Key (Access token)
+# Get Consumer Key (API key) and Access Key (Access token)
 
 If you want access to Twitter’s APIs, you should create a twitter account (if you don't have one) and apply for a developer account using the new developer portal at [developer.twitter.com](https://developer.twitter.com/en).
 
@@ -32,7 +32,7 @@ From your Twitter Apps page, click `+ create App` and you are ready to go.
 ![tw_acc](/assets/images/Data-Crawling-TwitterAPI/tw_acc.png){:height="800px" width="400px"}  
 | Fig2. Twitter Developer Apps Page|
 
-## Open Source Libraries
+# Open Source Libraries
 The following libararies are open-source Python libraries for accessing Twitter API. I personally started with `tweepy`.
 - python-twitter by the Python-Twitter Developers
 - tweepy by the tweepy Developers

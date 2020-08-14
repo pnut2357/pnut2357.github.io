@@ -25,9 +25,10 @@ Pathfinding builds on top of graph search algorithms and explore routes between 
   <img src="/assets/images/Pathfinding/game_path.png" width="150" height="100"/>
   <img src="/assets/images/Pathfinding/game-playing.png" width="300" height="100"/>
 </p>
-<!-- ![game-playing](/assets/images/Pathfinding/game-playing.png){:height="400px" width="300px"}   -->
 
-## Graphs
+I applied pathfinding to Pacman domain (gaming-play application) to compare which algorithms are suitable in the case.
+
+# Graphs
 A graphs can represent networks of communication, data organization, computational devices, the flow of computation, etc, depending on how you set up nodes and edges.
 
 For instance, we can set an input as a graph of the map like a set of locations (nodes) and the connections (edges) can be input. The following figures shows how a map is represented as a graph. The shaded path is the shortest path in the graph, the blue dots are nodes, and the green lines are edges.
@@ -45,147 +46,39 @@ This map can represent in many different ways. One can be doorways as edges (lef
   <img src="/assets/images/Pathfinding/doorways_edges.png" width="200" height="100"/>
   <img src="/assets/images/Pathfinding/grid_map.png" width="200" height="100"/>
 </p>
-
-
-grid_map
-
 | Fig2. The map represented as a graph|
-## Shortest Path
 
-The Shortest Path algorithm calculates the shortest (weighted) path between a pair of nodes. One of the most popular algorithms is Dijkstra's. So when should we use
+A pathfinding graph can vary, depending on how you define. In the Pacman domain, the map is designed as a grid.
 
-![ML Pipeline](/assets/images/ml_basic1/pl.png){:height="700px" width="400px"}  
-| Fig1. ML Pipeline|
+# Shortest Path
 
-Every data is not labeled: mostly unlabeled. ML method (algorithm) is based on your goal and the data type. Under the 3 categories (Supervised Learning, Unsupervised Learning, and Reinforcement Learning), the 'method' including learning process varies. The following figure and table may clearly show what they are and when to use.
-
-![ML Type](/assets/images/ml_basic1/MLtype.png){:height="700px" width="400px"}  
-| Fig2. ML Type|
-
-| Type           |    Supervised     |   Unsupervised      |    Reinforcement    |
-|:--------------:|:-----------------:|:-------------------:|:-------------------:|
-| **Input**      |  Data with Label  | Data without Label  | states and actions  |
-|**Problem Type**| Regression,       | Clustering,         | Exploitation,       |
-|                | Classification    | Association         | Exploration         |
-|**Algorithm**   | Linear Regress.,  | K-Means, C-Means,   | Q-Learning, SARSA,  |
-|                | Logistic Regress.,|Apriori, DBSCAN, GAN,|Monte Carlo, TD, etc.|    
-|                | SVM, KNN, etc.    | Autoencoder, etc.   |                     |
-| **Goal**       | Predict outcomes  | Discover underlying | Learn a series of   | |                |                   | patterns            | actions             |
-|**Application** | Risk Evaluation,  | Recommender,        | Self Driving Cars,  |
-|                | Forecast Sales, ..| Anomaly Detector, ..|Gaming, Healthcare,..|
-{:.table-striped}
-| Table1. ML Type|
-
-For a better learning process and delivery, ML pipeline should have the following processes:
-- Data collection
-- Data cleaning (Data Wrangling)
-- Feature extraction / Feature selection
-- Model evaluation (Evaluation Metrics)
-- Visualization
-
-If you are interested in more details, Check [here](https://sebastianraschka.com/Articles/2014_intro_supervised_learning.html).
+The Shortest Path algorithm calculates the shortest (weighted) path between a pair of nodes. One of the most popular shortest path algorithms is Dijkstra's.
+> **NOTE** Dijkstra's is known as Uniform Cost Search.
 
 
-# Terminology
 
-## Labels
-A label is the real value that we're predicting - $$y$$ variable (dependent variable). For example, a label could be a real housing price, a real species animal in a picture, an actual meaning of an audio clip, etc.
+The goal of this project is to see how the behaviors of graph search algorithms in the Pacman domain and how heuristic affects them while finding the shortest path.
+> ** NOTE** You can think of heuristic an approximate measure of how close you are to the target.
 
-## Features
-A feature is an input variable - $$x$$ variable (independent variable). A simple ML problem could have a single feature; it depends on how we define a problem. Suppose that housing price replies on only size. Then, we have one independent variable (house size) that affects one dependent variable (housing price).
+![scrapy_archit_all](/assets/images/Data-Crawling-Scrapy/scrapy_archit_all.png){:height="800px" width="600px"}  
+| Fig3. Pathfinding in Pacman Domain |
 
-NOTE: if a problem is set up more complicated having $$N$$ features, then the features can be expressed as $$x_1, x_2, x_3, ..., x_N$$.
+There are various search algorithms, but we can categorize them into two: blind searches and heuristic searches.
 
-More real example can be a spam detector. Then, features are:
-- $$x_1$$: words in the email text
-- $$x_2$$: sender's email address
-- $$x_3$$: time that the email was sent
-- $$x_4$$: the particular phrases that a spam usually has
+<div class="side-by-side">
+  <figure id="diagram-contour-unweighted">
+  <figcaption>Breadth First Search</figcaption>
+  <canvas width="568" height="568" style="touch-action: none; cursor: crosshair;">
+  </canvas>
+  </figure>
+  <figure id="diagram-contour-weighted">
+  <figcaption>Dijkstra’s Algorithm</figcaption>
+  <canvas width="568" height="568" style="touch-action: none; cursor: crosshair;"></canvas>
+  </figure>
+</div>
 
-## Examples
-An example is a particular instance of data, $$\overrightarrow{x}$$ (boldface indicate a vector). A labeled example has both feature(s) and the label.
+ but in this project, BFS (Breadth-First Search), DFS (Depth-First Search), A* (A* Search), USC (Uniform Cost Search), and BiS (Bi-directional Search).
 
-``` labeled examples: {features, label}: (x, y) ```
+If you are not familiar with those algorithms, check this [tutorial](https://cs.stanford.edu/people/abisee/tutorial/).
 
-The following table shows 5 labeled examples from a housing price data set.
-
-![SL example](/assets/images/ml_basic1/SL_ex.png){:height="700px" width="400px"}  
-| Table2. Labeled example|
-
-``` unlabeled examples: {features, ?}: (x, ?) ```
-
-There are 3 unlabeled examples from the same housing price data set, which do not have a label (medianHouseValue).
-
-![USL example](/assets/images/ml_basic1/USL_ex.png){:height="700px" width="400px"}  
-| Table2. Unlabeled example|
-
-Once trained our model with labeled examples, we use that model to predict the label on unlabeled examples. Similarly, in the spam detector, unlabeled examples are new upcoming emails which don't have labels.
-
-## Models
-A model defines the relationship between features and label. You feed labeled examples to the model and enable the model to learn the relationships between features and label. That learning process is called 'training'.
-
-Inference means applying the trained model to unlabeled examples. That is, you let the trained model predicts estimated value ($$\hat y$$) from training. During inference, in the spam filter example, your model can predict which are spam emails among newly upcoming emails. Similarly, in housing price estimator, your model can predict medianHouseValue for new unlabeled examples.
-
-# Applications
-Let's see what applications are in each category.
-
-## Supervised learning (SL)
-SL mainly has two categories: regression and classification.
-
-- Regression
-
-A regression model predicts continuous values like housing price. The following example model learns the relationship from the house level features to the observed sales price in order to predict the price of a new house. Both simple regressor and multiple regressor have linear or non-linear regression.
-
-![Linear Regression](/assets/images/ml_basic1/lr.png){:height="700px" width="400px"}  
-| Fig3. Linear Regression|
-
-- Classification
-
-A classification model predicts discrete values like spam or not, dog or cat, etc. The following classification example is a sentiment analysis task. From the reviews of the customers who visited a restaurant, features are extracted for the input of a ML algorithm. The model learns it with labeled examples to classify a new unlabeled review is positive or negative.
-
-![Classification](/assets/images/ml_basic1/class.png){:height="700px" width="400px"}  
-| Fig4. Classification|
-
-## Unsupervised Learning (UL)
-Let me briefly introduce one UL example of application; clustering.
-
-- Clustering
-
-A
-
-![Clustering](/assets/images/ml_basic1/cluster.png){:height="700px" width="400px"}  
-| Fig5. Clustering|
-
-## Semi-Supervised Learning
-Although a recommendation system can use SL or UL, it is neither of them (in my view) because it uses both algorithms as 'tools'. When classifying items into recommended or not, labeling (classification) is needed. When understanding customers'(users') behaviors on an item, it uses UL (content-based, collaborative filtering, or both). The ML method can be based on a user-item matrix or a matrix factorization.
-
-![Recommender](/assets/images/ml_basic1/reco.png){:height="700px" width="400px"}  
-| Fig6. Recommender|
-
-> **_NOTE:_** Content-based filtering is based on more item profile. In a movie recommender example, item profile can be such as genre, year, director, actor, etc. (e.g. images/videos recommender: metadata and tag, people recommender: a set of friends). The simple idea of it is that you analyze some features from the items that your users (customers) like and recommend some other items that have same features (How similar features between items). On the other hand, collaborative filtering is to analyze interaction between users and items. From your purchase history, you are grouped with those who had the similar purchase behavior. Then, the items that the squad bought but you didn't are recommended. Content-based filtering usually use TF-IDF (a way of clustering by vectorizing each item) while collaborative filtering can use user-item matrix (memory-based method) or matrix factorization (model-based) is needed to extract features.
-
-![CF vs. CBF](/assets/images/ml_basic1/recom.png){:height="700px" width="400px"}  
-| Fig7. CF vs. CBF|
-
-## Deep Learning (DL)
-What if input data are images (pixels), but texts for a recommender system? Visual recommender system uses DL to extract the features of the images that the users bought and recommend the similar styles (features) of items.
-
-![DL](/assets/images/ml_basic1/dl.png){:height="700px" width="400px"}  
-| Fig8. DL|
-
-# Overview
-
-![Overview](/assets/images/ml_basic1/overview.png){:height="700px" width="400px"}  
-| Fig9. Overview|
-
-![lr_](/assets/images/ml_basic1/lr_.png){:height="700px" width="400px"}  
-| Fig10. lr_|
-
-![class_](/assets/images/ml_basic1/class_.png){:height="700px" width="400px"}  
-| Fig11. class_|
-
-![cluster_retrieval](/assets/images/ml_basic1/cluster_retrieval.png){:height="700px" width="400px"}  
-| Fig12. cluster_retrieval|
-
-![mf_dr](/assets/images/ml_basic1/mf_dr.png){:height="700px" width="400px"}  
-| Fig13. mf_dr|
+https://github.com/pnut2357/Bidirectional_Pacman
