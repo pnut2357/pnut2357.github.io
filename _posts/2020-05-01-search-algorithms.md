@@ -70,3 +70,8 @@ The following video shows how BFS and UCS search to the goal location. Their fin
 > **NOTE** You don't want to consider a flooded path to be the same as a ground path. So concept of 'weight' is introduced to each path (edge).
 
 {% include youtubePlayer.html id="R3DjBXUOcrk" %}
+
+A BFS explores around the departure whereas an UCS explores toward the destination and ignores some of unnecessary nodes. That is because of heuristic estimation. Intuitively, heuristic can reduce computational time of exploring nodes.
+
+![heuristic](/assets/images/Pathfinding/heuristic.png){:height="800px" width="300px"}  
+| Fig4. Heuristic Searches vs Blind Searches |
