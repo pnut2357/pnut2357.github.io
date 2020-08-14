@@ -100,7 +100,7 @@ Fig6 shows BiS types.
 
 The following video is the demo of how DFS and BiS with Manhattan heuristic find their optimal paths.
 
-{% include youtubePlayer.html id="Ug7bMNRbPNE" 400 300 %}
+{% include youtubePlayer.html id="Ug7bMNRbPNE" %}
 
 Even though BFS and DFS are included, $$MM_{\epsilon}$$ showed the best performance among the blind searches. For heuristic searches, MM outperformed A* in a majority of times. Performance of a heuristic search is sensitive to complexity of the Pacman domain and heuristic function.
 
