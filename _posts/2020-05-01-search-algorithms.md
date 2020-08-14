@@ -34,9 +34,9 @@ A graphs can represent networks of communication, data organization, computation
 For instance, we can set an input as a graph of the map like a set of locations (nodes) and the connections (edges) can be input. The following figures shows how a map is represented as a graph. The shaded path is the shortest path in the graph, the blue dots are nodes, and the green lines are edges.
 
 <p float="left">
-  <img src="/assets/images/Pathfinding/map_1.png" width="300" height="200"/>
-  <img src="/assets/images/Pathfinding/map_2.png" width="300" height="200"/>
-  <img src="/assets/images/Pathfinding/map_3.png" width="300" height="200"/>
+  <img src="/assets/images/Pathfinding/map_1.png" width="200" height="200"/>
+  <img src="/assets/images/Pathfinding/map_2.png" width="200" height="200"/>
+  <img src="/assets/images/Pathfinding/map_3.png" width="200" height="200"/>
 </p>
 | Fig1. Applications of pathfinding |
 
@@ -57,6 +57,8 @@ The Shortest Path algorithm calculates the shortest (weighted) path between a pa
 
 The goal of this project is to see how the behaviors of graph search algorithms in the Pacman domain and how heuristic affects them while finding the shortest path.
 > ** NOTE** You can think of heuristic an approximate measure of how close you are to the target.
+
+Fig3 shows pathfinding of Bi-directional search in the Pacman domain. Unlike an Uni-directional search that explores nodes from only departure, a Bi-directional search explores starting from both departure and destination. 
 
 ![pacman](/assets/images/Pathfinding/pacman.png){:height="800px" width="600px"}  
 | Fig3. Bi-directional Pathfinding in Pacman Domain |
