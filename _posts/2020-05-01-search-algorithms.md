@@ -110,3 +110,11 @@ Even though BFS and DFS are included, $$MM_{\epsilon}$$ showed the best performa
 If you are interested in more detail code and theory, please check my [github](https://github.com/pnut2357/Bidirectional_Pacman) and my paper shown below.
 
 ![paper1](/assets/images/Pathfinding/paper1.png)
+
+![paper2](/assets/images/Pathfinding/paper2.png)
+
+![paper3](/assets/images/Pathfinding/paper3.png)
+
+![paper4](/assets/images/Pathfinding/paper4.png)
+
+![paper5](/assets/images/Pathfinding/paper5.png)
