@@ -38,4 +38,4 @@ The program calculates and outputs the average balance in your retirement bank a
 
 If I set up my retirement year for 40 years later, I will be broke around 10 years since my retirement year. I need to either increase my contribution or limit my retirement spending. :(
 
-If you are interested in playing with this, or even what formulae I used and how I implemented python GUI, please check my [github]()
+If you are interested in playing with this, or even what formulae I used and how I implemented python GUI, please check my [github](https://github.com/pnut2357/Retirement_Plan_Caulator_GUI)
