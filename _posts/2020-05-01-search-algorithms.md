@@ -93,8 +93,20 @@ Fig6 shows BiS types.
 ![mm](/assets/images/Pathfinding/mm.png){:height="800px" width="700px"}  
 | Fig6. Bi-directional Search Type |
 
-1. $$MM0$$: BiS without heuristic. There are forward search (from departure) and backward search (from destination). MM means 'M'eet in the 'M'iddle.
+1. $$MM_0$$: BiS without heuristic. There are forward search (from departure) and backward search (from destination). MM means 'M'eet in the 'M'iddle.
 
 2. $$MM_{\epsilon}$$: It is also a blind search, but covers the case that an optimal path is yet found. Using a priority (heuristic) function for both forward search and backward search, stretching the exploration to cover the gap between two explore regions.
 
 3. $$fMM$$: Fractional MM doesn't necessarily meet at the middle; it can fractionally decide which explore region should be bigger. It means that explore regions between forward search and backward search have different size, depending on the graph.
+
+# Demo / Conclusion
+
+The following video is the demo of how DFS and BiS with Manhattan heuristic find their optimal paths.
+
+{% include youtubePlayer.html id="Ug7bMNRbPNE"  %}
+
+Even though BFS and DFS are included, $$MM_{\epsilon}$$ showed the best performance among the blind searches. For heuristic searches, MM outperformed A* in a majority of times. Performance of a heuristic search is sensitive to complexity of the Pacman domain and heuristic function.
+
+If you are interested in more detail code and theory, please check my [github](https://github.com/pnut2357/Bidirectional_Pacman) and my paper shown below.
+
+![paper1](/assets/images/Pathfinding/paper1.png)
