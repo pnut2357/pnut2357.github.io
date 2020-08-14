@@ -86,3 +86,15 @@ Similarly, Bi-directional searches helps reducing exhaustive exploring even with
 In this project, BFS (Breadth-First Search), DFS (Depth-First Search), A* (A* Search), USC (Uniform Cost Search), and BiS (Bi-directional Search) are applied to Pacman domain to know which search algorithm performs best.
 
 If you are not familiar with those algorithms, check this [tutorial](https://cs.stanford.edu/people/abisee/tutorial/). Also, you can play with [this](https://qiao.github.io/PathFinding.js/visual/) to understand how each search algorithm work.
+
+## Bi-directional Search Type
+Fig6 shows BiS types.
+
+![mm](/assets/images/Pathfinding/mm.png){:height="800px" width="700px"}  
+| Fig6. Bi-directional Search Type |
+
+1. $$MM0$$: BiS without heuristic. There are forward search (from departure) and backward search (from destination). MM means 'M'eet in the 'M'iddle.
+
+2. $$MM_{\epsilon}$$: It is also a blind search, but covers the case that an optimal path is yet found. Using a priority (heuristic) function for both forward search and backward search, stretching the exploration to cover the gap between two explore regions.
+
+3. $$fMM$$: Fractional MM doesn't necessarily meet at the middle; it can fractionally decide which explore region should be bigger. It means that explore regions between forward search and backward search have different size, depending on the graph.
