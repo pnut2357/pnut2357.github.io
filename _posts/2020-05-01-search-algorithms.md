@@ -74,14 +74,3 @@ A BFS explores around the departure whereas an UCS explores toward the destinati
 
 ![heuristic](/assets/images/Pathfinding/heuristic.png){:height="800px" width="300px"}  
 | Fig4. Heuristic Searches vs Blind Searches |
-
-## Bi-directional Search
-
-Similarly, Bi-directional searches helps reducing exhaustive exploring even without using a heuristic.
-
-![bis_1](/assets/images/Pathfinding/bis_1.png){:height="800px" width="300px"}  
-| Fig5. Bi-directional Searches without a Heuristic |
-
-In this project, BFS (Breadth-First Search), DFS (Depth-First Search), A* (A* Search), USC (Uniform Cost Search), and BiS (Bi-directional Search) are applied to Pacman domain to know which search algorithm performs best.
-
-If you are not familiar with those algorithms, check this [tutorial](https://cs.stanford.edu/people/abisee/tutorial/). Also, you can play with [this](https://qiao.github.io/PathFinding.js/visual/) to understand how each search algorithm work.
