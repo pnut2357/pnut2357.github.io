@@ -1,5 +1,5 @@
 ---
-title: Pathfinding
+title: Pathfinding in Pacman domain
 description: Pathfinding / Graph Search Algorithms
 categories:
   - AI
@@ -20,6 +20,8 @@ Pathfinding builds on top of graph search algorithms and explore routes between 
 <p float="left">
   <img src="/assets/images/Pathfinding/logistics_path.png" width="150" height="100" />
   <img src="/assets/images/Pathfinding/robotics_path.png" width="300" height="100"/>
+</p>
+<p float="left">
   <img src="/assets/images/Pathfinding/game_path.png" width="150" height="100"/>
   <img src="/assets/images/Pathfinding/game-playing.png" width="300" height="100"/>
 </p>
@@ -28,9 +30,29 @@ Pathfinding builds on top of graph search algorithms and explore routes between 
 ## Graphs
 A graphs can represent networks of communication, data organization, computational devices, the flow of computation, etc, depending on how you set up nodes and edges.
 
+For instance, we can set an input as a graph of the map like a set of locations (nodes) and the connections (edges) can be input. The following figures shows how a map is represented as a graph. The shaded path is the shortest path in the graph, the blue dots are nodes, and the green lines are edges.
+
+<p float="left">
+  <img src="/assets/images/Pathfinding/map_1.png" width="200" height="100"/>
+  <img src="/assets/images/Pathfinding/map_2.png" width="200" height="100"/>
+  <img src="/assets/images/Pathfinding/map_3.png" width="200" height="100"/>
+</p>
+| Fig1. Applications of pathfinding |
+
+This map can represent in many different ways. One can be doorways as edges (left in the Fig2) or another can be a grid mapping.
+
+<p float="left">
+  <img src="/assets/images/Pathfinding/doorways_edges.png" width="200" height="100"/>
+  <img src="/assets/images/Pathfinding/grid_map.png" width="200" height="100"/>
+</p>
+
+
+grid_map
+
+| Fig2. The map represented as a graph|
 ## Shortest Path
 
-The Shortest Path algorithm calculates the shortest (weighted) path between a pair of nodes. One of the most popular algorithms is Dijkstra's. So when should we use 
+The Shortest Path algorithm calculates the shortest (weighted) path between a pair of nodes. One of the most popular algorithms is Dijkstra's. So when should we use
 
 ![ML Pipeline](/assets/images/ml_basic1/pl.png){:height="700px" width="400px"}  
 | Fig1. ML Pipeline|
