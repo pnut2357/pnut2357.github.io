@@ -58,19 +58,5 @@ The Shortest Path algorithm calculates the shortest (weighted) path between a pa
 The goal of this project is to see how the behaviors of graph search algorithms in the Pacman domain and how heuristic affects them while finding the shortest path.
 > ** NOTE** You can think of heuristic an approximate measure of how close you are to the target.
 
-![scrapy_archit_all](/assets/images/Pathfinding/pacman.png){:height="800px" width="600px"}  
+![pacman](/assets/images/Pathfinding/pacman.png){:height="800px" width="600px"}  
 | Fig3. Bi-directional Pathfinding in Pacman Domain |
-
-## Blind Searches vs Heuristic Searches
-
-There are various search algorithms, but we can categorize them into two: blind searches and heuristic searches.
-
-The following video shows how BFS and UCS search to the goal location. Their final paths are different cause blind searches don't take edge weights into account; they don't care about the edge is weighted or not.
-> **NOTE** You don't want to consider a flooded path to be the same as a ground path. So concept of 'weight' is introduced to each path (edge).
-
-{% include youtubePlayer.html id="R3DjBXUOcrk" 400 300 %}
-
-A BFS explores around the departure whereas an UCS explores toward the destination and ignores some of unnecessary nodes. That is because of heuristic estimation. Intuitively, heuristic can reduce computational time of exploring nodes.
-
-![heuristic](/assets/images/Pathfinding/heuristic.png){:height="800px" width="300px"}  
-| Fig4. Heuristic Searches vs Blind Searches |
