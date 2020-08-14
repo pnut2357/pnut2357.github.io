@@ -60,22 +60,12 @@ The Shortest Path algorithm calculates the shortest (weighted) path between a pa
 The goal of this project is to see how the behaviors of graph search algorithms in the Pacman domain and how heuristic affects them while finding the shortest path.
 > ** NOTE** You can think of heuristic an approximate measure of how close you are to the target.
 
-![scrapy_archit_all](/assets/images/Data-Crawling-Scrapy/scrapy_archit_all.png){:height="800px" width="600px"}  
+![scrapy_archit_all](/assets/images/Pathfinding/pacman.png){:height="800px" width="600px"}  
 | Fig3. Pathfinding in Pacman Domain |
 
 There are various search algorithms, but we can categorize them into two: blind searches and heuristic searches.
 
-<div class="side-by-side">
-  <figure id="diagram-contour-unweighted">
-  <figcaption>Breadth First Search</figcaption>
-  <canvas width="568" height="568" style="touch-action: none; cursor: crosshair;">
-  </canvas>
-  </figure>
-  <figure id="diagram-contour-weighted">
-  <figcaption>Dijkstra’s Algorithm</figcaption>
-  <canvas width="568" height="568" style="touch-action: none; cursor: crosshair;"></canvas>
-  </figure>
-</div>
+</p><div id="diagram-contour"><div class="side-by-side"><figure id="diagram-contour-unweighted"><figcaption>Breadth First Search</figcaption></figure><figure id="diagram-contour-weighted"><figcaption>Dijkstra’s Algorithm</figcaption></figure></div></div><p>
 
  but in this project, BFS (Breadth-First Search), DFS (Depth-First Search), A* (A* Search), USC (Uniform Cost Search), and BiS (Bi-directional Search).
 
