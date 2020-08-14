@@ -15,17 +15,22 @@ excerpt: |
 
 # Introduction
 
-Pathfinding builds on top of graph search algorithms and explore routes between nodes, traversing from the start node to the destination. These algorithms are used to identify optimal routes through a graph for uses such as logistics planning (Vehicle routing/logistics), least cost call or IP routing, and gaming simulation (AI movements or user assistance).
+Pathfinding builds on top of graph search algorithms and explore routes between nodes, traversing from the start node to the destination. These algorithms are used to identify optimal routes through a graph for uses such as logistics planning (Vehicle routing/logistics), least cost call or IP routing, and gaming simulation (AI movements or user assistance). The following figures are applications of pathfinding; logistics planning, robotics, and game-playing.
 
 <p float="left">
-  <img src="/assets/images/Pathfinding/game_path.png" width="150" height="100" />
+  <img src="/assets/images/Pathfinding/logistics_path.png" width="150" height="100" />
   <img src="/assets/images/Pathfinding/robotics_path.png" width="300" height="100"/>
   <img src="/assets/images/Pathfinding/game_path.png" width="150" height="100"/>
+  <img src="/assets/images/Pathfinding/game-playing.png" width="300" height="100"/>
 </p>
+<!-- ![game-playing](/assets/images/Pathfinding/game-playing.png){:height="400px" width="300px"}   -->
 
-# Machine Learning Pipeline
+## Graphs
+A graphs can represent networks of communication, data organization, computational devices, the flow of computation, etc, depending on how you set up nodes and edges.
 
-ML pipeline is simply to train a model. Machine learning pipelines iteratively improves the current model that you created for a better output. Data proliferation tremendously affect your decision-making valued or misvalued, depending on your approach and data manipulation.
+## Shortest Path
+
+The Shortest Path algorithm calculates the shortest (weighted) path between a pair of nodes. One of the most popular algorithms is Dijkstra's. So when should we use 
 
 ![ML Pipeline](/assets/images/ml_basic1/pl.png){:height="700px" width="400px"}  
 | Fig1. ML Pipeline|
