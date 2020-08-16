@@ -13,4 +13,4 @@ excerpt: |
 #header:
 #  image: /assets/images/logos/logo-text-8c3ba8a6.svg
 ---
-https://classifiertest.netlify.app
+click [here](https://classifiertest.netlify.app)
