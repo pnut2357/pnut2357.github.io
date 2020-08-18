@@ -27,15 +27,18 @@ If trying to merge two datasets that comes from two separate sources, you must h
 
 When machine recognizes that the data match:
 
-![exact-match](/assets/images/data-matching/exact-match.png)
+![exact-match](/assets/images/data-matching/exact-match.png){:height="800px" width="700px"}  
+| Fig1. Deterministic Matching |
 
 This is called Deterministic matching. However, it happens that a part of data is mistyped or missing. Then, we use probability to match (Probabilistic matching). Using string distance algorithms like Levenshtein, Damerau-Levenshtein, Jaro-Winkler, q-gram, and cosine, we score a match to see how such matching is suitable.
 
-![analogy](/assets/images/data-matching/analogy.png)
+![analogy](/assets/images/data-matching/analogy.png){:height="800px" width="600px"}  
+| Fig2. Data Linkage/Matching Analogy |
 
 Through the data-matching, Duplicates in the data can be eliminated.  
 
-![dupls](/assets/images/data-matching/dupls.png)
+![dupls](/assets/images/data-matching/dupls.png){:height="800px" width="600px"}  
+| Fig3. Eliminating Duplicates (Deduplication) |
 
 The vlookup function in Excel requests exhaustive work, so using `fuzzymatcher` or `recordlinkage` is recommended.
 
