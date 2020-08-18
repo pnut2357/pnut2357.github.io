@@ -14,12 +14,18 @@ I'm a grad student in AI/ML at ASU. I've experienced how to design, develop, tra
 
 My current focus areas are:
 
-- Azure/AWS
+- Google Cloud/Azure/AWS
 - deep learning
 - Natural Language Processing
 - statistics
 - Computer Vision
 - Docker
+
+![png](/assets/images/about/Jae_H_Choi_CV_5-4-2020-1.png)
+
+![png](/assets/images/about/Jae_H_Choi_CV_5-4-2020-2.png)
+
+![png](/assets/images/about/Jae_H_Choi_CV_5-4-2020-3.png)
 
 ## What is the blog for?
 

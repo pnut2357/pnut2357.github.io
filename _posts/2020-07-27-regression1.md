@@ -38,57 +38,54 @@ y_{2} \\
 y_{m}
 \end{bmatrix} \approx
 \hat{y}_{i} = \theta_{0} + \theta_{1}x_{i}$$
-$$ \hat{y}_{i} $$ : predicted output
 
-$$ \theta =
+- $$\hat{y}_{i}$$ : predicted output
+
+- $$ \theta =
 \begin{bmatrix}
 \theta_{0} \\
 \theta_{1} \\
 \end{bmatrix}
-$$ : Model parameters
+$$ : Model parameters \quad $$ \hat{y}_{i} = f(x_{i}\,; \theta) \; \text{ in general}$$
 
+- In many cases, a linear model is used to predict $$y_{i}$$
+ $$ \hat{y}_{i} = \theta_{0} + \theta_{1}x_{i} \; \quad \text{  such that  }\quad  \min\limits_{\theta_{0}, \theta_{1}}\sum\limits_{i = 1}^{m} (\hat{y}_{i} - y_{i})^2$$
 
-$$ \hat{y}_{i} = f(x_{i}\,; \theta) \; \text{ in general}$$
-in many cases, a linear model is used to predict $$y_{i}$$
+![png](/assets/images/regression1/pic1.png){:height="800px" width="600px"}
 
-$$ \hat{y}_{i} = \theta_{0} + \theta_{1}x_{i} \; \quad \text{  such that  }\quad  \min\limits_{\theta_{0}, \theta_{1}}\sum\limits_{i = 1}^{m} (\hat{y}_{i} - y_{i})^2$$
+## Re-cast Problem as a Least Squares
+- For convenience, we define a function that maps inputs to feature vectors, $$\phi$$
 
+  $$\begin{array}{Icr}\begin{align*} \hat{y}_{i}
+   = \theta_0 + x_i \theta_1 = 1 \cdot \theta_0 + x_i \theta_1 \\ \\
+   = \begin{bmatrix}1 \ \ x_{i}\end{bmatrix}\begin{bmatrix}\theta_{0} \\ \theta_{1}\end{bmatrix} \\\\
+   =\begin{bmatrix}1 \\ x_{i} \end{bmatrix}^{T}\begin{bmatrix}\theta_{0} \\ \theta_{1}\end{bmatrix} \\\\
+   =\phi^{T}(x_{i})\ \theta
+  \end{align*}\end{array}
+  \begin{array}{Icr}
+  \quad \quad  \text{where feature vector}
+  \; \phi(x_{i}) = \begin{bmatrix}1 \\ x_{i}\end{bmatrix}
+  \end{array}$$
 
+  $$\Phi = \begin{bmatrix}1 \ \ x_{1} \\ 1 \ \ x_{2} \\ \vdots \\1 \ \ x_{m} \end{bmatrix}=\begin{bmatrix}\phi^T(x_{1}) \\\phi^T(x_{2}) \\\vdots \\\phi^T(x_{m}) \end{bmatrix} \quad \implies \quad \hat{y} = \begin{bmatrix}\hat{y}_{1} \\\hat{y}_{2} \\\vdots \\\hat{y}_{m}\end{bmatrix}=\Phi\theta$$
 
-1. Re-cast Problem as a Least Squares
-For convenience, we define a function that maps inputs to feature vectors, $$\phi$$
+- Optimization problem
 
+  $$\min\limits_{\theta_{0}, \theta_{1}}\sum\limits_{i = 1}^{m} (\hat{y}_{i} - y_{i})^2
+  =\min\limits_{\theta}\lVert\Phi\theta-y\rVert^2_2
+  \qquad \qquad  \left(\text{same as} \; \min_{x} \lVert Ax-b \rVert_2^2 \right)$$
+  $$ \text{solution} \;
+  \theta^* = (\Phi^{T}\Phi)^{-1}\Phi^{T} y
+  $$
 
-$$\begin{array}{Icr}\begin{align*} \hat{y}_{i}
- = \theta_0 + x_i \theta_1 = 1 \cdot \theta_0 + x_i \theta_1 \\ \\
- = \begin{bmatrix}1 \ \ x_{i}\end{bmatrix}\begin{bmatrix}\theta_{0} \\ \theta_{1}\end{bmatrix} \\\\
- =\begin{bmatrix}1 \\ x_{i} \end{bmatrix}^{T}\begin{bmatrix}\theta_{0} \\ \theta_{1}\end{bmatrix} \\\\
- =\phi^{T}(x_{i})\ \theta
-\end{align*}\end{array}
-\begin{array}{Icr}
-\quad \quad  \text{where feature vector}
-\; \phi(x_{i}) = \begin{bmatrix}1 \\ x_{i}\end{bmatrix}
-\end{array}$$
-
-$$\Phi = \begin{bmatrix}1 \ \ x_{1} \\ 1 \ \ x_{2} \\ \vdots \\1 \ \ x_{m} \end{bmatrix}=\begin{bmatrix}\phi^T(x_{1}) \\\phi^T(x_{2}) \\\vdots \\\phi^T(x_{m}) \end{bmatrix} \quad \implies \quad \hat{y} = \begin{bmatrix}\hat{y}_{1} \\\hat{y}_{2} \\\vdots \\\hat{y}_{m}\end{bmatrix}=\Phi\theta$$
-
-Optimization problem
-
-
-$$\min\limits_{\theta_{0}, \theta_{1}}\sum\limits_{i = 1}^{m} (\hat{y}_{i} - y_{i})^2
-=\min\limits_{\theta}\lVert\Phi\theta-y\rVert^2_2
-\qquad \qquad  \left(\text{same as} \; \min_{x} \lVert Ax-b \rVert_2^2 \right)$$
-$$ \text{solution} \;
-\theta^* = (\Phi^{T}\Phi)^{-1}\Phi^{T} y
-$$
-
-
+![png](/assets/images/regression1/pic2.png){:height="800px" width="600px"}
 
 $$\begin{array}{Icr} \text{input} \\ x_{i} \end{array}
 \quad \rightarrow \quad
 \begin{array}{Icr} \text{feature} \\ \begin{bmatrix} 1 \\ x_{i} \end{bmatrix} \end{array}
 \quad \rightarrow \quad
 \begin{array}{Icr} \text{predicted output} \\ \hat{y}_{i} \end{array}$$
+
 $$\begin{array}{Icr}
 \begin{bmatrix} 1 \ \ x_{1} \\1 \ \ x_{2}\\\vdots \ \ \vdots\\1 \ \ x_{m}\end{bmatrix}\begin{bmatrix}\theta_0\\\theta_1\end{bmatrix}=\begin{bmatrix}y_{1} \\y_{2} \\\vdots \\y_{m}\end{bmatrix} \\
 \begin{array}{Icr} \uparrow \\ \vec{A}_1 \end{array}
@@ -101,13 +98,18 @@ $$\begin{array}{Icr}
 \end{array}
 \quad
 \begin{array}{Icr}
-\quad \text{over-determined or} \\
+\quad \text{over-determined} \\
+\\ \text{or}
 \quad \text{projection}
 \end{array}$$
+
 $$A(= \Phi) = \left[ \vec{A}_1 \;\vec{A}_2 \right]$$
 
 
 
+## Solve Optimizaton in Linear Regression
+### Use Linear Algebra
+- known as least square
 $$ \theta = (A^TA)^{-1}A^T y $$
 
 ```python
@@ -156,9 +158,6 @@ plt.show()
 
 ![png](/assets/images/regression1/output_8_1.png){:height="800px" width="700px"}
 
-$$ A(= \Phi) = \left[ \vec{A}_1 \;\vec{A}_2 \right] \ \ \ \ \ \ \ \theta = (A^TA)^{-1}A^T y$$
-$$ \underbrace{\hat{y}}_\text{13x1}=\underbrace{A}_\text{13x2} \ \underbrace{\theta}_\text{2x1} \ \ \text{where} \ \hat{y} \ \text{is prediction}$$
-
 ```python
 m = y.shape[0]
 #A = np.hstack([np.ones([m, 1]), x])
@@ -175,6 +174,10 @@ print('A(phi):\n', np.shape(A))
 
     A(phi):
      (13, 2)
+
+ $$ A(= \Phi) = \left[ \vec{A}_1 \;\vec{A}_2 \right] \ \ \ \ \ \ \ \theta = (A^TA)^{-1}A^T y$$
+
+ $$ \underbrace{\hat{y}}_\text{13x1}=\underbrace{A}_\text{13x2} \ \underbrace{\theta}_\text{2x1} \ \ \text{where} \ \hat{y} \ \text{is prediction}$$
 
 ```python
 # to plot
@@ -199,6 +202,7 @@ plt.show()
 
 ![png](/assets/images/regression1/output_11_1.png){:height="800px" width="700px"}
 
+### Use Gradient Descent
 
 $$\min_{\theta} ~ \lVert \hat y - y \rVert_2^2  =  \min_{\theta} ~ \lVert A\theta - y \rVert_2^2$$
 
@@ -254,6 +258,7 @@ plt.show()
 
 ![png](/assets/images/regression1/output_14_1.png){:height="800px" width="700px"}
 
+### Use CVXPY Optimization
 
 $$\min_{\theta} ~ \lVert \hat y - y \rVert_2  =  \min_{\theta} ~ \lVert A\theta - y \rVert_2$$
 
@@ -272,10 +277,9 @@ print('theta2:\n', theta2.value)
      [[0.65306531]
      [0.67129519]]
 
-<font size="4"><b>By the way, do we have to use only $$L_2$$ norm? No.</b></font>
+**Can we use $$L_1$$ norm instead of $$L_2$$? YES.**
 
-Let's use $$L_1$$ norm
-
+- Let's use $$L_1$$ norm
 
 $$  \min_{\theta} ~ \lVert \hat y - y \rVert_1  =  \min_{\theta} ~ \lVert A\theta - y \rVert_1  $$
 
@@ -318,12 +322,12 @@ plt.show()
 ![png](/assets/images/regression1/output_19_1.png){:height="800px" width="700px"}
 
 $$L_1$$ norm also provides a decent linear approximation.
-<strong>What if outliers exist?</strong>
 
-Fit with the different norms
-Discuss the result
-It is important to understand what makes them different.
+**What if outliers exist?**
 
+- Fit with the different norms
+- Discuss the result
+- It is important to understand what makes them different.
 
 ```python
 # add outliers
@@ -353,9 +357,6 @@ plt.show()
 theta2 = cvx.Variable([2, 1])
 obj2 = cvx.Minimize(cvx.norm(A@theta2-y, 2))
 prob2 = cvx.Problem(obj2).solve()
-```
-
-```python
 # to plot straight lines (fitted lines)
 plt.figure(figsize = (10, 8))
 plt.plot(x, y, 'ko', label = 'data')
@@ -418,8 +419,9 @@ plt.show()
 ```
 ![png](/assets/images/regression1/output_27_0.png){:height="800px" width="700px"}
 
-Think about what makes them different.
+Adding outliers have a huge impact on regression analysis.
 
+###
 
 ```python
 
@@ -428,7 +430,6 @@ y = np.array([0.5, 0.9, 1.1, 1.5, 1.5, 2.0, 2.2, 2.8, 2.7, 3.0, 3.5, 3.7, 3.9]).
 print(f'x shape: {np.shape(x)}, yshape: {np.shape(y)}')
 
 ```
-
     x shape: (13, 1), yshape: (13, 1)
 
 ```python
