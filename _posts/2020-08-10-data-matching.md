@@ -19,8 +19,8 @@ excerpt: |
 Record Linkage aka data matching/merging is to join the information from a variety of data sources. The `recordlinkage` and `fuzzymaker` are used for process of joining two data sets when they don't have a common unique identifier.
 
 This problem is a common business challenge and difficult to solve in a systematic way due to the tremendous amount of data sets. A naive approach using vlookup function in Excel requests a lot of human intervention. To reduce that, `fuzzymatcher` and `recordlinkage` can be used.
-1. `fuzzymatcher` has an interface to link two pandas DataFrames using probabilistic record linkage.
-2. `recordlinkage` has
+1. `fuzzymatcher` allows us to match two pandas DataFrames using sqlite3 for finding potential matches and probabilistic record linkage for scoring those matches.
+2. `recordlinkage` is a library to link records in or between data sources.
 
 # Problem
 If trying to merge two datasets that comes from two separate sources, you must have some challenge of removing duplicates; like the contents are the same but a machine could not recognize that they are the same. For instance, a machine cannot recognize the duplicates that do not match exactly.
@@ -288,8 +288,6 @@ The DataFrame 'matched_results' contains all the data linked together as well as
 ```python
 matched_results.head(2)
 ```
-
-
 
 
 <div>
@@ -743,18 +741,15 @@ matched_results[cols].query("best_match_score <= .75").sort_values(
 It shows that the data becomes more ambiguous below 0.75. The [CALIFORNIA PACIFIC MEDICAL CTR-DAVIES CAMPUS HOSP](https://www.sutterhealth.org/find-location/facility/cpmc-lab-davies-campus-castro-duboce) is different from [CALIFORNIA PACIFIC MEDICAL CTR-PACIFIC CAMPUS](https://www.sutterhealth.org/find-location/facility/cpmc-pacific-heights-outpatient-center-2333-buchanan-street).  
 By checking your data, you need to find and set the proper threshold for collecting data.
 
-Overall, fuzzymatcher is a useful tool to have for medium sized data sets (around 10,000) due to its computational time. However, it is easy to use.
+Overall, `fuzzymatcher` is a useful tool to have for medium sized data sets (around 10,000) due to its computational time. However, it is easy to use.
 
 # Recordlinkage
 
-Record Linkage Toolkit has additional capabilities:
+Record Linkage Toolkit can clean, standardize data, and score similarity of data like `fuzzymatcher`, but it has additional capabilities:
 
-- Ability to define the types of matches for each column based on the column data types
-- Use “blocks” to limit the pool of potential matches
-- Provides ranking of the matches using a scoring algorithm
-- Multiple algorithms for measuring string similarity
-- Supervised and unsupervised learning approaches
-- Multiple data cleaning methods
+- makes pairs of data by 'blocking' (`block()`) to limit the pool of potential matches and 'grouping' (`sortedneighbourhood()`) to cover the data with minor spelling mistakes.
+- compares data with similarity scores for different types of data.
+- provides Supervised and unsupervised classification algorithms for classifying data.
 
 The trade-off is that it is a little more complicated to wrangle the results in order to do further validation. However, the steps are relatively standard pandas commands so do not let that intimidate you.
 
