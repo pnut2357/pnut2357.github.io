@@ -385,7 +385,6 @@ matched_results.head(2)
     </tr>
   </tbody>
 </table>
-<p>2 rows × 23 columns</p>
 </div>
 
 
@@ -951,20 +950,9 @@ indexer.block(left_on='State', right_on='Provider State')
 indexer.sortedneighbourhood(left_on='State', right_on='Provider State')
 ```
 
-    WARNING:recordlinkage:indexing - performance warning - A full index can result in large number of record pairs.
-
-
-
-
-
-    <Index>
-
-
-
-This WARNING points us to a difference between the record linkage library and fuzzymatcher. With record linkage, we have some flexibility to influence how many pairs are evaluated. By using full indexer all potential pairs are evaluated (which we know is over 14M pairs). I will come back to some of the other options in a moment. Let’s continue with the full index and see how it performs.
+It may toss a warning of large number of data. With the `recordlinkage`, we have some flexibility to influence how many pairs are evaluated. By using full indexer all potential pairs are evaluated (which we know is over 14M pairs). I will come back to some of the other options in a moment. Let’s continue with the full index and see how it performs.
 
 The next step is to build up all the potential candidates to check:
-
 
 ```python
 candidates = indexer.index(hospital_accounts, hospital_reimbursement)
@@ -1116,7 +1104,6 @@ features
     </tr>
   </tbody>
 </table>
-<p>998860 rows × 3 columns</p>
 </div>
 
 
@@ -1643,18 +1630,7 @@ final_merge[cols].sort_values(by=['Account_Num', 'Score'], ascending=False)
     </tr>
   </tbody>
 </table>
-<p>2736 rows × 5 columns</p>
 </div>
-
-
-
-
-```python
-# If you need to save it to Excel -
-#final_merge.sort_values(by=['Account_Num', 'Score'],
-#                        ascending=False).to_excel('merge_list.xlsx',
-#                                                  index=False)
-```
 
 # Deduplicates Remover with Recordlinkage
 Another additional uses of the `Recordlinkage` is for finding duplicate records in a data set. The process is very similar to matching except you pass match a single DataFrame against itself.
@@ -1912,29 +1888,19 @@ dupe_features
     </tr>
   </tbody>
 </table>
-<p>981277 rows × 4 columns</p>
 </div>
 
-
-
 ## Similarity Score
-
 
 ```python
 dupe_features.sum(axis=1).value_counts().sort_index(ascending=False)
 ```
-
-
-
 
     3.0         7
     2.0       206
     1.0      7859
     0.0    973205
     dtype: int64
-
-
-
 
 ```python
 potential_dupes = dupe_features[dupe_features.sum(axis=1) > 2].reset_index()
@@ -2136,13 +2102,11 @@ hospital_dupes[hospital_dupes.index.isin([51567, 41166])]
 
 
 
-Yes. That looks like a potential duplicate. The name and address are similar and the phone number is off by one digit. How many hospitals do they really need to treat all those Packer fans? :)
+Such potential duplicates can be confirmed with further checks. Their names and addresses are similar and their phone numbers are off by one digit.
 
 As you can see, this method can be a powerful and relatively easy tool to inspect your data and check for duplicate records.
 
 # Summary
-Linking different record sets on text fields like names and addresses is a common but challenging data problem. The python ecosystem contains two useful libraries that can take data sets and use multiple algorithms to try to match them together.
+Matching/Linking different datasets on text fields like names and addresses is a common challenge in data processing. This article provided two useful data linkage packages to match two data from separate sources.
 
-Fuzzymatcher uses sqlite’s full text search to simply match two pandas DataFrames together using probabilistic record linkage. If you have a larger data set or need to use more complex matching logic, then the Python Record Linkage Toolkit is a very powerful set of tools for joining data and removing duplicates.
-
-Part of my motivation for writing this long article is that there are lots of commercial options out there for these problems and I wanted to raise awareness about these python options. Before you engage with an expensive consultant or try to pay for solution, you should spend an afternoon with these two options and see if it helps you out. All of the relevant code examples to get you started are in this
+The `fuzzymatcher` uses sqlite 3 to simply match two pandas DataFrames together, based on probabilistic scoring. If you have a larger data set or need to use more complex matching logic, then the `Recordlinkage` could be a better tool for  cleaning duplicates and joining data.
