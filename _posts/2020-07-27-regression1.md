@@ -17,7 +17,7 @@ excerpt: |
 <font size="6"><b>Regression1</b></font><br/><br/></p>
 <p><br/></p>
 
-</div>
+
 
 
 <h1 id="1.-Linear-Regression">1. Linear Regression<a class="anchor-link" href="#1.-Linear-Regression">¶</a></h1><p>Consider a linear regression.</p>
