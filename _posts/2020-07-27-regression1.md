@@ -13,19 +13,16 @@ excerpt: |
 #   image: /assets/images/logos/logo-text-8c3ba8a6.svg
 ---
 
+# Linear Regression
 
-<font size="6"><b>Regression1</b></font>
-
-
-
-
-
+Consider a linear regression:
 
 $$\text{Given} \; \begin{cases}
 x_{i} \; \text{: inputs} \\
 y_{i} \; \text{: outputs}
 \end{cases}$$
 , Find $$\theta_{0}$$ and $$\theta_{1}$$
+
 $$x=
 \begin{bmatrix}
 x_{1} \\
