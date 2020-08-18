@@ -421,7 +421,12 @@ plt.show()
 
 Adding outliers have a huge impact on regression analysis.
 
-###
+## Scikit-Learn
+- Machine Learning package in Python
+- Simple and efficient tools for data mining and data analysis
+- Accessible to everybody, and reusable in various contexts
+Built on NumPy, SciPy, and matplotlib
+- Open source, commercially usable - BSD license
 
 ```python
 
@@ -467,24 +472,17 @@ plt.show()
 ```
 ![png](/assets/images/regression1/output_35_0.png){:height="800px" width="700px"}
 
-
+# Multivariate Linear Regression
 
 $$ \hat{y} = \theta_0 + \theta_{1}x_1 + \theta_{2}x_2  $$$$$$ $$$$
 $$\phi \left(x^{(i)}\right) = \begin{bmatrix}1\\x^{(i)}_{1}\\x^{(i)}_{2} \end{bmatrix}$$
 
-```python
+![png](/assets/images/regression1/pic3.png){:height="800px" width="700px"}
 
+```python
 # for 3D plot
 from mpl_toolkits.mplot3d import Axes3D
-
-
-```
-
-
-```python
-
 # y = theta0 + theta1*x1 + theta2*x2 + noise
-
 n = 200
 x1 = np.random.randn(n, 1)
 x2 = np.random.randn(n, 1)
@@ -506,17 +504,12 @@ plt.show()
 
 ![png](/assets/images/regression1/output_38_0.png){:height="800px" width="700px"}
 
-
-
 $$\Phi = \begin{bmatrix}1 \ x_{1}^{(1)} \ x_{2}^{(1)}\\1 \ x_{1}^{(2)} \ x_{2}^{(2)}\\ \vdots \\1 \ x_{1}^{(m)} \ x_{2}^{(m)} \end{bmatrix} \quad \implies \quad \hat{y} = \begin{bmatrix}\hat{y}^{(1)} \\\hat{y}^{(2)} \\\vdots \\\hat{y}^{(m)}\end{bmatrix}=\Phi\theta$$
-$$\implies \theta^{*} = (\Phi^T \Phi)^{-1} \Phi^T y$$
 
-
+$$\implies \theta^{ * } = (\Phi^T \Phi)^{-1} \Phi^T y$$
 
 ```python
-
 #% matplotlib qt5
-
 A = np.hstack([np.ones((n, 1)), x1, x2])
 A = np.asmatrix(A)
 theta = (A.T*A).I*A.T*y
@@ -536,33 +529,21 @@ ax.plot_wireframe(X1, X2, YP, color = 'k', alpha = 0.3, label = 'Regression Plan
 #ax.view_init(30,30)
 plt.legend(fontsize = 15)
 plt.show()
-
-
 ```
-
-    /opt/anaconda3/lib/python3.8/site-packages/numpy/matrixlib/defmatrix.py:71: PendingDeprecationWarning: the matrix subclass is not the recommended way to represent matrices or deal with linear algebra (see https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html). Please adjust your code to use regular ndarray.
-      return matrix(data, dtype=dtype, copy=False)
-
 
 ![png](/assets/images/regression1/output_40_1.png){:height="800px" width="700px"}
 
+# Nonlinear Regression
+- Same as linear regression, just with non-linear features
 
+- Method 1: constructing explicit feature vectors
+  - Polynomial features
+  - Radial basis function (<font color="red">RBF</font>) features
 
+- Method 2: implicit feature vectors, <font color="red">kernel trick</font> (optional)
 
-
-Same as linear regression, just with non-linear features
-
-
-Method 1: constructing explicit feature vectors
-Polynomial features
-Radial basis function (<font color="red">RBF</font>) features
-
-
-
-
-Method 2: implicit feature vectors, <font color="red">kernel trick</font> (<em>optional</em>)
-
-<h2 id="3.1.-Nonlinear-Regression-with-Polynomial-Features">3.1. Nonlinear Regression with Polynomial Features<a class="anchor-link" href="#3.1.-Nonlinear-Regression-with-Polynomial-Features"></h2>(here, quad is used as an example)
+## Nonlinear Regression with Polynomial Features
+(here, quad is used as an example)
 
 $$
 \begin{align*}
@@ -572,17 +553,12 @@ $$
 
 $$\phi(x_{i}) =  \begin{bmatrix}1\\x_{i}\\x_{i}^2 \end{bmatrix}$$
 
-
-
 $$\Phi = \begin{bmatrix}1 \ x_{1} \ x_{1}^2 \\ 1 \  x_{2} \ x_{2}^2 \\ \vdots \\ 1 \ x_{m} \ x_{m}^2\end{bmatrix} \quad \implies \quad \hat{y} = \begin{bmatrix}\hat{y}_1 \\\hat{y}_2 \\\vdots \\\hat{y}_m\end{bmatrix}=\Phi\theta$$
-$$\implies \theta^{*} = (\Phi^T \Phi)^{-1} \Phi^T y$$
 
-
+$$\implies \theta^{ * } = (\Phi^T \Phi)^{-1} \Phi^T y$$
 
 ```python
-
 # y = theta0 + theta1*x + theta2*x^2 + noise
-
 n = 100            
 x = -5 + 15*np.random.rand(n, 1)
 noise = 10*np.random.randn(n, 1)
@@ -598,35 +574,21 @@ plt.xlim([np.min(x), np.max(x)])
 plt.grid(alpha = 0.3)
 plt.legend(fontsize = 15)
 plt.show()
-
-
 ```
-
-
 ![png](/assets/images/regression1/output_43_0.png){:height="800px" width="700px"}
 
-
-
 ```python
-
 A = np.hstack([x**0, x, x**2])
 A = np.asmatrix(A)
 
 theta = (A.T@A).I@A.T@y
 print('theta:\n', theta)
-
-
 ```
-
     theta:
      [[8.95974395]
      [1.14260403]
      [1.98897501]]
-
-
-
 ```python
-
 xp = np.linspace(np.min(x), np.max(x))
 yp = theta[0,0] + theta[1,0]*xp + theta[2,0]*xp**2
 
@@ -641,8 +603,6 @@ plt.xlim([np.min(x), np.max(x)])
 plt.grid(alpha = 0.3)
 plt.legend(fontsize = 15)
 plt.show()
-
-
 ```
 
 ![png](/assets/images/regression1/output_45_0.png){:height="800px" width="700px"}
