@@ -2100,8 +2100,6 @@ hospital_dupes[hospital_dupes.index.isin([51567, 41166])]
 </table>
 </div>
 
-
-
 Such potential duplicates can be confirmed with further checks. Their names and addresses are similar and their phone numbers are off by one digit.
 
 As you can see, this method can be a powerful and relatively easy tool to inspect your data and check for duplicate records.
