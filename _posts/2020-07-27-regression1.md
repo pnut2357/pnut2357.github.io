@@ -13,7 +13,7 @@ excerpt: |
 #   image: /assets/images/logos/logo-text-8c3ba8a6.svg
 ---
 
-# Linear Regression
+# 1. Linear Regression
 
 Consider a linear regression:
 
@@ -53,7 +53,7 @@ $$ : Model parameters \quad $$ \hat{y}_{i} = f(x_{i}\,; \theta) \; \text{ in gen
 
 ![png](/assets/images/regression1/pic1.png){:height="800px" width="600px"}
 
-## Re-cast Problem as a Least Squares
+## 1.1. Re-cast Problem as a Least Squares
 - For convenience, we define a function that maps inputs to feature vectors, $$\phi$$
 
   $$\begin{array}{Icr}\begin{align*} \hat{y}_{i}
@@ -107,8 +107,8 @@ $$A(= \Phi) = \left[ \vec{A}_1 \;\vec{A}_2 \right]$$
 
 
 
-## Solve Optimizaton in Linear Regression
-### Use Linear Algebra
+## 1.2. Solve Optimizaton in Linear Regression
+### 1.2.1. Use Linear Algebra
 - known as least square
 $$ \theta = (A^TA)^{-1}A^T y $$
 
@@ -202,7 +202,7 @@ plt.show()
 
 ![png](/assets/images/regression1/output_11_1.png){:height="800px" width="700px"}
 
-### Use Gradient Descent
+### 1.2.2. Use Gradient Descent
 
 $$\min_{\theta} ~ \lVert \hat y - y \rVert_2^2  =  \min_{\theta} ~ \lVert A\theta - y \rVert_2^2$$
 
@@ -258,7 +258,7 @@ plt.show()
 
 ![png](/assets/images/regression1/output_14_1.png){:height="800px" width="700px"}
 
-### Use CVXPY Optimization
+### 1.2.3. Use CVXPY Optimization
 
 $$\min_{\theta} ~ \lVert \hat y - y \rVert_2  =  \min_{\theta} ~ \lVert A\theta - y \rVert_2$$
 
@@ -421,7 +421,7 @@ plt.show()
 
 Adding outliers have a huge impact on regression analysis.
 
-## Scikit-Learn
+## 1.3. Scikit-Learn
 - Machine Learning package in Python
 - Simple and efficient tools for data mining and data analysis
 - Accessible to everybody, and reusable in various contexts
@@ -472,7 +472,7 @@ plt.show()
 ```
 ![png](/assets/images/regression1/output_35_0.png){:height="800px" width="700px"}
 
-# Multivariate Linear Regression
+# 2. Multivariate Linear Regression
 
 $$ \hat{y} = \theta_0 + \theta_{1}x_1 + \theta_{2}x_2  $$$$$$ $$$$
 $$\phi \left(x^{(i)}\right) = \begin{bmatrix}1\\x^{(i)}_{1}\\x^{(i)}_{2} \end{bmatrix}$$
@@ -533,7 +533,7 @@ plt.show()
 
 ![png](/assets/images/regression1/output_40_1.png){:height="800px" width="700px"}
 
-# Nonlinear Regression
+# 3. Nonlinear Regression
 - Same as linear regression, just with non-linear features
 
 - Method 1: constructing explicit feature vectors
@@ -542,7 +542,7 @@ plt.show()
 
 - Method 2: implicit feature vectors, <font color="red">kernel trick</font> (optional)
 
-## Nonlinear Regression with Polynomial Features
+## 3.1. Nonlinear Regression with Polynomial Features
 (here, quad is used as an example)
 
 $$
