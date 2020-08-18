@@ -163,7 +163,7 @@ plt.show()
 ```
     x shape: (13, 1), yshape: (13, 1)
 
-![png](/assets/images/data-matching/output_8_1.png){:height="800px" width="700px"}
+![png](/assets/images/regression1/output_8_1.png){:height="800px" width="700px"}
 
 $$ A(= \Phi) = \left[ \vec{A}_1 \;\vec{A}_2 \right] \ \ \ \ \ \ \ \theta = (A^TA)^{-1}A^T y$$
 $$ \underbrace{\hat{y}}_\text{13x1}=\underbrace{A}_\text{13x2} \ \underbrace{\theta}_\text{2x1} \ \ \text{where} \ \hat{y} \ \text{is prediction}$$
@@ -206,7 +206,7 @@ plt.show()
 ```
     x shape: (13, 1), yshape: (13, 1)
 
-![png](/assets/images/data-matching/output_11_1.png){:height="800px" width="700px"}
+![png](/assets/images/regression1/output_11_1.png){:height="800px" width="700px"}
 
 <h3 id="1.2.2.-Use-Gradient-Descent">1.2.2. Use Gradient Descent<a class="anchor-link" href="#1.2.2.-Use-Gradient-Descent">¶</a></h3><p><br/><br/>
 $$\min_{\theta} ~ \lVert \hat y - y \rVert_2^2  =  \min_{\theta} ~ \lVert A\theta - y \rVert_2^2$$</p>
@@ -261,7 +261,7 @@ plt.show()
 ```
     x shape: (13, 1), yshape: (13, 1)
 
-![png](/assets/images/data-matching/output_14_1.png){:height="800px" width="700px"}
+![png](/assets/images/regression1/output_14_1.png){:height="800px" width="700px"}
 
 <h3 id="1.2.3.-Use-CVXPY-Optimization">1.2.3. Use CVXPY Optimization<a class="anchor-link" href="#1.2.3.-Use-CVXPY-Optimization">¶</a></h3><p><br/><br/>
 $$\min_{\theta} ~ \lVert \hat y - y \rVert_2  =  \min_{\theta} ~ \lVert A\theta - y \rVert_2$$</p>
@@ -324,7 +324,7 @@ plt.show()
 ```
     x shape: (13, 1), yshape: (13, 1)
 
-![png](/assets/images/data-matching/output_19_1.png){:height="800px" width="700px"}
+![png](/assets/images/regression1/output_19_1.png){:height="800px" width="700px"}
 
 <p>$$L_1$$ norm also provides a decent linear approximation.</p>
 <p><strong>What if outliers exist?</strong></p>
@@ -356,7 +356,7 @@ plt.grid(alpha = 0.3)
 plt.show()
 ```
 
-![png](/assets/images/data-matching/output_22_0.png){:height="800px" width="700px"}
+![png](/assets/images/regression1/output_22_0.png){:height="800px" width="700px"}
 
 ```python
 theta2 = cvx.Variable([2, 1])
@@ -379,7 +379,7 @@ plt.grid(alpha = 0.3)
 plt.show()
 ```
 
-![png](/assets/images/data-matching/output_24_0.png){:height="800px" width="700px"}
+![png](/assets/images/regression1/output_24_0.png){:height="800px" width="700px"}
 
 ```python
 theta1 = cvx.Variable([2, 1])
@@ -402,7 +402,7 @@ plt.grid(alpha = 0.3)
 plt.show()
 ```
 
-![png](/assets/images/data-matching/output_26_0.png){:height="800px" width="700px"}
+![png](/assets/images/regression1/output_26_0.png){:height="800px" width="700px"}
 
 ```python
 # to plot data
@@ -425,7 +425,7 @@ plt.legend(fontsize = 15, loc = 5)
 plt.grid(alpha = 0.3)
 plt.show()
 ```
-![png](/assets/images/data-matching/output_27_0.png){:height="800px" width="700px"}
+![png](/assets/images/regression1/output_27_0.png){:height="800px" width="700px"}
 
 <p>Think about what makes them different.</p>
 
@@ -529,7 +529,7 @@ plt.grid(alpha = 0.3)
 plt.xlim([0, 5])
 plt.show()
 ```
-![png](/assets/images/data-matching/output_35_0.png){:height="800px" width="700px"}
+![png](/assets/images/regression1/output_35_0.png){:height="800px" width="700px"}
 
 <h1 id="2.-Multivariate-Linear-Regression">2. Multivariate Linear Regression<a class="anchor-link" href="#2.-Multivariate-Linear-Regression">¶</a></h1><p>(= linear regression for multivariate data)</p>
 <p><br/></p>
@@ -570,7 +570,7 @@ plt.legend(fontsize = 15)
 plt.show()
 ```
 
-![png](/assets/images/data-matching/output_38_0.png){:height="800px" width="700px"}
+![png](/assets/images/regression1/output_38_0.png){:height="800px" width="700px"}
 
 
 <p><br/></p>
@@ -610,7 +610,7 @@ plt.show()
       return matrix(data, dtype=dtype, copy=False)
 
 
-![png](/assets/images/data-matching/output_40_1.png){:height="800px" width="700px"}
+![png](/assets/images/regression1/output_40_1.png){:height="800px" width="700px"}
 
 
 <h1 id="3.-Nonlinear-Regression">3. Nonlinear Regression<a class="anchor-link" href="#3.-Nonlinear-Regression">¶</a></h1><p>(= Linear Regression for Non-linear Data)</p>
@@ -669,7 +669,7 @@ plt.show()
 ```
 
 
-![png](/assets/images/data-matching/output_43_0.png){:height="800px" width="700px"}
+![png](/assets/images/regression1/output_43_0.png){:height="800px" width="700px"}
 
 
 
@@ -711,4 +711,4 @@ plt.show()
 
 ```
 
-![png](/assets/images/data-matching/output_45_0.png){:height="800px" width="700px"}
+![png](/assets/images/regression1/output_45_0.png){:height="800px" width="700px"}
