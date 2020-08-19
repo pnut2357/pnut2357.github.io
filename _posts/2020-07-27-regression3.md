@@ -141,6 +141,7 @@ X_{cor}\\
 $$
 
 - Then, plug $$A$$, $$b$$ to $$(A^TA)^{-1}A^Tb$$
+
 ```python
 mu = 100
 
