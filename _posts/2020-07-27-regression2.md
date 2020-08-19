@@ -486,7 +486,7 @@ $$
 \end{array}
 $$
 
-<center><img src="regression2/graph.png" height="400" width="500" /></center>
+<center><img src="/assets/images/regression2/graph.png" height="400" width="500" /></center>
 
 $$\min\; \lVert \Phi \theta - y \rVert_2^2 + \lambda \lVert \theta \rVert_1$$
 
