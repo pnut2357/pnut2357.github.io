@@ -217,6 +217,7 @@ b_0(x)  \  b_1(x)  \  b_2(x)\\
 $$
 
 $$ \hat{y}=\sum_{i=0}^d{\theta_i b_i(x)} = \Phi \ \theta$$
+
 <strong>1) Polynomial functions</strong>
 
 $$b_i(x) = x^i, \quad i = 0,\cdots,d$$
