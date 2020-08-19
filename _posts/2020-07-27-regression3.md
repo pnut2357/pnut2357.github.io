@@ -332,6 +332,7 @@ plt.ylabel('corrupted signal', fontsize = 15)
 plt.xlabel('x', fontsize = 15)
 plt.show()
 ```
+
 <center><img src="/assets/images/regression3/output_19_0.png" height="800" width="700" /></center>
 
 ## 2.1. L2 Norm (Quadratic Smoothing)

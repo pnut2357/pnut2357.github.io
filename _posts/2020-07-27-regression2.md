@@ -1,5 +1,5 @@
 ---
-title: Regression2
+title: Regression2 (Overfitting and Regularization)
 description: regression2
 categories:
   - machine-learning-concept
