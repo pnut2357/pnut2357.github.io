@@ -266,7 +266,7 @@ plt.show()
 ## 1.5. L2 Norm with a Constraint
 
 $$\min \; \lVert Dx \rVert_2$$
-$$ \text{s.t.} \quad \lVert x-x_{cor} \rVert_2 &lt; \beta $$
+$$ \text{s.t.} \quad \lVert x-x_{cor} \rVert_2 < \beta $$
 
 ```python
 beta = 0.8
@@ -311,7 +311,8 @@ plt.show()
 # 2. Signal with Sharp Transition + Noise
 Suppose we have a signal $$x$$, which is mostly smooth, but has several rapid variations (or jumps). If we apply quadratic smoothing on this signal, then in order to remove the noise we will not be able to preserve the signal's sharp transitions.
 
-- First, apply the same method that we used for smoothing signals before
+- First, apply the same method that we used for smoothing signals before.
+
 ```python
 n = 200
 t = np.arange(n).reshape(-1,1)
@@ -332,10 +333,10 @@ plt.xlabel('x', fontsize = 15)
 plt.show()
 ```
 <center><img src="/assets/images/regression3/output_19_0.png" height="800" width="700" /></center>
+
 ## 2.1. L2 Norm (Quadratic Smoothing)
 
 ```python
-
 plt.figure(figsize = (10, 12))
 
 beta = [0.5, 2, 4]
