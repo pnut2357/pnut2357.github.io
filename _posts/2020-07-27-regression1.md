@@ -51,7 +51,7 @@ $$ : Model parameters \quad $$ \hat{y}_{i} = f(x_{i}\,; \theta) \; \text{ in gen
 - In many cases, a linear model is used to predict $$y_{i}$$
  $$ \hat{y}_{i} = \theta_{0} + \theta_{1}x_{i} \; \quad \text{  such that  }\quad  \min\limits_{\theta_{0}, \theta_{1}}\sum\limits_{i = 1}^{m} (\hat{y}_{i} - y_{i})^2$$
 
-![png](/assets/images/regression1/pic1.png){:height="600px" width="500px"}
+![png](/assets/images/regression1/pic1.png){:height="450px" width="400px"}
 
 ## 1.1. Re-cast Problem as a Least Squares
 - For convenience, we define a function that maps inputs to feature vectors, $$\phi$$
@@ -477,7 +477,7 @@ plt.show()
 $$ \hat{y} = \theta_0 + \theta_{1}x_1 + \theta_{2}x_2  $$$$$$ $$$$
 $$\phi \left(x^{(i)}\right) = \begin{bmatrix}1\\x^{(i)}_{1}\\x^{(i)}_{2} \end{bmatrix}$$
 
-![png](/assets/images/regression1/pic3.png){:height="600px" width="500px"}
+![png](/assets/images/regression1/pic3.png){:height="450px" width="400px"}
 
 ```python
 # for 3D plot
@@ -535,7 +535,7 @@ plt.show()
 
 # 3. Nonlinear Regression
 
-![png](/assets/images/regression1/pic4.png){:height="600px" width="500px"}
+![png](/assets/images/regression1/pic4.png){:height="450px" width="400px"}
 
 - Same as linear regression, just with non-linear features
 
