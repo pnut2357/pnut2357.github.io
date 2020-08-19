@@ -200,9 +200,8 @@ plt.show()
 <center><img src="/assets/images/regression2/output_10_0.png" height="800" width="700" /></center>
 
 # 2. Linear Basis Function Models
-Construct explicit feature vectors
-
-Consider linear combinations of fixed nonlinear functions of the input variables, of the form
+- Construct explicit feature vectors
+- Consider linear combinations of fixed nonlinear functions of the input variables, of the form
 
 $$
 \begin{bmatrix}
@@ -269,9 +268,9 @@ plt.legend(loc = 'lower right', fontsize = 15)
 plt.grid(alpha = 0.3)
 plt.show()
 ```
-With many features, our prediction function becomes very expressive
+- With many features, our prediction function becomes very expressive
 
-Can lead to overfitting (low error on input data points, but high error nearby)
+- Can lead to overfitting (low error on input data points, but high error nearby)
 
 ```python
 xp = np.arange(-4.5, 4.5, 0.01).reshape(-1, 1)
@@ -332,9 +331,9 @@ plt.show()
 Often, overfitting associated with very large estimated parameters $$\theta$$
 We want to balance
 
-how well function fits data
+- how well function fits data
 
-magnitude of coefficients
+- magnitude of coefficients
 
 $$
 \begin{align*}
@@ -343,15 +342,15 @@ $$
 \end{align*}
 $$
 
-where $$ RSS(\theta) = \lVert \Phi\theta - y \rVert^2_2 $$, ( = Rresidual Sum of Squares) and $$\lambda$$ is a tuning parameter to be determined separately
+  where $$ RSS(\theta) = \lVert \Phi\theta - y \rVert^2_2 $$, ( = Rresidual Sum of Squares) and $$\lambda$$ is a tuning parameter to be determined separately
 
-the second term, $$\lambda \cdot \lVert \theta \rVert_2^2$$, called a shrinkage penalty, is small when $$\theta_1, \cdots,\theta_d$$ are close to zeros, and so it has the effect of shrinking the estimates of $$\theta_j$$ towards zero
+- the second term, $$\lambda \cdot \lVert \theta \rVert_2^2$$, called a shrinkage penalty, is small when $$\theta_1, \cdots,\theta_d$$ are close to zeros, and so it has the effect of shrinking the estimates of $$\theta_j$$ towards zero
 
-The tuning parameter $$\lambda$$ serves to control the relative impact of these two terms on the regression coefficient estimates
+- The tuning parameter $$\lambda$$ serves to control the relative impact of these two terms on the regression coefficient estimates
 
-known as a <em>ridge regression</em>
+- known as a <em>ridge regression</em>
 
-Example: start from rich representation.
+- Example: start from rich representation.
 
 $$\min\; \lVert \Phi \theta - y \rVert_2^2$$
 
@@ -386,7 +385,7 @@ plt.show()
 ```
 <center><img src="/assets/images/regression2/output_20_1.png" height="800" width="700" /></center>
 
-Start from rich representation. Then, regularize coefficients $$\theta$$
+- Start from rich representation. Then, regularize coefficients $$\theta$$
 
 $$\min\; \lVert \Phi \theta - y \rVert_2^2 + \lambda \lVert \theta \rVert_2^2$$
 
@@ -445,15 +444,15 @@ plt.show()
 <center><img src="/assets/images/regression2/output_24_1.png" height="800" width="700" /></center>
 
 # 4. Sparsity for Feature Selection using LASSO
-Least Squares with a penalty on the $$l_1$$ norm of the parameters
+- Least Squares with a penalty on the $$l_1$$ norm of the parameters
 
-Start with full model (all possible features)
+- Start with full model (all possible features)
 
-'Shrink' some coefficients exactly to 0
-<em>i.e.</em>, knock out certain features
-the $$l_1$$ penalty has the effect of forcing some of the coefficient estimates to be exactly equal to zero
+- 'Shrink' some coefficients exactly to 0
+  - <em>i.e.</em>, knock out certain features
+  - the $$l_1$$ penalty has the effect of forcing some of the coefficient estimates to be exactly equal to zero
 
-Non-zero coefficients indicate 'selected' features
+- Non-zero coefficients indicate 'selected' features
 
 Try this cost instead of ridge...
 
@@ -464,9 +463,9 @@ $$
 \end{align*}$$
 
 
-$$\lambda$$ is a tuning parameter = balance of fit and sparsity
+- $$\lambda$$ is a tuning parameter = balance of fit and sparsity
 
-Another equivalent forms of optimizations
+- Another equivalent forms of optimizations
 
 $$
 \begin{array}{rl}
@@ -657,7 +656,7 @@ for k in [0,1,2]:
 
 # 6. Scikit-Learn
 
-RBF functions $$g_i(x)$$ as basis
+- RBF functions $$g_i(x)$$ as basis
 
 $$
 \begin{align*}

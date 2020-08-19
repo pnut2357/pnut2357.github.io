@@ -107,7 +107,7 @@ $$\large \min\limits_{X}\;\left\{\underbrace{\lVert(X - X_{cor})\rVert^2_{2}}_{\
 3. $$\mu$$ : to adjust the relative weight of 1. & 2.
 
 
-In a vector form
+- In a vector form
 1. $$X - X_{cor} = I_n X - X_{cor}$$
 2. $$\sum\;(x_{k+1}-x_{k})^2$$ :
 
@@ -140,7 +140,7 @@ X_{cor}\\
 \end{bmatrix}
 $$
 
-Then, plug $$A$$, $$b$$ to $$(A^TA)^{-1}A^Tb$$
+- Then, plug $$A$$, $$b$$ to $$(A^TA)^{-1}A^Tb$$
 ```python
 mu = 100
 
@@ -193,7 +193,7 @@ plt.show()
 
 ## 1.3. CVXPY Implementation
 
-<code>cvxpy</code> toolbox to numerically solve
+- <code>cvxpy</code> toolbox to numerically solve
 
 $$ \min\; \left\{ \lVert x-x_{cor}\rVert_2^2 + \mu \lVert Dx \rVert_2^2 \right\}$$
 ```python
@@ -234,9 +234,9 @@ plt.show()
 
 ## 1.4. L2 Norm
 
-CVXPY strongly encourages to eliminate quadratic forms, that is, functions like <code>sum_squares</code>, <code>sum(square(.))</code> or <code>quad_form</code>
+- CVXPY strongly encourages to eliminate quadratic forms, that is, functions like <code>sum_squares</code>, <code>sum(square(.))</code> or <code>quad_form</code>
 
-Whenever it is possible to construct equivalent models using <code>norm</code> instead
+- Whenever it is possible to construct equivalent models using <code>norm</code> instead
 
 $$ \min \; \left\{ \lVert x-x_{cor}\rVert_2 + \gamma \lVert Dx \rVert_2 \right \}$$
 
@@ -307,7 +307,7 @@ plt.show()
 # 2. Signal with Sharp Transition + Noise
 Suppose we have a signal $$x$$, which is mostly smooth, but has several rapid variations (or jumps). If we apply quadratic smoothing on this signal, then in order to remove the noise we will not be able to preserve the signal's sharp transitions.
 
-First, apply the same method that we used for smoothing signals before
+- First, apply the same method that we used for smoothing signals before
 ```python
 n = 200
 t = np.arange(n).reshape(-1,1)
@@ -351,9 +351,9 @@ plt.show()
 ```
 <center><img src="/assets/images/regression3/output_21_0.png" height="800" width="700" /></center>
 
-Quadratic smoothing smooths out <em>noise and sharp transitions</em> in signal, but this is not what we want
+- Quadratic smoothing smooths out <em>noise and sharp transitions</em> in signal, but this is not what we want
 
-Any ideas ?
+- Any ideas ?
 
 ## 2.2. L1 Norm
 
@@ -386,14 +386,14 @@ plt.show()
 ```
 <center><img src="/assets/images/regression3/output_24_0.png" height="800" width="700" /></center>
 
-Total Variation (TV) smoothing preserves sharp transitions in signal, and this is not bad
+- Total Variation (TV) smoothing preserves sharp transitions in signal, and this is not bad
 
-Note how TV reconstruction does a better job of preserving the sharp transitions in the signal while removing the noise.
+- Note how TV reconstruction does a better job of preserving the sharp transitions in the signal while removing the noise.
 
 # 3. Total Variation Image Reconstruction
 
-Idea comes from <a href="http://www2.compute.dtu.dk/~pcha/mxTV/">here</a>
-Download <a href="https://www.dropbox.com/s/nii23bxl9vptc23/dog.jpg?dl=1">the image</a>
+- Idea comes from <a href="http://www2.compute.dtu.dk/~pcha/mxTV/">here</a>
+- Download <a href="https://www.dropbox.com/s/nii23bxl9vptc23/dog.jpg?dl=1">the image</a>
 
 ```python
 import cv2
@@ -411,7 +411,7 @@ plt.show()
 ```
 <center><img src="/assets/images/regression3/output_27_0.png" height="800" width="700" /></center>
 
-Question: Apply $$L_1$$ norm to the image, and guess what kind of an image will be produced ?
+- Question: Apply $$L_1$$ norm to the image, and guess what kind of an image will be produced ?
 
 
 $$\min \; \lVert Dx \rVert_1$$
@@ -438,4 +438,4 @@ plt.show()
 ```
 <center><img src="/assets/images/regression3/output_29_0.png" height="800" width="700" /></center>
 
-Cartoonish effect
+- Cartoonish effect
