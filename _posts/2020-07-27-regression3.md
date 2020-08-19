@@ -108,7 +108,9 @@ $$\large \min\limits_{X}\;\left\{\underbrace{\lVert(X - X_{cor})\rVert^2_{2}}_{\
 
 
 - In a vector form
+
 1. $$X - X_{cor} = I_n X - X_{cor}$$
+
 2. $$\sum\;(x_{k+1}-x_{k})^2$$ :
 
 $$\qquad \qquad$$ <img src="/assets/images/regression3/eq1.png" height="400" width="500" />
@@ -197,6 +199,7 @@ plt.show()
 - <code>cvxpy</code> toolbox to numerically solve
 
 $$ \min\; \left\{ \lVert x-x_{cor}\rVert_2^2 + \mu \lVert Dx \rVert_2^2 \right\}$$
+
 ```python
 mu = 100
 
