@@ -96,7 +96,7 @@ finder(r'e.t', 'ease')
     ease : No pattern.
 
 
-# 4. Matching classes of characters¶
+# 4. Matching classes of characters
 
 Now let’s find out how to narrow down the field a bit. We’d like to be able to find a pattern starting letter **b**, followed by any **vowel** (a, e, i, o, or u), followed by letter **t** (e.g. b_t like bot, bat, bite). To say “any one of a certain series of characters”, you enclose them in square brackets. The `finder()` found patters in words like **bat**, **bet**, rab**bit**, ro**bot**ic, and a**but**ment
 > **NOTE** any vowel can be inserted to _
