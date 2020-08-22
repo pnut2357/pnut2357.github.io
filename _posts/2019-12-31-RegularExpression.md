@@ -1,6 +1,6 @@
 ---
-title: Calculating the Balance in Your Retirement Account (GUI)
-description: Wealth calculation at retirement
+title: Regular Expression Tutorial
+description: Regular Expression Tutorial
 categories:
   - python
 tags:
@@ -8,7 +8,7 @@ toc: true
 toc_sticky: true
 comments: true
 excerpt: |
-  Wealth calculation at retirement / GUI
+  Regular Expression Tutorial
 # header:
 #   image: /assets/images/logos/logo-text-8c3ba8a6.svg
 ---
