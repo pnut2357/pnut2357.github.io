@@ -2,7 +2,7 @@
 title: Data Matching (Recordlinkage and Fuzzymatcher)
 description: Small project of Recordlinkage and Fuzzymatcher.
 categories:
-  - Data
+  - EDA
 #cover: '/assets/images/intro_api/api.png'
 tags:
 toc: true
@@ -14,7 +14,7 @@ excerpt: |
 #  image: /assets/images/logos/logo-text-8c3ba8a6.svg
 ---
 
-# Introduction
+# 1. Introduction
 
 Record Linkage aka data matching/merging is to join the information from a variety of data sources. The `recordlinkage` and `fuzzymaker` are used for process of joining two data sets when they don't have a common unique identifier.
 
@@ -22,7 +22,7 @@ This problem is a common business challenge and difficult to solve in a systemat
 1. `fuzzymatcher` allows us to match two pandas DataFrames using sqlite3 for finding potential matches and probabilistic record linkage for scoring those matches.
 2. `recordlinkage` is a library to link records in or between data sources.
 
-# Problem
+# 2. Problem
 If trying to merge two datasets that comes from two separate sources, you must have some challenge of removing duplicates; like the contents are the same but a machine could not recognize that they are the same. For instance, a machine cannot recognize the duplicates that do not match exactly.
 
 When machine recognizes that the data match:
@@ -43,7 +43,7 @@ Through the data-matching, Duplicates in the data can be eliminated.
 The vlookup function in Excel requests exhaustive work, so using `fuzzymatcher` or `recordlinkage` is recommended.
 
 
-# Data
+# 3. Data
 For exploring the data matching, US hospital data was used for the following challenges:
 
 - Similar names of hospitals: to know they are different or the same (Saint Lukes, Saint Mary, etc.)
@@ -56,7 +56,7 @@ The full data sets are available: [Medicare.gov](https://data.medicare.gov/Hospi
 I used the cleaned version available [here]().
 
 
-## Importing packages
+## 3.1. Importing packages
 
 
 ```python
@@ -68,8 +68,8 @@ import recordlinkage as rl# works at python 3.6 ver.
 
 ```
 
-# Fuzzymatcher
-## Loading the data
+# 4. Fuzzymatcher
+## 4.1. Loading the data
 
 
 
@@ -254,7 +254,7 @@ hospital_reimbursement.head(2)
 
 
 
-## Joining the data
+## 4.2. Joining the data
 Since the columns have different names, we need to define which columns to match for the left and right DataFrames. In this case, the 'hospital_accounts' will be the left and the 'hospital_reimbursement' will be the right.
 
 
@@ -390,7 +390,7 @@ matched_results.head(2)
 
 
 
-## Best and Worst Matches
+## 4.3. Best and Worst Matches
 The columns are rearranged for readability. The following data represent the top 3 best matches and the worst 3
 
 
@@ -745,7 +745,7 @@ By checking your data, you need to find and set the proper threshold for collect
 
 Overall, `fuzzymatcher` is a useful tool to have for medium sized data sets (around 10,000) due to its computational time. However, it is easy to use.
 
-# Recordlinkage
+# 5. Recordlinkage
 
 Record Linkage Toolkit can clean, standardize data, and score similarity of data like `fuzzymatcher`, but it has additional capabilities:
 
@@ -756,7 +756,7 @@ Record Linkage Toolkit can clean, standardize data, and score similarity of data
 The trade-off is that it is a little more complicated to wrangle the results in order to do further validation. However, the steps are relatively standard pandas commands so do not let that intimidate you.
 
 
-## Loading the data with index_col
+## 5.1. Loading the data with index_col
 
 It needs to set the 'index_col' argument for indexing
 
@@ -933,7 +933,7 @@ hospital_reimbursement.head(2)
 
 
 
-## Blocking
+## 5.2. Blocking
 Blocking is nothing but a limiter of the size of comparisons. For instance, we want to compare the only hospitals that are in the same state. We can use this knowledge to setup a block on the state columns.
 
 This will speed up the process, but adding some flexibility for minor spelling mistakes is important. Using `SortedNeighborhood()` function to clean the data
@@ -965,7 +965,7 @@ print(len(candidates))
 
 This quick check just confirmed the total number of comparisons. With the block on state, the 14,399,283 candidates will be filtered to only include those where the state values are the same. It may take longer to take care of minor spelling mistakes, but it is a reasonable trade-off.  
 
-## Comparing
+## 5.3. Comparing
 
 Now that we have defined the left and right data sets and all the candidates, we can define how we want to perform the comparison logic using the `Compare()` function
 
@@ -1110,7 +1110,7 @@ features
 
 This DataFrame shows the results of all of the comparisons. There is one row for each row in the account and reimbursement DataFrames. The columns correspond to the comparisons we defined. 1 is a match and 0 is not.
 
-## Similarity Score
+## 5.4. Similarity Score
 
 Given the large number of records with no matches, it is a little hard to see how many matches we might have. We can sum up the individual scores to see about the quality of the matches.
 
@@ -1277,7 +1277,7 @@ hospital_reimbursement.loc[556917,:]
 
 Those look like good matches.
 
-## Joining
+## 5.5. Joining
 
 Now that we know the matches, we need to wrangle the data to make it easier to review all the data together. I am going to make a concatenated name and address lookup for each of these source DataFrames.
 
@@ -1632,10 +1632,10 @@ final_merge[cols].sort_values(by=['Account_Num', 'Score'], ascending=False)
 </table>
 </div>
 
-# Deduplicates Remover with Recordlinkage
+# 6. Deduplicates Remover with Recordlinkage
 Another additional uses of the `Recordlinkage` is for finding duplicate records in a data set. The process is very similar to matching except you pass match a single DataFrame against itself.
 
-## Loading the data
+## 6.1. Loading the data
 
 
 ```python
@@ -1724,7 +1724,7 @@ hospital_dupes.head(2)
 
 
 
-## Blocking
+## 6.2. Blocking
 
 Then create our indexer with a `sortedneighbourhood` block on State .
 
@@ -1737,7 +1737,7 @@ dupe_candidate_links = dupe_indexer.index(hospital_dupes)
 
 ```
 
-## Comparing
+## 6.3. Comparing
 
 We should check for duplicates based on city, name and address:
 
@@ -1890,7 +1890,7 @@ dupe_features
 </table>
 </div>
 
-## Similarity Score
+## 6.4. Similarity Score
 
 ```python
 dupe_features.sum(axis=1).value_counts().sort_index(ascending=False)
@@ -2104,7 +2104,7 @@ Such potential duplicates can be confirmed with further checks. Their names and 
 
 As you can see, this method can be a powerful and relatively easy tool to inspect your data and check for duplicate records.
 
-# Summary
+# 7. Summary
 Matching/Linking different datasets on text fields like names and addresses is a common challenge in data processing. This article provided two useful data linkage packages to match two data from separate sources.
 
 The `fuzzymatcher` uses sqlite 3 to simply match two pandas DataFrames together, based on probabilistic scoring. If you have a larger data set or need to use more complex matching logic, then the `Recordlinkage` could be a better tool for  cleaning duplicates and joining data.
