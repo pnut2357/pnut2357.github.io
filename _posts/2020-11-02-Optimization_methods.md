@@ -1,6 +1,6 @@
 -------
-title: Deep Learning Performance Improvement2 - Optimizer
-description: Discussed how optimization improve performance of a model. 
+title: "Deep Learning Performance Improvement2 - Optimizer"
+description: "Discussed how optimization improve performance of a model."
 categories:
 	- machine-learning-concept
 #cover: '/assets/images/intro_api/api.png'
