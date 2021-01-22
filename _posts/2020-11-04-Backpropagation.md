@@ -228,10 +228,10 @@ As we can see from the dataset above, the data point are defined as $$
 \end{equation}
 $$. Therefore the input layer of the network must have two units. We want to classify the data points as being either class "1" or class "0", then the output layer of the network must contain a single unit. Between the input and the output layers, we add a hidden layer with 3 units. The full network looks like:
 
-<center>
-<img src="./images/neural_network_practice.png" style="width: 300px;" >
+
+<img src="/assets/images/dl_backpropagation/neural_network_practice.png" height="800" width="330" >
 </center>
-<caption><center> <u> **Figure 5** </u>: Neural Network </center></caption>
+<caption><center>  <font color='purple'> Figure 4 </font> Neural Network </center></caption>
 
 Choosing the right network architecture is more an art than a science, and there is no ground reason to choose the second layer to have 3 units. I encourage you to go and play with the [tensorflow playground](https://playground.tensorflow.org/#activation=tanh&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.03&regularizationRate=0&noise=0&networkShape=4,2&seed=0.07489&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false) to realize that. We have already studied a similar architecture before but with a single unit per layer. The previous equations can be easily generalized for layers with more than one unit:
 
