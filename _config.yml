@@ -95,7 +95,7 @@ social:
   type                   : # Person or Organization (defaults to Person)
   name                   : # If the user or organization name differs from the site's name
   links: # An array of links to social media profiles
-    - "https://www.linkedin.com/in/jaechoii/"
+    - "https://www.linkedin.com/in/jaechoi2357/"
 # Analytics
 analytics:
   provider               : "google-universal" # false (default), "google", "google-universal", "custom"
@@ -117,7 +117,7 @@ author:
       url: "mailto:jaehyuk0325@gmail.com"
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
-      url: "https://www.linkedin.com/in/jaechoii/"
+      url: "https://www.linkedin.com/in/jaechoi2357/"
     - label: "DevPost"
       icon: "fas fa-fw fa-link"
       url: "https://devpost.com/jaehyuk0325?ref_content=user-portfolio&ref_feature=portfolio&ref_medium=global-nav"
@@ -145,7 +145,7 @@ footer:
       # url:
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
-      url: "https://www.linkedin.com/in/jaechoii/"
+      url: "https://www.linkedin.com/in/jaechoi2357/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/pnut2357"
