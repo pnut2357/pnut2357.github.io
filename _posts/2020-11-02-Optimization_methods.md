@@ -700,9 +700,11 @@ print("v[\"db2\"] = " + str(v["db2"]))
 
 <font color='blue'>
 **What you should remember**:
-- Momentum takes past gradients into account to smooth out the steps of gradient descent. It can be applied with batch gradient descent, mini-batch gradient descent or stochastic gradient descent.
-- You have to tune a momentum hyperparameter $$\beta$$ and a learning rate $$\alpha$$.
 </font>
+
+- <font color='blue'> Momentum takes past gradients into account to smooth out the steps of gradient descent. It can be applied with batch gradient descent, mini-batch gradient descent or stochastic gradient descent. </font>
+- <font color='blue'> You have to tune a momentum hyperparameter $$\beta$$ and a learning rate $$\alpha$$. </font>
+
 
 ## 4 - Adam
 
