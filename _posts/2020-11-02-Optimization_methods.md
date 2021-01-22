@@ -239,11 +239,11 @@ As Figure 3 shows, "+" denotes a minimum of the cost. Using mini-batches in your
 
 <font color='blue'>
 **What you should remember**:
-    
-    - The difference between gradient descent, mini-batch gradient descent and stochastic gradient descent is the number of examples you use to perform one update step.
-    - You have to tune a learning rate hyperparameter $$\alpha$$.
-    - With a well-turned mini-batch size, usually it outperforms either gradient descent or stochastic gradient descent (particularly when the training set is large).
 </font>
+    - <font color='blue'> The difference between gradient descent, mini-batch gradient descent and stochastic gradient descent is the number of examples you use to perform one update step.</font>
+    - <font color='blue'>You have to tune a learning rate hyperparameter $$\alpha$$. </font>
+    - <font color='blue'>With a well-turned mini-batch size, usually it outperforms either gradient descent or stochastic gradient descent (particularly when the training set is large). </font>
+
 
 
 ## 2 - Mini-Batch Gradient descent
