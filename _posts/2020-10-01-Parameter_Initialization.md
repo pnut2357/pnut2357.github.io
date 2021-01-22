@@ -9,8 +9,6 @@ toc_sticky: true
 comments: true
 excerpt: |
     Parameter Initialization / Weight Initialization / Machine Learning Performance Improvement 
-#header:
-
 ---
 
 # Parameter Initialization
