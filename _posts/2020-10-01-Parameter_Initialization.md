@@ -1,25 +1,21 @@
-```python
-# 1. magic to print version
-# 2. magic so that the notebook will reload external python modules
-# https://gist.github.com/minrk/3301035
-%load_ext watermark
-%load_ext autoreload
-%autoreload 
-from typing import List
-%watermark -a 'Jae H. Choi' -d -t -v -p typing
-```
-
-    Jae H. Choi 2021-01-20 18:03:49 
-    
-    CPython 3.8.3
-    IPython 7.16.1
-    
-    typing unknown
+---
+title: Deep Learning Performance Improvement1: Weight Initialization 
+description: Weight initialization helps a predictive model achieve better performance. 
+categories:
+  - machine-learning-concept
+#cover: '/assets/images/intro_api/api.png'
+tags:
+toc: true
+toc_sticky: true
+comments: true
+excerpt: |
+    Parameter Initialization / Weight Initialization / Machine Learning Performance Improvement 
+#header:
 
 
-# Weight Initialization
+# Parameter Initialization
 
-## Importance of Weight Initialization
+## Importance of Parameter Initialization
 To build a machine learning algorithm, we use ideas from defined models such as Linear Regression, Logistic Regression, Support Vector Machine, CNN, RNN, etc. The follwoing is a common training process: 
 
 1. Initialize parameters
@@ -30,7 +26,7 @@ To build a machine learning algorithm, we use ideas from defined models such as 
     - Back-Propagation to Compute Gradients of the loss w.r.t. parameters
     - Update each parameter using the gradients, depending on optimizer.
 
-*Weight Initialization* can be important to the performance of your model. **Initializing all weights with zeros can lead the neurons to learn the same features over and over again during training**. 
+*Parameter Initialization* can be important to the performance of your model. **Initializing all weights with zeros can lead the neurons to learn the same features over and over again during training**. 
 
 A well chosen weight can:
 - Speed up the convergence of gradient descent
