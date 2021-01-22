@@ -1,6 +1,6 @@
 ---
-title: Deep Learning Performance Improvement1: Weight Initialization 
-description: Weight initialization helps a predictive model achieve better performance. 
+title: Deep Learning Performance Improvement1: Parameter Initialization 
+description: Parameter initialization helps a predictive model achieve better performance. 
 categories:
   - machine-learning-concept
 tags:
@@ -9,8 +9,8 @@ toc_sticky: true
 comments: true
 excerpt: |
     Parameter Initialization / Weight Initialization / Machine Learning Performance Improvement 
-# header:
-#   image: /assets/images/logos/logo-text-8c3ba8a6.svg
+header:
+image: /assets/images/logos/logo-text-8c3ba8a6.svg
 ---
 
 # Parameter Initialization
