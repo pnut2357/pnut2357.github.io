@@ -1,17 +1,16 @@
 -------
-title: Deep Learning Performance Improvement2- Optimizer
+title: Deep Learning Performance Improvement2 - Optimizer
 description: Discussed how optimization improve performance of a model. 
 categories:
-    - machine-learning-concept
+- machine-learning-concept
 #cover: '/assets/images/intro_api/api.png'
 tags:
 toc: true
 toc_sticky: true
 comments: true
 excerpt:
-    |Optimizer / Gradient Descent / Stochastic Gradient Descent / Adam / / Machine Learning Performance Improvement
+|Optimizer / Gradient Descent / Stochastic Gradient Descent / Adam / / Machine Learning Performance Improvement
 header: Deep Learning Performance Improvement2- Optimizer
-# image: /assets/images/logos/logo-text-8c3ba8a6.svg
 -------
 
 ## 1. Importance of Optimization
