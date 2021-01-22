@@ -1,15 +1,15 @@
 ---
-title: Database System and SQL
-description: Database System and SQL
+title: Deep Learning Performance Improvement1: Optimizer
+description: Discussed how optimization improve performance of a model. 
 categories:
-  - SQL
+  - machine-learning-concept
 #cover: '/assets/images/intro_api/api.png'
 tags:
 toc: true
 toc_sticky: true
 comments: true
 excerpt: |
-  SQL / Personal Relational Database Query Project
+  Optimizer / Gradient Descent / Stochastic Gradient Descent / Adam / / Machine Learning Performance Improvement
 #header:
 #  image: /assets/images/logos/logo-text-8c3ba8a6.svg
 ---
@@ -28,20 +28,22 @@ In Machine Learning, we can think of improvement mainly in four parts: initializ
     - Back-Propagation to Compute Gradients of the loss w.r.t. parameters
     - Update each parameter using the gradients, depending on optimizer.
 
-First, your problem and model are defined. You want your model to provide desired outputs from inputs. Inputs, once it is fed to your model, go through forward-progation process with multiple layers with parameter and activation functions. Then, depending on your loss function, cost (loss) is computed to see how well it went through ($J=\frac{1}{m} \sum_{i}^{m} L^{(i)}$ where *m* is size of training dataset, $L^{(i)}$ is loss of a instance from training dataset). This cost $L$ indicates the error between predicted one and labeled one. Back-propagation process helps to steer a better direction to global minimum of loss by computing changes of backward-partial differentiating based on chain rule (such as changes of cost w.r.t. activation $\sigma$ * changes of activation w.r.t. $z$ where $z=W*X+b$ * ...). Then, an optimizer, updating weights and bias, leads where to go. In simple term, partial derivation of loss function tells the optimizer when moving toward a direction is right or wrong. In this sense, *Optimizer* is important to the performance of your model.  
+First, your problem and model are defined. You want your model to provide desired outputs from inputs. Inputs, once it is fed to your model, go through forward-progation process with multiple layers with parameter and activation functions. Then, depending on your loss function, cost (loss) is computed to see how well it went through ($$J=\frac{1}{m} \sum_{i}^{m} L^{(i)}$$ where *m* is size of training dataset, $$L^{(i)}$$ is loss of a instance from training dataset). This cost $$L$$ indicates the error between predicted one and labeled one. Back-propagation process helps to steer a better direction to global minimum of loss by computing changes of backward-partial differentiating based on chain rule (such as changes of cost w.r.t. activation $$\sigma$$ * changes of activation w.r.t. $$z$$ where $$z=W*X+b$$ * ...). Then, an optimizer, updating weights and bias, leads where to go. In simple term, partial derivation of loss function tells the optimizer when moving toward a direction is right or wrong. In this sense, *Optimizer* is important to the performance of your model.  
 
 
 
 Keep it in your mind that our goal is to minimize cost (loss), and let's explore optimization methods that can speed up learning and perhaps even get you to a better final value for the cost function. Having a good optimization algorithm can be the difference between waiting days vs. just a few hours to get a good result. 
 
-Gradient descent goes "downhill" on a cost function $J$. Think of it as trying to do this: 
+Gradient descent goes "downhill" on a cost function $$J$$. Think of it as trying to do this: 
 <center>
-<img src="images/cost.jpg" style="width:300px;">
-<img src="images/optimizers.gif" style="width:400px;">
+<img src="/assets/images/Optimizers/cost.jpg" height="800" width="600" />
+<img src="/assets/images/Optimizers/optimizers.gif" height="800" width="600" />
 </center>
-<caption><center> <u> **Figure 1** </u>: **Minimizing the cost is like finding the lowest point in a hilly landscape**<br> At each step of the training, you update your parameters following a certain direction to try to get to the lowest possible point. </center></caption>
+<caption><center> **Figure 1** </center></caption> 
 
-**Notations**: As usual, $\frac{\partial J}{\partial a } = $ `da` for any variable `a`.
+As FIgure 1 shows, minimizing the cost is like finding the lowest point in a hilly landscape. At each step of the training, you update your parameters following a certain direction to try to get to the lowest possible point. 
+
+**Notations**: As usual, $$\frac{\partial J}{\partial a } = $$ `da` for any variable `a`.
 
 To get started, run the following code to import the libraries you will need.
 
@@ -70,13 +72,13 @@ from testCases import *
 
 ## 1 - Gradient Descent
 
-A simple optimization method in machine learning is gradient descent (GD). When you take gradient steps with respect to all $m$ examples on each step, it is also called Batch Gradient Descent. 
+A simple optimization method in machine learning is gradient descent (GD). When you take gradient steps with respect to all $$m$$ examples on each step, it is also called Batch Gradient Descent. 
 
-**Warm-up exercise**: Implement the gradient descent update rule. The  gradient descent rule is, for $l = 1, ..., L$: 
+**Warm-up exercise**: Implement the gradient descent update rule. The  gradient descent rule is, for $$l = 1, ..., L$$: 
 $$ W^{[l]} = W^{[l]} - \alpha \text{ } dW^{[l]} \tag{1}$$
 $$ b^{[l]} = b^{[l]} - \alpha \text{ } db^{[l]} \tag{2}$$
 
-where L is the number of layers and $\alpha$ is the learning rate. All parameters should be stored in the `parameters` dictionary. Note that the iterator `l` starts at 0 in the `for` loop while the first parameters are $W^{[1]}$ and $b^{[1]}$. You need to shift `l` to `l+1` when coding.
+where L is the number of layers and $$\alpha$$ is the learning rate. All parameters should be stored in the `parameters` dictionary. Note that the iterator `l` starts at 0 in the `for` loop while the first parameters are $$W^{[1]}$$ and $$b^{[1]}$$. You need to shift `l` to `l+1` when coding.
 
 
 ```python
@@ -220,47 +222,62 @@ for i in range(0, num_iterations):
 
 In Stochastic Gradient Descent, you use only 1 training example before updating the gradients. When the training set is large, SGD can be faster. But the parameters will "oscillate" toward the minimum rather than converge smoothly. Here is an illustration of this: 
 
-<img src="images/kiank_sgd.png" style="width:750px;height:250px;">
-<caption><center> <u> <font color='purple'> **Figure 1** </u><font color='purple'>  : **SGD vs GD**<br> "+" denotes a minimum of the cost. SGD leads to many oscillations to reach convergence. But each step is a lot faster to compute for SGD than for GD, as it uses only one training example (vs. the whole batch for GD). </center></caption>
+<center>
+<img src="/assets/images/Optimizers/kiank_sgd.png" height="800" width="600" />
+</center>
+<caption><center>  <font color='purple'> **Figure 2** </font>  SGD vs GD </center></caption>
+
+As Figure 2 shows, "+" denotes a minimum of the cost. SGD leads to many oscillations to reach convergence. But each step is a lot faster to compute for SGD than for GD, as it uses only one training example (vs. the whole batch for GD). 
 
 **Note** also that implementing SGD requires 3 for-loops in total:
 1. Over the number of iterations
-2. Over the $m$ training examples
-3. Over the layers (to update all parameters, from $(W^{[1]},b^{[1]})$ to $(W^{[L]},b^{[L]})$)
+2. Over the $$m$$ training examples
+3. Over the layers (to update all parameters, from $$(W^{[1]},b^{[1]})$$ to $$(W^{[L]},b^{[L]})$$)
 
 In practice, you'll often get faster results if you do not use neither the whole training set, nor only one training example, to perform each update. Mini-batch gradient descent uses an intermediate number of examples for each step. With mini-batch gradient descent, you loop over the mini-batches instead of looping over individual training examples.
 
-<img src="images/kiank_minibatch.png" style="width:750px;height:250px;">
-<caption><center> <u> <font color='purple'> **Figure 2** </u>: <font color='purple'>  **SGD vs Mini-Batch GD**<br> "+" denotes a minimum of the cost. Using mini-batches in your optimization algorithm often leads to faster optimization. </center></caption>
+<center>
+<img src="/assets/images/Optimizers/kiank_minibatch.png" height="800" width="600" />
+</center>
+<caption><center> <font color='purple'> **Figure 3**  </font>  SGD vs Mini-Batch GD </center></caption>
+
+As Figure 3 shows, "+" denotes a minimum of the cost. Using mini-batches in your optimization algorithm often leads to faster optimization. 
 
 <font color='blue'>
 **What you should remember**:
     
 - The difference between gradient descent, mini-batch gradient descent and stochastic gradient descent is the number of examples you use to perform one update step.
-- You have to tune a learning rate hyperparameter $\alpha$.
+- You have to tune a learning rate hyperparameter $$\alpha$$.
 - With a well-turned mini-batch size, usually it outperforms either gradient descent or stochastic gradient descent (particularly when the training set is large).
+
+</font>
+
 
 ## 2 - Mini-Batch Gradient descent
 
 Let's learn how to build mini-batches from the training set (X, Y).
 
 There are two steps:
-- **Shuffle**: Create a shuffled version of the training set (X, Y) as shown below. Each column of X and Y represents a training example. Note that the random shuffling is done synchronously between X and Y. Such that after the shuffling the $i^{th}$ column of X is the example corresponding to the $i^{th}$ label in Y. The shuffling step ensures that examples will be split randomly into different mini-batches. 
+- **Shuffle**: Create a shuffled version of the training set (X, Y) as shown below. Each column of X and Y represents a training example. Note that the random shuffling is done synchronously between X and Y. Such that after the shuffling the $$i^{th}$$ column of X is the example corresponding to the $$i^{th}$$ label in Y. The shuffling step ensures that examples will be split randomly into different mini-batches. 
 
-<img src="images/kiank_shuffle.png" style="width:550px;height:300px;">
+<center>
+<img src="/assets/images/Optimizers/kiank_shuffle.png" height="800" width="600" />
+</center>
 
 - **Partition**: Partition the shuffled (X, Y) into mini-batches of size `mini_batch_size` (here 64). Note that the number of training examples is not always divisible by `mini_batch_size`. The last mini batch might be smaller, but you don't need to worry about this. When the final mini-batch is smaller than the full `mini_batch_size`, it will look like this: 
 
-<img src="images/kiank_partition.png" style="width:550px;height:300px;">
+<center>
+<img src="/assets/images/Optimizers/kiank_partition.png" height="800" width="600" />
+</center>
 
-**Exercise**: Implement `random_mini_batches`. We coded the shuffling part for you. To help you with the partitioning step, we give you the following code that selects the indexes for the $1^{st}$ and $2^{nd}$ mini-batches:
+**Exercise**: Implement `random_mini_batches`. We coded the shuffling part for you. To help you with the partitioning step, we give you the following code that selects the indexes for the $$1^{st}$$ and $$2^{nd}$$ mini-batches:
 ```python
 first_mini_batch_X = shuffled_X[:, 0 : mini_batch_size]
 second_mini_batch_X = shuffled_X[:, mini_batch_size : 2 * mini_batch_size]
 ...
 ```
 
-Note that the last mini-batch might end up smaller than `mini_batch_size=64`. Let $\lfloor s \rfloor$ represents $s$ rounded down to the nearest integer (this is `math.floor(s)` in Python). If the total number of examples is not a multiple of `mini_batch_size=64` then there will be $\lfloor \frac{m}{mini\_batch\_size}\rfloor$ mini-batches with a full 64 examples, and the number of examples in the final mini-batch will be ($m-mini_\_batch_\_size \times \lfloor \frac{m}{mini\_batch\_size}\rfloor$). 
+Note that the last mini-batch might end up smaller than `mini_batch_size=64`. Let $$\lfloor s \rfloor$$ represents $$s$$ rounded down to the nearest integer (this is `math.floor(s)` in Python). If the total number of examples is not a multiple of `mini_batch_size=64` then there will be $$\lfloor \frac{m}{mini\_batch\_size}\rfloor$$ mini-batches with a full 64 examples, and the number of examples in the final mini-batch will be ($$m-mini_\_batch_\_size \times \lfloor \frac{m}{mini\_batch\_size}\rfloor$$). 
 
 
 ```python
@@ -392,19 +409,26 @@ print("mini batch sanity check: " + str(mini_batches[0][0][0][0:3]))
     
 - Shuffling and Partitioning are the two steps required to build mini-batches
 - Powers of two are often chosen to be the mini-batch size, e.g., 16, 32, 64, 128.
+</font>
+
 
 ## 3 - Momentum
 
 Because mini-batch gradient descent makes a parameter update after seeing just a subset of examples, the direction of the update has some variance, and so the path taken by mini-batch gradient descent will "oscillate" toward convergence. Using momentum can reduce these oscillations. 
 
-Momentum takes into account the past gradients to smooth out the update. We will store the 'direction' of the previous gradients in the variable $v$. Formally, this will be the exponentially weighted average of the gradient on previous steps. You can also think of $v$ as the "velocity" of a ball rolling downhill, building up speed (and momentum) according to the direction of the gradient/slope of the hill. 
-
-<img src="images/opt_momentum.png" style="width:400px;height:250px;">
-<caption><center> <u><font color='purple'>**Figure 3**</u><font color='purple'>: The red arrows shows the direction taken by one step of mini-batch gradient descent with momentum. The blue points show the direction of the gradient (with respect to the current mini-batch) on each step. Rather than just following the gradient, we let the gradient influence $v$ and then take a step in the direction of $v$.<br> <font color='black'> </center>
+Momentum takes into account the past gradients to smooth out the update. We will store the 'direction' of the previous gradients in the variable $$v$$. Formally, this will be the exponentially weighted average of the gradient on previous steps. You can also think of $$v$$ as the "velocity" of a ball rolling downhill, building up speed (and momentum) according to the direction of the gradient/slope of the hill. 
 
 
-**Exercise**: Initialize the velocity. The velocity, $v$, is a python dictionary that needs to be initialized with arrays of zeros. Its keys are the same as those in the `grads` dictionary, that is:
-for $l =1,...,L$:
+<center>
+<img src="/assets/images/Optimizers/opt_momentum.png" height="800" width="600" />
+</center>
+<caption><center> <font color='purple'>**Figure 3**</font>: 
+
+As Figure 3 shows, The red arrows shows the direction taken by one step of mini-batch gradient descent with momentum. The blue points show the direction of the gradient (with respect to the current mini-batch) on each step. Rather than just following the gradient, we let the gradient influence $$v$$ and then take a step in the direction of $$v$$.
+
+
+**Exercise**: Initialize the velocity. The velocity, $$v$$, is a python dictionary that needs to be initialized with arrays of zeros. Its keys are the same as those in the `grads` dictionary, that is:
+for $$l =1,...,L$$:
 ```python
 v["dW" + str(l+1)] = ... #(numpy array of zeros with the same shape as parameters["W" + str(l+1)])
 v["db" + str(l+1)] = ... #(numpy array of zeros with the same shape as parameters["b" + str(l+1)])
@@ -513,7 +537,7 @@ print("v[\"db2\"] = " + str(v["db2"]))
 
 
 
-**Exercise**:  Now, implement the parameters update with momentum. The momentum update rule is, for $l = 1, ..., L$: 
+**Exercise**:  Now, implement the parameters update with momentum. The momentum update rule is, for $$l = 1, ..., L$$: 
 
 $$ \begin{cases}
 v_{dW^{[l]}} = \beta v_{dW^{[l]}} + (1 - \beta) dW^{[l]} \\
@@ -525,7 +549,7 @@ v_{db^{[l]}} = \beta v_{db^{[l]}} + (1 - \beta) db^{[l]} \\
 b^{[l]} = b^{[l]} - \alpha v_{db^{[l]}} 
 \end{cases}\tag{4}$$
 
-where L is the number of layers, $\beta$ is the momentum and $\alpha$ is the learning rate. All parameters should be stored in the `parameters` dictionary.  Note that the iterator `l` starts at 0 in the `for` loop while the first parameters are $W^{[1]}$ and $b^{[1]}$ (that's a "one" on the superscript). So you will need to shift `l` to `l+1` when coding.
+where L is the number of layers, $$\beta$$ is the momentum and $$\alpha$$ is the learning rate. All parameters should be stored in the `parameters` dictionary.  Note that the iterator `l` starts at 0 in the `for` loop while the first parameters are $$W^{[1]}$$ and $$b^{[1]}$$ (that's a "one" on the superscript). So you will need to shift `l` to `l+1` when coding.
 
 
 ```python
@@ -667,29 +691,30 @@ print("v[\"db2\"] = " + str(v["db2"]))
 
 **Note** that:
 - The velocity is initialized with zeros. So the algorithm will take a few iterations to "build up" velocity and start to take bigger steps.
-- If $\beta = 0$, then this just becomes standard gradient descent without momentum. 
+- If $$\beta = 0$$, then this just becomes standard gradient descent without momentum. 
 
-**How do you choose $\beta$?**
+**How do you choose $$\beta$$?**
 
-- The larger the momentum $\beta$ is, the smoother the update because the more we take the past gradients into account. But if $\beta$ is too big, it could also smooth out the updates too much. 
-- Common values for $\beta$ range from 0.8 to 0.999. If you don't feel inclined to tune this, $\beta = 0.9$ is often a reasonable default. 
-- Tuning the optimal $\beta$ for your model might need trying several values to see what works best in term of reducing the value of the cost function $J$. 
+- The larger the momentum $$\beta$$ is, the smoother the update because the more we take the past gradients into account. But if $$\beta$$ is too big, it could also smooth out the updates too much. 
+- Common values for $$\beta$$ range from 0.8 to 0.999. If you don't feel inclined to tune this, $$\beta = 0.9$$ is often a reasonable default. 
+- Tuning the optimal $$\beta$$ for your model might need trying several values to see what works best in term of reducing the value of the cost function $$J$$. 
 
 <font color='blue'>
 **What you should remember**:
 - Momentum takes past gradients into account to smooth out the steps of gradient descent. It can be applied with batch gradient descent, mini-batch gradient descent or stochastic gradient descent.
-- You have to tune a momentum hyperparameter $\beta$ and a learning rate $\alpha$.
+- You have to tune a momentum hyperparameter $$\beta$$ and a learning rate $$\alpha$$.
+</font>
 
 ## 4 - Adam
 
 Adam is one of the most effective optimization algorithms for training neural networks. It combines ideas from RMSProp (described in lecture) and Momentum. 
 
 **How does Adam work?**
-1. It calculates an exponentially weighted average of past gradients, and stores it in variables $v$ (before bias correction) and $v^{corrected}$ (with bias correction). 
-2. It calculates an exponentially weighted average of the squares of the past gradients, and  stores it in variables $s$ (before bias correction) and $s^{corrected}$ (with bias correction). 
+1. It calculates an exponentially weighted average of past gradients, and stores it in variables $$v$$ (before bias correction) and $$v^{corrected}$$ (with bias correction). 
+2. It calculates an exponentially weighted average of the squares of the past gradients, and  stores it in variables $$s$$ (before bias correction) and $$s^{corrected}$$ (with bias correction). 
 3. It updates parameters in a direction based on combining information from "1" and "2".
 
-The update rule is, for $l = 1, ..., L$: 
+The update rule is, for $$l = 1, ..., L$$: 
 
 $$\begin{cases}
 v_{dW^{[l]}} = \beta_1 v_{dW^{[l]}} + (1 - \beta_1) \frac{\partial \mathcal{J} }{ \partial W^{[l]} } \\
@@ -701,16 +726,16 @@ W^{[l]} = W^{[l]} - \alpha \frac{v^{corrected}_{dW^{[l]}}}{\sqrt{s^{corrected}_{
 where:
 - t counts the number of steps taken of Adam 
 - L is the number of layers
-- $\beta_1$ and $\beta_2$ are hyperparameters that control the two exponentially weighted averages. 
-- $\alpha$ is the learning rate
-- $\varepsilon$ is a very small number to avoid dividing by zero
+- $$\beta_1$$ and $$\beta_2$$ are hyperparameters that control the two exponentially weighted averages. 
+- $$\alpha$$ is the learning rate
+- $$\varepsilon$$ is a very small number to avoid dividing by zero
 
 As usual, we will store all parameters in the `parameters` dictionary  
 
-**Exercise**: Initialize the Adam variables $v, s$ which keep track of the past information.
+**Exercise**: Initialize the Adam variables $$v, s$$ which keep track of the past information.
 
-**Instruction**: The variables $v, s$ are python dictionaries that need to be initialized with arrays of zeros. Their keys are the same as for `grads`, that is:
-for $l = 1, ..., L$:
+**Instruction**: The variables $$v, s$$ are python dictionaries that need to be initialized with arrays of zeros. Their keys are the same as for `grads`, that is:
+for $$l = 1, ..., L$$:
 ```python
 v["dW" + str(l+1)] = ... #(numpy array of zeros with the same shape as parameters["W" + str(l+1)])
 v["db" + str(l+1)] = ... #(numpy array of zeros with the same shape as parameters["b" + str(l+1)])
@@ -849,7 +874,7 @@ print("s[\"db2\"] = " + str(s["db2"]))
 </table>
 
 
-**Exercise**:  Now, implement the parameters update with Adam. Recall the general update rule is, for $l = 1, ..., L$: 
+**Exercise**:  Now, implement the parameters update with Adam. Recall the general update rule is, for $$l = 1, ..., L$$: 
 
 $$\begin{cases}
 v_{W^{[l]}} = \beta_1 v_{W^{[l]}} + (1 - \beta_1) \frac{\partial J }{ \partial W^{[l]} } \\
@@ -860,7 +885,7 @@ W^{[l]} = W^{[l]} - \alpha \frac{v^{corrected}_{W^{[l]}}}{\sqrt{s^{corrected}_{W
 \end{cases}$$
 
 
-**Note** that the iterator `l` starts at 0 in the `for` loop while the first parameters are $W^{[1]}$ and $b^{[1]}$. You need to shift `l` to `l+1` when coding.
+**Note** that the iterator `l` starts at 0 in the `for` loop while the first parameters are $$W^{[1]}$$ and $$b^{[1]}$$. You need to shift `l` to `l+1` when coding.
 
 
 ```python
@@ -1068,8 +1093,9 @@ plt.show()
 ```
 
 
-![png](output_35_0.png)
-
+<center>
+<img src="/assets/images/Optimizers/output_35_0.png" height="800" width="600" />
+</center>
 
 We have already implemented a 3-layer neural network. You will train it with: 
 - Mini-batch **Gradient Descent**: it will call your function:
@@ -1201,16 +1227,16 @@ plot_decision_boundary(lambda x: predict_dec(parameters, x.T), train_X, train_Y)
     Cost after epoch 9000: 0.459771
 
 
-
-![png](output_39_1.png)
-
+<center>
+<img src="/assets/images/Optimizers/output_39_1.png" height="800" width="600" />
+</center>
 
     Accuracy: 0.7633333333333333
 
 
-
-![png](output_39_3.png)
-
+<center>
+<img src="/assets/images/Optimizers/output_39_3.png" height="800" width="600" />
+</center>
 
 ### 5.2 - Mini-batch gradient descent with momentum
 
@@ -1245,15 +1271,16 @@ plot_decision_boundary(lambda x: predict_dec(parameters, x.T), train_X, train_Y)
     Cost after epoch 9000: 0.459792
 
 
-
-![png](output_41_1.png)
-
+<center>
+<img src="/assets/images/Optimizers/output_41_1.png" height="800" width="600" />
+</center>
 
     Accuracy: 0.7633333333333333
 
 
-
-![png](output_41_3.png)
+<center>
+<img src="/assets/images/Optimizers/output_41_3.png" height="800" width="600" />
+</center>
 
 
 ### 5.3 - Mini-batch with Adam mode
@@ -1289,16 +1316,16 @@ plot_decision_boundary(lambda x: predict_dec(parameters, x.T), train_X, train_Y)
     Cost after epoch 9000: 0.360600
 
 
-
-![png](output_43_1.png)
-
+<center>
+<img src="/assets/images/Optimizers/output_43_1.png" height="800" width="600" />
+</center>
 
     Accuracy: 0.8866666666666667
 
 
-
-![png](output_43_3.png)
-
+<center>
+<img src="/assets/images/Optimizers/output_43_3.png" height="800" width="600" />
+</center>
 
 ### 5.4 - Summary
 
@@ -1353,7 +1380,7 @@ Adam on the other hand, clearly outperforms mini-batch gradient descent and Mome
 
 Some advantages of Adam include:
 - Relatively low memory requirements (though higher than gradient descent and gradient descent with momentum) 
-- Usually works well even with little tuning of hyperparameters (except $\alpha$)
+- Usually works well even with little tuning of hyperparameters (except $$\alpha$$)
 
 **References**:
 

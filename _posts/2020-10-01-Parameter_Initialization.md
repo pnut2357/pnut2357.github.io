@@ -1,16 +1,17 @@
 ---
 title: Deep Learning Performance Improvement1: Parameter Initialization 
-description: Parameter initialization helps a predictive model achieve better performance. 
+description: Discussed how parameter initialization improve performance of a model. 
 categories:
   - machine-learning-concept
+#cover: '/assets/images/intro_api/api.png'
 tags:
 toc: true
 toc_sticky: true
 comments: true
 excerpt: |
-    Parameter Initialization / Weight Initialization / Machine Learning Performance Improvement 
-header:
-image: /assets/images/logos/logo-text-8c3ba8a6.svg
+  Parameter Initialization / Weight Initialization / Machine Learning Performance Improvement
+#header:
+#  image: /assets/images/logos/logo-text-8c3ba8a6.svg
 ---
 
 # Parameter Initialization
