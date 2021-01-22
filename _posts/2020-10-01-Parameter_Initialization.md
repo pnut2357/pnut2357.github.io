@@ -9,6 +9,8 @@ toc_sticky: true
 comments: true
 excerpt: |
     Parameter Initialization / Weight Initialization / Machine Learning Performance Improvement 
+# header:
+#   image: /assets/images/logos/logo-text-8c3ba8a6.svg
 ---
 
 # Parameter Initialization
