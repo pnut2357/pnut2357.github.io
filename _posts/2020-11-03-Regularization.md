@@ -346,9 +346,9 @@ def load_2D_dataset():
 <center>
 <img src="/assets/images/dl_regularization/field_kiank.png" height="800" width="300" >
 </center>
-<caption><center>  <font color='purple'> Figure 1 </font>  </center></caption>
+<caption><center>  <font color='purple'> Figure 1 </font> Football field*  </center></caption>
 
-As Figure 1 shows, **Football field**<br> The goal keeper kicks the ball in the air, the players of each team are fighting to hit the ball with their head </center></caption>
+As Figure 1 shows, the goal keeper kicks the ball in the air, the players of each team are fighting to hit the ball with their head.
 
 
 They give you the following 2D dataset from France's past 10 games.

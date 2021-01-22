@@ -30,10 +30,10 @@ Keep it in your mind that our goal is to minimize cost (loss), and let's explore
 
 Gradient descent goes "downhill" on a cost function $$J$$. Think of it as trying to do this: 
 <center>
-<img src="/assets/images/Optimizers/cost.jpg" height="800" width="600" />
-<img src="/assets/images/Optimizers/optimizers.gif" height="800" width="600" />
+<img src="/assets/images/Optimizers/cost.jpg" height="800" width="300" />
+<img src="/assets/images/Optimizers/optimizers.gif" height="800" width="350" />
 </center>
-<caption><center> Figure 1 </center></caption> 
+<caption><center> <font color='purple'> Figure 1 </font> Comparison of Optimizer Performance </center></caption> 
 
 As FIgure 1 shows, minimizing the cost is like finding the lowest point in a hilly landscape. At each step of the training, you update your parameters following a certain direction to try to get to the lowest possible point. 
 
