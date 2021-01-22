@@ -417,7 +417,7 @@ Momentum takes into account the past gradients to smooth out the update. We will
 <center>
 <img src="/assets/images/Optimizers/opt_momentum.png" height="800" width="300" />
 </center>
-<caption><center> <font color='purple'>Figure 6</font> </caption></center>
+<caption><center> <font color='purple'>Figure 6</font> </center></caption>
 
 
 As Figure 6 shows, The red arrows shows the direction taken by one step of mini-batch gradient descent with momentum. The blue points show the direction of the gradient (with respect to the current mini-batch) on each step. Rather than just following the gradient, we let the gradient influence $$v$$ and then take a step in the direction of $$v$$.
