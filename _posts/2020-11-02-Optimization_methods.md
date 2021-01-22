@@ -1383,4 +1383,4 @@ Some advantages of Adam include:
 
 **References**:
 
-- Adam paper: https://arxiv.org/pdf/1412.6980.pdf
+- [Adam paper](https://arxiv.org/pdf/1412.6980.pdf)
