@@ -161,7 +161,7 @@ Before speaking in more details about what back-propagation is, let's first intr
 
 
 <center>
-<img src="/assets/images/dl_backpropagation/computational_graph.png" height="800" width="500" >
+<img src="/assets/images/dl_backpropagation/computational_graph.png" height="800" width="380" >
 </center>
 <caption><center>  <font color='purple'> Figure 3 </font> Back-propagation Computational Diagram </center></caption>
 
@@ -632,7 +632,3 @@ visualization(xor_weights, xor_X, 'Visualization after learning', superposed_tra
 ## 5 - Conclusion
 Back-propagation is not an extremely complicated algorithm, but with numerical approach, it still requests tendendous amount of tedious computation; it become computationally more difficult as we have more hidden layers. Introducing back-propagation helps to mitigate such issue.
 
-
-```python
-
-```
