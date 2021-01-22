@@ -241,7 +241,7 @@ As Figure 3 shows, "+" denotes a minimum of the cost. Using mini-batches in your
 **What you should remember**:
 </font>
 - <font color='blue'> The difference between gradient descent, mini-batch gradient descent and stochastic gradient descent is the number of examples you use to perform one update step.</font>
-- <font color='blue'>You have to tune a learning rate hyperparameter α </font>. 
+- <font color='blue'>You have to tune a learning rate hyperparameter α. </font>
 - <font color='blue'>With a well-turned mini-batch size, usually it outperforms either gradient descent or stochastic gradient descent (particularly when the training set is large). </font>
 
 
@@ -395,14 +395,14 @@ print("mini batch sanity check: " + str(mini_batches[0][0][0][0:3]))
     (1, 20)
     </td>
     </tr>
-
+</table> 
 
 <font color='blue'>
 **What you should remember**:
-    
-- Shuffling and Partitioning are the two steps required to build mini-batches
-- Powers of two are often chosen to be the mini-batch size, e.g., 16, 32, 64, 128.
 </font>
+
+- <font color='blue'> Shuffling and Partitioning are the two steps required to build mini-batches </font>
+- <font color='blue'> Powers of two are often chosen to be the mini-batch size, e.g., 16, 32, 64, 128. </font>
 
 
 ## 3 - Momentum
