@@ -1,5 +1,5 @@
 ---
-title: "Deep Learning Performance Improvement2 - Optimizer"
+title: "Deep Learning Performance Improvement 2 - Optimizer"
 excerpt: "Discussed how optimization improve performance of a model."
 categories:
   - machine-learning-concept
@@ -8,7 +8,7 @@ toc: true
 toc_sticky: true
 comments: true
 excerpt: |
-  Optimizer / Gradient Descent / Stochastic Gradient Descent / Adam /  Machine Learning Performance Improvement
+  Optimizer / Gradient Descent / Stochastic Gradient Descent / Momentum / Adam /  Machine Learning Performance Improvement
 ---
 # Optimizer
 ## Importance of Optimization
@@ -724,6 +724,7 @@ s_{dW^{[l]}} = \beta_2 s_{dW^{[l]}} + (1 - \beta_2) (\frac{\partial \mathcal{J} 
 s^{corrected}_{dW^{[l]}} = \frac{s_{dW^{[l]}}}{1 - (\beta_1)^t} \\
 W^{[l]} = W^{[l]} - \alpha \frac{v^{corrected}_{dW^{[l]}}}{\sqrt{s^{corrected}_{dW^{[l]}}} + \varepsilon}
 \end{cases}$$
+
 where:
 - t counts the number of steps taken of Adam 
 - L is the number of layers
@@ -737,6 +738,7 @@ As usual, we will store all parameters in the `parameters` dictionary
 
 **Instruction**: The variables $$v, s$$ are python dictionaries that need to be initialized with arrays of zeros. Their keys are the same as for `grads`, that is:
 for $$l = 1, ..., L$$:
+
 ```python
 v["dW" + str(l+1)] = ... #(numpy array of zeros with the same shape as parameters["W" + str(l+1)])
 v["db" + str(l+1)] = ... #(numpy array of zeros with the same shape as parameters["b" + str(l+1)])

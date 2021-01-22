@@ -8,7 +8,7 @@ toc: true
 toc_sticky: true
 comments: true
 excerpt: |
-  Regularization / Comparison between Ridge and Lasso Regression / bias-variance tradeoff
+  L1 L2 Regularization / Comparison between Ridge and Lasso Regression / bias-variance tradeoff
 # header:
 #   image: /assets/images/logos/logo-text-8c3ba8a6.svg
 ---
