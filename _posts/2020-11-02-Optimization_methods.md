@@ -10,8 +10,8 @@ toc_sticky: true
 comments: true
 excerpt: |
   Optimizer / Gradient Descent / Stochastic Gradient Descent / Adam / / Machine Learning Performance Improvement
-#header: Deep Learning Performance Improvement2: Optimizer
-#image: /assets/images/logos/logo-text-8c3ba8a6.svg
+# header: Deep Learning Performance Improvement2: Optimizer
+# image: /assets/images/logos/logo-text-8c3ba8a6.svg
 ---
 
 
