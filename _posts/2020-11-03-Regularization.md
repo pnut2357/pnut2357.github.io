@@ -1,6 +1,6 @@
 ---
 title: "Deep Learning Performance Improvement 3 - Regularization"
-excerpt: "Discussed how regularization improve performance of a model."
+excerpt: "Discussed how regularization improves performance of a model."
 categories:
   - machine-learning-concept
 tags:
@@ -346,7 +346,7 @@ def load_2D_dataset():
 <center>
 <img src="/assets/images/dl_regularization/field_kiank.png" height="800" width="300" >
 </center>
-<caption><center>  <font color='purple'> Figure 1 </font> Football field*  </center></caption>
+<caption><center>  <font color='purple'> Figure 1 </font> Football field  </center></caption>
 
 As Figure 1 shows, the goal keeper kicks the ball in the air, the players of each team are fighting to hit the ball with their head.
 

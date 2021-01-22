@@ -1,5 +1,5 @@
 ---
-title: "Deep Learning Performance Improvement 1: Parameter Initialization"
+title: "Deep Learning Performance Improvement 1 - Parameter Initialization"
 excerpt: "Discussed how parameter initialization improve performance of a model."
 categories:
   - machine-learning-concept
