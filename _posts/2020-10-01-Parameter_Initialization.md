@@ -20,15 +20,15 @@ from typing import List
 # Weight Initialization
 
 ## Importance of Weight Initialization
-To build a machine learning algorithm, we use ideas from defined models such as Linear Regression, Logistic Regression, Support Vector Machine, CNN, RNN, etc. The follwoing is a common training process: </br>
-##### 1. Initialize parameters
-##### 2. Choose Optimizer
-##### 3. Repeat the steps:
-###### $\quad$ a. Forward-Propagation with inputs
-###### $\quad$ b. Compute Loss function after determining which one you use
-###### $\quad$ c. Back-Propagation to Compute Gradients of the loss w.r.t. parameters
-###### $\quad$ d. Update each parameter using the gradients, depending on optimizer.
-</br>
+To build a machine learning algorithm, we use ideas from defined models such as Linear Regression, Logistic Regression, Support Vector Machine, CNN, RNN, etc. The follwoing is a common training process: 
+
+1. Initialize parameters
+2. Choose Optimizer
+3. Repeat the steps:
+    - Forward-Propagation with inputs
+    - Compute Loss function after determining which one you use
+    - Back-Propagation to Compute Gradients of the loss w.r.t. parameters
+    - Update each parameter using the gradients, depending on optimizer.
 
 *Weight Initialization* can be important to the performance of your model. **Initializing all weights with zeros can lead the neurons to learn the same features over and over again during training**. 
 
@@ -306,8 +306,7 @@ plt.show()
 ```
 
 
-![png](output_3_0.png)
-
+<center><img src="/assets/images/Parameter-Initialization/output_3_0.png" height="800" width="600" /></center>
 
 You would like a classifier to separate the blue dots from the red dots.
 
@@ -505,9 +504,7 @@ predictions_test = predict(test_X, test_Y, parameters)
     Cost after iteration 14000: 0.6931471805599453
 
 
-
-![png](output_13_1.png)
-
+<center><img src="/assets/images/Parameter-Initialization/output_13_1.png" height="800" width="600" /></center>
 
     On the train set:
     Accuracy: 0.5
@@ -548,8 +545,7 @@ plot_decision_boundary(lambda x: predict_dec(parameters, x.T), train_X, train_Y)
 ```
 
 
-![png](output_16_0.png)
-
+<center><img src="/assets/images/Parameter-Initialization/output_16_0.png" height="800" width="600" /></center>
 
 The model is predicting 0 for every example. 
 
@@ -557,9 +553,10 @@ In general, initializing all the weights to zero results in the network failing 
 
 <font color='blue'>
 **What you should remember**:
+
 - The weights $W^{[l]}$ should be initialized randomly to break symmetry. 
 - It is however okay to initialize the biases $b^{[l]}$ to zeros. Symmetry is still broken so long as $W^{[l]}$ is initialized randomly. 
-
+</font>
 
 ## 3 - Random initialization
 
@@ -696,9 +693,7 @@ predictions_test = predict(test_X, test_Y, parameters)
     Cost after iteration 14000: 0.23959997123320914
 
 
-
-![png](output_24_4.png)
-
+<center><img src="/assets/images/Parameter-Initialization/output_24_4.png" height="800" width="600" /></center>
 
     On the train set:
     Accuracy: 0.8866666666666667
@@ -745,18 +740,20 @@ plot_decision_boundary(lambda x: predict_dec(parameters, x.T), train_X, train_Y)
 
 
 
-![png](output_27_1.png)
-
+<center><img src="/assets/images/Parameter-Initialization/output_27_1.png" height="800" width="600" /></center>
 
 **Observations**:
+
 - The cost starts very high. This is because with large random-valued weights, the last activation (sigmoid) outputs results that are very close to 0 or 1 for some examples, and when it gets that example wrong it incurs a very high loss for that example. Indeed, when $\log(a^{[3]}) = \log(0)$, the loss goes to infinity.
 - Poor initialization can lead to vanishing/exploding gradients, which also slows down the optimization algorithm. 
 - If you train this network longer you will see better results, but initializing with overly large random numbers slows down the optimization.
 
 <font color='blue'>
 **In summary**:
+
 - Initializing weights to very large random values does not work well. 
 - Hopefully intializing with small random values does better. The important question is: how small should be these random values be? Lets find out in the next part! 
+</font>
 
 ## 4 - He initialization
 
@@ -892,8 +889,7 @@ predictions_test = predict(test_X, test_Y, parameters)
 
 
 
-![png](output_34_1.png)
-
+<center><img src="/assets/images/Parameter-Initialization/output_34_1.png" height="800" width="600" /></center>
 
     On the train set:
     Accuracy: 1.0
@@ -912,10 +908,10 @@ plot_decision_boundary(lambda x: predict_dec(parameters, x.T), train_X, train_Y)
 ```
 
 
-![png](output_35_0.png)
-
+<center><img src="/assets/images/Parameter-Initialization/output_35_0.png" height="800" width="600" /></center>
 
 **Observations**:
+
 - The model with He initialization separates the blue and the red dots very well in a small number of iterations.
 
 
@@ -932,12 +928,13 @@ comparison is:
 | 3-layer NN with He initialization             | 99%        |   Normalized variance with 0 mean   |
 
 <font color='blue'>
-**What you should remember from this notebook**:</br>
+**What you should remember from this notebook**:
 
 - Different initializations lead to different results
 - Random initialization is used to break symmetry and make sure different hidden units can learn different things
 - Don't intialize to values that are too large
 - He initialization works well for networks with ReLU activations.
+</font>
 
 ## 6. Looking at the weight initialization problem from the distribution of activation values
 Observing the distribution of the activation value of the hidden layer, we can get a lot of inspiration.
@@ -983,9 +980,7 @@ plt.show()
 
 ```
 
-
-![png](output_41_0.png)
-
+<center><img src="/assets/images/Parameter-Initialization/output_41_0.png" height="800" width="600" /></center>
 
 Here it is assumed that the neural network has 5 layers and each layer has 100 units. Then, use Gaussian distribution to randomly generate 1000 data as input data, and pass them to the 5-layer neural network.
 
@@ -1025,8 +1020,7 @@ plt.show()
 ```
 
 
-![png](output_43_0.png)
-
+<center><img src="/assets/images/Parameter-Initialization/output_43_0.png" height="800" width="600" /></center>
 
 When using a Gaussian distribution with a standard deviation of 0.01, the activation value distribution of each layer is shown in the figure above.
 
@@ -1064,8 +1058,7 @@ plt.show()
 ```
 
 
-![png](output_45_0.png)
-
+<center><img src="/assets/images/Parameter-Initialization/output_45_0.png" height="800" width="600" /></center>
 
 The result after using Xavier's initial value is shown in the figure above. It can be seen from the image that the more behind the layer, the more skewed the image becomes, but it presents a wider distribution than before. Because the data passed between the layers has an appropriate breadth, the expressive power of the sigmoid function is not limited, and it is expected to be efficient learning.
 
@@ -1104,9 +1097,7 @@ for i, a in activations.items():
 plt.show()
 ```
 
-
-![png](output_47_0.png)
-
+<center><img src="/assets/images/Parameter-Initialization/output_47_0.png" height="800" width="600" /></center>
 
 Observing the above figure, we can see that when the standard deviation is a Gaussian distribution of 0.01, the activation value of each layer is very small. The value passed on the neural network is very small, indicating that the gradient of the weight is also very small during back propagation. This is a very serious problem. In fact, there is basically no progress in learning.
 
