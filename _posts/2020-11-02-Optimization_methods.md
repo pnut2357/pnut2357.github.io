@@ -256,14 +256,14 @@ There are two steps:
 <center>
 <img src="/assets/images/Optimizers/kiank_shuffle.png" height="800" width="600" />
 </center>
-<caption><center> <font color='purple'>Figure 4</font> </caption></center>
+<caption><center> <font color='purple'>Figure 4</font> </center></caption>
 
 - **Partition**: Partition the shuffled (X, Y) into mini-batches of size `mini_batch_size` (here 64). Note that the number of training examples is not always divisible by `mini_batch_size`. The last mini batch might be smaller, but you don't need to worry about this. When the final mini-batch is smaller than the full `mini_batch_size`, it will look like this: 
 
 <center>
 <img src="/assets/images/Optimizers/kiank_partition.png" height="800" width="600" />
 </center>
-<caption><center> <font color='purple'>Figure 5</font> </caption></center>
+<caption><center> <font color='purple'>Figure 5</font> </center></caption>
 
 **Exercise**: Implement `random_mini_batches`. We coded the shuffling part for you. To help you with the partitioning step, we give you the following code that selects the indexes for the $$1^{st}$$ and $$2^{nd}$$ mini-batches:
 ```python
