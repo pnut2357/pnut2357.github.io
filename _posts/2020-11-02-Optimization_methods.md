@@ -10,8 +10,8 @@ comments: true
 excerpt: |
   Optimizer / Gradient Descent / Stochastic Gradient Descent / Adam /  Machine Learning Performance Improvement
 ---
-
-## 1. Importance of Optimization
+# Optimizer
+## Importance of Optimization
 In Machine Learning, we can think of improvement mainly in four parts: initialization, optimization, regularzation, and gradient check). As a reminder, a common training process is shown below: 
 
 1. Initialize parameters
@@ -240,10 +240,9 @@ As Figure 3 shows, "+" denotes a minimum of the cost. Using mini-batches in your
 <font color='blue'>
 **What you should remember**:
     
-- The difference between gradient descent, mini-batch gradient descent and stochastic gradient descent is the number of examples you use to perform one update step.
-- You have to tune a learning rate hyperparameter $$\alpha$$.
-- With a well-turned mini-batch size, usually it outperforms either gradient descent or stochastic gradient descent (particularly when the training set is large).
-
+    - The difference between gradient descent, mini-batch gradient descent and stochastic gradient descent is the number of examples you use to perform one update step.
+    - You have to tune a learning rate hyperparameter $$\alpha$$.
+    - With a well-turned mini-batch size, usually it outperforms either gradient descent or stochastic gradient descent (particularly when the training set is large).
 </font>
 
 
