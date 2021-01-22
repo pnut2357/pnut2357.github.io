@@ -33,7 +33,7 @@ Gradient descent goes "downhill" on a cost function $$J$$. Think of it as trying
 <img src="/assets/images/Optimizers/cost.jpg" height="800" width="600" />
 <img src="/assets/images/Optimizers/optimizers.gif" height="800" width="600" />
 </center>
-<caption><center> **Figure 1** </center></caption> 
+<caption><center> Figure 1 </center></caption> 
 
 As FIgure 1 shows, minimizing the cost is like finding the lowest point in a hilly landscape. At each step of the training, you update your parameters following a certain direction to try to get to the lowest possible point. 
 
@@ -219,7 +219,7 @@ In Stochastic Gradient Descent, you use only 1 training example before updating 
 <center>
 <img src="/assets/images/Optimizers/kiank_sgd.png" height="800" width="600" />
 </center>
-<caption><center>  <font color='purple'> **Figure 2** </font>  SGD vs GD </center></caption>
+<caption><center>  <font color='purple'> Figure 2 </font>  SGD vs GD </center></caption>
 
 As Figure 2 shows, "+" denotes a minimum of the cost. SGD leads to many oscillations to reach convergence. But each step is a lot faster to compute for SGD than for GD, as it uses only one training example (vs. the whole batch for GD). 
 
@@ -233,7 +233,7 @@ In practice, you'll often get faster results if you do not use neither the whole
 <center>
 <img src="/assets/images/Optimizers/kiank_minibatch.png" height="800" width="600" />
 </center>
-<caption><center> <font color='purple'> **Figure 3**  </font>  SGD vs Mini-Batch GD </center></caption>
+<caption><center> <font color='purple'> Figure 3  </font>  SGD vs Mini-Batch GD </center></caption>
 
 As Figure 3 shows, "+" denotes a minimum of the cost. Using mini-batches in your optimization algorithm often leads to faster optimization. 
 
@@ -256,12 +256,14 @@ There are two steps:
 <center>
 <img src="/assets/images/Optimizers/kiank_shuffle.png" height="800" width="600" />
 </center>
+<caption><center> <font color='purple'>Figure 4</font> </caption></center>
 
 - **Partition**: Partition the shuffled (X, Y) into mini-batches of size `mini_batch_size` (here 64). Note that the number of training examples is not always divisible by `mini_batch_size`. The last mini batch might be smaller, but you don't need to worry about this. When the final mini-batch is smaller than the full `mini_batch_size`, it will look like this: 
 
 <center>
 <img src="/assets/images/Optimizers/kiank_partition.png" height="800" width="600" />
 </center>
+<caption><center> <font color='purple'>Figure 5</font> </caption></center>
 
 **Exercise**: Implement `random_mini_batches`. We coded the shuffling part for you. To help you with the partitioning step, we give you the following code that selects the indexes for the $$1^{st}$$ and $$2^{nd}$$ mini-batches:
 ```python
@@ -413,19 +415,23 @@ Momentum takes into account the past gradients to smooth out the update. We will
 
 
 <center>
-<img src="/assets/images/Optimizers/opt_momentum.png" height="800" width="600" />
+<img src="/assets/images/Optimizers/opt_momentum.png" height="800" width="300" />
 </center>
-<caption><center> <font color='purple'>**Figure 3**</font>: 
+<caption><center> <font color='purple'>Figure 6</font> </caption></center>
 
-As Figure 3 shows, The red arrows shows the direction taken by one step of mini-batch gradient descent with momentum. The blue points show the direction of the gradient (with respect to the current mini-batch) on each step. Rather than just following the gradient, we let the gradient influence $$v$$ and then take a step in the direction of $$v$$.
+
+As Figure 6 shows, The red arrows shows the direction taken by one step of mini-batch gradient descent with momentum. The blue points show the direction of the gradient (with respect to the current mini-batch) on each step. Rather than just following the gradient, we let the gradient influence $$v$$ and then take a step in the direction of $$v$$.
 
 
 **Exercise**: Initialize the velocity. The velocity, $$v$$, is a python dictionary that needs to be initialized with arrays of zeros. Its keys are the same as those in the `grads` dictionary, that is:
 for $$l =1,...,L$$:
+
 ```python
 v["dW" + str(l+1)] = ... #(numpy array of zeros with the same shape as parameters["W" + str(l+1)])
 v["db" + str(l+1)] = ... #(numpy array of zeros with the same shape as parameters["b" + str(l+1)])
 ```
+
+
 **Note** that the iterator l starts at 0 in the for loop while the first parameters are v["dW1"] and v["db1"] (that's a "one" on the superscript). This is why we are shifting l to l+1 in the `for` loop.
 
 
