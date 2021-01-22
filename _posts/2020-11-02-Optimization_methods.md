@@ -1,17 +1,15 @@
--------
+---
 title: "Deep Learning Performance Improvement2 - Optimizer"
-description: "Discussed how optimization improve performance of a model."
+excerpt: "Discussed how optimization improve performance of a model."
 categories:
-	- machine-learning-concept
-#cover: '/assets/images/intro_api/api.png'
+  - machine-learning-concept
 tags:
 toc: true
 toc_sticky: true
 comments: true
-excerpt:
-|Optimizer / Gradient Descent / Stochastic Gradient Descent / Adam / / Machine Learning Performance Improvement
-header: Deep Learning Performance Improvement2- Optimizer
--------
+excerpt: |
+  Optimizer / Gradient Descent / Stochastic Gradient Descent / Adam /  Machine Learning Performance Improvement
+---
 
 ## 1. Importance of Optimization
 In Machine Learning, we can think of improvement mainly in four parts: initialization, optimization, regularzation, and gradient check). As a reminder, a common training process is shown below: 
