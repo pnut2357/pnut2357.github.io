@@ -14,10 +14,7 @@ header: Deep Learning Performance Improvement2: Optimizer
 # image: /assets/images/logos/logo-text-8c3ba8a6.svg
 ---
 
-
-# Optimizer
-
-## Importance of Optimization
+## 1. Importance of Optimization
 In Machine Learning, we can think of improvement mainly in four parts: initialization, optimization, regularzation, and gradient check). As a reminder, a common training process is shown below: 
 
 1. Initialize parameters
