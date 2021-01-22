@@ -302,7 +302,7 @@ plt.show()
 ```
 
 
-<center><img src="/assets/images/Parameter-Initialization/output_3_0.png" height="800" width="600" /></center>
+<center><img src="/assets/images/Parameter_Initialization/output_3_0.png" height="800" width="600" /></center>
 
 You would like a classifier to separate the blue dots from the red dots.
 
@@ -500,7 +500,7 @@ predictions_test = predict(test_X, test_Y, parameters)
     Cost after iteration 14000: 0.6931471805599453
 
 
-<center><img src="/assets/images/Parameter-Initialization/output_13_1.png" height="800" width="600" /></center>
+<center><img src="/assets/images/Parameter_Initialization/output_13_1.png" height="800" width="600" /></center>
 
     On the train set:
     Accuracy: 0.5
@@ -541,7 +541,7 @@ plot_decision_boundary(lambda x: predict_dec(parameters, x.T), train_X, train_Y)
 ```
 
 
-<center><img src="/assets/images/Parameter-Initialization/output_16_0.png" height="800" width="600" /></center>
+<center><img src="/assets/images/Parameter_Initialization/output_16_0.png" height="800" width="600" /></center>
 
 The model is predicting 0 for every example. 
 
@@ -689,7 +689,7 @@ predictions_test = predict(test_X, test_Y, parameters)
     Cost after iteration 14000: 0.23959997123320914
 
 
-<center><img src="/assets/images/Parameter-Initialization/output_24_4.png" height="800" width="600" /></center>
+<center><img src="/assets/images/Parameter_Initialization/output_24_4.png" height="800" width="600" /></center>
 
     On the train set:
     Accuracy: 0.8866666666666667
@@ -736,7 +736,7 @@ plot_decision_boundary(lambda x: predict_dec(parameters, x.T), train_X, train_Y)
 
 
 
-<center><img src="/assets/images/Parameter-Initialization/output_27_1.png" height="800" width="600" /></center>
+<center><img src="/assets/images/Parameter_Initialization/output_27_1.png" height="800" width="600" /></center>
 
 **Observations**:
 
@@ -885,7 +885,7 @@ predictions_test = predict(test_X, test_Y, parameters)
 
 
 
-<center><img src="/assets/images/Parameter-Initialization/output_34_1.png" height="800" width="600" /></center>
+<center><img src="/assets/images/Parameter_Initialization/output_34_1.png" height="800" width="600" /></center>
 
     On the train set:
     Accuracy: 1.0
@@ -904,7 +904,7 @@ plot_decision_boundary(lambda x: predict_dec(parameters, x.T), train_X, train_Y)
 ```
 
 
-<center><img src="/assets/images/Parameter-Initialization/output_35_0.png" height="800" width="600" /></center>
+<center><img src="/assets/images/Parameter_Initialization/output_35_0.png" height="800" width="600" /></center>
 
 **Observations**:
 
@@ -976,7 +976,7 @@ plt.show()
 
 ```
 
-<center><img src="/assets/images/Parameter-Initialization/output_41_0.png" height="800" width="600" /></center>
+<center><img src="/assets/images/Parameter_Initialization/output_41_0.png" height="800" width="600" /></center>
 
 Here it is assumed that the neural network has 5 layers and each layer has 100 units. Then, use Gaussian distribution to randomly generate 1000 data as input data, and pass them to the 5-layer neural network.
 
@@ -1016,7 +1016,7 @@ plt.show()
 ```
 
 
-<center><img src="/assets/images/Parameter-Initialization/output_43_0.png" height="800" width="600" /></center>
+<center><img src="/assets/images/Parameter_Initialization/output_43_0.png" height="800" width="600" /></center>
 
 When using a Gaussian distribution with a standard deviation of 0.01, the activation value distribution of each layer is shown in the figure above.
 
@@ -1054,7 +1054,7 @@ plt.show()
 ```
 
 
-<center><img src="/assets/images/Parameter-Initialization/output_45_0.png" height="800" width="600" /></center>
+<center><img src="/assets/images/Parameter_Initialization/output_45_0.png" height="800" width="600" /></center>
 
 The result after using Xavier's initial value is shown in the figure above. It can be seen from the image that the more behind the layer, the more skewed the image becomes, but it presents a wider distribution than before. Because the data passed between the layers has an appropriate breadth, the expressive power of the sigmoid function is not limited, and it is expected to be efficient learning.
 
@@ -1093,7 +1093,7 @@ for i, a in activations.items():
 plt.show()
 ```
 
-<center><img src="/assets/images/Parameter-Initialization/output_47_0.png" height="800" width="600" /></center>
+<center><img src="/assets/images/Parameter_Initialization/output_47_0.png" height="800" width="600" /></center>
 
 Observing the above figure, we can see that when the standard deviation is a Gaussian distribution of 0.01, the activation value of each layer is very small. The value passed on the neural network is very small, indicating that the gradient of the weight is also very small during back propagation. This is a very serious problem. In fact, there is basically no progress in learning.
 
