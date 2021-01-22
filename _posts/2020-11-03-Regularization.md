@@ -344,7 +344,7 @@ def load_2D_dataset():
 **Problem Statement**: You have just been hired as an AI expert by the French Football Corporation. They would like you to recommend positions where France's goal keeper should kick the ball so that the French team's players can then hit it with their head. 
 
 <center>
-<img src="/assets/images/Optimizers/field_kiank.png" height="800" width="300" >
+<img src="/assets/images/dl_regularization/field_kiank.png" height="800" width="300" >
 </center>
 <caption><center>  <font color='purple'> Figure 1 </font>  </center></caption>
 
@@ -746,7 +746,7 @@ plot_decision_boundary(lambda x: predict_dec(parameters, x.T), train_X, train_Y)
 L2-regularization relies on the assumption that a model with small weights is simpler than a model with large weights. Thus, by penalizing the square values of the weights in the cost function you drive all the weights to smaller values. It becomes too costly for the cost to have large weights! This leads to a smoother model in which the output changes more slowly as the input changes. 
 
 <font color='blue'>
-**What you should remember** -- the implications of L2-regularization on: 
+**What you should remember** -- the implications of L2-regularization on: </font>
 
 - <font color='blue'> The cost computation: </font>
 - <font color='blue'> A regularization term is added to the cost </font>
@@ -783,7 +783,7 @@ As Figure 3 shows, drop-out works on the second hidden layer. At each iteration,
 </center>
 <caption><center>  <font color='purple'> Figure 4 </font>  </center></caption>
 
-As Figure 4 shows, Drop-out on the first and third hidden layers. <br> $$1^{st}$$ layer: we shut down on average 40% of the neurons.  $$3^{rd}$$ layer: we shut down on average 20% of the neurons.
+As Figure 4 shows, Drop-out on the first and third hidden layers. $$1^{st}$$ layer: we shut down on average 40% of the neurons.  $$3^{rd}$$ layer: we shut down on average 20% of the neurons.
 
 When you shut some neurons down, you actually modify your model. The idea behind drop-out is that at each iteration, you train a different model that uses only a subset of your neurons. With dropout, your neurons thus become less sensitive to the activation of one other specific neuron, because that other neuron might be shut down at any time. 
 
