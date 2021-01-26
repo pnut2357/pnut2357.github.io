@@ -110,6 +110,9 @@ plt.scatter(X[N_points//2:, 0], X[N_points//2:, 1], s=10, color='blue', label='c
 plt.legend(loc=9, bbox_to_anchor=(0.5, -0.1), ncol=2)
 plt.show()
 ```
+<center>
+<img src="/assets/images/dl_backpropagation/output_10_0.png" height="800" width="600" >
+</center>
 
 ### 1.1 - Example Dataset
 Let's consider a binary classification problem where the task is about predict the class of a given input. As a dataset, we chose a pretty standard not linearly separable dataset made of two classes "0" and "1". 

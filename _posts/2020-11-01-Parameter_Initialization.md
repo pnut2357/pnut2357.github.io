@@ -378,8 +378,8 @@ def model(X, Y, learning_rate=0.01, num_iterations=15000, print_cost=True, initi
 ## 2 - Zero initialization
 
 There are two types of parameters to initialize in a neural network:
-- the weight matrices $(W^{[1]}, W^{[2]}, W^{[3]}, ..., W^{[L-1]}, W^{[L]})$
-- the bias vectors $(b^{[1]}, b^{[2]}, b^{[3]}, ..., b^{[L-1]}, b^{[L]})$
+- the weight matrices $$(W^{[1]}, W^{[2]}, W^{[3]}, ..., W^{[L-1]}, W^{[L]})$$
+- the bias vectors $$(b^{[1]}, b^{[2]}, b^{[3]}, ..., b^{[L-1]}, b^{[L]})$$
 
 **Exercise**: Implement the following function to initialize all parameters to zeros. You'll see later that this does not work well since it fails to "break symmetry", but lets try it anyway and see what happens. Use np.zeros((..,..)) with the correct shapes.
 
@@ -543,13 +543,13 @@ plot_decision_boundary(lambda x: predict_dec(parameters, x.T), train_X, train_Y)
 
 The model is predicting 0 for every example. 
 
-In general, initializing all the weights to zero results in the network failing to break symmetry. This means that every neuron in each layer will learn the same thing, and you might as well be training a neural network with $n^{[l]}=1$ for every layer, and the network is no more powerful than a linear classifier such as logistic regression. 
+In general, initializing all the weights to zero results in the network failing to break symmetry. This means that every neuron in each layer will learn the same thing, and you might as well be training a neural network with $$n^{[l]}=1$$ for every layer, and the network is no more powerful than a linear classifier such as logistic regression. 
 
 <font color='blue'>
 **What you should remember**:
 
-- The weights $W^{[l]}$ should be initialized randomly to break symmetry. 
-- It is however okay to initialize the biases $b^{[l]}$ to zeros. Symmetry is still broken so long as $W^{[l]}$ is initialized randomly. 
+- The weights $$W^{[l]}$$ should be initialized randomly to break symmetry. 
+- It is however okay to initialize the biases $$b^{[l]}$$ to zeros. Symmetry is still broken so long as $$W^{[l]}$$ is initialized randomly. 
 </font>
 
 ## 3 - Random initialization
@@ -738,7 +738,7 @@ plot_decision_boundary(lambda x: predict_dec(parameters, x.T), train_X, train_Y)
 
 **Observations**:
 
-- The cost starts very high. This is because with large random-valued weights, the last activation (sigmoid) outputs results that are very close to 0 or 1 for some examples, and when it gets that example wrong it incurs a very high loss for that example. Indeed, when $\log(a^{[3]}) = \log(0)$, the loss goes to infinity.
+- The cost starts very high. This is because with large random-valued weights, the last activation (sigmoid) outputs results that are very close to 0 or 1 for some examples, and when it gets that example wrong it incurs a very high loss for that example. Indeed, when $$\log(a^{[3]}) = \log(0)$$, the loss goes to infinity.
 - Poor initialization can lead to vanishing/exploding gradients, which also slows down the optimization algorithm. 
 - If you train this network longer you will see better results, but initializing with overly large random numbers slows down the optimization.
 
@@ -751,11 +751,11 @@ plot_decision_boundary(lambda x: predict_dec(parameters, x.T), train_X, train_Y)
 
 ## 4 - He initialization
 
-Finally, try "He Initialization"; this is named for the first author of He et al., 2015. (If you have heard of "Xavier initialization", this is similar except Xavier initialization uses a scaling factor for the weights $W^{[l]}$ of `sqrt(1./layers_dims[l-1])` where He initialization would use `sqrt(2./layers_dims[l-1])`.)
+Finally, try "He Initialization"; this is named for the first author of He et al., 2015. (If you have heard of "Xavier initialization", this is similar except Xavier initialization uses a scaling factor for the weights $$W^{[l]}$$ of `sqrt(1./layers_dims[l-1])` where He initialization would use `sqrt(2./layers_dims[l-1])`.)
 
 **Exercise**: Implement the following function to initialize your parameters with He initialization.
 
-**Hint**: This function is similar to the previous `initialize_parameters_random(...)`. The only difference is that instead of multiplying `np.random.randn(..,..)` by 10, you will multiply it by $\sqrt{\frac{2}{\text{dimension of the previous layer}}}$, which is what He initialization recommends for layers with a ReLU activation. 
+**Hint**: This function is similar to the previous `initialize_parameters_random(...)`. The only difference is that instead of multiplying `np.random.randn(..,..)` by 10, you will multiply it by $$\sqrt{\frac{2}{\text{dimension of the previous layer}}}$$, which is what He initialization recommends for layers with a ReLU activation. 
 
 
 ```python
