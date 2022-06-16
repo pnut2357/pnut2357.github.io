@@ -1,0 +1,1000 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Regular Expression Tutorial - Jae’s Blog</title>
+<meta name="description" content="Regular Expression Tutorial">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Jae's Blog">
+<meta property="og:title" content="Regular Expression Tutorial">
+<meta property="og:url" content="http://localhost:4000/RegularExpression/">
+
+
+  <meta property="og:description" content="Regular Expression Tutorial">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2019-12-31T00:00:00+00:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/RegularExpression/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Jae H. Choi",
+      "url": "http://localhost:4000",
+      "sameAs": ["https://www.linkedin.com/in/jaechoi2357/"]
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Jae's Blog Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
+    </script>
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/mush.jpeg" alt=""></a>
+        
+        <a class="site-title" href="/">Jae's Blog</a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about/" >About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Portfolios/Concepts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Personal Interests</a>
+            </li><li class="masthead__menu-item">
+              <a href="/cheatsheets/introduction/" >Cheatsheets</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/profile.jpeg" alt="Jae H. Choi" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Jae H. Choi</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Yesterday is history, tomorrow is a mystery, but today is a gift. That's why it's called the present.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Tempe, AZ</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:jaehyuk0325@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/jaechoi2357/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://devpost.com/jaehyuk0325?ref_content=user-portfolio&ref_feature=portfolio&ref_medium=global-nav" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i> DevPost</a></li>
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/pnut2357" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Regular Expression Tutorial">
+    <meta itemprop="description" content="Regular Expression Tutorial">
+    <meta itemprop="datePublished" content="December 31, 2019">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Regular Expression Tutorial
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  12 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#1-introduction">1. Introduction</a></li>
+  <li><a href="#2-the-simple-patterns">2. The Simple Patterns</a></li>
+  <li><a href="#3-matching-any-single-character">3. Matching any single character</a></li>
+  <li><a href="#4-matching-classes-of-characters">4. Matching classes of characters</a></li>
+  <li><a href="#5-anchors">5. Anchors</a></li>
+  <li><a href="#6-repetition">6. Repetition</a></li>
+  <li><a href="#7-grouping">7. Grouping</a></li>
+  <li><a href="#8-modifiers">8. Modifiers</a></li>
+  <li><a href="#9-advanced-pattern-matching">9. Advanced Pattern Matching</a></li>
+  <li><a href="#10-finding-all-occurrences">10. Finding All Occurrences</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <h1 id="1-introduction">1. Introduction</h1>
+<p>Regular expressions are Python’s method to check some patterns in your program.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ignore errors
+</span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="p">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s">'ignore'</span><span class="p">)</span>
+<span class="c1"># 1. magic to print version
+# 2. magic so that the notebook will reload external python modules
+# https://gist.github.com/minrk/3301035
+</span><span class="o">%</span><span class="n">load_ext</span> <span class="n">watermark</span>
+<span class="o">%</span><span class="n">load_ext</span> <span class="n">autoreload</span>
+<span class="o">%</span><span class="n">autoreload</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="o">%</span><span class="n">watermark</span> <span class="o">-</span><span class="n">a</span> <span class="s">'Jae H. Choi'</span> <span class="o">-</span><span class="n">d</span> <span class="o">-</span><span class="n">t</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">p</span> <span class="n">pandas</span><span class="p">,</span><span class="n">re</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Jae H. Choi 2020-08-21 13:57:39
+
+CPython 3.8.3
+IPython 7.16.1
+
+pandas 1.0.5
+re 2.2.1
+</code></pre></div></div>
+
+<h1 id="2-the-simple-patterns">2. The Simple Patterns</h1>
+
+<p>The pattern is a string preceded by the <code class="language-plaintext highlighter-rouge">r</code>, which tells Python to interpet the string (the pattern that you want to see) as a regular expression. If you want to see if a variable pattern <code class="language-plaintext highlighter-rouge">it</code> in a word, <code class="language-plaintext highlighter-rouge">find_eat()</code> would help</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">find_it</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+    <span class="n">found</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s">'it'</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">found</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="s">': found the pattern of "it".'</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="s">': NO the pattern of "it".'</span><span class="p">)</span>
+<span class="c1">############# Check #############
+</span><span class="n">find_it</span><span class="p">(</span><span class="s">'this'</span><span class="p">)</span>
+<span class="n">find_it</span><span class="p">(</span><span class="s">'is'</span><span class="p">)</span>
+<span class="n">find_it</span><span class="p">(</span><span class="s">'fitting'</span><span class="p">)</span>
+<span class="n">find_it</span><span class="p">(</span><span class="s">'good'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>this : NO the pattern of "it".
+is : NO the pattern of "it".
+fitting : found the pattern of "it".
+good : NO the pattern of "it".
+</code></pre></div></div>
+
+<h1 id="3-matching-any-single-character">3. Matching any single character</h1>
+
+<p>What if a pattern that will match the letter e followed by any character at all, followed by the letter t. (e.g. e_t like ‘eat’er, b’ett’er, etc.) To say “any character at all”, use <code class="language-plaintext highlighter-rouge">.</code>. Here’s the pattern:</p>
+<blockquote>
+  <p><strong>NOTE</strong> any character can be inserted to _</p>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">finder</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">word</span><span class="p">):</span>
+    <span class="n">found</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">found</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="sa">f</span><span class="s">': Found the pattern.'</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="sa">f</span><span class="s">': No pattern.'</span><span class="p">)</span>
+<span class="c1">############# Check #############
+</span><span class="n">finder</span><span class="p">(</span><span class="sa">r</span><span class="s">'e.t'</span><span class="p">,</span> <span class="s">'better'</span><span class="p">)</span>
+<span class="n">finder</span><span class="p">(</span><span class="sa">r</span><span class="s">'e.t'</span><span class="p">,</span> <span class="s">'either'</span><span class="p">)</span>
+<span class="n">finder</span><span class="p">(</span><span class="sa">r</span><span class="s">'e.t'</span><span class="p">,</span> <span class="s">'best'</span><span class="p">)</span>
+<span class="n">finder</span><span class="p">(</span><span class="sa">r</span><span class="s">'e.t'</span><span class="p">,</span> <span class="s">'beast'</span><span class="p">)</span>
+<span class="n">finder</span><span class="p">(</span><span class="sa">r</span><span class="s">'e.t'</span><span class="p">,</span> <span class="s">'etch'</span><span class="p">)</span>
+<span class="n">finder</span><span class="p">(</span><span class="sa">r</span><span class="s">'e.t'</span><span class="p">,</span> <span class="s">'ease'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>better : Found the pattern.
+either : Found the pattern.
+best : Found the pattern.
+beast : No pattern.
+etch : No pattern.
+ease : No pattern.
+</code></pre></div></div>
+
+<h1 id="4-matching-classes-of-characters">4. Matching classes of characters</h1>
+
+<p>Now let’s find out how to narrow down the field a bit. We’d like to be able to find a pattern starting letter <strong>b</strong>, followed by any <strong>vowel</strong> (a, e, i, o, or u), followed by letter <strong>t</strong> (e.g. b_t like bot, bat, bite). To say “any one of a certain series of characters”, you enclose them in square brackets. The <code class="language-plaintext highlighter-rouge">finder()</code> found patters in words like <strong>bat</strong>, <strong>bet</strong>, rab<strong>bit</strong>, ro<strong>bot</strong>ic, and a<strong>but</strong>ment</p>
+<blockquote>
+  <p><strong>NOTE</strong> any vowel can be inserted to _</p>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">############# Check #############
+</span><span class="n">finder</span><span class="p">(</span><span class="sa">r</span><span class="s">'b[aeiou]t'</span><span class="p">,</span> <span class="s">'bot'</span><span class="p">)</span>
+<span class="n">finder</span><span class="p">(</span><span class="sa">r</span><span class="s">'b[aeiou]t'</span><span class="p">,</span> <span class="s">'bat'</span><span class="p">)</span>
+<span class="n">finder</span><span class="p">(</span><span class="sa">r</span><span class="s">'b[aeiou]t'</span><span class="p">,</span> <span class="s">'rabbit'</span><span class="p">)</span>
+<span class="n">finder</span><span class="p">(</span><span class="sa">r</span><span class="s">'b[aeiou]t'</span><span class="p">,</span> <span class="s">'robotic'</span><span class="p">)</span>
+<span class="n">finder</span><span class="p">(</span><span class="sa">r</span><span class="s">'b[aeiou]t'</span><span class="p">,</span> <span class="s">'abutment'</span><span class="p">)</span>
+<span class="n">finder</span><span class="p">(</span><span class="sa">r</span><span class="s">'b[aeiou]t'</span><span class="p">,</span> <span class="s">'boot'</span><span class="p">)</span>
+<span class="n">finder</span><span class="p">(</span><span class="sa">r</span><span class="s">'b[aeiou]t'</span><span class="p">,</span> <span class="s">'beautiful'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bot : Found the pattern.
+bat : Found the pattern.
+rabbit : Found the pattern.
+robotic : Found the pattern.
+abutment : Found the pattern.
+boot : No pattern.
+beautiful : No pattern.
+</code></pre></div></div>
+
+<p>You may also complement (negate <code class="language-plaintext highlighter-rouge">^</code> <strong>inside of the bracket</strong>) a class. The following patterns are examples:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">r'e[^aeiou]t'</code> : letter <strong>e</strong> followed by anything <strong>except a vowel</strong>, followed by a letter <strong>t</strong> e.g. e_t</li>
+  <li><code class="language-plaintext highlighter-rouge">r'[^A-Z]'</code> : any character except a capital letter</li>
+</ul>
+
+<p>Likewise, there are some classes that are so useful that Python provides quick and easy abbrevations:</p>
+<center><img src="assets/images/RegularExpression/re_table.png" height="400" width="500" /></center>
+
+<h1 id="5-anchors">5. Anchors</h1>
+
+<p>All the patterns youe’ve seen so far will find a match anywhere within a string. But, what if you need to find the word <strong>go</strong> only at the beginning of a word like <strong>go</strong>ne, not for<strong>go</strong>t? To solve such an issue, Anchor comes; make sure that you are at a certain boundary before you continue the match. Unlike character classes, which match individual characters in a string, these anchors do not match any character; they simply establish that you are on the correct boundaries.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">^</code> <strong>outside of a bracket</strong> matches the beginning of a line, and the <code class="language-plaintext highlighter-rouge">$</code> matches the end of a line. Thus, <code class="language-plaintext highlighter-rouge">^[A-Z]</code> matches a capital letter at the beginning of the line.</p>
+<blockquote>
+  <p>Note that if you put the ^ <strong>inside of the bracket</strong>, you are using negation.</p>
+</blockquote>
+
+<p>The <code class="language-plaintext highlighter-rouge">\b</code> and <code class="language-plaintext highlighter-rouge">\B</code> are stand for a “word boundary” and “non-word boundary” respectively. For example, if you want to find the word <strong>met</strong> at the beginning of a word, we write the pattern <code class="language-plaintext highlighter-rouge">r'\bmet'</code>, which will match like <strong>met</strong>al or <strong>met</strong>ropolitan, not hel<strong>met</strong>. The pattern <code class="language-plaintext highlighter-rouge">r'ing\b'</code> will match like Hik<strong>ing</strong> or writ<strong>ing</strong>, not <strong>ing</strong>ots. Finally,the pattern <code class="language-plaintext highlighter-rouge">r'\bhat\b'</code> matches only like <strong>hat</strong>, not T<strong>hat</strong> or <strong>hat</strong>ers.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">find_boundary</span><span class="p">(</span><span class="n">in_str</span><span class="p">):</span>
+    <span class="n">found1</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s">'\bmeet'</span><span class="p">,</span> <span class="n">in_str</span><span class="p">)</span>
+    <span class="n">found2</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s">'ing\b'</span><span class="p">,</span> <span class="n">in_str</span><span class="p">)</span>
+    <span class="n">found3</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s">'\bhat\b'</span><span class="p">,</span> <span class="n">in_str</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">found1</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'"</span><span class="si">{</span><span class="n">in_str</span><span class="si">}</span><span class="s">" : Found "meet" at the start of a word.'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">found2</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'"</span><span class="si">{</span><span class="n">in_str</span><span class="si">}</span><span class="s">" : Found "ing" at the end of a word.'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">found3</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'"</span><span class="si">{</span><span class="n">in_str</span><span class="si">}</span><span class="s">" : Found word "hat" in it.'</span><span class="p">)</span>
+<span class="c1">############# Check #############
+</span><span class="n">in_str</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">'Enter one of the preceding sentences:'</span><span class="p">)</span>
+<span class="n">find_boundary</span><span class="p">(</span><span class="n">in_str</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Enter one of the preceding sentences: Are we meeting here? That is amazing!
+
+
+"Are we meeting here? That is amazing!" : Found "meet" at the start of a word.
+"Are we meeting here? That is amazing!" : Found "ing" at the end of a word.
+</code></pre></div></div>
+
+<p>While <code class="language-plaintext highlighter-rouge">\b</code> is used to find the breakpoint between words and non-words, <code class="language-plaintext highlighter-rouge">\B</code> finds pairs of letters or nonletters.</p>
+
+<h1 id="6-repetition">6. Repetition</h1>
+
+<p>What if we want to match three digits in a row, or an arbitrary number of vowels? You can follow any class or character by a repetition count:</p>
+
+<center><img src="assets/images/RegularExpression/rep_table.png" height="400" width="500" /></center>
+
+<p>For instance, your ssn pattern match like <code class="language-plaintext highlighter-rouge">r'\d{3}-\d{2}-\d{4}</code>. There are three repetitions that are so common that Python has special symbols for them: <code class="language-plaintext highlighter-rouge">*</code> means “zero or more,” <code class="language-plaintext highlighter-rouge">+</code> means “one or more,” and <code class="language-plaintext highlighter-rouge">?</code> means “zero or one.” Thus, if you want to look for lines consisting of last names followed by a first initial, you could use this pattern:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">find_last_and_initial</span><span class="p">(</span><span class="n">in_str</span><span class="p">):</span>
+    <span class="c1"># (word 1 or more)(, 0 or 1)(space)(A-Z 0 or more)
+</span>    <span class="n">found</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s">'^\w+,?\s*[A-Z]$'</span><span class="p">,</span> <span class="n">in_str</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">found</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">in_str</span><span class="p">,</span> <span class="s">': Found the pattern.'</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">in_str</span><span class="p">,</span> <span class="s">': NO such pattern.'</span><span class="p">)</span>
+<span class="c1">############# Check #############
+</span><span class="n">find_last_and_initial</span><span class="p">(</span><span class="s">'Jae, C'</span><span class="p">)</span>
+<span class="n">find_last_and_initial</span><span class="p">(</span><span class="s">'Erik Naylor'</span><span class="p">)</span>
+<span class="n">find_last_and_initial</span><span class="p">(</span><span class="s">'Jae C'</span><span class="p">)</span>
+<span class="n">find_last_and_initial</span><span class="p">(</span><span class="s">'Tanyon'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Jae, C : Found the pattern.
+Erik Naylor : NO such pattern.
+Jae C : Found the pattern.
+Tanyon : NO such pattern.
+</code></pre></div></div>
+
+<p>Let’s analyze that pattern by parts:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">^</code> starting at the beginning of the string</li>
+  <li><code class="language-plaintext highlighter-rouge">\w+</code> look for one or more word characters</li>
+  <li><code class="language-plaintext highlighter-rouge">,?</code> followed by an optional comma (zero or one commas)</li>
+  <li><code class="language-plaintext highlighter-rouge">\s*</code> zero or more spaces</li>
+  <li><code class="language-plaintext highlighter-rouge">[A-Z]</code> and a capital letter</li>
+  <li><code class="language-plaintext highlighter-rouge">$</code> which must be at the end of the string</li>
+</ul>
+
+<h1 id="7-grouping">7. Grouping</h1>
+
+<p>What if you want to scan for a last name, followed by an optional comma-whitespace-initial; it find name in both cases like ‘Smith, J’ or ‘Smith’?</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">valid_name</span><span class="p">(</span><span class="n">in_str</span><span class="p">):</span>
+    <span class="c1"># (word 1 or more)(, 0 or 1)(space)(A-Z 0 or more)
+</span>    <span class="n">found</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s">'^\w+(,?\s*[A-Z])?$'</span><span class="p">,</span> <span class="n">in_str</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">found</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">in_str</span><span class="p">,</span> <span class="s">': Found the pattern.'</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">in_str</span><span class="p">,</span> <span class="s">': No such pattern.'</span><span class="p">)</span>
+<span class="c1">############# Check #############
+</span><span class="n">valid_name</span><span class="p">(</span><span class="s">'Jae, C'</span><span class="p">)</span>
+<span class="n">valid_name</span><span class="p">(</span><span class="s">'Erik'</span><span class="p">)</span>
+<span class="n">valid_name</span><span class="p">(</span><span class="s">'Calvin     K'</span><span class="p">)</span>
+<span class="n">valid_name</span><span class="p">(</span><span class="s">'Big  Mouth'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Jae, C : Found the pattern.
+Erik : Found the pattern.
+Calvin     K : Found the pattern.
+Big  Mouth : No such pattern.
+</code></pre></div></div>
+
+<h1 id="8-modifiers">8. Modifiers</h1>
+
+<p>If you want a pattern match to be case-insenstive, add the <code class="language-plaintext highlighter-rouge">flags=re.I</code> to the <code class="language-plaintext highlighter-rouge">search()</code> call (The <code class="language-plaintext highlighter-rouge">I</code> stands for <code class="language-plaintext highlighter-rouge">IGNORECASE</code>, which you may also spell out completely if you wish). The following example shows a pattern that will match any Canadian postal code in upper or lower case. Canadian postal codes consist of a letter, a digit, and another letter, followed by a space, a digit, a letter, and another digit. An example of a valid postal code would be <code class="language-plaintext highlighter-rouge">A5B 6R9</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">valid_postcode_ignore</span><span class="p">(</span><span class="n">in_str</span><span class="p">):</span>
+    <span class="c1"># (start with A-Z 1)(digit 1)(A-Z 1)(space)(digit 1)(A-Z 1)(digit 1)
+</span>    <span class="n">found</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s">'^[A-Z]\d[A-Z]\s+\d[A-Z]\d$'</span><span class="p">,</span> <span class="n">in_str</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="p">.</span><span class="n">I</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">found</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">in_str</span><span class="p">,</span> <span class="s">': Found the pattern.'</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">in_str</span><span class="p">,</span> <span class="s">': No such pattern.'</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">valid_postcode_noig</span><span class="p">(</span><span class="n">in_str</span><span class="p">):</span>
+    <span class="c1"># (start with A-Z 1)(digit 1)(A-Z 1)(space)(digit 1)(A-Z 1)(digit 1)
+</span>    <span class="n">found</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s">'^[A-Z]\d[A-Z]\s+\d[A-Z]\d$'</span><span class="p">,</span> <span class="n">in_str</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">found</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">in_str</span><span class="p">,</span> <span class="s">': Found the pattern.'</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">in_str</span><span class="p">,</span> <span class="s">': No such pattern.'</span><span class="p">)</span>
+<span class="c1">############# Check #############
+</span><span class="n">valid_postcode_ignore</span><span class="p">(</span><span class="s">'A5B 6R9'</span><span class="p">)</span>
+<span class="n">valid_postcode_ignore</span><span class="p">(</span><span class="s">'c7H 8j2'</span><span class="p">)</span>
+<span class="c1"># ignore vs. without ignore
+</span><span class="n">valid_postcode_noig</span><span class="p">(</span><span class="s">'c7H 8j2'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A5B 6R9 : Found the pattern.
+c7H 8j2 : Found the pattern.
+c7H 8j2 : No such pattern.
+</code></pre></div></div>
+
+<h1 id="9-advanced-pattern-matching">9. Advanced Pattern Matching</h1>
+
+<p>All you have done so far is testing to see whether a pattern matches or not. Now that you can match a person’s last name and initial, you might want to be able to grab them out of the string so that you can change ‘Martinez, A’ to ‘A. Martinez’. To accomplish this, you will need something other than <code class="language-plaintext highlighter-rouge">search()</code>; you will need the <code class="language-plaintext highlighter-rouge">sub()</code> method to do substitution. You will also have to use the grouping parentheses, which have a side effect: whenever you use parentheses to group something, the pattern matching operation stores the part of the string that matched the group so that you can use it later on.</p>
+
+<p>It is now time to reveal a secret: the return value from <code class="language-plaintext highlighter-rouge">search()</code> is not a boolean; it is a matching object that has special properties that you can examine and use. In the following example, we have put parentheses around the ‘last name’ part of the pattern as well as the ‘comma and initial’ part. If there is a match, the program will display whatever was found in the grouping parentheses. The vertical bars are in the <code class="language-plaintext highlighter-rouge">print()</code> so that you can see where there are blanks (if any).</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">valid_name</span><span class="p">(</span><span class="n">in_str</span><span class="p">):</span>
+
+    <span class="n">found</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s">'^(\w+)(,?\s*[A-Z])?$'</span><span class="p">,</span> <span class="n">in_str</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">found</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'Pattern match results:'</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'whole match:      |'</span><span class="p">,</span> <span class="n">found</span><span class="p">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="s">'|'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'first set of ():  |'</span><span class="p">,</span> <span class="n">found</span><span class="p">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="s">'|'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'second set of (): |'</span><span class="p">,</span> <span class="n">found</span><span class="p">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="s">'|'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">in_str</span><span class="p">,</span> <span class="s">'does not contain the pattern.'</span><span class="p">)</span>
+
+<span class="n">valid_name</span><span class="p">(</span><span class="s">'Jae, C'</span><span class="p">)</span>
+<span class="c1"># valid_name('Erik')  # try uncommenting these as well
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Pattern match results:
+whole match:      |Jae, C|
+first set of ():  |Jae|
+second set of (): |, C|
+</code></pre></div></div>
+
+<p>In the preceding code, <code class="language-plaintext highlighter-rouge">found</code> is the match object produced by the <code class="language-plaintext highlighter-rouge">search()</code> method. The <code class="language-plaintext highlighter-rouge">found.group(0)</code> method calls contains everything matched by the entire pattern. <code class="language-plaintext highlighter-rouge">found.group(1)</code> contains the part of the string that the first set of grouping parentheses matched–the last name, and <code class="language-plaintext highlighter-rouge">found.group(2)</code> contains the part of the string matched by the second set of grouping parentheses–the comma and initial, if any. If the pattern had more groups of parentheses, you would use <code class="language-plaintext highlighter-rouge">.group(3)</code>, <code class="language-plaintext highlighter-rouge">.group(4)</code>, and so forth.</p>
+
+<p>If you look at the output from <code class="language-plaintext highlighter-rouge">Jae, C</code> you’ll see that the second set of grouping parentheses doesn’t give you quite what you want. The group stores the entire matched substring, which includes the comma. You’d like to store only the initial. You can do this two ways. First, you can include yet another set of parentheses:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">valid_name</span><span class="p">(</span><span class="n">in_str</span><span class="p">):</span>
+    <span class="n">found</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s">'^(\w+)(,?\s*([A-Z]))?$'</span><span class="p">,</span> <span class="n">in_str</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">found</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'Pattern match results:'</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'whole match:     |'</span><span class="p">,</span> <span class="n">found</span><span class="p">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="s">'|'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'first set of (): |'</span><span class="p">,</span> <span class="n">found</span><span class="p">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="s">'|'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'outer set of (): |'</span><span class="p">,</span> <span class="n">found</span><span class="p">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="s">'|'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'inner set of (): |'</span><span class="p">,</span> <span class="n">found</span><span class="p">.</span><span class="n">group</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="s">'|'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">in_str</span><span class="p">,</span> <span class="s">'does not contain the pattern.'</span><span class="p">)</span>
+
+<span class="n">valid_name</span><span class="p">(</span><span class="s">'Jae, C'</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Pattern match results:
+whole match:     |Jae, C|
+first set of (): |Jae|
+outer set of (): |, C|
+inner set of (): |C|
+</code></pre></div></div>
+
+<p>If you do it this way, then the capital letter is stored in <code class="language-plaintext highlighter-rouge">found.group(3)</code> and the entire comma-and-initial is stored in <code class="language-plaintext highlighter-rouge">found.group(2)</code>.</p>
+
+<p>The other way to do this is to say that the outer parentheses should group but not store the matched portion in the result array. You do that with a question mark and colon right after the outer parentheses.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">valid_name</span><span class="p">(</span><span class="n">in_str</span><span class="p">):</span>
+    <span class="n">found</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s">'^(\w+)(?:,?\s*([A-Z]))?$'</span><span class="p">,</span> <span class="n">in_str</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">found</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'Pattern match results:'</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'whole match:     |'</span><span class="p">,</span> <span class="n">found</span><span class="p">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="s">'|'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'first set of (): |'</span><span class="p">,</span> <span class="n">found</span><span class="p">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="s">'|'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'inner set of (): |'</span><span class="p">,</span> <span class="n">found</span><span class="p">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="s">'|'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">in_str</span><span class="p">,</span> <span class="s">'does not contain the pattern.'</span><span class="p">)</span>
+
+<span class="n">valid_name</span><span class="p">(</span><span class="s">'Jae, C'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Pattern match results:
+whole match:     |Jae, C|
+first set of (): |Jae|
+inner set of (): |C|
+</code></pre></div></div>
+
+<p>In this case, the initial is in <code class="language-plaintext highlighter-rouge">found.group(2)</code>, since the outer set of open parentheses doesn’t get stored. As you can see, patterns can very quickly become difficult to read, so let’s break this into parts:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">^</code> at the start of the string,</li>
+  <li><code class="language-plaintext highlighter-rouge">(\w+)</code> look for (and remember) one or more “word” characters</li>
+  <li><code class="language-plaintext highlighter-rouge">(?:</code> start a non-storing group which consists of:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">,?</code> an optional comma</li>
+      <li><code class="language-plaintext highlighter-rouge">\s*</code> zero or more spaces</li>
+      <li><code class="language-plaintext highlighter-rouge">([A-Z])</code> and a capital letter, which is remembered because it is in parentheses</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">)?</code> this ends the non-storing group; the question mark means it is all optional</li>
+  <li><code class="language-plaintext highlighter-rouge">$</code> at which point we must be at the end of the string.</li>
+</ul>
+
+<p>Now that you know how to extract the last name and initial, you are in a position to use <code class="language-plaintext highlighter-rouge">sub()</code> to swap their positions. The <code class="language-plaintext highlighter-rouge">re.sub()</code> method takes three arguments:</p>
+
+<ul>
+  <li>A pattern to search for</li>
+  <li>A replacement pattern</li>
+  <li>The string to search in</li>
+</ul>
+
+<p>So, <code class="language-plaintext highlighter-rouge">re.sub(r'-\d{4}', r'-XXXX', '301-22-0109')</code> will replace the last four digits of a Social Security number by Xes. This example does not work in ActiveCode (since <code class="language-plaintext highlighter-rouge">re.sub()</code> is not implemented), but it will work in IDLE.</p>
+
+<p>If you are using grouping, you can use <code class="language-plaintext highlighter-rouge">\1</code> and <code class="language-plaintext highlighter-rouge">\2</code> in the replacement pattern to stand for the first and second matched groups. This is how you can write a program that will change names like “Jae, C” to “C. Jae”; in the following example, the comma and initial are not optional.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">swap_name</span><span class="p">(</span><span class="n">in_str</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s">'^(\w+),?\s*([A-Z])$'</span><span class="p">,</span> <span class="sa">r</span><span class="s">'\2. \1'</span><span class="p">,</span> <span class="n">in_str</span> <span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">swap_name</span><span class="p">(</span><span class="s">'Smith, J'</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">swap_name</span><span class="p">(</span><span class="s">'Joe-Bob Smythe-Fauntleroy'</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">swap_name</span><span class="p">(</span><span class="s">'Madonna'</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">swap_name</span><span class="p">(</span><span class="s">'Gonzales M'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>J. Smith
+Joe-Bob Smythe-Fauntleroy
+Madonna
+M. Gonzales
+</code></pre></div></div>
+
+<p>If you run the preceding program in IDLE, you will see that if the pattern does not match, <code class="language-plaintext highlighter-rouge">re.sub()</code> returns a copy of the input string, untouched..</p>
+
+<p>Finally, another example with groups. Say you want to match a phone number and find the area code, prefix, and number. In this case, rather than doing a substitution, we return a list with the relevant information, or a list of three empty strings if the input is not valid. Note that when you want to match to a real parenthesis, you have to precede it with a backslash to make it “not part of a group.” You can do it this way:</p>
+
+<p>Again, let’s break apart that pattern:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">\(</code> look for a real open parenthesis</li>
+  <li><code class="language-plaintext highlighter-rouge">(\d{3})</code> followed by three digits (and store them)</li>
+  <li><code class="language-plaintext highlighter-rouge">\)</code> and a real closing parenthesis</li>
+  <li><code class="language-plaintext highlighter-rouge">\s*</code> followed by zero or more spaces</li>
+  <li>(\d{3}) three digits (store them)</li>
+  <li><code class="language-plaintext highlighter-rouge">-</code> a dash</li>
+  <li><code class="language-plaintext highlighter-rouge">(\d{4})</code> and four more digits (store them)</li>
+</ul>
+
+<h1 id="10-finding-all-occurrences">10. Finding All Occurrences</h1>
+
+<p>The <code class="language-plaintext highlighter-rouge">re.search()</code> method finds only the first occurrence of a pattern within a string. If you want to find all the matches in a string, use <code class="language-plaintext highlighter-rouge">re.findall()</code>, which returns a list of matched substrings. (Unlike <code class="language-plaintext highlighter-rouge">re.search()</code>, which returns match objects.) Here is a pattern that finds a capital letter followed by an optional dash and a single digit:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">message</span> <span class="o">=</span> <span class="s">'Insert tabs B3, D-7, and C6 into slot A9.'</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s">'([A-Z]-?\d)'</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">result</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'findall() did not find any matches to the pattern.'</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>B3
+D-7
+C6
+A9
+</code></pre></div></div>
+
+<p>Please check the <a href="https://docs.python.org/3/library/re.html">source</a></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#python" class="page__taxonomy-item" rel="tag">python</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-12-31T00:00:00+00:00">December 31, 2019</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Regular+Expression+Tutorial%20http%3A%2F%2Flocalhost%3A4000%2FRegularExpression%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2FRegularExpression%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2FRegularExpression%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="#" class="pagination--pager disabled">Previous</a>
+    
+    
+      <a href="/retirement/" class="pagination--pager" title="Calculating the Balance in Your Retirement Account (GUI)
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/" rel="permalink">Deep Learning Applications in Computer Vision
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Deep Learning / Computer Vision /
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/cv_intro/" rel="permalink">Deep Learning Applications in Computer Vision
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Deep Learning / Computer Vision /
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Backpropagation/" rel="permalink">Deep Learning Performance Improvement 4 - Back-propagation
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  16 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Back-propagation / Forward-propagation /  Machine Learning Performance Improvement
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Regularization/" rel="permalink">Deep Learning Performance Improvement 3 - Regularization
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  21 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Penalizing Regularization (L1 and L2) / Dropout /  Machine Learning Performance Improvement
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><input type="text" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/jaechoi2357/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/pnut2357" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 Jae H. Choi. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.7.1/js/all.js" integrity="sha384-eVEQC9zshBn0rFj4+TU78eNA19HMNigMviK/PU/FFjLXqa/GKPgX58rvt5Z8PLs7" crossorigin="anonymous"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://localhost:4000/RegularExpression/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/RegularExpression"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://JBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+  </body>
+</html>

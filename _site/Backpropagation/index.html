@@ -1,0 +1,1184 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Deep Learning Performance Improvement 4 - Back-propagation - Jae’s Blog</title>
+<meta name="description" content="Back-propagation / Forward-propagation /  Machine Learning Performance Improvement">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Jae's Blog">
+<meta property="og:title" content="Deep Learning Performance Improvement 4 - Back-propagation">
+<meta property="og:url" content="http://localhost:4000/Backpropagation/">
+
+
+  <meta property="og:description" content="Back-propagation / Forward-propagation /  Machine Learning Performance Improvement">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2020-11-04T00:00:00+00:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/Backpropagation/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Jae H. Choi",
+      "url": "http://localhost:4000",
+      "sameAs": ["https://www.linkedin.com/in/jaechoi2357/"]
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Jae's Blog Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
+    </script>
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/mush.jpeg" alt=""></a>
+        
+        <a class="site-title" href="/">Jae's Blog</a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about/" >About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Portfolios/Concepts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Personal Interests</a>
+            </li><li class="masthead__menu-item">
+              <a href="/cheatsheets/introduction/" >Cheatsheets</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/profile.jpeg" alt="Jae H. Choi" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Jae H. Choi</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Yesterday is history, tomorrow is a mystery, but today is a gift. That's why it's called the present.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Tempe, AZ</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:jaehyuk0325@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/jaechoi2357/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://devpost.com/jaehyuk0325?ref_content=user-portfolio&ref_feature=portfolio&ref_medium=global-nav" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i> DevPost</a></li>
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/pnut2357" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Deep Learning Performance Improvement 4 - Back-propagation">
+    <meta itemprop="description" content="Back-propagation / Forward-propagation /  Machine Learning Performance Improvement">
+    <meta itemprop="datePublished" content="November 04, 2020">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Deep Learning Performance Improvement 4 - Back-propagation
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  15 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#back-propagation">Back-propagation</a>
+    <ul>
+      <li><a href="#importance-of-back-propagation">Importance of Back-propagation</a></li>
+      <li><a href="#1---problem-definition">1 - Problem definition</a>
+        <ul>
+          <li><a href="#11---example-dataset">1.1 - Example Dataset</a></li>
+        </ul>
+      </li>
+      <li><a href="#2---approaches-for-differentiation">2 - Approaches for Differentiation</a>
+        <ul>
+          <li><a href="#21---analytical-differentiation-computational-difficulty">2.1 - Analytical differentiation (Computational Difficulty)</a></li>
+          <li><a href="#22---numerical-differentiation-eulers-method">2.2 - Numerical differentiation (Euler’s method)</a></li>
+        </ul>
+      </li>
+      <li><a href="#3---back-propagation">3 - Back-propagation</a></li>
+      <li><a href="#4---the-neural-network">4 - The neural network</a>
+        <ul>
+          <li><a href="#41---forward-propagation">4.1 - Forward propagation</a></li>
+          <li><a href="#42---loss-function">4.2 - Loss function</a></li>
+          <li><a href="#43---back-propagation">4.3 - Back-propagation</a></li>
+          <li><a href="#44---training-gradient-descent">4.4 - Training: gradient descent</a></li>
+          <li><a href="#45---visualization-of-nns-performace-for-double-circle-case">4.5 - Visualization of NN’s Performace for Double Circle Case</a></li>
+          <li><a href="#46---visualization-of-nns-performace-for-xor-case">4.6 - Visualization of NN’s Performace for XOR Case</a></li>
+        </ul>
+      </li>
+      <li><a href="#5---conclusion">5 - Conclusion</a></li>
+    </ul>
+  </li>
+</ul>
+            </nav>
+          </aside>
+        
+        <h1 id="back-propagation">Back-propagation</h1>
+
+<h2 id="importance-of-back-propagation">Importance of Back-propagation</h2>
+<p>Due to improvement of open source tools like Tensorflow or Keras, it seems easier to code up <a href="https://github.com/fchollet/deep-learning-with-python-notebooks/blob/master/5.2-using-convnets-with-small-datasets.ipynb">classification of cat or dog based on CNN without understanding</a>. Unfortunately, these tools let us be tempted to avoid understanding of the algorithms. In particular, not understanding back-propagation would most probably lead you to badly design your networks. In a <a href="https://medium.com/@karpathy/yes-you-should-understand-backprop-e2f06eab496b">Medium article</a>, Andrej Karpathy, now director of AI at Tesla, listed few reasons why you should understand back-propagation. Problems such as vanishing and exploding gradients, or dying relus are some of them. Back-propagation is not a very complicated algorithm, and with some knowledge about calculus especially the chain rules, it can be understood pretty quick.</p>
+
+<p>Neural networks, like any other supervised learning algorithms, learn to map an input to an output based on some provided examples of (input, output) pairs, called the training set. In particular, neural networks performs this mapping by processing the input through a set of transformations. A neural network is composed of several layers, and each of these layers are made of units (also called neurons) as illustrated below:</p>
+
+<center>
+<img src="/assets/images/dl_backpropagation/Backpropagation.gif" height="800" width="330" />
+<img src="/assets/images/dl_backpropagation/neural_network.png" height="800" width="300" />
+</center>
+<caption><center>  <font color="purple"> Figure 1 </font> Neural Network  </center></caption>
+
+<p>The input in the Figure 1 is transformed into the hidden layer 1 and 2 sequantially up to the outputs as prediction. Each transformation is controlled by a set of weights and biases. During training, to indeed learn something, the network needs to adjust these weights to minimize the error (also called the loss function) between the expected outputs and the ones it maps from the given inputs. Using <a href="https://en.wikipedia.org/wiki/Gradient_descent">gradient descent</a> as an optimization algorithm, the weights are updated at each iteration as:</p>
+
+<p>\(w^{(n+1)} = w^{(n)} - \epsilon \frac{\partial L}{\partial w}\), where L is the loss function and \(\epsilon\) is the learning rate.</p>
+
+<p>As we can see above, the gradient of the loss w.r.t. the weight is substracted from the weight at each iteration. This weight updating process that guides the direction of a model to global minimum gradually is called gradient descent. The gradient \(\frac{\partial L}{\partial w}\) can be interpreted as a measure of the contribution of the weight to the loss. Therefore the larger is this gradient (in absolute value), the more the weight is updated during an iteration of gradient descent.</p>
+
+<p>The minimization of the loss function task ends up being related to the evaluation of the gradients described above. We will review 3 proposals to perform this evaluation:</p>
+
+<ul>
+  <li>Analytical calculation of the gradients.</li>
+  <li>Approximation of the gradients as being: \(\frac{\partial L}{\partial w} = \frac{L(w + \delta w) - L(w)}{\delta w}\), where \(\delta w \rightarrow 0\).</li>
+  <li>Backpropagation or reverse mode autodiff.</li>
+</ul>
+
+<p>Before explore the analysis of back-propagation, let’s define our problem and simplify it for the sake of the discussion.</p>
+
+<h2 id="1---problem-definition">1 - Problem definition</h2>
+
+<p>To simplify our discussion, we will consider that each layer of the network is made of a single unit, and that we have a single hidden layer. The network looks now like:</p>
+
+<center>
+<img src="/assets/images/dl_backpropagation/nn1d.png" height="800" width="400" />
+</center>
+<caption><center>  <font color="purple"> Figure 2 </font> Single Neural Network  </center></caption>
+
+<p>Figure 2 shows how the input is transformed to produce the hidden layer representation. In neural network, a layer is obtained by performing two operations on the previous layer:</p>
+
+<ul>
+  <li>First the previous layer is tranformed via a linear operation: the value of the previous layer is multiplied by a weight, and a bias is added to it. It gives: 
+\(z = xw + b\), where x is the value of the previous layer unit, w and b are respectively the weight and the bias discussed above.</li>
+  <li>Second, the previous linear operation is used as an input to the activation function of the unit. This activation is generally chosen to introduce non linearity in order to solve complex tasks. Here we will simply consider that this activation function is a sigmoid function: \(\sigma(x) = \frac{1}{1+\exp(-x)}\). As a consequence the value y of a layer can be written as: 
+\(y = \sigma (z) = \sigma (xw + b)\), with x, w and b defined as above.</li>
+</ul>
+
+<p>From the input layer \(x\), through hidden layer \(h\), to output layer \(y\), we can write:</p>
+
+<p>\(h = \sigma (xw_1 + b_1)\), where \(w_1\) and \(b_1\) are respectively the weight and the bias used to compute the hidden unit from the input.</p>
+
+<p>\(y = \sigma (hw_2 + b_2)\), where \(w_2\) and \(b_2\) are respectively the weight and the bias used to compute the output from the hidden unit.</p>
+
+<p>From now on, we are able to calculate the output y based on the input x, through a set of transformations. This is the so called forward propagation since this calculation goes forward inside the network.</p>
+
+<p>We now need to compare this predicted ouptut to the true one \(y_T\). As explained earlier, we use a loss function to quantify the error that the network does while prediciting. Here we will consider as a loss function the squared error defined as :</p>
+
+\[L = \frac{1}{2} (y-y_T)^2\]
+
+<p>The weight (with biases) updating prothe process if important for the gradient of this loss function L w.r.t. these weights (and biases). Naive approach of evaluating these gradients suffers against computational difficulty. Thus, the idea of Euler’s method was taken with partial derivation for each layer.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">generate_dataset</span><span class="p">(</span><span class="n">N_points</span><span class="p">):</span>
+    <span class="c1"># 1 class
+</span>    <span class="n">radiuses</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">N_points</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">angles</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="p">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">N_points</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span>
+    
+    <span class="n">x_1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">radiuses</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angles</span><span class="p">)).</span><span class="n">reshape</span><span class="p">(</span><span class="n">N_points</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">x_2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">radiuses</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angles</span><span class="p">)).</span><span class="n">reshape</span><span class="p">(</span><span class="n">N_points</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">X_class_1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">x_1</span><span class="p">,</span> <span class="n">x_2</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">Y_class_1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">full</span><span class="p">((</span><span class="n">N_points</span><span class="o">//</span><span class="mi">2</span><span class="p">,),</span> <span class="mi">1</span><span class="p">)</span>
+        
+    <span class="c1"># 0 class
+</span>    <span class="n">radiuses</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">N_points</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">angles</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="p">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">N_points</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span>
+    
+    <span class="n">x_1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">radiuses</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angles</span><span class="p">)).</span><span class="n">reshape</span><span class="p">(</span><span class="n">N_points</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">x_2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">radiuses</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angles</span><span class="p">)).</span><span class="n">reshape</span><span class="p">(</span><span class="n">N_points</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">X_class_0</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">x_1</span><span class="p">,</span> <span class="n">x_2</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">Y_class_0</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">full</span><span class="p">((</span><span class="n">N_points</span><span class="o">//</span><span class="mi">2</span><span class="p">,),</span> <span class="mi">0</span><span class="p">)</span>
+        
+    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">X_class_1</span><span class="p">,</span> <span class="n">X_class_0</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">Y_class_1</span><span class="p">,</span> <span class="n">Y_class_0</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span>
+    
+<span class="n">N_points</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">generate_dataset</span><span class="p">(</span><span class="n">N_points</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="p">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="n">N_points</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:</span><span class="n">N_points</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'red'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'class 1'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span> 
+<span class="n">plt</span><span class="p">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">N_points</span><span class="o">//</span><span class="mi">2</span><span class="p">:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">N_points</span><span class="o">//</span><span class="mi">2</span><span class="p">:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'blue'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'class 0'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">),</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+<center>
+<img src="/assets/images/dl_backpropagation/output_10_0.png" height="800" width="600" />
+</center>
+
+<h3 id="11---example-dataset">1.1 - Example Dataset</h3>
+<p>Let’s consider a binary classification problem where the task is about predict the class of a given input. As a dataset, we chose a pretty standard not linearly separable dataset made of two classes “0” and “1”.</p>
+
+<h2 id="2---approaches-for-differentiation">2 - Approaches for Differentiation</h2>
+<h3 id="21---analytical-differentiation-computational-difficulty">2.1 - Analytical differentiation (Computational Difficulty)</h3>
+<p>Now we are here for analytical derivation why it suffers against computational difficulty.</p>
+
+\[\begin{equation} 
+    \begin{split}
+        \frac{\partial L}{\partial w_2} &amp; = \frac{1}{2} \frac{\partial \left((y-y_T)^2\right)}{\partial w_2} \\
+                                        &amp; = \frac{1}{2} \left(\frac{\partial \left(y^2\right)}{\partial w_2} - 2y_T \frac{\partial y}{\partial w_2}\right)\\
+    \end{split}
+\end{equation}\]
+
+<p>Knowing that \(y = \sigma (hw_2 +b_2)\), we get :</p>
+
+\[\begin{equation} 
+    \begin{split}
+        \frac{\partial L}{\partial w_2} &amp; = \frac{1}{2} \left(\frac{\partial \left(\frac{1}{\left( 1 + \exp(-hw_2 -b_2\right))^2}\right)}{\partial w_2} - 2y_T \frac{\partial \frac{1}{1 + \exp(-hw_2 - b_2)}}{\partial w_2}\right) \\
+                                        &amp; = \frac{h \exp(-hw_2 - b_2)}{\left(1+\exp(-hw_2 - b_2)\right)^3} - \frac{y_T h \exp(-hw_2 - b_2)}{\left(1+\exp(-hw_2 - b_2)\right)^2} \\
+                                        &amp; = h\frac{ \exp(-hw_2 - b_2)}{\left(1+\exp(-hw_2 - b_2)\right)^2} \left(\frac{1}{1+\exp(-hw_2 - b_2)} - y_T\right)
+    \end{split}
+\end{equation}\]
+
+<p>Here we derived the gradient w.r.t. \(w_2\), and the calculation for the one w.r.t. \(w_1\) would be even more tedious. That means, such an analytical approach would be exponentially complicated to implement for a “deep” neural network. In addition, computing wise this approach would be quite inefficient since we could not leverage the fact that the gradients share some common definition. A way more easy way to get these gradients would be to use a numerical approximation (Euler’s method).</p>
+
+<h3 id="22---numerical-differentiation-eulers-method">2.2 - Numerical differentiation (Euler’s method)</h3>
+
+<p>Trading accuracy for simplicity, we can obtain the gradient using the following:</p>
+
+\[\begin{equation} 
+    \begin{split}
+        \frac{\partial L}{\partial w} \simeq \frac{L(w + \delta w) - L(w)}{\delta w}, \space with \space\delta w \rightarrow 0
+    \end{split}
+\end{equation}\]
+
+<p>Numerical approach ease computational wise, but providing approximate soltuion. In addition before computing all the gradients, we would have to compute the loss function to update (doing one forward pass by weights and biases). That is, computational burden comes with size of parameters; for a neural network with 1 million weigth parameters, it would requires 1 million forward propagation, which is definitely not efficient to compute. To reduce such a burden by adjusting a better weight (with biases) and loss updating process, back-propagation can be introduced.</p>
+
+<h2 id="3---back-propagation">3 - Back-propagation</h2>
+<p>Before speaking in more details about what back-propagation is, let’s first introduce the computational diagram that leads to the evaluation of the loss function.</p>
+
+<center>
+<img src="/assets/images/dl_backpropagation/computational_graph.png" height="800" width="380" />
+</center>
+<caption><center>  <font color="purple"> Figure 3 </font> Back-propagation Computational Diagram </center></caption>
+
+<p>The nodes in this graph correspond to all the values that are computed in order to get the loss L. If a variable is computed by applying an operation to another variable, an edge is drawn between the two variable nodes. Looking at this graph, and making use of the chain rule of calculus, we can express the gradient of L with respect to the weights (or biases) as:</p>
+
+\[\begin{equation} 
+    \begin{split}
+        \frac{\partial L}{\partial w_2} &amp; = \frac{\partial L}{\partial y} \frac{\partial y}{\partial w_2}\\
+                                        &amp; = \frac{\partial L}{\partial y} \frac{\partial y}{\partial z_2} \frac{\partial z_2}{\partial w_2} \\
+    \end{split}
+\end{equation}\]
+
+<p>Same goes for the weight \(w_1\):</p>
+
+\[\begin{equation} 
+    \begin{split}
+        \frac{\partial L}{\partial w_1} &amp; = \frac{\partial L}{\partial y} \frac{\partial y}{\partial w_1}\\
+                                        &amp; = \frac{\partial L}{\partial y} \frac{\partial y}{\partial z_2} \frac{\partial z_2}{\partial w_1} \\
+                                        &amp; = \frac{\partial L}{\partial y} \frac{\partial y}{\partial z_2} \frac{\partial z_2}{\partial h} \frac{\partial h}{\partial w_1} \\
+                                        &amp; = \frac{\partial L}{\partial y} \frac{\partial y}{\partial z_2} \frac{\partial z_2}{\partial h} \frac{\partial h}{\partial z_1} \frac{\partial z_1}{\partial w_1}
+    \end{split}
+\end{equation}\]
+
+<p>One very important thing to notice here is that the evaluation of the gradient \(\frac{\partial L}{\partial w_1}\) can reuse some of the calculations perfomed during the evaluation of the gradient \(\frac{\partial L}{\partial w_2}\). It is even clearer if we evaluate the gradient \(\frac{\partial L}{\partial b_1}\):</p>
+
+\[\begin{equation} 
+    \begin{split}
+        \frac{\partial L}{\partial b_1} = \frac{\partial L}{\partial y} \frac{\partial y}{\partial z_2} \frac{\partial z_2}{\partial h} \frac{\partial h}{\partial z_1} \frac{\partial z_1}{\partial b_1}
+    \end{split}
+\end{equation}\]
+
+<p>We see that the first four term on the righ hand of the equation are the same than the one from \(\frac{\partial L}{\partial w_1}\).</p>
+
+<p>As you can see in the equations above, we calculate the gradient starting from the end of the computational graph, and proceed backward to get the gradient of the loss with respect to the weights (or the biases). This backward evaluation gives its name to the algoritm: back-propagation. The back-propagation algorithm can be illustrated by the image below:</p>
+
+<center>
+<img src="/assets/images/dl_backpropagation/backpropagation.png" height="800" width="400" />
+</center>
+<caption><center>  <font color="purple"> Figure 4 </font> Back-propagation Process </center></caption>
+
+<p>In pratice, one iteration of gradient descent would now require one forward pass, and only one pass in the reverse direction computing all the partial derivatives starting from the output node. It is therefore way more efficient than the previous approaches. In the original paper about backpropagation published in 1986 [4] , the authors (among which Geoffrey Hinton) used for the first time backpropagation to allow internal hidden units to learn features of the task domain.</p>
+
+<p>To visualize better what backpropagation is in practice, let’s implement a neural network classification problem in bare numpy. Indeed as we will see below, there is no need of a complex deep learning library to play at first with a neural network.</p>
+
+<h2 id="4---the-neural-network">4 - The neural network</h2>
+<p>As we can see from the dataset above, the data point are defined as \(\begin{equation} 
+    \begin{split}
+        \mathbf{x} = 
+                        \begin{bmatrix}
+                            x_1 \\
+                            x_2 \\
+                        \end{bmatrix}
+    \end{split}
+\end{equation}\). Therefore the input layer of the network must have two units. We want to classify the data points as being either class “1” or class “0”, then the output layer of the network must contain a single unit. Between the input and the output layers, we add a hidden layer with 3 units. The full network looks like:</p>
+
+<p><img src="/assets/images/dl_backpropagation/neural_network_practice.png" height="800" width="330" />
+&lt;/center&gt;</p>
+<caption><center>  <font color="purple"> Figure 4 </font> Neural Network </center></caption>
+
+<p>Choosing the right network architecture is more an art than a science, and there is no ground reason to choose the second layer to have 3 units. I encourage you to go and play with the <a href="https://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=circle&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=4,2&amp;seed=0.07489&amp;showTestData=false&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false">tensorflow playground</a> to realize that. We have already studied a similar architecture before but with a single unit per layer. The previous equations can be easily generalized for layers with more than one unit:</p>
+
+<p>\(\mathbf{z_1} = \mathbf{W_1 x} + \mathbf{b_1}\),  with 
+\(\begin{equation} 
+    \begin{split}
+        \mathbf{W_1} = 
+                        \begin{bmatrix}
+                            w^{(1)}_{1,1}       &amp; w^{(1)}_{2,1} \\
+                            w^{(1)}_{1,2}       &amp; w^{(1)}_{2,2} \\
+                            w^{(1)}_{1,3}       &amp; w^{(1)}_{2,3} \\
+                        \end{bmatrix}
+    \end{split}
+\end{equation}\), 
+\(\begin{equation} 
+    \begin{split}
+        \mathbf{x} = 
+                        \begin{bmatrix}
+                            x_1 \\
+                            x_2 \\
+                        \end{bmatrix}
+    \end{split}
+\end{equation}\) and
+\(\begin{equation} 
+    \begin{split}
+        \mathbf{b_1} = 
+                        \begin{bmatrix}
+                            b^{(1)}_{1}\\
+                            b^{(1)}_{2}\\
+                            b^{(1)}_{3}\\
+                        \end{bmatrix}
+    \end{split}
+\end{equation}\)</p>
+
+\[\mathbf{h} = \sigma(\mathbf{z_1})\]
+
+<p>\(\mathbf{z_2} = \mathbf{W_2 h} + b_2\) with 
+\(\begin{equation} 
+    \begin{split}
+        \mathbf{W_2} = 
+                        \begin{bmatrix}
+                            w^{(2)}_{1,1}       &amp; w^{(2)}_{2,1}       &amp; w^{(2)}_{3,1} 
+                        \end{bmatrix}
+    \end{split}
+\end{equation}\), and \(b_2 = b^{(2)}_1\).</p>
+
+\[\mathbf{y} = \sigma(\mathbf{z_2})\]
+
+<p>The above equations allow to predict a single output given a single data point\(\begin{equation} 
+    \begin{split}
+        \mathbf{x} = 
+                        \begin{bmatrix}
+                            x_1 \\
+                            x_2 \\
+                        \end{bmatrix}
+    \end{split}
+\end{equation}\). Instead of looping over all the data points from the dataset and evaluation y from them, it is way more efficient to take advantage of the vectorization of the problem. Let’s consider the vector \(\mathbf{X}\) with the shape \((N_{points}, 2)\):
+\(\begin{equation} 
+    \begin{split}
+        \mathbf{X} = 
+                        \begin{bmatrix}
+                            x_1^{(1)}    &amp;    x_2^{(1)} \\
+                            x_1^{(2)}    &amp;    x_2^{(2)} \\
+                            . &amp; . \\                           
+                            . &amp; . \\                           
+                            . &amp; . \\                           
+                            x_1^{(N_{points})}    &amp;    x_2^{(N_{points})} \\
+                        \end{bmatrix}
+    \end{split}
+\end{equation}\)</p>
+
+<p>where the upperscripts \(^{(i)}\) simply refer to the datapoints.</p>
+
+<p>We can rewrite the equations vectorized:</p>
+
+<p>\(\mathbf{Z_1} = \mathbf{X W_1^T} + \mathbf{1 b_1^T}\), with 
+\(\begin{equation} 
+    \begin{split}
+        \mathbf{1} = 
+                        \begin{bmatrix}
+                            1 \\
+                            1 \\
+                            . \\                           
+                            . \\                           
+                            . \\                           
+                            1 \\
+                        \end{bmatrix}
+    \end{split}
+\end{equation}\) a vector of shape \((N_{points}, 1)\) whose elements are all 1.</p>
+
+\[\mathbf{H} = \sigma(\mathbf{Z_1})\]
+
+<p>\(\mathbf{Z_2} = \mathbf{H W_2^T} + \mathbf{1} b_2\), with \(\mathbf{1}\) is as defined above.</p>
+
+\[\mathbf{Y} = \sigma(\mathbf{Z_2})\]
+
+<h3 id="41---forward-propagation">4.1 - Forward propagation</h3>
+<p>Let’s now implement the code for the forward propagation through the network.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">weights</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'W1'</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="s">'b1'</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
+    <span class="s">'W2'</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
+    <span class="s">'b2'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="s">"""
+    Compute the sigmoid of x
+
+    Arguments:
+    x -- A scalar or numpy array of any size.
+
+    Return:
+    s -- sigmoid(x)
+    """</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">s</span>
+
+<span class="k">def</span> <span class="nf">forward_propagation</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">weights</span><span class="p">):</span>    
+    <span class="c1"># this implement the vectorized equations defined above.
+</span>    <span class="n">Z1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">weights</span><span class="p">[</span><span class="s">'W1'</span><span class="p">].</span><span class="n">T</span><span class="p">)</span>  <span class="o">+</span> <span class="n">weights</span><span class="p">[</span><span class="s">'b1'</span><span class="p">]</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">Z1</span><span class="p">)</span>
+    <span class="n">Z2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">weights</span><span class="p">[</span><span class="s">'W2'</span><span class="p">].</span><span class="n">T</span><span class="p">)</span> <span class="o">+</span> <span class="n">weights</span><span class="p">[</span><span class="s">'b2'</span><span class="p">]</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">Z2</span><span class="p">)</span>    
+    <span class="k">return</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z2</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">Z1</span>
+</code></pre></div></div>
+
+<h3 id="42---loss-function">4.2 - Loss function</h3>
+<p>Previously, for simplicity we used the squared error as a loss function. It turns out that for a classification problem, this is not an appropriate choice as a loss function. Indeed the squared error is not able to distinguish bad prediction from extremely bad ones in a classification context. Here as a loss function, we will rather use the cross entropy function defined as:</p>
+
+\[L(y, y_T) = \frac{1}{N_{points}} \sum_{n=1}^{N_{points}}\left( -y_T^{(n)} \log(y^{(n)}) - (1-y_T^{(n)}) \log(1-y^{(n)})\right)\]
+
+<p>where \(y^{(n)}\) is the output of the forward propagation of a single data point 
+\(\begin{equation} 
+    \begin{split}
+        \mathbf{x^{(n)}} = 
+                        \begin{bmatrix}
+                            x^{(n)}_1 \\
+                            x^{(n)}_2 \\
+                        \end{bmatrix}
+    \end{split}
+\end{equation}\), and \(y_T^{(n)}\) the correct class of the data point.</p>
+
+<p>To understand why the cross entropy is a good choice as a loss function, I highly recommend this <a href="https://www.youtube.com/watch?v=ErfnhcEV1O8">video from Aurelien Geron</a>.</p>
+
+<h3 id="43---back-propagation">4.3 - Back-propagation</h3>
+<p>We have everything we need now to define the back_propagation function. First let’s write again down the gradient equations:</p>
+
+\[\frac{\partial L}{\partial \mathbf{W_2}} = \frac{\partial L}{\partial \mathbf{Y}}\frac{\partial \mathbf{Y}}{\partial \mathbf{Z_2}}\frac{\partial \mathbf{Z_2}}{\partial \mathbf{W_2}}\]
+
+\[\frac{\partial L}{\partial \mathbf{b_2}} = \frac{\partial L}{\partial \mathbf{Y}}\frac{\partial \mathbf{Y}}{\partial \mathbf{Z_2}}\frac{\partial \mathbf{Z_2}}{\partial \mathbf{b_2}}\]
+
+\[\frac{\partial L}{\partial \mathbf{W_1}} = \frac{\partial L}{\partial \mathbf{Y}}\frac{\partial \mathbf{Y}}{\partial \mathbf{Z_2}}\frac{\partial \mathbf{Z_2}}{\partial \mathbf{H}}\frac{\partial \mathbf{H}}{\partial \mathbf{Z_1}}\frac{\partial \mathbf{Z_1}}{\partial \mathbf{W_1}}\]
+
+\[\frac{\partial L}{\partial \mathbf{b_1}} = \frac{\partial L}{\partial \mathbf{Y}}\frac{\partial \mathbf{Y}}{\partial \mathbf{Z_2}}\frac{\partial \mathbf{Z_2}}{\partial \mathbf{H}}\frac{\partial \mathbf{H}}{\partial \mathbf{Z_1}}\frac{\partial \mathbf{Z_1}}{\partial \mathbf{b_1}}\]
+
+<p>We therefore need the following partial derivatives, which can be easily obtained:</p>
+
+\[\frac{\partial L}{\partial\mathbf{Y}} = \frac{1}{N} \frac{\mathbf{Y}-\mathbf{Y_T}}{\mathbf{Y}(1-\mathbf{Y})}\]
+
+\[\frac{\partial \mathbf{L}}{\partial\mathbf{Z_2}} = \frac{\partial L}{\partial\mathbf{Y}} .\left(\sigma(\mathbf{Z_2})(1-\sigma(\mathbf{Z_2}))\right)\]
+
+\[\frac{\partial \mathbf{L}}{\partial \mathbf{W_2}} = \mathbf{H^T} \frac{\partial \mathbf{L}}{\partial\mathbf{Z_2}}\]
+
+\[\frac{\partial \mathbf{L}}{\partial \mathbf{b_2}} = \left(\frac{\partial \mathbf{L}}{\partial\mathbf{Z_2}} \right)^T\mathbf{1}\]
+
+\[\frac{\partial \mathbf{L}}{\partial \mathbf{H}} = \frac{\partial \mathbf{L}}{\partial\mathbf{Z_2}} \mathbf{W_2^T}\]
+
+\[\frac{\partial \mathbf{L}}{\partial \mathbf{Z_1}} = \frac{\partial \mathbf{L}}{\partial \mathbf{H}}.\left(\sigma(\mathbf{Z_1})(1-\sigma(\mathbf{Z_1}))\right)\]
+
+\[\frac{\partial \mathbf{L}}{\partial \mathbf{W_1}} = \left(\frac{\partial \mathbf{L}}{\partial \mathbf{Z_1}}\right)^T\mathbf{X}\]
+
+\[\frac{\partial \mathbf{L}}{\partial \mathbf{b_1}} = \left(\frac{\partial \mathbf{L}}{\partial \mathbf{Z_1}}\right)^T\mathbf{1}\]
+
+<p>We can now define the code for the backpropagation:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">back_propagation</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y_T</span><span class="p">,</span> <span class="n">weights</span><span class="p">):</span>
+    <span class="n">N_points</span> <span class="o">=</span> <span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="c1"># forward propagation
+</span>    <span class="n">Y</span><span class="p">,</span> <span class="n">Z2</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">Z1</span> <span class="o">=</span> <span class="n">forward_propagation</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">N_points</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="nb">sum</span><span class="p">(</span><span class="o">-</span><span class="n">Y_T</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">Y_T</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">Y</span><span class="p">))</span>
+    <span class="c1"># Backward propagation: 
+</span>    <span class="c1"># back propagation: calculate dL/dW1, dL/db1, dL/dW2, dL/db2. 
+</span>    <span class="n">dLdY</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">N_points</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="n">divide</span><span class="p">(</span><span class="n">Y</span> <span class="o">-</span> <span class="n">Y_T</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">Y</span><span class="p">))</span>
+    <span class="n">dLdZ2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">dLdY</span><span class="p">,</span> <span class="p">(</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">Z2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">Z2</span><span class="p">))))</span>
+    <span class="n">dLdW2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">H</span><span class="p">.</span><span class="n">T</span><span class="p">,</span> <span class="n">dLdZ2</span><span class="p">)</span>
+    <span class="n">dLdb2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">dLdZ2</span><span class="p">.</span><span class="n">T</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N_points</span><span class="p">))</span>
+    <span class="n">dLdH</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">dLdZ2</span><span class="p">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">N_points</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">weights</span><span class="p">[</span><span class="s">'W2'</span><span class="p">].</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="n">dLdZ1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">dLdH</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">Z1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">Z1</span><span class="p">))))</span>
+    <span class="n">dLdW1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">dLdZ1</span><span class="p">.</span><span class="n">T</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+    <span class="n">dLdb1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">dLdZ1</span><span class="p">.</span><span class="n">T</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N_points</span><span class="p">))</span>
+    
+    <span class="n">gradients</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">'W1'</span><span class="p">:</span> <span class="n">dLdW1</span><span class="p">,</span>
+        <span class="s">'b1'</span><span class="p">:</span> <span class="n">dLdb1</span><span class="p">,</span>
+        <span class="s">'W2'</span><span class="p">:</span> <span class="n">dLdW2</span><span class="p">,</span>
+        <span class="s">'b2'</span><span class="p">:</span> <span class="n">dLdb2</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">gradients</span><span class="p">,</span> <span class="n">L</span>
+    
+</code></pre></div></div>
+
+<h3 id="44---training-gradient-descent">4.4 - Training: gradient descent</h3>
+<p>We have all in place to start training our network using gradient descent. Remember, at every iteration the weights and the biases are updated as \(w^{(n+1)} = w^{(n)} - \epsilon \frac{\partial L}{\partial w}\).</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">epochs</span> <span class="o">=</span> <span class="mi">2000</span>
+<span class="n">epsilon</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">initial_weights</span> <span class="o">=</span> <span class="n">copy</span><span class="p">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+    
+<span class="n">fw_bk_losses</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+    <span class="n">gradients</span><span class="p">,</span> <span class="n">L</span> <span class="o">=</span> <span class="n">back_propagation</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">weight_name</span> <span class="ow">in</span> <span class="n">weights</span><span class="p">:</span>
+        <span class="n">weights</span><span class="p">[</span><span class="n">weight_name</span><span class="p">]</span> <span class="o">-=</span> <span class="n">epsilon</span> <span class="o">*</span> <span class="n">gradients</span><span class="p">[</span><span class="n">weight_name</span><span class="p">]</span>
+        
+    <span class="n">fw_bk_losses</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="p">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">),</span> <span class="n">fw_bk_losses</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">'Training Loss'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'Epoch'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'Loss'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<center>
+<img src="/assets/images/dl_backpropagation/output_10_0.png" height="800" width="600" />
+</center>
+
+<p>As we can see in the plot above where the loss is plotted with respect to the number of epochs the network experienced, we clearly observed a decrease of the loss. In other words, the network seems to make less and less errors. In other words, it learns something.</p>
+
+<h3 id="45---visualization-of-nns-performace-for-double-circle-case">4.5 - Visualization of NN’s Performace for Double Circle Case</h3>
+<p>Before to see what the network learned, it would be interesting to see how the initial weights of the network would perform.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">visualization</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">X_data</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">superposed_training</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="n">N_test_points</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1">#1000
+</span>    <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1.1</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="nb">min</span><span class="p">(</span><span class="n">X_data</span><span class="p">),</span> <span class="mf">1.1</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="nb">max</span><span class="p">(</span><span class="n">X_data</span><span class="p">),</span> <span class="n">N_test_points</span><span class="p">)</span>
+    <span class="n">datapoints</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">transpose</span><span class="p">([</span><span class="n">np</span><span class="p">.</span><span class="n">tile</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">xs</span><span class="p">)),</span> <span class="n">np</span><span class="p">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">xs</span><span class="p">))])</span>
+    <span class="n">Y_initial</span> <span class="o">=</span> <span class="n">forward_propagation</span><span class="p">(</span><span class="n">datapoints</span><span class="p">,</span> <span class="n">weights</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="n">reshape</span><span class="p">(</span><span class="n">N_test_points</span><span class="p">,</span> <span class="n">N_test_points</span><span class="p">)</span>
+    <span class="n">X1</span><span class="p">,</span> <span class="n">X2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">xs</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">X1</span><span class="p">,</span> <span class="n">X2</span><span class="p">,</span> <span class="n">Y_initial</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="p">.</span><span class="n">cm</span><span class="p">.</span><span class="n">coolwarm</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s">'P(1)'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">superposed_training</span><span class="p">:</span>
+        <span class="n">plt</span><span class="p">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_data</span><span class="p">[:</span><span class="n">N_points</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X_data</span><span class="p">[:</span><span class="n">N_points</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'tomato'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span> 
+        <span class="n">plt</span><span class="p">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_data</span><span class="p">[</span><span class="n">N_points</span><span class="o">//</span><span class="mi">2</span><span class="p">:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X_data</span><span class="p">[</span><span class="n">N_points</span><span class="o">//</span><span class="mi">2</span><span class="p">:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'cyan'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span> 
+    <span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fig</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="p">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">visualization</span><span class="p">(</span><span class="n">initial_weights</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span>  <span class="s">'Visualization before learning'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<center>
+<img src="/assets/images/dl_backpropagation/output_13_0.png" height="800" width="600" />
+</center>
+
+<p>The picture above represents as a colormap the probability of a point being of class 1. As expected, the network is completely unable yet to classify correctly. Let’s visualize the same thing after learning:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fig</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="p">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">visualization</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="s">'Visualization after learning'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<center>
+<img src="/assets/images/dl_backpropagation/output_15_0.png" height="800" width="600" />
+</center>
+
+<p>Now an island of class “1” lives in the middle of the map, while the rest is of class 0. If we superimpose the training samples to this visualization we realize that our network did a pretty good job classifying this map.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fig</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="p">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">visualization</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="s">'Visualization after learning'</span><span class="p">,</span> <span class="n">superposed_training</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<center>
+<img src="/assets/images/dl_backpropagation/output_17_0.png" height="800" width="600" />
+</center>
+
+<h3 id="46---visualization-of-nns-performace-for-xor-case">4.6 - Visualization of NN’s Performace for XOR Case</h3>
+<p>Let’s try our implementation with XOR like distribution.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">generate_xor_like_dataset</span><span class="p">(</span><span class="n">N_points</span><span class="p">):</span>
+    <span class="c1"># 1 class
+</span>    <span class="n">X_class_1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">concatenate</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">concatenate</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">normal</span><span class="p">(</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">N_points</span><span class="o">//</span><span class="mi">4</span><span class="p">).</span><span class="n">reshape</span><span class="p">(</span><span class="n">N_points</span><span class="o">//</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> 
+             <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">normal</span><span class="p">(</span><span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">N_points</span><span class="o">//</span><span class="mi">4</span><span class="p">).</span><span class="n">reshape</span><span class="p">(</span><span class="n">N_points</span><span class="o">//</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span> 
+            <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+        <span class="n">np</span><span class="p">.</span><span class="n">concatenate</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">normal</span><span class="p">(</span><span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">N_points</span><span class="o">//</span><span class="mi">4</span><span class="p">).</span><span class="n">reshape</span><span class="p">(</span><span class="n">N_points</span><span class="o">//</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> 
+             <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">normal</span><span class="p">(</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">N_points</span><span class="o">//</span><span class="mi">4</span><span class="p">).</span><span class="n">reshape</span><span class="p">(</span><span class="n">N_points</span><span class="o">//</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span> 
+            <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+    <span class="p">)</span>
+    <span class="n">Y_class_1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">full</span><span class="p">((</span><span class="n">N_points</span><span class="o">//</span><span class="mi">2</span><span class="p">,),</span> <span class="mi">1</span><span class="p">)</span>
+        
+    <span class="c1"># 0 class
+</span>    <span class="n">X_class_0</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">concatenate</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">concatenate</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">normal</span><span class="p">(</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">N_points</span><span class="o">//</span><span class="mi">4</span><span class="p">).</span><span class="n">reshape</span><span class="p">(</span><span class="n">N_points</span><span class="o">//</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> 
+             <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">normal</span><span class="p">(</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">N_points</span><span class="o">//</span><span class="mi">4</span><span class="p">).</span><span class="n">reshape</span><span class="p">(</span><span class="n">N_points</span><span class="o">//</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span> 
+            <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+        <span class="n">np</span><span class="p">.</span><span class="n">concatenate</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">normal</span><span class="p">(</span><span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">N_points</span><span class="o">//</span><span class="mi">4</span><span class="p">).</span><span class="n">reshape</span><span class="p">(</span><span class="n">N_points</span><span class="o">//</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> 
+             <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">normal</span><span class="p">(</span><span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">N_points</span><span class="o">//</span><span class="mi">4</span><span class="p">).</span><span class="n">reshape</span><span class="p">(</span><span class="n">N_points</span><span class="o">//</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span> 
+            <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+    <span class="p">)</span>
+    <span class="n">Y_class_0</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">full</span><span class="p">((</span><span class="n">N_points</span><span class="o">//</span><span class="mi">2</span><span class="p">,),</span> <span class="mi">0</span><span class="p">)</span>
+        
+    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">X_class_1</span><span class="p">,</span> <span class="n">X_class_0</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">Y_class_1</span><span class="p">,</span> <span class="n">Y_class_0</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span>
+    
+<span class="n">xor_X</span><span class="p">,</span> <span class="n">xor_Y</span> <span class="o">=</span> <span class="n">generate_xor_like_dataset</span><span class="p">(</span><span class="n">N_points</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="p">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xor_X</span><span class="p">[:</span><span class="n">N_points</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">xor_X</span><span class="p">[:</span><span class="n">N_points</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s">'red'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'class 1'</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span> 
+<span class="n">plt</span><span class="p">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xor_X</span><span class="p">[</span><span class="n">N_points</span><span class="o">//</span><span class="mi">2</span><span class="p">:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">xor_X</span><span class="p">[</span><span class="n">N_points</span><span class="o">//</span><span class="mi">2</span><span class="p">:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s">'blue'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'class 0'</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">),</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">xor_weights</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'W1'</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="s">'b1'</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
+    <span class="s">'W2'</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
+    <span class="s">'b2'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">xor_initial_weights</span> <span class="o">=</span> <span class="n">copy</span><span class="p">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">xor_weights</span><span class="p">)</span>
+<span class="n">xor_losses</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+    <span class="n">gradients</span><span class="p">,</span> <span class="n">L</span> <span class="o">=</span> <span class="n">back_propagation</span><span class="p">(</span><span class="n">xor_X</span><span class="p">,</span> <span class="n">xor_Y</span><span class="p">,</span> <span class="n">xor_weights</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">weight_name</span> <span class="ow">in</span> <span class="n">xor_weights</span><span class="p">:</span>
+        <span class="n">xor_weights</span><span class="p">[</span><span class="n">weight_name</span><span class="p">]</span> <span class="o">-=</span> <span class="n">epsilon</span> <span class="o">*</span> <span class="n">gradients</span><span class="p">[</span><span class="n">weight_name</span><span class="p">]</span>
+        
+    <span class="n">xor_losses</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="p">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">),</span> <span class="n">xor_losses</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">'Training Loss'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'Epoch'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'Loss'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="p">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">visualization</span><span class="p">(</span><span class="n">xor_weights</span><span class="p">,</span> <span class="n">xor_X</span><span class="p">,</span> <span class="s">'Visualization after learning'</span><span class="p">,</span> <span class="n">superposed_training</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<center>
+<img src="/assets/images/dl_backpropagation/output_19_0.png" height="800" width="600" />
+</center>
+
+<center>
+<img src="/assets/images/dl_backpropagation/output_19_1.png" height="800" width="600" />
+</center>
+
+<center>
+<img src="/assets/images/dl_backpropagation/output_19_2.png" height="800" width="600" />
+</center>
+
+<h2 id="5---conclusion">5 - Conclusion</h2>
+<p>Back-propagation is not an extremely complicated algorithm, but with numerical approach, it still requests tendendous amount of tedious computation; it become computationally more difficult as we have more hidden layers. Introducing back-propagation helps to mitigate such issue.</p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#machine-learning-concept" class="page__taxonomy-item" rel="tag">machine-learning-concept</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-11-04T00:00:00+00:00">November 04, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Deep+Learning+Performance+Improvement+4+-+Back-propagation%20http%3A%2F%2Flocalhost%3A4000%2FBackpropagation%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2FBackpropagation%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2FBackpropagation%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/Regularization/" class="pagination--pager" title="Deep Learning Performance Improvement 3 - Regularization
+">Previous</a>
+    
+    
+      <a href="/cv_intro/" class="pagination--pager" title="Deep Learning Applications in Computer Vision
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/" rel="permalink">Deep Learning Applications in Computer Vision
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Deep Learning / Computer Vision /
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/cv_intro/" rel="permalink">Deep Learning Applications in Computer Vision
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Deep Learning / Computer Vision /
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Regularization/" rel="permalink">Deep Learning Performance Improvement 3 - Regularization
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  25 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Penalizing Regularization (L1 and L2) / Dropout /  Machine Learning Performance Improvement
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Optimization_methods/" rel="permalink">Deep Learning Performance Improvement 2 - Optimizer
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  28 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Optimizer / Gradient Descent / Stochastic Gradient Descent / Momentum / Adam /  Machine Learning Performance Improvement
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><input type="text" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/jaechoi2357/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/pnut2357" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 Jae H. Choi. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.7.1/js/all.js" integrity="sha384-eVEQC9zshBn0rFj4+TU78eNA19HMNigMviK/PU/FFjLXqa/GKPgX58rvt5Z8PLs7" crossorigin="anonymous"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://localhost:4000/Backpropagation/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/Backpropagation"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://JBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+  </body>
+</html>

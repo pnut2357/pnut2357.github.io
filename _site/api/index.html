@@ -1,0 +1,673 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Into. to APIs and Web - Jae’s Blog</title>
+<meta name="description" content="Basic Understanding APIs and Web">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Jae's Blog">
+<meta property="og:title" content="Into. to APIs and Web">
+<meta property="og:url" content="http://localhost:4000/api/">
+
+
+  <meta property="og:description" content="Basic Understanding APIs and Web">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2020-08-07T00:00:00+01:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/api/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Jae H. Choi",
+      "url": "http://localhost:4000",
+      "sameAs": ["https://www.linkedin.com/in/jaechoi2357/"]
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Jae's Blog Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
+    </script>
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/mush.jpeg" alt=""></a>
+        
+        <a class="site-title" href="/">Jae's Blog</a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about/" >About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Portfolios/Concepts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Personal Interests</a>
+            </li><li class="masthead__menu-item">
+              <a href="/cheatsheets/introduction/" >Cheatsheets</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/profile.jpeg" alt="Jae H. Choi" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Jae H. Choi</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Yesterday is history, tomorrow is a mystery, but today is a gift. That's why it's called the present.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Tempe, AZ</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:jaehyuk0325@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/jaechoi2357/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://devpost.com/jaehyuk0325?ref_content=user-portfolio&ref_feature=portfolio&ref_medium=global-nav" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i> DevPost</a></li>
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/pnut2357" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Into. to APIs and Web">
+    <meta itemprop="description" content="API / Web / HTTP / Client / Server / TCP / DNS">
+    <meta itemprop="datePublished" content="August 07, 2020">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Into. to APIs and Web
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#api-introduction">API Introduction</a></li>
+  <li><a href="#how-apis-work">How APIs work</a></li>
+  <li><a href="#example-of-api">Example of API</a></li>
+  <li><a href="#categories-of-api">Categories of API</a></li>
+  <li><a href="#web-and-clients-servers-relationship">Web and Clients-Servers Relationship</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <h1 id="api-introduction">API Introduction</h1>
+<p>An API (Application programmable Interface) communicates between your personal device and data/service. In simple words, to help interactions between multiple softwares. It is an easy-to-use tool like GUI or UI.</p>
+
+<p><img src="/assets/images/intro_api/api.png" alt="api" height="700px" width="500px" /><br />
+| Fig1. API Overview|</p>
+
+<p>Think of the case that you want to order a delivery food. You choose a restaurant, check the menu, and decided omelette. You can clicked on your mobile and 20 minutes later the food came to your place. Even though you don’t have the ingredients, but you can easily get it. That menu is the API, your order is the request (API call), the food delivered to your place is the response. Like clicking the menu helped to deliver food to you, an API help you if you ask something. Whereas APIs operate when requests come from 3rd party apps, web-hooks operate when a specific event happens.</p>
+
+<h1 id="how-apis-work">How APIs work</h1>
+<p>Like the earlier example with simplification, your order (request) lets a delivery car pick up the ingredients of an omelette, cook it, and deliver it to you (response).</p>
+
+<p><img src="/assets/images/intro_api/food_del.png" alt="food_del" height="800px" width="400px" /><br />
+| Fig2. Simplified Food Delivery|</p>
+
+<p>Similarly, an API receives your request for specific data/service and provides response to you.</p>
+
+<p><img src="/assets/images/intro_api/api_work.png" alt="api_work" height="800px" width="400px" /><br />
+| Fig3. API analogy|</p>
+
+<p>In this simplified version, we talked about two elements: request, response, but there is one more: access.</p>
+<ul>
+  <li>Access: If the user is allowed to ask for data/services.</li>
+  <li>Request: If the user have access, it comes into two parts:
+    <ul>
+      <li>Methods: the questions that you want an answer (response) for.</li>
+      <li>Parameters: additional details you can add to your questions or answer (response).</li>
+    </ul>
+  </li>
+  <li>Response: The data/service as the answer that you requested.</li>
+</ul>
+
+<h1 id="example-of-api">Example of API</h1>
+
+<p>Poketmon Go uses the existing open source Google maps to build their application.</p>
+
+<p><img src="/assets/images/intro_api/poketmon.png" alt="poketmon" height="700px" width="600px" /><br />
+| Fig4. Poketmon Go API example|</p>
+
+<h1 id="categories-of-api">Categories of API</h1>
+<ul>
+  <li>Web-based System: A web API is an interface to either a web service or a web browser. These APIs are the most widely used as client-server architecture, working at the server end or the client end. They receive requests from user applications and provide responses via HTTP (I will talk about what HTTP for intuitively). Twitter REST API, Facebook Graph API, Amazon S3 REST API, and Google Maps API are web-based API examples.
+    <blockquote>
+      <p><strong>NOTE</strong> REST uses HTTP to communicate resource requester and resource provider. IN the REST architecture, all the resources have their own unique URLs such that they can let access through suitable HTTP method (GET/PUT/POST/DELETE).
+<img src="/assets/images/intro_api/rest.png" alt="rest" height="700px" width="300px" /></p>
+
+      <p>If you want to understand how it works compared to SOAP, check <a href="https://smartbear.com/blog/test-and-monitor/soap-vs-rest-whats-the-difference/">here</a>.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Operating System: There are multiple OS based APIs that provide functionality of various OS features. They defines how applications use the resources and services of OS. Windows API, Linux API, and Cocoa are OS based API examples. Apple provides API reference for macOS and iOS so that building apps use Cocoa Touch for the iOS mobile OS.</p>
+  </li>
+  <li>Database System: These APIs communicate between an application and a database management system, receiving the requested data by written queries and provide an answer. Drupal 7 Database API as an example allows users to access data via Oracle, MongoDB, PostgreSQL, MySQL, etc.</li>
+</ul>
+
+<h1 id="web-and-clients-servers-relationship">Web and Clients-Servers Relationship</h1>
+<p>As mentioned earlier, most common RESTful web APIs use HTTP methods to get information from a web-application/web-server. Let me talk about what HTTP is in web. HTTP is used to structure requests and responses over the internet. HTTP requires data to be transferred from one point to another over the network. A client (browser) sends an HTTP request to the server; then the server returns a response to the client. Let’s switch gears in the client-server relationship for a deeper understanding. The client-server relationship comes when your device is connected to the internet. For instance, your mobile/laptop (client) connected to your wifi/mobile network (server). Technically, Servers are the computers that store webpages, sites, or apps such that a webpage can be shown in the user’s web browser.</p>
+
+<p><img src="/assets/images/intro_api/client_server.png" alt="client_server" height="700px" width="400px" /><br />
+| Fig5. client_server Relationship|</p>
+
+<p>You can imagine that from your home (client) to the shop you need to visit (server) you need to pass through:</p>
+<ul>
+  <li>Internet Connection: Allows you to send and receive data on the web like the street between your home and the shop.</li>
+  <li>TCP/IP: Transmission Control Protocol / Internet Protocol are communication protocols that define how data should travel across the internet like the transportation that let you place how you approach to the shop.</li>
+  <li>DNS: Domain Name Servers are like an address book for websites. When you type a web address in your browser, the browser looks at the DNS to find the website’s real address (the IP address of the shop you want to visit). The browser needs to find out which server the website lives on, so it can send HTTP messages to the right place.</li>
+  <li>HTTP: Hypertext Transfer Protocol is an application protocol that defines a language for clients and servers to communicate to each other. This is like the language you use to order your goods.</li>
+  <li>Component files: If a website were a store, a component file would be a product in a store. A website (store) contains various  component files (products). These files are mainly in two types:
+    <ol>
+      <li>Code files: HTML, CSS, JavaScript (JS), etc, like structure or frames to format a website.</li>
+      <li>Assets: images, music, video, Word documents, PDFs, etc, like a design of style and contents for a website.</li>
+    </ol>
+  </li>
+</ul>
+
+<p>If you are interested in more detail information, please visit the following websites: <a href="https://www.altexsoft.com/blog/engineering/what-is-api-definition-types-specifications-documentation/">API</a>, <a href="https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/How_the_Web_works">Web</a></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#web" class="page__taxonomy-item" rel="tag">web</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-08-07T00:00:00+01:00">August 07, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Into.+to+APIs+and+Web%20http%3A%2F%2Flocalhost%3A4000%2Fapi%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fapi%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fapi%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/regression3/" class="pagination--pager" title="Regression3 (Regression Applications)
+">Previous</a>
+    
+    
+      <a href="/Data-Crawling-TwitterAPI/" class="pagination--pager" title="Data Crawling with Twitter API
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/" rel="permalink">Deep Learning Applications in Computer Vision
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Deep Learning / Computer Vision /
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/cv_intro/" rel="permalink">Deep Learning Applications in Computer Vision
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Deep Learning / Computer Vision /
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Backpropagation/" rel="permalink">Deep Learning Performance Improvement 4 - Back-propagation
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  16 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Back-propagation / Forward-propagation /  Machine Learning Performance Improvement
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Regularization/" rel="permalink">Deep Learning Performance Improvement 3 - Regularization
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  21 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Penalizing Regularization (L1 and L2) / Dropout /  Machine Learning Performance Improvement
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><input type="text" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/jaechoi2357/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/pnut2357" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 Jae H. Choi. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.7.1/js/all.js" integrity="sha384-eVEQC9zshBn0rFj4+TU78eNA19HMNigMviK/PU/FFjLXqa/GKPgX58rvt5Z8PLs7" crossorigin="anonymous"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://localhost:4000/api/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/api"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://JBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+  </body>
+</html>

@@ -1,0 +1,1038 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>VirtualBox Cheatsheet - Jae’s Blog</title>
+<meta name="description" content="List VMs">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Jae's Blog">
+<meta property="og:title" content="VirtualBox Cheatsheet">
+<meta property="og:url" content="http://localhost:4000/cheatsheets/virtualbox/">
+
+
+  <meta property="og:description" content="List VMs">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-06-16T16:18:00+01:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/cheatsheets/virtualbox/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Jae H. Choi",
+      "url": "http://localhost:4000",
+      "sameAs": ["https://www.linkedin.com/in/jaechoi2357/"]
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Jae's Blog Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
+    </script>
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/mush.jpeg" alt=""></a>
+        
+        <a class="site-title" href="/">Jae's Blog</a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about/" >About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Portfolios/Concepts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Personal Interests</a>
+            </li><li class="masthead__menu-item">
+              <a href="/cheatsheets/introduction/" >Cheatsheets</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Applications</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/cheatsheets/chocolatey/" class="">Chocolatey</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/cheatsheets/packer/" class="">Packer</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/cheatsheets/vagrant/" class="">Vagrant</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/cheatsheets/virtualbox/" class="active">VirtualBox</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+    
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="VirtualBox Cheatsheet">
+    <meta itemprop="description" content="List VMs">
+    
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">VirtualBox Cheatsheet
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#list-vms">List VMs</a></li>
+  <li><a href="#delete-vm">Delete VM</a></li>
+  <li><a href="#delete-all-vms">Delete ALL VMs</a></li>
+  <li><a href="#list-forwarded-vm-ports">List forwarded VM ports</a></li>
+  <li><a href="#virtualbox-help">VirtualBox Help</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <h2 id="list-vms">List VMs</h2>
+
+<p><code class="language-plaintext highlighter-rouge">VBoxManage list vms</code></p>
+
+<p class="notice--info"><strong>Info:</strong> includes hidden VMs created by Vagrant</p>
+
+<h2 id="delete-vm">Delete VM</h2>
+
+<p><code class="language-plaintext highlighter-rouge">VBoxManage unregistervm VMNAME --delete</code></p>
+
+<h2 id="delete-all-vms">Delete ALL VMs</h2>
+
+<p>This PowerShell one-liner will get all VM names from their folder names, then delete every VM. Just update your path to where your VirtualBox VMs are stored:</p>
+
+<p><code class="language-plaintext highlighter-rouge">(Get-ChildItem 'D:\VMs\VirtualBox').Name | ForEach-Object {VBoxManage unregistervm $_ --delete}</code></p>
+
+<h2 id="list-forwarded-vm-ports">List forwarded VM ports</h2>
+
+<p><code class="language-plaintext highlighter-rouge">VBoxManage showvminfo VMNAME --machinereadable | Select-String -Pattern 'Forwarding'</code></p>
+
+<p class="notice--info"><strong>Note:</strong> <code class="language-plaintext highlighter-rouge">Select-String</code> is a PowerShell command</p>
+
+<h2 id="virtualbox-help">VirtualBox Help</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Oracle VM VirtualBox Command Line Management Interface Version 5.1.30
+(C) 2005-2017 Oracle Corporation
+All rights reserved.
+
+Usage:
+
+  VBoxManage [&lt;general option&gt;] &lt;command&gt;
+General Options:
+  [-v|--version]            print version number and exit
+  [-q|--nologo]             suppress the logo
+  [--settingspw &lt;pw&gt;]       provide the settings password
+  [--settingspwfile &lt;file&gt;] provide a file containing the settings password
+Commands:
+  list [--long|-l]          vms|runningvms|ostypes|hostdvds|hostfloppies|
+                            intnets|bridgedifs|hostonlyifs|natnets|dhcpservers|
+                            hostinfo|hostcpuids|hddbackends|hdds|dvds|floppies|
+                            usbhost|usbfilters|systemproperties|extpacks|
+                            groups|webcams|screenshotformats
+
+  showvminfo                &lt;uuid|vmname&gt; [--details]
+                            [--machinereadable]
+  showvminfo                &lt;uuid|vmname&gt; --log &lt;idx&gt;
+
+  registervm                &lt;filename&gt;
+
+  unregistervm              &lt;uuid|vmname&gt; [--delete]
+
+  createvm                  --name &lt;name&gt;
+                            [--groups &lt;group&gt;, ...]
+                            [--ostype &lt;ostype&gt;]
+                            [--register]
+                            [--basefolder &lt;path&gt;]
+                            [--uuid &lt;uuid&gt;]
+
+  modifyvm                  &lt;uuid|vmname&gt;
+                            [--name &lt;name&gt;]
+                            [--groups &lt;group&gt;, ...]
+                            [--description &lt;desc&gt;]
+                            [--ostype &lt;ostype&gt;]
+                            [--iconfile &lt;filename&gt;]
+                            [--memory &lt;memorysize in MB&gt;]
+                            [--pagefusion on|off]
+                            [--vram &lt;vramsize in MB&gt;]
+                            [--acpi on|off]
+                            [--pciattach 03:04.0]
+                            [--pciattach 03:04.0@02:01.0]
+                            [--pcidetach 03:04.0]
+                            [--ioapic on|off]
+                            [--hpet on|off]
+                            [--triplefaultreset on|off]
+                            [--apic on|off]
+                            [--x2apic on|off]
+                            [--paravirtprovider none|default|legacy|minimal|
+                                                hyperv|kvm]
+                            [--paravirtdebug &lt;key=value&gt; [,&lt;key=value&gt; ...]]
+                            [--hwvirtex on|off]
+                            [--nestedpaging on|off]
+                            [--largepages on|off]
+                            [--vtxvpid on|off]
+                            [--vtxux on|off]
+                            [--pae on|off]
+                            [--longmode on|off]
+                            [--cpu-profile "host|Intel 80[86|286|386]"]
+                            [--cpuid-portability-level &lt;0..3&gt;
+                            [--cpuidset &lt;leaf&gt; &lt;eax&gt; &lt;ebx&gt; &lt;ecx&gt; &lt;edx&gt;]
+                            [--cpuidremove &lt;leaf&gt;]
+                            [--cpuidremoveall]
+                            [--hardwareuuid &lt;uuid&gt;]
+                            [--cpus &lt;number&gt;]
+                            [--cpuhotplug on|off]
+                            [--plugcpu &lt;id&gt;]
+                            [--unplugcpu &lt;id&gt;]
+                            [--cpuexecutioncap &lt;1-100&gt;]
+                            [--rtcuseutc on|off]
+                            [--graphicscontroller none|vboxvga|vmsvga]
+                            [--monitorcount &lt;number&gt;]
+                            [--accelerate3d on|off]
+                            [--accelerate2dvideo on|off]
+                            [--firmware bios|efi|efi32|efi64]
+                            [--chipset ich9|piix3]
+                            [--bioslogofadein on|off]
+                            [--bioslogofadeout on|off]
+                            [--bioslogodisplaytime &lt;msec&gt;]
+                            [--bioslogoimagepath &lt;imagepath&gt;]
+                            [--biosbootmenu disabled|menuonly|messageandmenu]
+                            [--biosapic disabled|apic|x2apic]
+                            [--biossystemtimeoffset &lt;msec&gt;]
+                            [--biospxedebug on|off]
+                            [--boot&lt;1-4&gt; none|floppy|dvd|disk|net&gt;]
+                            [--nic&lt;1-N&gt; none|null|nat|bridged|intnet|hostonly|
+                                        generic|natnetwork]
+                            [--nictype&lt;1-N&gt; Am79C970A|Am79C973|
+                                            82540EM|82543GC|82545EM|
+                                            virtio]
+                            [--cableconnected&lt;1-N&gt; on|off]
+                            [--nictrace&lt;1-N&gt; on|off]
+                            [--nictracefile&lt;1-N&gt; &lt;filename&gt;]
+                            [--nicproperty&lt;1-N&gt; name=[value]]
+                            [--nicspeed&lt;1-N&gt; &lt;kbps&gt;]
+                            [--nicbootprio&lt;1-N&gt; &lt;priority&gt;]
+                            [--nicpromisc&lt;1-N&gt; deny|allow-vms|allow-all]
+                            [--nicbandwidthgroup&lt;1-N&gt; none|&lt;name&gt;]
+                            [--bridgeadapter&lt;1-N&gt; none|&lt;devicename&gt;]
+                            [--hostonlyadapter&lt;1-N&gt; none|&lt;devicename&gt;]
+                            [--intnet&lt;1-N&gt; &lt;network name&gt;]
+                            [--nat-network&lt;1-N&gt; &lt;network name&gt;]
+                            [--nicgenericdrv&lt;1-N&gt; &lt;driver&gt;
+                            [--natnet&lt;1-N&gt; &lt;network&gt;|default]
+                            [--natsettings&lt;1-N&gt; [&lt;mtu&gt;],[&lt;socksnd&gt;],
+                                                [&lt;sockrcv&gt;],[&lt;tcpsnd&gt;],
+                                                [&lt;tcprcv&gt;]]
+                            [--natpf&lt;1-N&gt; [&lt;rulename&gt;],tcp|udp,[&lt;hostip&gt;],
+                                          &lt;hostport&gt;,[&lt;guestip&gt;],&lt;guestport&gt;]
+                            [--natpf&lt;1-N&gt; delete &lt;rulename&gt;]
+                            [--nattftpprefix&lt;1-N&gt; &lt;prefix&gt;]
+                            [--nattftpfile&lt;1-N&gt; &lt;file&gt;]
+                            [--nattftpserver&lt;1-N&gt; &lt;ip&gt;]
+                            [--natbindip&lt;1-N&gt; &lt;ip&gt;
+                            [--natdnspassdomain&lt;1-N&gt; on|off]
+                            [--natdnsproxy&lt;1-N&gt; on|off]
+                            [--natdnshostresolver&lt;1-N&gt; on|off]
+                            [--nataliasmode&lt;1-N&gt; default|[log],[proxyonly],
+                                                         [sameports]]
+                            [--macaddress&lt;1-N&gt; auto|&lt;mac&gt;]
+                            [--mouse ps2|usb|usbtablet|usbmultitouch]
+                            [--keyboard ps2|usb
+                            [--uart&lt;1-N&gt; off|&lt;I/O base&gt; &lt;IRQ&gt;]
+                            [--uartmode&lt;1-N&gt; disconnected|
+                                             server &lt;pipe&gt;|
+                                             client &lt;pipe&gt;|
+                                             tcpserver &lt;port&gt;|
+                                             tcpclient &lt;hostname:port&gt;|
+                                             file &lt;file&gt;|
+                                             &lt;devicename&gt;]
+                            [--lpt&lt;1-N&gt; off|&lt;I/O base&gt; &lt;IRQ&gt;]
+                            [--lptmode&lt;1-N&gt; &lt;devicename&gt;]
+                            [--guestmemoryballoon &lt;balloonsize in MB&gt;]
+                            [--audio none|null|dsound]
+                            [--audiocontroller ac97|hda|sb16]
+                            [--audiocodec stac9700|ad1980|stac9221|sb16]
+                            [--clipboard disabled|hosttoguest|guesttohost|
+                                         bidirectional]
+                            [--draganddrop disabled|hosttoguest]
+                            [--vrde on|off]
+                            [--vrdeextpack default|&lt;name&gt;
+                            [--vrdeproperty &lt;name=[value]&gt;]
+                            [--vrdeport &lt;hostport&gt;]
+                            [--vrdeaddress &lt;hostip&gt;]
+                            [--vrdeauthtype null|external|guest]
+                            [--vrdeauthlibrary default|&lt;name&gt;
+                            [--vrdemulticon on|off]
+                            [--vrdereusecon on|off]
+                            [--vrdevideochannel on|off]
+                            [--vrdevideochannelquality &lt;percent&gt;]
+                            [--usb on|off]
+                            [--usbehci on|off]
+                            [--usbxhci on|off]
+                            [--usbrename &lt;oldname&gt; &lt;newname&gt;]
+                            [--snapshotfolder default|&lt;path&gt;]
+                            [--teleporter on|off]
+                            [--teleporterport &lt;port&gt;]
+                            [--teleporteraddress &lt;address|empty&gt;
+                            [--teleporterpassword &lt;password&gt;]
+                            [--teleporterpasswordfile &lt;file&gt;|stdin]
+                            [--tracing-enabled on|off]
+                            [--tracing-config &lt;config-string&gt;]
+                            [--tracing-allow-vm-access on|off]
+                            [--usbcardreader on|off]
+                            [--autostart-enabled on|off]
+                            [--autostart-delay &lt;seconds&gt;]
+                            [--videocap on|off]
+                            [--videocapscreens all|&lt;screen ID&gt; [&lt;screen ID&gt; ...]]
+                            [--videocapfile &lt;filename&gt;]
+                            [--videocapres &lt;width&gt; &lt;height&gt;]
+                            [--videocaprate &lt;rate&gt;]
+                            [--videocapfps &lt;fps&gt;]
+                            [--videocapmaxtime &lt;ms&gt;]
+                            [--videocapmaxsize &lt;MB&gt;]
+                            [--videocapopts &lt;key=value&gt; [,&lt;key=value&gt; ...]]
+                            [--defaultfrontend default|&lt;name&gt;]
+
+  clonevm                   &lt;uuid|vmname&gt;
+                            [--snapshot &lt;uuid&gt;|&lt;name&gt;]
+                            [--mode machine|machineandchildren|all]
+                            [--options link|keepallmacs|keepnatmacs|
+                                       keepdisknames]
+                            [--name &lt;name&gt;]
+                            [--groups &lt;group&gt;, ...]
+                            [--basefolder &lt;basefolder&gt;]
+                            [--uuid &lt;uuid&gt;]
+                            [--register]
+
+  import                    &lt;ovfname/ovaname&gt;
+                            [--dry-run|-n]
+                            [--options keepallmacs|keepnatmacs|importtovdi]
+                            [more options]
+                            (run with -n to have options displayed
+                             for a particular OVF)
+
+  export                    &lt;machines&gt; --output|-o &lt;name&gt;.&lt;ovf/ova&gt;
+                            [--legacy09|--ovf09|--ovf10|--ovf20]
+                            [--manifest]
+                            [--iso]
+                            [--options manifest|iso|nomacs|nomacsbutnat]
+                            [--vsys &lt;number of virtual system&gt;]
+                                    [--product &lt;product name&gt;]
+                                    [--producturl &lt;product url&gt;]
+                                    [--vendor &lt;vendor name&gt;]
+                                    [--vendorurl &lt;vendor url&gt;]
+                                    [--version &lt;version info&gt;]
+                                    [--description &lt;description info&gt;]
+                                    [--eula &lt;license text&gt;]
+                                    [--eulafile &lt;filename&gt;]
+
+  startvm                   &lt;uuid|vmname&gt;...
+                            [--type gui|sdl|headless|separate]
+
+  controlvm                 &lt;uuid|vmname&gt;
+                            pause|resume|reset|poweroff|savestate|
+                            acpipowerbutton|acpisleepbutton|
+                            keyboardputscancode &lt;hex&gt; [&lt;hex&gt; ...]|
+                            setlinkstate&lt;1-N&gt; on|off |
+                            nic&lt;1-N&gt; null|nat|bridged|intnet|hostonly|generic|
+                                     natnetwork [&lt;devicename&gt;] |
+                            nictrace&lt;1-N&gt; on|off |
+                            nictracefile&lt;1-N&gt; &lt;filename&gt; |
+                            nicproperty&lt;1-N&gt; name=[value] |
+                            nicpromisc&lt;1-N&gt; deny|allow-vms|allow-all |
+                            natpf&lt;1-N&gt; [&lt;rulename&gt;],tcp|udp,[&lt;hostip&gt;],
+                                        &lt;hostport&gt;,[&lt;guestip&gt;],&lt;guestport&gt; |
+                            natpf&lt;1-N&gt; delete &lt;rulename&gt; |
+                            guestmemoryballoon &lt;balloonsize in MB&gt; |
+                            usbattach &lt;uuid&gt;|&lt;address&gt;
+                                      [--capturefile &lt;filename&gt;] |
+                            usbdetach &lt;uuid&gt;|&lt;address&gt; |
+                            clipboard disabled|hosttoguest|guesttohost|
+                                      bidirectional |
+                            draganddrop disabled|hosttoguest |
+                            vrde on|off |
+                            vrdeport &lt;port&gt; |
+                            vrdeproperty &lt;name=[value]&gt; |
+                            vrdevideochannelquality &lt;percent&gt; |
+                            setvideomodehint &lt;xres&gt; &lt;yres&gt; &lt;bpp&gt;
+                                            [[&lt;display&gt;] [&lt;enabled:yes|no&gt; |
+                                              [&lt;xorigin&gt; &lt;yorigin&gt;]]] |
+                            screenshotpng &lt;file&gt; [display] |
+                            videocap on|off |
+                            videocapscreens all|none|&lt;screen&gt;,[&lt;screen&gt;...] |
+                            videocapfile &lt;file&gt;
+                            videocapres &lt;width&gt;x&lt;height&gt;
+                            videocaprate &lt;rate&gt;
+                            videocapfps &lt;fps&gt;
+                            videocapmaxtime &lt;ms&gt;
+                            videocapmaxsize &lt;MB&gt;
+                            setcredentials &lt;username&gt;
+                                           --passwordfile &lt;file&gt; | &lt;password&gt;
+                                           &lt;domain&gt;
+                                           [--allowlocallogon &lt;yes|no&gt;] |
+                            teleport --host &lt;name&gt; --port &lt;port&gt;
+                                     [--maxdowntime &lt;msec&gt;]
+                                     [--passwordfile &lt;file&gt; |
+                                      --password &lt;password&gt;] |
+                            plugcpu &lt;id&gt; |
+                            unplugcpu &lt;id&gt; |
+                            cpuexecutioncap &lt;1-100&gt;
+                            webcam &lt;attach [path [settings]]&gt; | &lt;detach [path]&gt; | &lt;list&gt;
+                            addencpassword &lt;id&gt;
+                                           &lt;password file&gt;|-
+                                           [--removeonsuspend &lt;yes|no&gt;]
+                            removeencpassword &lt;id&gt;
+                            removeallencpasswords
+
+  discardstate              &lt;uuid|vmname&gt;
+
+  adoptstate                &lt;uuid|vmname&gt; &lt;state_file&gt;
+
+  snapshot                  &lt;uuid|vmname&gt;
+                            take &lt;name&gt; [--description &lt;desc&gt;] [--live]
+                                 [--uniquename Number,Timestamp,Space,Force] |
+                            delete &lt;uuid|snapname&gt; |
+                            restore &lt;uuid|snapname&gt; |
+                            restorecurrent |
+                            edit &lt;uuid|snapname&gt;|--current
+                                 [--name &lt;name&gt;]
+                                 [--description &lt;desc&gt;] |
+                            list [--details|--machinereadable]
+                            showvminfo &lt;uuid|snapname&gt;
+
+  closemedium               [disk|dvd|floppy] &lt;uuid|filename&gt;
+                            [--delete]
+
+  storageattach             &lt;uuid|vmname&gt;
+                            --storagectl &lt;name&gt;
+                            [--port &lt;number&gt;]
+                            [--device &lt;number&gt;]
+                            [--type dvddrive|hdd|fdd]
+                            [--medium none|emptydrive|additions|
+                                      &lt;uuid|filename&gt;|host:&lt;drive&gt;|iscsi]
+                            [--mtype normal|writethrough|immutable|shareable|
+                                     readonly|multiattach]
+                            [--comment &lt;text&gt;]
+                            [--setuuid &lt;uuid&gt;]
+                            [--setparentuuid &lt;uuid&gt;]
+                            [--passthrough on|off]
+                            [--tempeject on|off]
+                            [--nonrotational on|off]
+                            [--discard on|off]
+                            [--hotpluggable on|off]
+                            [--bandwidthgroup &lt;name&gt;]
+                            [--forceunmount]
+                            [--server &lt;name&gt;|&lt;ip&gt;]
+                            [--target &lt;target&gt;]
+                            [--tport &lt;port&gt;]
+                            [--lun &lt;lun&gt;]
+                            [--encodedlun &lt;lun&gt;]
+                            [--username &lt;username&gt;]
+                            [--password &lt;password&gt;]
+                            [--initiator &lt;initiator&gt;]
+                            [--intnet]
+
+  storagectl                &lt;uuid|vmname&gt;
+                            --name &lt;name&gt;
+                            [--add ide|sata|scsi|floppy|sas|usb|pcie]
+                            [--controller LSILogic|LSILogicSAS|BusLogic|
+                                          IntelAHCI|PIIX3|PIIX4|ICH6|I82078|
+                            [             USB|NVMe]
+                            [--portcount &lt;1-n&gt;]
+                            [--hostiocache on|off]
+                            [--bootable on|off]
+                            [--rename &lt;name&gt;]
+                            [--remove]
+
+  bandwidthctl              &lt;uuid|vmname&gt;
+                            add &lt;name&gt; --type disk|network
+                                --limit &lt;megabytes per second&gt;[k|m|g|K|M|G] |
+                            set &lt;name&gt;
+                                --limit &lt;megabytes per second&gt;[k|m|g|K|M|G] |
+                            remove &lt;name&gt; |
+                            list [--machinereadable]
+                            (limit units: k=kilobit, m=megabit, g=gigabit,
+                                          K=kilobyte, M=megabyte, G=gigabyte)
+
+  showmediuminfo            [disk|dvd|floppy] &lt;uuid|filename&gt;
+
+  createmedium              [disk|dvd|floppy] --filename &lt;filename&gt;
+                            [--size &lt;megabytes&gt;|--sizebyte &lt;bytes&gt;]
+                            [--diffparent &lt;uuid&gt;|&lt;filename&gt;
+                            [--format VDI|VMDK|VHD] (default: VDI)
+                            [--variant Standard,Fixed,Split2G,Stream,ESX]
+
+  modifymedium              [disk|dvd|floppy] &lt;uuid|filename&gt;
+                            [--type normal|writethrough|immutable|shareable|
+                                    readonly|multiattach]
+                            [--autoreset on|off]
+                            [--property &lt;name=[value]&gt;]
+                            [--compact]
+                            [--resize &lt;megabytes&gt;|--resizebyte &lt;bytes&gt;]
+                            [--move &lt;path&gt;]
+  clonemedium               [disk|dvd|floppy] &lt;uuid|inputfile&gt; &lt;uuid|outputfile&gt;
+                            [--format VDI|VMDK|VHD|RAW|&lt;other&gt;]
+                            [--variant Standard,Fixed,Split2G,Stream,ESX]
+                            [--existing]
+
+  mediumproperty            [disk|dvd|floppy] set &lt;uuid|filename&gt;
+                            &lt;property&gt; &lt;value&gt;
+
+                            [disk|dvd|floppy] get &lt;uuid|filename&gt;
+                            &lt;property&gt;
+
+                            [disk|dvd|floppy] delete &lt;uuid|filename&gt;
+                            &lt;property&gt;
+
+  encryptmedium             &lt;uuid|filename&gt;
+                            [--newpassword &lt;file&gt;|-]
+                            [--oldpassword &lt;file&gt;|-]
+                            [--cipher &lt;cipher identifier&gt;]
+                            [--newpasswordid &lt;password identifier&gt;]
+
+  checkmediumpwd            &lt;uuid|filename&gt;
+                            &lt;pwd file&gt;|-
+
+  convertfromraw            &lt;filename&gt; &lt;outputfile&gt;
+                            [--format VDI|VMDK|VHD]
+                            [--variant Standard,Fixed,Split2G,Stream,ESX]
+                            [--uuid &lt;uuid&gt;]
+  convertfromraw            stdin &lt;outputfile&gt; &lt;bytes&gt;
+                            [--format VDI|VMDK|VHD]
+                            [--variant Standard,Fixed,Split2G,Stream,ESX]
+                            [--uuid &lt;uuid&gt;]
+
+  getextradata              global|&lt;uuid|vmname&gt;
+                            &lt;key&gt;|enumerate
+
+  setextradata              global|&lt;uuid|vmname&gt;
+                            &lt;key&gt;
+                            [&lt;value&gt;] (no value deletes key)
+
+  setproperty               machinefolder default|&lt;folder&gt; |
+                            hwvirtexclusive on|off |
+                            vrdeauthlibrary default|&lt;library&gt; |
+                            websrvauthlibrary default|null|&lt;library&gt; |
+                            vrdeextpack null|&lt;library&gt; |
+                            autostartdbpath null|&lt;folder&gt; |
+                            loghistorycount &lt;value&gt;
+                            defaultfrontend default|&lt;name&gt;
+                            logginglevel &lt;log setting&gt;
+
+  usbfilter                 add &lt;index,0-N&gt;
+                            --target &lt;uuid|vmname&gt;|global
+                            --name &lt;string&gt;
+                            --action ignore|hold (global filters only)
+                            [--active yes|no] (yes)
+                            [--vendorid &lt;XXXX&gt;] (null)
+                            [--productid &lt;XXXX&gt;] (null)
+                            [--revision &lt;IIFF&gt;] (null)
+                            [--manufacturer &lt;string&gt;] (null)
+                            [--product &lt;string&gt;] (null)
+                            [--remote yes|no] (null, VM filters only)
+                            [--serialnumber &lt;string&gt;] (null)
+                            [--maskedinterfaces &lt;XXXXXXXX&gt;]
+
+  usbfilter                 modify &lt;index,0-N&gt;
+                            --target &lt;uuid|vmname&gt;|global
+                            [--name &lt;string&gt;]
+                            [--action ignore|hold] (global filters only)
+                            [--active yes|no]
+                            [--vendorid &lt;XXXX&gt;|""]
+                            [--productid &lt;XXXX&gt;|""]
+                            [--revision &lt;IIFF&gt;|""]
+                            [--manufacturer &lt;string&gt;|""]
+                            [--product &lt;string&gt;|""]
+                            [--remote yes|no] (null, VM filters only)
+                            [--serialnumber &lt;string&gt;|""]
+                            [--maskedinterfaces &lt;XXXXXXXX&gt;]
+
+  usbfilter                 remove &lt;index,0-N&gt;
+                            --target &lt;uuid|vmname&gt;|global
+
+  sharedfolder              add &lt;uuid|vmname&gt;
+                            --name &lt;name&gt; --hostpath &lt;hostpath&gt;
+                            [--transient] [--readonly] [--automount]
+
+  sharedfolder              remove &lt;uuid|vmname&gt;
+                            --name &lt;name&gt; [--transient]
+
+  guestproperty             get &lt;uuid|vmname&gt;
+                            &lt;property&gt; [--verbose]
+
+  guestproperty             set &lt;uuid|vmname&gt;
+                            &lt;property&gt; [&lt;value&gt; [--flags &lt;flags&gt;]]
+
+  guestproperty             delete|unset &lt;uuid|vmname&gt;
+                            &lt;property&gt;
+
+  guestproperty             enumerate &lt;uuid|vmname&gt;
+                            [--patterns &lt;patterns&gt;]
+
+  guestproperty             wait &lt;uuid|vmname&gt; &lt;patterns&gt;
+                            [--timeout &lt;msec&gt;] [--fail-on-timeout]
+
+  guestcontrol              &lt;uuid|vmname&gt; [--verbose|-v] [--quiet|-q]
+                              [--username &lt;name&gt;] [--domain &lt;domain&gt;]
+                              [--passwordfile &lt;file&gt; | --password &lt;password&gt;]
+
+                              run [common-options]
+                              [--exe &lt;path to executable&gt;] [--timeout &lt;msec&gt;]
+                              [-E|--putenv &lt;NAME&gt;[=&lt;VALUE&gt;]] [--unquoted-args]
+                              [--ignore-operhaned-processes] [--profile]
+                              [--no-wait-stdout|--wait-stdout]
+                              [--no-wait-stderr|--wait-stderr]
+                              [--dos2unix] [--unix2dos]
+                              -- &lt;program/arg0&gt; [argument1] ... [argumentN]]
+
+                              start [common-options]
+                              [--exe &lt;path to executable&gt;] [--timeout &lt;msec&gt;]
+                              [-E|--putenv &lt;NAME&gt;[=&lt;VALUE&gt;]] [--unquoted-args]
+                              [--ignore-operhaned-processes] [--profile]
+                              -- &lt;program/arg0&gt; [argument1] ... [argumentN]]
+
+                              copyfrom [common-options]
+                              [--dryrun] [--follow] [-R|--recursive]
+                              &lt;guest-src0&gt; [guest-src1 [...]] &lt;host-dst&gt;
+
+                              copyfrom [common-options]
+                              [--dryrun] [--follow] [-R|--recursive]
+                              [--target-directory &lt;host-dst-dir&gt;]
+                              &lt;guest-src0&gt; [guest-src1 [...]]
+
+                              copyto [common-options]
+                              [--dryrun] [--follow] [-R|--recursive]
+                              &lt;host-src0&gt; [host-src1 [...]] &lt;guest-dst&gt;
+
+                              copyto [common-options]
+                              [--dryrun] [--follow] [-R|--recursive]
+                              [--target-directory &lt;guest-dst&gt;]
+                              &lt;host-src0&gt; [host-src1 [...]]
+
+                              mkdir|createdir[ectory] [common-options]
+                              [--parents] [--mode &lt;mode&gt;]
+                              &lt;guest directory&gt; [...]
+
+                              rmdir|removedir[ectory] [common-options]
+                              [-R|--recursive]
+                              &lt;guest directory&gt; [...]
+
+                              removefile|rm [common-options] [-f|--force]
+                              &lt;guest file&gt; [...]
+
+                              mv|move|ren[ame] [common-options]
+                              &lt;source&gt; [source1 [...]] &lt;dest&gt;
+
+                              mktemp|createtemp[orary] [common-options]
+                              [--secure] [--mode &lt;mode&gt;] [--tmpdir &lt;directory&gt;]
+                              &lt;template&gt;
+
+                              stat [common-options]
+                              &lt;file&gt; [...]
+
+  guestcontrol              &lt;uuid|vmname&gt; [--verbose|-v] [--quiet|-q]
+
+                              list &lt;all|sessions|processes|files&gt; [common-opts]
+
+                              closeprocess [common-options]
+                              &lt;   --session-id &lt;ID&gt;
+                                | --session-name &lt;name or pattern&gt;
+                              &lt;PID1&gt; [PID1 [...]]
+
+                              closesession [common-options]
+                              &lt;  --all | --session-id &lt;ID&gt;
+                                | --session-name &lt;name or pattern&gt; &gt;
+
+                              updatega|updateguestadditions|updateadditions
+                              [--source &lt;guest additions .ISO&gt;]
+                              [--wait-start] [common-options]
+                              [-- [&lt;argument1&gt;] ... [&lt;argumentN&gt;]]
+
+                              watch [common-options]
+
+  metrics                   list [*|host|&lt;vmname&gt; [&lt;metric_list&gt;]]
+                                                 (comma-separated)
+
+  metrics                   setup
+                            [--period &lt;seconds&gt;] (default: 1)
+                            [--samples &lt;count&gt;] (default: 1)
+                            [--list]
+                            [*|host|&lt;vmname&gt; [&lt;metric_list&gt;]]
+
+  metrics                   query [*|host|&lt;vmname&gt; [&lt;metric_list&gt;]]
+
+  metrics                   enable
+                            [--list]
+                            [*|host|&lt;vmname&gt; [&lt;metric_list&gt;]]
+
+  metrics                   disable
+                            [--list]
+                            [*|host|&lt;vmname&gt; [&lt;metric_list&gt;]]
+
+  metrics                   collect
+                            [--period &lt;seconds&gt;] (default: 1)
+                            [--samples &lt;count&gt;] (default: 1)
+                            [--list]
+                            [--detach]
+                            [*|host|&lt;vmname&gt; [&lt;metric_list&gt;]]
+
+  natnetwork                add --netname &lt;name&gt;
+                            --network &lt;network&gt;
+                            [--enable|--disable]
+                            [--dhcp on|off]
+                            [--port-forward-4 &lt;rule&gt;]
+                            [--loopback-4 &lt;rule&gt;]
+                            [--ipv6 on|off]
+                            [--port-forward-6 &lt;rule&gt;]
+                            [--loopback-6 &lt;rule&gt;]
+
+  natnetwork                remove --netname &lt;name&gt;
+
+  natnetwork                modify --netname &lt;name&gt;
+                            [--network &lt;network&gt;]
+                            [--enable|--disable]
+                            [--dhcp on|off]
+                            [--port-forward-4 &lt;rule&gt;]
+                            [--loopback-4 &lt;rule&gt;]
+                            [--ipv6 on|off]
+                            [--port-forward-6 &lt;rule&gt;]
+                            [--loopback-6 &lt;rule&gt;]
+
+  natnetwork                start --netname &lt;name&gt;
+
+  natnetwork                stop --netname &lt;name&gt;
+
+  natnetwork                list [&lt;pattern&gt;]
+
+  hostonlyif                ipconfig &lt;name&gt;
+                            [--dhcp |
+                            --ip&lt;ipv4&gt; [--netmask&lt;ipv4&gt; (def: 255.255.255.0)] |
+                            --ipv6&lt;ipv6&gt; [--netmasklengthv6&lt;length&gt; (def: 64)]]
+                            create |
+                            remove &lt;name&gt;
+
+  dhcpserver                add|modify --netname &lt;network_name&gt; |
+                                       --ifname &lt;hostonly_if_name&gt;
+                            [--ip &lt;ip_address&gt;
+                            --netmask &lt;network_mask&gt;
+                            --lowerip &lt;lower_ip&gt;
+                            --upperip &lt;upper_ip&gt;]
+                            [--enable | --disable]
+
+  dhcpserver                remove --netname &lt;network_name&gt; |
+                                   --ifname &lt;hostonly_if_name&gt;
+
+  usbdevsource              add &lt;source name&gt;
+                            --backend &lt;backend&gt;
+                            --address &lt;address&gt;
+  usbdevsource              remove &lt;source name&gt;
+
+Introspection and guest debugging:
+  VBoxManage debugvm &lt;uuid|vmname&gt; dumpvmcore [--filename=name]
+  VBoxManage debugvm &lt;uuid|vmname&gt; info &lt;item&gt; [args...]
+  VBoxManage debugvm &lt;uuid|vmname&gt; injectnmi
+  VBoxManage debugvm &lt;uuid|vmname&gt; log [[--release] | [--debug]]
+      [group-settings...]
+  VBoxManage debugvm &lt;uuid|vmname&gt; logdest [[--release] | [--debug]]
+      [destinations...]
+  VBoxManage debugvm &lt;uuid|vmname&gt; logflags [[--release] | [--debug]] [flags...]
+  VBoxManage debugvm &lt;uuid|vmname&gt; osdetect
+  VBoxManage debugvm &lt;uuid|vmname&gt; osinfo
+  VBoxManage debugvm &lt;uuid|vmname&gt; osdmesg [--lines=lines]
+  VBoxManage debugvm &lt;uuid|vmname&gt; getregisters [--cpu=id] [reg-set.reg-name...]
+  VBoxManage debugvm &lt;uuid|vmname&gt; setregisters [--cpu=id]
+      [reg-set.reg-name=value...]
+  VBoxManage debugvm &lt;uuid|vmname&gt; show [[--human-readable] | [--sh-export] |
+      [--sh-eval] | [--cmd-set]] [settings-item...]
+  VBoxManage debugvm &lt;uuid|vmname&gt; stack [--cpu=id]
+  VBoxManage debugvm &lt;uuid|vmname&gt; statistics [--reset] [--descriptions]
+      [--pattern=pattern]
+
+Extension package management:
+  VBoxManage extpack install [--replace] &lt;tarball&gt;
+  VBoxManage extpack uninstall [--force] &lt;name&gt;
+  VBoxManage extpack cleanup
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=VirtualBox+Cheatsheet%20http%3A%2F%2Flocalhost%3A4000%2Fcheatsheets%2Fvirtualbox%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fcheatsheets%2Fvirtualbox%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fcheatsheets%2Fvirtualbox%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/cheatsheets/vagrant/" class="pagination--pager" title="Vagrant Cheatsheet
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><input type="text" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/jaechoi2357/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/pnut2357" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 Jae H. Choi. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.7.1/js/all.js" integrity="sha384-eVEQC9zshBn0rFj4+TU78eNA19HMNigMviK/PU/FFjLXqa/GKPgX58rvt5Z8PLs7" crossorigin="anonymous"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  </body>
+</html>

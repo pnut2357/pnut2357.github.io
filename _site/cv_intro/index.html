@@ -1,0 +1,773 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Deep Learning Applications in Computer Vision - Jae’s Blog</title>
+<meta name="description" content="Deep Learning / Computer Vision /">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Jae's Blog">
+<meta property="og:title" content="Deep Learning Applications in Computer Vision">
+<meta property="og:url" content="http://localhost:4000/cv_intro/">
+
+
+  <meta property="og:description" content="Deep Learning / Computer Vision /">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2021-01-01T00:00:00+00:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/cv_intro/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Jae H. Choi",
+      "url": "http://localhost:4000",
+      "sameAs": ["https://www.linkedin.com/in/jaechoi2357/"]
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Jae's Blog Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
+    </script>
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/mush.jpeg" alt=""></a>
+        
+        <a class="site-title" href="/">Jae's Blog</a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about/" >About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Portfolios/Concepts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Personal Interests</a>
+            </li><li class="masthead__menu-item">
+              <a href="/cheatsheets/introduction/" >Cheatsheets</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/profile.jpeg" alt="Jae H. Choi" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Jae H. Choi</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Yesterday is history, tomorrow is a mystery, but today is a gift. That's why it's called the present.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Tempe, AZ</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:jaehyuk0325@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/jaechoi2357/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://devpost.com/jaehyuk0325?ref_content=user-portfolio&ref_feature=portfolio&ref_medium=global-nav" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i> DevPost</a></li>
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/pnut2357" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Deep Learning Applications in Computer Vision">
+    <meta itemprop="description" content="Deep Learning / Computer Vision /">
+    <meta itemprop="datePublished" content="January 01, 2021">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Deep Learning Applications in Computer Vision
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#applications-in-computer-vision">Applications in Computer Vision</a>
+    <ul>
+      <li><a href="#1-image-classification">1. Image Classification</a></li>
+      <li><a href="#2-object-detection">2. Object Detection</a></li>
+      <li><a href="#3-object-segmentation">3. Object Segmentation</a></li>
+      <li><a href="#4-object-tracking">4. Object Tracking</a></li>
+      <li><a href="#5-pose-estimation">5. Pose Estimation</a></li>
+      <li><a href="#6-image-generation-with-gan">6. Image Generation with GAN</a></li>
+      <li><a href="#7-image-captioning">7. Image Captioning</a></li>
+      <li><a href="#8-anomaly-detection">8. Anomaly Detection</a></li>
+    </ul>
+  </li>
+</ul>
+            </nav>
+          </aside>
+        
+        <h1 id="applications-in-computer-vision">Applications in Computer Vision</h1>
+<p>Even though there are many challenging problems in computer vision, I would like to categorize them into 8 so far and introduce important papers for each type.</p>
+
+<h2 id="1-image-classification">1. Image Classification</h2>
+<p>Image classification is the task of classifying image into one of the pre-defined categories. The most famous exmaple is cat or dog classification. The main point is to distinguish the features of image. AlexNet, ResNet, and VGG are popular techniques.</p>
+
+<center>
+<img src="/assets/images/Deep-Learning-Applications-in-Computer-Vision/cat_dog.gif" height="800" width="500" />
+</center>
+<caption><center>  <font color="purple"> Figure 1 </font> Cat or Dog Classification </center></caption>
+
+<p>Papers:</p>
+
+<p><a href="https://proceedings.neurips.cc/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html">ImageNet Classification With Deep Convolutional Neural Networks</a></p>
+
+<p><a href="https://arxiv.org/abs/1512.03385">Deep Residual Learning for Image Recognition</a></p>
+
+<h2 id="2-object-detection">2. Object Detection</h2>
+<p>Object detection is the task of classification with localization. Using a bounding box around the object, objects in different categories are detected. There are two evalution methods for this techniue; mAP for classification and IoU for localization. Due to the imbalance of dataset, average precision (AP) via maximized area under the precision-recall (just like AUC through ROC) can be averaged over all categories. This categorical mean of AP is called mAP (mean Averaged Precision).  Thus, mAP is evaluation metric for classification while intersection over unit (IoU) is one for localization if a bounding box is localized well around the object.</p>
+
+<center>
+<img src="/assets/images/Deep-Learning-Applications-in-Computer-Vision/object_detect.jpeg" height="800" width="500" />
+</center>
+<caption><center>  <font color="purple"> Figure 2 </font> Object Detection </center></caption>
+
+<p>There are 2 types of detector; 1-stage detector (R-CNN family) and 2-stage detector (YOLO or SSD family). 1-sage detector works for region proporal and classification simultaneously by feature extraction while 2-stage dector works for them sequentially by selective search. For training time, 1-stage detector has faster trend than 2-stage, but 2-stage detector has lower localization error.</p>
+
+<p>Papers:</p>
+
+<p><a href="https://link.springer.com/article/10.1007/s11263-013-0620-5">Selective Search for Object Recognition</a></p>
+
+<p><a href="https://arxiv.org/abs/1506.01497">Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks</a></p>
+
+<p><a href="https://arxiv.org/abs/1506.02640">You Only Look Once: Unified, Real-Time Object Detection</a></p>
+
+<h2 id="3-object-segmentation">3. Object Segmentation</h2>
+<p>Object segmentation is the task of object detection where a drawing line is around each detected object. While object detection identifies objects through a bounding box, object segmentation identifies relevant pixels that belong to an object. There are semantic segmentation and instance segmentation. Instead of treating each pixel that belongs to an object categories (semantic), instance segmentation treats each pixel that belongs to an object instance.</p>
+<center>
+<img src="/assets/images/Deep-Learning-Applications-in-Computer-Vision/seg.png" height="800" width="500" />
+</center>
+<caption><center>  <font color="purple"> Figure 3 </font> Segmentations Compared with Detections  </center></caption>
+
+<p>Due to cruciality of every pixel information (especially in each object boundary), downsampling (Conv+Pool) and upsampling (Transpose Conv) are popularly used rather than fully connected layers that causes loss of spatial information.</p>
+
+<p>Papers:</p>
+
+<p><a href="https://arxiv.org/abs/1407.1808">Simultaneous Detection and Segmentation</a></p>
+
+<p><a href="https://ieeexplore.ieee.org/document/7478072">Fully Convolutional Networks for Semantic Segmentation</a></p>
+
+<p><a href="https://ieeexplore.ieee.org/document/7803544">SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation</a></p>
+
+<p><a href="https://arxiv.org/abs/1703.06870">Mask R-CNN</a></p>
+
+<h2 id="4-object-tracking">4. Object Tracking</h2>
+
+<p>Object tracking is the task of taking an initial set of object detections with localization, creating a unique ID for each of the initial sets, and then tracking each in frames of a video.</p>
+
+<center>
+<img src="/assets/images/Deep-Learning-Applications-in-Computer-Vision/object_tracking.gif" height="800" width="500" />
+</center>
+<caption><center>  <font color="purple"> Figure 4 </font> Object Tracking </center></caption>
+
+<p><strong>Centroid based ID assignment</strong>:</p>
+<ol>
+  <li>Take an initial set of object detection with an input set of bounding box coordinates.</li>
+  <li>Create a unique ID for each initial detection.</li>
+  <li>Assign the unique ID to the obect that has the nearest centroid of bounding box in the next frame (tracking).</li>
+</ol>
+
+<p>In this case, it is possible that assignment of ID could be switched when objects overlap. So, Kalman filter can be used to track based on moving speed and direction of object.</p>
+
+<p>Papers:</p>
+
+<p><a href="https://arxiv.org/abs/1602.00763">Simple Online and Realtime Tracking</a></p>
+
+<p><a href="https://arxiv.org/pdf/1703.07402.pdf">Deep SORT</a></p>
+
+<h2 id="5-pose-estimation">5. Pose Estimation</h2>
+
+<p>Pose Estimation is the task of identifying, locating, and tracking a number of keypoints on objects. Depending on dimension and number of points (keypoints), a point of body parts can be estimated based on regression loss. For instance, suppose that number of keypoints is set up 18. 2D pose estimation is based on \((x,y)\) coordinates for each joint (similarly, 3D pose estimation is based on \((x,y,z)\)). Then, in 2D, we have \((x_0,y_0)\), \((x_1,y_1)\), …, \((x_{17},y_{17})\). These points are estimated and optimized. Pose Estimation is heavily used in action recognition, animation, gaming, etc.</p>
+
+<center>
+<img src="/assets/images/Deep-Learning-Applications-in-Computer-Vision/pose_est_ex.png" height="800" width="300" />
+</center>
+<caption><center>  <font color="purple"> Figure 5 </font> Pose Estimation with 18 points </center></caption>
+
+<p>The top-down approach starts by identifying and localizing each object instance with a bounding box. Then, estimating is executed for the pose of the object. The bottom-up approach starts by localizing identity-free semantic entities, then grouping them into person instances.</p>
+
+<center>
+<img src="/assets/images/Deep-Learning-Applications-in-Computer-Vision/pose_est.png" height="800" width="500" />
+</center>
+<caption><center>  <font color="purple"> Figure 6 </font> Pose Estimation; top-down approach from top to right and  bottom-up approach from bottom to right </center></caption>
+
+<h2 id="6-image-generation-with-gan">6. Image Generation with GAN</h2>
+<p>There are various applications in GAN; face generation which outputs plausible photos from the actual existing photos, photo inpainting which performs plausible photos by filling in an area of a photograph that was removed, super resolution which is a technique to generate images with higher pixel resolution, etc.</p>
+
+<center>
+<img src="/assets/images/Deep-Learning-Applications-in-Computer-Vision/photo_gan.png" height="800" width="500" />
+<img src="/assets/images/Deep-Learning-Applications-in-Computer-Vision/inpainting.png" height="800" width="500" />
+<img src="/assets/images/Deep-Learning-Applications-in-Computer-Vision/super_res.png" height="800" width="500" />
+</center>
+<caption><center>  <font color="purple"> Figure 7 </font> GAN; face generation, photo inpainting, and super resolution </center></caption>
+
+<p>GAN has two sub-models: a generator and a discriminator. A generator creates new plausible examples from the given domain against a discriminator which classifies if an instance is fake or real. That adversarial relationship improves quality of the output.</p>
+
+<center>
+<img src="/assets/images/Deep-Learning-Applications-in-Computer-Vision/gan.png" height="800" width="350" />
+</center>
+<caption><center>  <font color="purple"> Figure 8 </font> GAN architecture </center></caption>
+
+<p>A generator takes a vector randomly drawn from Gaussian distribution as input and generates a sample. A discriminator takes the sample with real ones and predicts a binary class label of real or fake (generated sample). From this process, the generator and discriminator play two-player minimax game with value function, finding the features that generally appear in the problem domain and fitting output vector space to the statistical latent space. This zero-sum game improves quality of the generated sample (50% for both real and fake).</p>
+
+<p>Papers:</p>
+
+<p><a href="https://arxiv.org/abs/1406.2661">Generative Adversarial Networks
+</a></p>
+
+<p><a href="https://arxiv.org/abs/1601.06759">Pixel Recurrent Neural Networks</a></p>
+
+<p><a href="https://arxiv.org/abs/1804.07723">Image Inpainting for Irregular Holes Using Partial Convolutions</a></p>
+
+<p><a href="https://arxiv.org/abs/1805.03300">Highly Scalable Image Reconstruction using Deep Neural Networks with Bandpass Filtering</a></p>
+
+<p><a href="https://arxiv.org/abs/1609.04802">Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network</a></p>
+
+<p><a href="https://arxiv.org/abs/1704.03915">Deep Laplacian Pyramid Networks for Fast and Accurate Super-Resolution</a></p>
+
+<p><a href="https://arxiv.org/abs/1711.10925">Deep Image Prior</a></p>
+
+<h2 id="7-image-captioning">7. Image Captioning</h2>
+
+<p>Image Captioning is the task of generating a textual description for given images. The model can take two inputs; an image for CNN and texts in a sequence for RNN. Extracting the important features from an image via CNN and using RNN over the image to generate the textual sentence for the image description.</p>
+
+<center>
+<img src="/assets/images/Deep-Learning-Applications-in-Computer-Vision/img_captioning.png" height="800" width="700" />
+</center>
+<caption><center>  <font color="purple"> Figure 9 </font> Image Captioning with a sequence of words </center></caption>
+
+<p>Figure 10 shows how image captioning works graphically.</p>
+
+<center>
+<img src="/assets/images/Deep-Learning-Applications-in-Computer-Vision/img_captioning2.png" height="800" width="500" />
+</center>
+<caption><center>  <font color="purple"> Figure 10 </font> Image Captioning  </center></caption>
+
+<h2 id="8-anomaly-detection">8. Anomaly Detection</h2>
+
+<p>Anomaly detection is the task of identifying rare patterns or observations by differing significantly from the majority of the data. Depending on data with annotation, approach would vary.</p>
+<ol>
+  <li>Images with labels (supervised)</li>
+  <li>Images only with labels for nomal data (semi-supervised)</li>
+  <li>No label (unsupervised)</li>
+</ol>
+
+<p>In the case of supervised learning, data imbalance of abnomal data is challenging. In the case of semi-supervised learning, learning the important features from the labeled data, so this method is limited to only including labeled normal samples and disregards the unlabeled ones. The unsupervised learning case for anomaly detection is based on two models; autoencoder and CNN. In either case, feature extraction is needed for which features has to be investigated for anomaly detection; Many algorithms of reducing number of dimensions are used. Edge detection for images, fast Fourier transform (FFT) for sounds, or discrete cosine transform (DCT) for other cases. Moreover, k-means clustering and principal component analysis (PCA) can help grouping and reducing dimensions. For autoencoder, it internally compresses the data into a latent-space and reconstruct the input data from the latent representation with regression loss.</p>
+
+<center>
+<img src="/assets/images/Deep-Learning-Applications-in-Computer-Vision/anomal_det.png" height="800" width="500" />
+</center>
+<caption><center>  <font color="purple"> Figure 11 </font> Anomaly Detection with Autoencoder </center></caption>
+
+<p>Papers:</p>
+
+<p><a href="https://arxiv.org/pdf/1807.02011.pdf">Improving Unsupervised Defect Segmentation
+by Applying Structural Similarity To Autoencoders</a></p>
+
+<p><a href="https://arxiv.org/abs/1804.04488">Deep Autoencoding Models for Unsupervised Anomaly Segmentation in Brain MR Images</a></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#machine-learning-concept" class="page__taxonomy-item" rel="tag">machine-learning-concept</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2021-01-01T00:00:00+00:00">January 01, 2021</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Deep+Learning+Applications+in+Computer+Vision%20http%3A%2F%2Flocalhost%3A4000%2Fcv_intro%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fcv_intro%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fcv_intro%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/Backpropagation/" class="pagination--pager" title="Deep Learning Performance Improvement 4 - Back-propagation
+">Previous</a>
+    
+    
+      <a href="/" class="pagination--pager" title="Deep Learning Applications in Computer Vision
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/" rel="permalink">Deep Learning Applications in Computer Vision
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Deep Learning / Computer Vision /
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Backpropagation/" rel="permalink">Deep Learning Performance Improvement 4 - Back-propagation
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  15 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Back-propagation / Forward-propagation /  Machine Learning Performance Improvement
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Regularization/" rel="permalink">Deep Learning Performance Improvement 3 - Regularization
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  25 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Penalizing Regularization (L1 and L2) / Dropout /  Machine Learning Performance Improvement
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Optimization_methods/" rel="permalink">Deep Learning Performance Improvement 2 - Optimizer
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  28 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Optimizer / Gradient Descent / Stochastic Gradient Descent / Momentum / Adam /  Machine Learning Performance Improvement
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><input type="text" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/jaechoi2357/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/pnut2357" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 Jae H. Choi. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.7.1/js/all.js" integrity="sha384-eVEQC9zshBn0rFj4+TU78eNA19HMNigMviK/PU/FFjLXqa/GKPgX58rvt5Z8PLs7" crossorigin="anonymous"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://localhost:4000/cv_intro/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/cv_intro"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://JBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+  </body>
+</html>

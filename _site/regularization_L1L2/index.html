@@ -1,0 +1,1312 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Demystifying Regularization - Jae’s Blog</title>
+<meta name="description" content="Regularization">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Jae's Blog">
+<meta property="og:title" content="Demystifying Regularization">
+<meta property="og:url" content="http://localhost:4000/regularization_L1L2/">
+
+
+  <meta property="og:description" content="Regularization">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2020-05-10T00:00:00+01:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/regularization_L1L2/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Jae H. Choi",
+      "url": "http://localhost:4000",
+      "sameAs": ["https://www.linkedin.com/in/jaechoi2357/"]
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Jae's Blog Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
+    </script>
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/mush.jpeg" alt=""></a>
+        
+        <a class="site-title" href="/">Jae's Blog</a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about/" >About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Portfolios/Concepts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Personal Interests</a>
+            </li><li class="masthead__menu-item">
+              <a href="/cheatsheets/introduction/" >Cheatsheets</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/profile.jpeg" alt="Jae H. Choi" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Jae H. Choi</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Yesterday is history, tomorrow is a mystery, but today is a gift. That's why it's called the present.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Tempe, AZ</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:jaehyuk0325@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/jaechoi2357/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://devpost.com/jaehyuk0325?ref_content=user-portfolio&ref_feature=portfolio&ref_medium=global-nav" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i> DevPost</a></li>
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/pnut2357" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Demystifying Regularization">
+    <meta itemprop="description" content="L1 L2 Regularization / Comparison between Ridge and Lasso Regression / bias-variance tradeoff">
+    <meta itemprop="datePublished" content="May 10, 2020">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Demystifying Regularization
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  15 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#regularization">Regularization</a>
+    <ul>
+      <li><a href="#ridge-and-lasso-regression">Ridge and Lasso Regression</a></li>
+      <li><a href="#visualizing-regularization">Visualizing Regularization</a></li>
+      <li><a href="#advice-for-applying-regularization">Advice For Applying Regularization</a></li>
+    </ul>
+  </li>
+  <li><a href="#reference">Reference</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <h1 id="regularization">Regularization</h1>
+
+<p>Before discussing about regularization, we’ll do a quick recap on the notion of <strong>overfitting</strong> and the <strong>bias-variance tradeoff</strong>.</p>
+
+<p><strong>Overfitting:</strong> So what is overfitting? Well, to put it in more simple terms it’s when we built a model that is too complex that it matches the training data “too closely” or we can say that the model has started to learn not only the signal, but also the noise in the data. The result of this is that our model will do well on the training data, but won’t generalize to out-of-sample data, data that we have not seen before.</p>
+
+<p><strong>Bias-Variance tradeoff:</strong> When we discuss prediction models, prediction errors can be decomposed into two main subcomponents we care about: error due to “bias” and error due to “variance”. Understanding these two types of error can help us diagnose model results and avoid the mistake of over/under fitting. A typical graph of discussing this is shown below:</p>
+
+<p><img src="/assets/images/regularization/bias_variance.png" alt="Bias-variance tradeoff" height="700px" width="400px" /><br />
+| Fig1. Bias-variance tradeoff|</p>
+
+<ul>
+  <li><strong>Bias:</strong> The red line, measures how far off in general our models’ predictions are from the correct value. Thus as our model gets more and more complex we will become more and more accurate about our predictions (Error steadily decreases).</li>
+  <li><strong>Variance:</strong> The cyan line, measures how different can our model be from one to another, as we’re looking at different possible data sets. If the estimated model will vary dramatically from one data set to the other, then we will have very erratic predictions, because our prediction will be extremely sensitive to what data set we obtain. As the complexity of our model rises, variance becomes our primary concern.</li>
+</ul>
+
+<p>When creating a model, our goal is to locate the optimum model complexity. If our model complexity exceeds this sweet spot, we are in effect overfitting our model; while if our complexity falls short of the sweet spot, we are underfitting the model. With all of that in mind, the notion of <strong>regularization</strong> is simply a useful technique to use when we think our model is too complex (models that have low bias, but high variance). It is a method for “constraining” or “regularizing” the <strong>size of the coefficients</strong> (“shrinking” them towards zero). The specific regularization techniques we’ll be discussing are <strong>Ridge Regression</strong> and <strong>Lasso Regression</strong>.</p>
+
+<p>For those interested, the following link contains a nice infogprahics on Bias-Variance Tradeoff. <a href="https://elitedatascience.com/bias-variance-tradeoff">Blog: Bias-Variance Tradeoff Infographic</a></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># code for loading the format for the notebook
+</span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="c1"># path : store the current path to convert back to it later
+</span><span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">getcwd</span><span class="p">()</span>
+<span class="n">os</span><span class="p">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="s">'..'</span><span class="p">,</span> <span class="s">'notebook_format'</span><span class="p">))</span>
+<span class="kn">from</span> <span class="nn">formats</span> <span class="kn">import</span> <span class="n">load_style</span>
+<span class="n">load_style</span><span class="p">(</span><span class="n">plot_style</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span>
+</code></pre></div></div>
+
+<style>
+@import url('http://fonts.googleapis.com/css?family=Source+Code+Pro');
+@import url('http://fonts.googleapis.com/css?family=Vollkorn');
+@import url('http://fonts.googleapis.com/css?family=Arimo');
+@import url('http://fonts.googleapis.com/css?family=Fira_sans');
+
+    div.cell {
+        width: 1000px;
+        margin-left: 0% !important;
+        margin-right: auto;
+    }
+    div.text_cell code {
+        background: transparent;
+        color: #000000;
+        font-weight: 600;
+        font-size: 12pt;
+        font-style: bold;
+        font-family:  'Source Code Pro', Consolas, monocco, monospace;
+    }
+    h1 {
+        font-family: 'Open sans',verdana,arial,sans-serif;
+	}
+
+    div.input_area {
+        background: #F6F6F9;
+        border: 1px solid #586e75;
+    }
+
+    .text_cell_render h1 {
+        font-weight: 200;
+        font-size: 30pt;
+        line-height: 100%;
+        color:#c76c0c;
+        margin-bottom: 0.5em;
+        margin-top: 1em;
+        display: block;
+        white-space: wrap;
+        text-align: left;
+    }
+    h2 {
+        font-family: 'Open sans',verdana,arial,sans-serif;
+        text-align: left;
+    }
+    .text_cell_render h2 {
+        font-weight: 200;
+        font-size: 16pt;
+        font-style: italic;
+        line-height: 100%;
+        color:#c76c0c;
+        margin-bottom: 0.5em;
+        margin-top: 1.5em;
+        display: block;
+        white-space: wrap;
+        text-align: left;
+    }
+    h3 {
+        font-family: 'Open sans',verdana,arial,sans-serif;
+    }
+    .text_cell_render h3 {
+        font-weight: 200;
+        font-size: 14pt;
+        line-height: 100%;
+        color:#d77c0c;
+        margin-bottom: 0.5em;
+        margin-top: 2em;
+        display: block;
+        white-space: wrap;
+        text-align: left;
+    }
+    h4 {
+        font-family: 'Open sans',verdana,arial,sans-serif;
+    }
+    .text_cell_render h4 {
+        font-weight: 100;
+        font-size: 14pt;
+        color:#d77c0c;
+        margin-bottom: 0.5em;
+        margin-top: 0.5em;
+        display: block;
+        white-space: nowrap;
+    }
+    h5 {
+        font-family: 'Open sans',verdana,arial,sans-serif;
+    }
+    .text_cell_render h5 {
+        font-weight: 200;
+        font-style: normal;
+        color: #1d3b84;
+        font-size: 16pt;
+        margin-bottom: 0em;
+        margin-top: 0.5em;
+        display: block;
+        white-space: nowrap;
+    }
+    div.text_cell_render{
+        font-family: 'Fira sans', verdana,arial,sans-serif;
+        line-height: 125%;
+        font-size: 115%;
+        text-align:justify;
+        text-justify:inter-word;
+    }
+    div.output_wrapper{
+        margin-top:0.2em;
+        margin-bottom:0.2em;
+    }
+
+    code{
+      font-size: 70%;
+    }
+    .rendered_html code{
+    background-color: transparent;
+    }
+    ul{
+        margin: 2em;
+    }
+    ul li{
+        padding-left: 0.5em;
+        margin-bottom: 0.5em;
+        margin-top: 0.5em;
+    }
+    ul li li{
+        padding-left: 0.2em;
+        margin-bottom: 0.2em;
+        margin-top: 0.2em;
+    }
+    ol{
+        margin: 2em;
+    }
+    ol li{
+        padding-left: 0.5em;
+        margin-bottom: 0.5em;
+        margin-top: 0.5em;
+    }
+    ul li{
+        padding-left: 0.5em;
+        margin-bottom: 0.5em;
+        margin-top: 0.2em;
+    }
+    a:link{
+       font-weight: bold;
+       color:#447adb;
+    }
+    a:visited{
+       font-weight: bold;
+       color: #1d3b84;
+    }
+    a:hover{
+       font-weight: bold;
+       color: #1d3b84;
+    }
+    a:focus{
+       font-weight: bold;
+       color:#447adb;
+    }
+    a:active{
+       font-weight: bold;
+       color:#447adb;
+    }
+    .rendered_html :link {
+       text-decoration: underline;
+    }
+    .rendered_html :hover {
+       text-decoration: none;
+    }
+    .rendered_html :visited {
+      text-decoration: none;
+    }
+    .rendered_html :focus {
+      text-decoration: none;
+    }
+    .rendered_html :active {
+      text-decoration: none;
+    }
+    .warning{
+        color: rgb( 240, 20, 20 )
+    }
+    hr {
+      color: #f3f3f3;
+      background-color: #f3f3f3;
+      height: 1px;
+    }
+    blockquote{
+      display:block;
+      background: #fcfcfc;
+      border-left: 5px solid #c76c0c;
+      font-family: 'Open sans',verdana,arial,sans-serif;
+      width:680px;
+      padding: 10px 10px 10px 10px;
+      text-align:justify;
+      text-justify:inter-word;
+      }
+      blockquote p {
+        margin-bottom: 0;
+        line-height: 125%;
+        font-size: 100%;
+      }
+</style>
+
+<script>
+    MathJax.Hub.Config({
+                        TeX: {
+                           extensions: ["AMSmath.js"]
+                           },
+                tex2jax: {
+                    inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                    displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+                },
+                displayAlign: 'center', // Change this to 'center' to center equations.
+                "HTML-CSS": {
+                    scale:100,
+                        availableFonts: [],
+                        preferredFont:null,
+                        webFont: "TeX",
+                    styles: {'.MathJax_Display': {"margin": 4}}
+                }
+        });
+</script>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">os</span><span class="p">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+<span class="c1"># 1. magic for inline plot
+# 2. magic to print version
+# 3. magic so that the notebook will reload external python modules
+# 4. magic to enable retina (high resolution) plots
+# https://gist.github.com/minrk/3301035
+</span><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="o">%</span><span class="n">load_ext</span> <span class="n">watermark</span>
+<span class="o">%</span><span class="n">load_ext</span> <span class="n">autoreload</span>
+<span class="o">%</span><span class="n">autoreload</span> <span class="mi">2</span>
+<span class="o">%</span><span class="n">config</span> <span class="n">InlineBackend</span><span class="p">.</span><span class="n">figure_format</span> <span class="o">=</span> <span class="s">'retina'</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_boston</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Ridge</span><span class="p">,</span> <span class="n">RidgeCV</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Lasso</span><span class="p">,</span> <span class="n">LassoCV</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="o">%</span><span class="n">watermark</span> <span class="o">-</span><span class="n">a</span> <span class="s">'Jae H. Choi'</span> <span class="o">-</span><span class="n">d</span> <span class="o">-</span><span class="n">t</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">p</span> <span class="n">numpy</span><span class="p">,</span><span class="n">pandas</span><span class="p">,</span><span class="n">matplotlib</span><span class="p">,</span><span class="n">sklearn</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The watermark extension is already loaded. To reload it, use:
+  %reload_ext watermark
+The autoreload extension is already loaded. To reload it, use:
+  %reload_ext autoreload
+Jae H. Choi 2020-07-30 22:04:44
+
+CPython 3.8.3
+IPython 7.16.1
+
+numpy 1.18.5
+pandas 1.0.5
+matplotlib 3.2.2
+sklearn 0.23.1
+</code></pre></div></div>
+
+<h2 id="ridge-and-lasso-regression">Ridge and Lasso Regression</h2>
+
+<p>Recall that for a normal linear regression model of:</p>
+
+\[Y = \beta_0 + \beta_1X_1 + ... + \beta_pX_p\]
+
+<p>We would estimate its coefficients using the least squares criterion, which minimizes the residual sum of squares (RSS). Or graphically, we’re fitting the blue line to our data (the black points) that minimizes the sum of the distances between the points and the blue line (sum of the red lines) as shown below.</p>
+
+<p><img src="/assets/images/regularization/estimating_coefficients.png" alt="Estimating coefficients" height="700px" width="400px" /><br />
+| Fig2. Bias-variance tradeoff|</p>
+
+<p>Mathematically, this can be denoted as:</p>
+
+\[RSS = \sum_{i=1}^n \left( y_i - ( \beta_0 + \sum_{j=1}^p \beta_jx_{ij} ) \right)^2\]
+
+<p>Where:</p>
+
+<ul>
+  <li>\(n\) is the total number of observations (data).</li>
+  <li>\(y_i\) is the actual output value of the observation (data).</li>
+  <li>\(p\) is the total number of features.</li>
+  <li>\(\beta_j\) is a model’s coefficient.</li>
+  <li>\(x_{ij}\) is the \(i_{th}\) observation, \(j_{th}\) feature’s value.</li>
+  <li>\(\beta_0 + \sum_{j=1}^p \beta_jx_{ij}\) is the predicted output of each observation.</li>
+</ul>
+
+<p>Regularized linear regression models are very similar to least squares, except that the coefficients are estimated by minimizing a slightly different objective function. we <strong>minimize the sum of RSS and a “penalty term”</strong> that penalizes coefficient size.</p>
+
+<p><strong>Ridge regression</strong> (or “L2 regularization”) minimizes:</p>
+
+\[\text{RSS} + \alpha \sum_{j=1}^p \beta_j^2\]
+
+<p><strong>Lasso regression</strong> (or “L1 regularization”) minimizes:</p>
+
+\[\text{RSS} + \alpha \sum_{j=1}^p \lvert \beta_j \rvert\]
+
+<p>Where \(\alpha\) is a <strong>tuning parameter</strong> that seeks to balance between the fit of the model to the data and the magnitude of the model’s coefficients:</p>
+
+<ul>
+  <li>A tiny \(\alpha\) imposes no penalty on the coefficient size, and is equivalent to a normal linear regression.</li>
+  <li>Increasing \(\alpha\) penalizes the coefficients and thus shrinks them towards zero.</li>
+</ul>
+
+<p>Thus you can think of it as, we’re balancing two things to measure the model’s total quality. The RSS, measures how well the model is going to fit the data, and then the magnitude of the coefficients, which can be problematic if they become too big.</p>
+
+<p>Let’s look at some examples. In the following section, we’ll load the <a href="http://facweb.cs.depaul.edu/mobasher/classes/CSC478/Data/housing-dscr.txt">Boston Housing Dataset</a>, which contains some dataset about the housing values in suburbs of Boston. We’ll choose the first few features, train a ridge and lasso regression separately at look at the estimated coefficients’ weight for different \(\alpha\) parameter.</p>
+
+<p>Note that we’re choosing the first few features because we’ll later use a plot to show the affect of the \(\alpha\) parameter on the estimated coefficients’ weight and too many features will make the plot pretty unappealing. The model’s interpreability or performance is not the main focus here.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># extract input and response variables (housing prices),
+# meaning of each variable is in the link above
+</span><span class="n">feature_num</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">boston</span> <span class="o">=</span> <span class="n">load_boston</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">boston</span><span class="p">.</span><span class="n">data</span><span class="p">[:,</span> <span class="p">:</span><span class="n">feature_num</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">boston</span><span class="p">.</span><span class="n">target</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">boston</span><span class="p">.</span><span class="n">feature_names</span><span class="p">[:</span><span class="n">feature_num</span><span class="p">]</span>
+<span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">features</span><span class="p">).</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>CRIM</th>
+      <th>ZN</th>
+      <th>INDUS</th>
+      <th>CHAS</th>
+      <th>NOX</th>
+      <th>RM</th>
+      <th>AGE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.00632</td>
+      <td>18.0</td>
+      <td>2.31</td>
+      <td>0.0</td>
+      <td>0.538</td>
+      <td>6.575</td>
+      <td>65.2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.02731</td>
+      <td>0.0</td>
+      <td>7.07</td>
+      <td>0.0</td>
+      <td>0.469</td>
+      <td>6.421</td>
+      <td>78.9</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.02729</td>
+      <td>0.0</td>
+      <td>7.07</td>
+      <td>0.0</td>
+      <td>0.469</td>
+      <td>7.185</td>
+      <td>61.1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.03237</td>
+      <td>0.0</td>
+      <td>2.18</td>
+      <td>0.0</td>
+      <td>0.458</td>
+      <td>6.998</td>
+      <td>45.8</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.06905</td>
+      <td>0.0</td>
+      <td>2.18</td>
+      <td>0.0</td>
+      <td>0.458</td>
+      <td>7.147</td>
+      <td>54.2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># split into training and testing sets and standardize them
+</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">std</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X_train_std</span> <span class="o">=</span> <span class="n">std</span><span class="p">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test_std</span> <span class="o">=</span> <span class="n">std</span><span class="p">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># loop through different penalty score (alpha) and obtain the estimated coefficient (weights)
+</span><span class="n">alphas</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'different alpha values:'</span><span class="p">,</span> <span class="n">alphas</span><span class="p">)</span>
+
+<span class="c1"># stores the weights of each feature
+</span><span class="n">ridge_weight</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="n">alphas</span><span class="p">:</span>    
+    <span class="n">ridge</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">fit_intercept</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+    <span class="n">ridge</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_std</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">ridge_weight</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">ridge</span><span class="p">.</span><span class="n">coef_</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>different alpha values: [   10   100  1000 10000]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">weight_versus_alpha_plot</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">features</span><span class="p">):</span>
+    <span class="s">"""
+    Pass in the estimated weight, the alpha value and the names
+    for the features and plot the model's estimated coefficient weight
+    for different alpha values
+    """</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+    <span class="c1"># ensure that the weight is an array
+</span>    <span class="n">weight</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">weight</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">weight</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">alphas</span><span class="p">,</span> <span class="n">weight</span><span class="p">[:,</span> <span class="n">col</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="n">features</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+
+    <span class="n">plt</span><span class="p">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s">'black'</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s">'--'</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+
+    <span class="c1"># manually specify the coordinate of the legend
+</span>    <span class="n">plt</span><span class="p">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.3</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">))</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">'Coefficient Weight as Alpha Grows'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'Coefficient weight'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'alpha'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># change default figure and font size
+</span><span class="n">plt</span><span class="p">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s">'figure.figsize'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s">'font.size'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">12</span>
+
+
+<span class="n">ridge_fig</span> <span class="o">=</span> <span class="n">weight_versus_alpha_plot</span><span class="p">(</span><span class="n">ridge_weight</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">features</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/regularization/output_12_0.png" alt="png" height="500px" width="600px" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># does the same thing above except for lasso
+</span><span class="n">alphas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'different alpha values:'</span><span class="p">,</span> <span class="n">alphas</span><span class="p">)</span>
+
+<span class="n">lasso_weight</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="n">alphas</span><span class="p">:</span>    
+    <span class="n">lasso</span> <span class="o">=</span> <span class="n">Lasso</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">fit_intercept</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+    <span class="n">lasso</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_std</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">lasso_weight</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">lasso</span><span class="p">.</span><span class="n">coef_</span><span class="p">)</span>
+
+<span class="n">lasso_fig</span> <span class="o">=</span> <span class="n">weight_versus_alpha_plot</span><span class="p">(</span><span class="n">lasso_weight</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">features</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>different alpha values: [0.01, 0.1, 1, 5, 8]
+</code></pre></div></div>
+
+<p><img src="/assets/images/regularization/output_12_0.png" alt="png" height="500px" width="600px" /></p>
+
+<h2 id="visualizing-regularization">Visualizing Regularization</h2>
+
+<p>From the result above, we can see that as the penalty value, \(\alpha\) increases:</p>
+
+<ul>
+  <li><strong>Lasso regression</strong> shrinks coefficients all the way to zero, thus removing them from the model.</li>
+  <li><strong>Ridge regression</strong> shrinks coefficients toward zero, but they rarely reach zero.</li>
+</ul>
+
+<p>To get a sense of why this is happening, the visualization below depicts what happens when we apply the two different regularization. The general idea is that we are restricting the allowed values of our coefficients to a certain “region” and within that region, we wish to find the coefficients that result in the best model.</p>
+
+<p><img src="/assets/images/regularization/lasso_ridge_coefficients.png" alt="Lasso and Ridge Coefficient Plots" height="800px" width="800px" /><br />
+| Fig3. Lasso and Ridge Coefficient Plots|</p>
+
+<p>In this diagram, we are fitting a linear regression model with two features, \(x_1\) and \(x_2\).</p>
+
+<ul>
+  <li>\(\hat\beta\) represents the set of two coefficients, \(\beta_1\) and \(\beta_2\), which minimize the RSS for the <strong>unregularized model</strong>.</li>
+  <li>The ellipses that are centered around \(\hat\beta\) represent <strong>regions of constant RSS</strong>. In other words, all of the points on a given ellipse share a common value of the RSS, despite the fact that they may have different values for \(\beta_1\) and \(\beta_2\). As the ellipses expand away from the least squares coefficient estimates, the RSS increases.</li>
+  <li>Regularization restricts the allowed positions of \(\hat\beta\) to the <strong>blue constraint region</strong>. In this case, \(\hat\beta\) is <strong>not</strong> within the blue constraint region. Thus, we need to move \(\hat\beta\) until it intersects the blue region, while increasing the RSS as little as possible.
+    <ul>
+      <li>For <strong>ridge</strong>, this region is a <strong>circle</strong> because it constrains the square of the coefficients. Thus the intersection will not generally occur on an axis, and so the coefficient estimates will be typically be non-zero.</li>
+      <li>For <strong>lasso</strong>, this region is a <strong>diamond</strong> because it constrains the absolute value of the coefficients. Because the constraint has corners at each of the axes, and so the ellipse will often intersect the constraint region at an axis. When this occurs, one of the coefficients will equal zero. In higher dimensions, many of the coefficient estimates may equal zero simultaneously. In the figure above, the intersection occurs at \(\beta_1 = 0\), and so the resulting model will only include \(\beta_2\).</li>
+    </ul>
+  </li>
+  <li>The <strong>size of the blue constraint region</strong> is determined by \(\alpha\), with a smaller \(\alpha\) resulting in a larger region:
+    <ul>
+      <li>When \(\alpha\) is zero, the blue region is infinitely large, and thus the coefficient sizes are not constrained.</li>
+      <li>When \(\alpha\) increases, the blue region gets smaller and smaller.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="advice-for-applying-regularization">Advice For Applying Regularization</h2>
+
+<p><strong>Signs and causes of overfitting in the original regression model</strong></p>
+
+<ul>
+  <li>Linear models can overfit if you include irrelevant features, meaning features that are unrelated to the response. Or if you include highly correlated features, meaning two or more predictor variables are closely related to one another. Because it will learn a coefficient for every feature you include in the model, regardless of whether that feature has the signal or the noise. This is especially a problem when \(p\) (number of features) is close to \(n\) (number of observations).</li>
+  <li>Linear models that have large estimated coefficients is a sign that the model may be overfitting the data. The larger the absolute value of the coefficient, the more power it has to change the predicted response, resulting in a higher variance.</li>
+</ul>
+
+<p><strong>Should features be standardized?</strong></p>
+
+<p>Yes, because L1 and L2 regularizers of linear models assume that all features are centered around 0 and have variance in the same order. If a feature has a variance that is orders of magnitude larger that others, features would be penalized simply because of their scale and make the model unable to learn from other features correctly as expected. Also, standardizing avoids penalizing the intercept, which wouldn’t make intuitive sense.</p>
+
+<p><strong>How should we choose between Lasso regression (L1) and Ridge regression (L2)?</strong></p>
+
+<ul>
+  <li>If model performance is our primary concern or that we are not concerned with explicit feature selection, it is best to try both and see which one works better. Usually L2 regularization can be expected to give superior performance over L1.</li>
+  <li>Note that there’s also a ElasticNet regression, which is a combination of Lasso regression and Ridge regression.</li>
+  <li>Lasso regression is preferred if we want a sparse model, meaning that we believe many features are irrelevant to the output.</li>
+  <li>When the dataset includes collinear features, Lasso regression is unstable in a similar way as unregularized linear models are, meaning that the coefficients (and thus feature ranks) can vary significantly even on small data changes. We will elaborate on this point in the following section.</li>
+</ul>
+
+<p>When using L2-norm, since the coefficients are squared in the penalty expression, it has a different effect from L1-norm, namely it forces the coefficient values to be spread out more equally. When the dataset at hand contains correlated features, it means that these features should get similar coefficients. Using an example of a linear model \(Y = X1 + X2\), with strongly correlated feature of \(X1\) and \(X2\), then for L1-norm, the penalty is the same whether the learned model is \(Y=1∗X1+1∗X2\) or \(Y=2∗X1+0∗X2\). In both cases the penalty is \(2∗α\). For L2-norm, however, the first model’s penalty is \(1^2+1^2=2α\), while for the second model is penalized with \(2^2+0^2=4α\).</p>
+
+<p>The effect of this is that models are much more stable (coefficients do not fluctuate on small data changes as is the case with unregularized or L1 models). So while L2 regularization does not perform feature selection the same way as L1 does, it is more useful for feature interpretation due to its stability and the fact that useful features still tend to have non-zero coefficients. But again, please do remove collinear features to prevent a bunch of downstream headaches.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">generate_random_data</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">seed</span><span class="p">):</span>
+    <span class="s">"""Example of collinear features existing within the data"""</span>
+    <span class="n">rstate</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">RandomState</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">X_seed</span> <span class="o">=</span> <span class="n">rstate</span><span class="p">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+    <span class="n">X1</span> <span class="o">=</span> <span class="n">X_seed</span> <span class="o">+</span> <span class="n">rstate</span><span class="p">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">.</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+    <span class="n">X2</span> <span class="o">=</span> <span class="n">X_seed</span> <span class="o">+</span> <span class="n">rstate</span><span class="p">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">.</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+    <span class="n">X3</span> <span class="o">=</span> <span class="n">X_seed</span> <span class="o">+</span> <span class="n">rstate</span><span class="p">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">.</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">X1</span> <span class="o">+</span> <span class="n">X2</span> <span class="o">+</span> <span class="n">X3</span> <span class="o">+</span> <span class="n">rstate</span><span class="p">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="n">X1</span><span class="p">,</span> <span class="n">X2</span><span class="p">,</span> <span class="n">X3</span><span class="p">]).</span><span class="n">T</span>
+    <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span>
+
+
+<span class="k">def</span> <span class="nf">pretty_print_linear</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">names</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">sort</span> <span class="o">=</span> <span class="bp">False</span><span class="p">):</span>
+    <span class="s">"""A helper method for pretty-printing linear models' coefficients"""</span>
+    <span class="n">coef</span> <span class="o">=</span> <span class="n">estimator</span><span class="p">.</span><span class="n">coef_</span>
+    <span class="k">if</span> <span class="n">names</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s">'X%s'</span> <span class="o">%</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">coef</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+
+    <span class="n">info</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">coef</span><span class="p">,</span> <span class="n">names</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">sort</span><span class="p">:</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">np</span><span class="p">.</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+    <span class="n">output</span> <span class="o">=</span> <span class="p">[</span><span class="s">'{} * {}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">coef</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">coef</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">info</span><span class="p">]</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="s">' + '</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">output</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># We run the two method 10 times with different random seeds
+# confirming that Ridge is more stable than Lasso
+</span><span class="n">size</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="k">for</span> <span class="n">seed</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'Random seed:'</span><span class="p">,</span> <span class="n">seed</span><span class="p">)</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">generate_random_data</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">seed</span><span class="p">)</span>
+
+    <span class="n">lasso</span> <span class="o">=</span> <span class="n">Lasso</span><span class="p">()</span>
+    <span class="n">lasso</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'Lasso model:'</span><span class="p">,</span> <span class="n">pretty_print_linear</span><span class="p">(</span><span class="n">lasso</span><span class="p">))</span>
+
+    <span class="n">ridge</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="n">ridge</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'Ridge model:'</span><span class="p">,</span> <span class="n">pretty_print_linear</span><span class="p">(</span><span class="n">ridge</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Random seed: 0
+Lasso model: 0.486 * X1 + 1.508 * X2 + 0.0 * X3
+Ridge model: 0.938 * X1 + 1.059 * X2 + 0.877 * X3
+
+Random seed: 1
+Lasso model: 1.034 * X1 + 0.626 * X2 + 0.0 * X3
+Ridge model: 0.984 * X1 + 1.068 * X2 + 0.759 * X3
+
+Random seed: 2
+Lasso model: 1.361 * X1 + 0.0 * X2 + 0.782 * X3
+Ridge model: 0.972 * X1 + 0.943 * X2 + 1.085 * X3
+
+Random seed: 3
+Lasso model: 0.0 * X1 + 1.008 * X2 + 1.134 * X3
+Ridge model: 0.919 * X1 + 1.005 * X2 + 1.033 * X3
+
+Random seed: 4
+Lasso model: 0.27 * X1 + 0.0 * X2 + 1.832 * X3
+Ridge model: 0.964 * X1 + 0.982 * X2 + 1.098 * X3
+
+Random seed: 5
+Lasso model: 0.0 * X1 + 0.035 * X2 + 1.854 * X3
+Ridge model: 0.758 * X1 + 1.011 * X2 + 1.139 * X3
+
+Random seed: 6
+Lasso model: 0.486 * X1 + 0.0 * X2 + 1.601 * X3
+Ridge model: 1.016 * X1 + 0.89 * X2 + 1.091 * X3
+
+Random seed: 7
+Lasso model: 0.441 * X1 + 0.036 * X2 + 1.582 * X3
+Ridge model: 1.018 * X1 + 1.039 * X2 + 0.901 * X3
+
+Random seed: 8
+Lasso model: 0.28 * X1 + 1.974 * X2 + 0.0 * X3
+Ridge model: 0.907 * X1 + 1.071 * X2 + 1.008 * X3
+
+Random seed: 9
+Lasso model: 0.0 * X1 + 0.0 * X2 + 1.912 * X3
+Ridge model: 0.896 * X1 + 0.903 * X2 + 0.98 * X3
+</code></pre></div></div>
+
+<p><strong>How do we choose the \(\alpha\) parameter?</strong></p>
+
+<p>We can either use a validation set if we have lots of data or use cross validation for smaller data sets. See a quick examples below that uses cross validation with <code class="language-plaintext highlighter-rouge">RidgeCV</code> and <code class="language-plaintext highlighter-rouge">LassoCV</code>, which is function that performs ridge regression and lasso regression with built-in cross-validation of the alpha parameter.</p>
+
+<blockquote>
+  <p>From R’s <a href="https://web.stanford.edu/~hastie/glmnet/glmnet_alpha.html">glmnet package vignette</a></p>
+
+  <p>It is known that the ridge penalty shrinks the coefficients of correlated predictors towards each other while the lasso tends to pick one of them and discard the others. The elastic-net penalty mixes these two; if predictors are correlated in groups, an \(\alpha = 0.5\) tends to select the groups in or out together. This is a higher level parameter, and users might pick a value upfront, else experiment with a few different values. One use of \(\alpha\) is for numerical stability; for example, the elastic net with \(\alpha = 1−\epsilon\) for some small \(\epsilon &gt; 0\) performs much like the lasso, but removes any degeneracies and wild behavior caused by extreme correlations.</p>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># alpha: array of alpha values to try; must be positive, increase for more regularization
+# create an array of alpha values and select the best one with RidgeCV
+</span><span class="n">alpha_range</span> <span class="o">=</span> <span class="mf">10.</span> <span class="o">**</span> <span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">ridge_cv</span> <span class="o">=</span> <span class="n">RidgeCV</span><span class="p">(</span><span class="n">alphas</span> <span class="o">=</span> <span class="n">alpha_range</span><span class="p">,</span> <span class="n">fit_intercept</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+<span class="n">ridge_cv</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_std</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># examine the coefficients and the errors of the predictions
+# using the best alpha value
+</span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">ridge_cv</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_std</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'coefficients:</span><span class="se">\n</span><span class="s">'</span><span class="p">,</span> <span class="n">ridge_cv</span><span class="p">.</span><span class="n">coef_</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'best alpha:</span><span class="se">\n</span><span class="s">'</span> <span class="p">,</span> <span class="n">ridge_cv</span><span class="p">.</span><span class="n">alpha_</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">RSS:'</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="nb">sum</span><span class="p">((</span><span class="n">y_test</span> <span class="o">-</span> <span class="n">y_pred</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>coefficients:
+ [-1.49246448  0.37088936 -0.70836731  1.08568161 -0.80970633  4.4075122
+ -0.80450999]
+best alpha:
+ 10.0
+
+RSS: 4366.321935003472
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># n_alphas: number of alpha values (automatically chosen) to try
+# select the best alpha with LassoCV
+</span><span class="n">lasso_cv</span> <span class="o">=</span> <span class="n">LassoCV</span><span class="p">(</span><span class="n">n_alphas</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">fit_intercept</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+<span class="n">lasso_cv</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_std</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># examine the coefficients and the errors of the predictions
+# using the best alpha value
+</span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">lasso_cv</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_std</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'coefficients:</span><span class="se">\n</span><span class="s">'</span><span class="p">,</span> <span class="n">lasso_cv</span><span class="p">.</span><span class="n">coef_</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'best alpha:</span><span class="se">\n</span><span class="s">'</span><span class="p">,</span> <span class="n">lasso_cv</span><span class="p">.</span><span class="n">alpha_</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">RSS:'</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="nb">sum</span><span class="p">((</span> <span class="n">y_test</span> <span class="o">-</span> <span class="n">y_pred</span> <span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>coefficients:
+ [-1.5149245   0.34021279 -0.67185865  1.09280671 -0.81071974  4.53310098
+ -0.81752854]
+best alpha:
+ 0.005835182912170716
+
+RSS: 4296.025010307988
+</code></pre></div></div>
+
+<p>To sum it up, overfitting is when we build a predictive model that fits the data “too closely”, so that it captures the random noise in the data rather than true patterns. As a result, the model predictions will be wrong when applied to new data. Give that our data is sufficiently large and clean, regularization is one good way to prevent overfitting from occurring.</p>
+
+<h1 id="reference">Reference</h1>
+
+<ul>
+  <li><a href="http://nbviewer.jupyter.org/github/justmarkham/DAT8/blob/master/notebooks/20_regularization.ipynb">Notebook: Regularization</a></li>
+  <li><a href="http://scott.fortmann-roe.com/docs/BiasVariance.html">Blog: Understanding the Bias-Variance Tradeoff</a></li>
+  <li><a href="http://blog.datadive.net/selecting-good-features-part-ii-linear-models-and-regularization/">Blog: Selecting good features – Part II: linear models and regularization</a></li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#machine-learning-project" class="page__taxonomy-item" rel="tag">machine-learning-project</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-05-10T00:00:00+01:00">May 10, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Demystifying+Regularization%20http%3A%2F%2Flocalhost%3A4000%2Fregularization_L1L2%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fregularization_L1L2%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fregularization_L1L2%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/search-algorithms/" class="pagination--pager" title="Pathfinding in Pacman domain
+">Previous</a>
+    
+    
+      <a href="/math-example/" class="pagination--pager" title="Machine Learning.
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/" rel="permalink">Deep Learning Applications in Computer Vision
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Deep Learning / Computer Vision /
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/cv_intro/" rel="permalink">Deep Learning Applications in Computer Vision
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Deep Learning / Computer Vision /
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Backpropagation/" rel="permalink">Deep Learning Performance Improvement 4 - Back-propagation
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  16 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Back-propagation / Forward-propagation /  Machine Learning Performance Improvement
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Regularization/" rel="permalink">Deep Learning Performance Improvement 3 - Regularization
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  21 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Penalizing Regularization (L1 and L2) / Dropout /  Machine Learning Performance Improvement
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><input type="text" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+          <li><a href="https://www.linkedin.com/in/jaechoi2357/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+        
+      
+        
+          <li><a href="https://github.com/pnut2357" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 Jae H. Choi. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.7.1/js/all.js" integrity="sha384-eVEQC9zshBn0rFj4+TU78eNA19HMNigMviK/PU/FFjLXqa/GKPgX58rvt5Z8PLs7" crossorigin="anonymous"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://localhost:4000/regularization_L1L2/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/regularization_L1L2"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://JBlog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+  </body>
+</html>
