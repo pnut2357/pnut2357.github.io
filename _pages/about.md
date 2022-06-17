@@ -23,9 +23,9 @@ My current focus areas are:
 - Kubernetes
 - Seamless CI/CD
 
-![png](/assets/images/about/JaehyukChoi_resume1.png)
+![png](/assets/images/about/JaehyukChoi_resume_1.png)
 
-![png](/assets/images/about/JaehyukChoi_resume2.png)
+![png](/assets/images/about/JaehyukChoi_resume_2.png)
 
 
 ## What is the blog for?
