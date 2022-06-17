@@ -10,22 +10,23 @@ toc_sticky: true
 
 ## Personal Info.
 
-I'm a grad student in AI/ML at ASU. I've experienced how to design, develop, train, and deploy models in deep learning, statistics, Computer Vision and Natural Language Processing.
+I'm a Data Scientist and ML engineer. I've experienced how to design, develop, train, and deploy models in deep learning, statistics, recommender system, computer vision and natural language process.
 
 My current focus areas are:
 
-- Google Cloud/Azure/AWS
-- deep learning
-- Natural Language Processing
-- statistics
+- Google Cloud / Azure / AWS
+- Deep Learning
+- Natural Language Process
+- Recommender System
+- Statistics
 - Computer Vision
-- Docker
+- Kubernetes
+- Seamless CI/CD
 
-![png](/assets/images/about/Jae_H_Choi_CV_5-4-2020-1.png)
+![png](/assets/images/about/JaehyukChoi_resume1.png)
 
-![png](/assets/images/about/Jae_H_Choi_CV_5-4-2020-2.png)
+![png](/assets/images/about/JaehyukChoi_resume2.png)
 
-![png](/assets/images/about/Jae_H_Choi_CV_5-4-2020-3.png)
 
 ## What is the blog for?
 
