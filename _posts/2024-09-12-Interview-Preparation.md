@@ -12,7 +12,6 @@ excerpt: |
 ---
 
 # Interview Preparation1
-
 ## 1. MLOps vs. LLMOps:
 
 MLOps: Focuses on automating and managing the lifecycle of traditional machine learning models (e.g., image classification, regression).
