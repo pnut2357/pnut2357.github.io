@@ -1,14 +1,14 @@
 ---
-title: "Interview Preparation1"
-excerpt: "Interview Questions"
+title: "Scan & Go Patent"
+excerpt: "Patent"
 categories:
-  - interview
+  - patent
 tags:
 toc: true
 toc_sticky: true
 comments: true
 excerpt: |
-  Interview / Algorithms
+  Patent / Publication
 ---
 
 # Scan & Go Patent
