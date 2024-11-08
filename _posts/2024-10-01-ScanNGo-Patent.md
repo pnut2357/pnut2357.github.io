@@ -13,8 +13,8 @@ excerpt: |
 
 # Scan & Go Patent
 
-Patent: Scan & Go (Systems and Methods for Assisting with Merchandise Purchases)
-Publication No: 20240029119
+- Patent: Scan & Go (Systems and Methods for Assisting with Merchandise Purchases)
+- Publication No: 20240029119
 
 You can search the [patent](https://ppubs.uspto.gov/pubwebapp/static/pages/ppubsbasic.html#:~:text=To%20start%20a%20quick%20lookup,of%20the%20Basic%20Search%20dropdowns) >> Type publication number (20240029119) >> Click view / pdf / text 
 <center>
