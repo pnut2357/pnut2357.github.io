@@ -1,1 +1,0 @@
-# [Jae's Blog]

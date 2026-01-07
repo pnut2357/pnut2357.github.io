@@ -139,3 +139,17 @@ dist
 .envs-looper
 coverage.json
 coverage.xml
+
+# Jekyll build artifacts
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+vendor/
+
+# Node.js
+node_modules/
+package-lock.json
+
+# Ruby
+Gemfile.lock
