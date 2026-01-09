@@ -1,65 +1,186 @@
 ---
 permalink: /about/
-title: "About Me"
-excerpt: "I'm Jae Choi."
+title: "Jae Choi"
+excerpt: "ML Engineer & AI Specialist | 8+ Years in Production ML Systems"
 header:
   image: "/assets/images/family.jpg"
+  overlay_filter: 0.3
 toc: true
 toc_sticky: true
 ---
-Heavenly Father God, I dedicate my life and professional skills to your glory, using my talents to serve You and build Your kingdom, knowing that "Every good gift and every perfect gift is from above, coming down from the Father of lights, with whom there is no variation or shadow due to change." [James 1:17]. In Jesus' name I pray, Amen. 
 
-## Personal Info.
+> *"Every good gift and every perfect gift is from above, coming down from the Father of lights."* — James 1:17
 
-I am a Data Scientist and ML Engineer with extensive experience in designing, developing, and deploying innovative AI solutions across diverse domains, including deep learning, statistics, recommender systems, computer vision, and natural language processing. I have a proven track record of success in leveraging Large Language Models (LLMs) and MLOps methodologies to deliver high-impact results.
+---
 
-My experience spans a range of areas, including:
+## Hi, I'm Jae 👋
 
-### Model Development & Engineering:
+**Machine Learning Engineer & AI Specialist** with **8+ years** of experience delivering production-grade ML systems. I specialize in **LLM fine-tuning**, **RAG architectures**, and **MLOps** at scale.
 
-- Feature Engineering: Expert in crafting robust feature engineering techniques to enhance model performance, focusing on accuracy and interpretability.
-- Model Training: Deep expertise in training high-performance machine learning models utilizing cutting-edge algorithms across various domains, including deep learning, statistics, recommender systems, computer vision, and natural language processing.
-- Prompt Engineering: Skilled in crafting effective prompts for LLMs, optimizing performance and ensuring desired responses.
-- Retrieval Augmented Generation (RAG): Adept at leveraging RAG techniques to enhance the knowledge base and context awareness of LLM-powered applications.
-- Chunking Strategies: Implementing optimal chunking techniques for efficient processing and analysis of large datasets.
-- Embedding Models: Developing and deploying embedding models for efficient information retrieval and similarity search.
-- Advanced Search Algorithms: Deep understanding of search vector databases and their application in optimizing LLM-based search functionalities.
-- Deep Learning: Expertise in building and deploying deep learning models across various domains, including image classification, object detection, and natural language understanding.
-- Statistics & Recommender Systems: Strong foundation in statistical modeling and data analysis, with experience in developing personalized recommendation systems.
-- Computer Vision: Proficient in utilizing computer vision techniques for image processing, object detection, and scene understanding.
-- Natural Language Processing: Expertise in natural language processing tasks such as text classification, sentiment analysis, and machine translation.
+Currently at **Walmart Global Tech**, I lead initiatives that have:
 
-### MLOps & Deployment:
+| Impact | Metric |
+|--------|--------|
+| 💰 **Cost Savings** | $250K+ annually across 15+ projects |
+| ⚡ **Efficiency** | 38% reduction in development time |
+| 📈 **Revenue** | $1.5M+ additional annual revenue |
+| 🎯 **Accuracy** | 15% improvement in predictive models |
 
-- Deployment: Implementing and deploying machine learning models in production environments for real-world applications.
-- MLOps/LLMOPs: Proficient in designing and implementing robust MLOps workflows, encompassing model training, deployment, monitoring, and continuous improvement. Applying best practices in MLOps for LLM-based systems, including model monitoring, versioning, and continuous integration/continuous delivery (CI/CD) pipelines.
+---
 
-### Passion & Impact:
+## What I Do
 
-I am passionate about leveraging the power of LLMs and MLOps to drive innovation and solve real-world challenges. My goal is to contribute to the development of impactful AI solutions that make a positive difference in the world.
+<div class="notice--primary">
+<h4>🤖 LLM & RAG Systems</h4>
+<p>Building production multimodal RAG pipelines with Llama, GPT, and Gemini. Designing data-centric chatbots that scale.</p>
+</div>
 
-My experience encompasses the entire MLOps lifecycle, from model development and training to deployment and monitoring. I am confident in my ability to contribute to the success of LLM-powered and MLOps initiatives within your organization.
-My current focus areas are:
+<div class="notice--info">
+<h4>⚙️ MLOps & Platform Engineering</h4>
+<p>Architecting Kubernetes-based ML platforms with automated CI/CD, model monitoring, and continuous learning feedback loops.</p>
+</div>
 
-- Google Cloud / Azure / AWS
-- Deep Learning
-- Natural Language Process
-- Recommender System
-- MLOps / LLMOps
-- Statistics
-- Computer Vision
-- Kubernetes
-- Seamless CI/CD
+<div class="notice--success">
+<h4>🎙️ Voice AI & Agents</h4>
+<p>Engineering low-latency voice agents with streaming ASR-to-LLM pipelines, achieving sub-4s response times at $0.05/conversation.</p>
+</div>
 
-![png](/assets/images/about/JaehyukChoi_resume_1.png)
+---
 
-![png](/assets/images/about/JaehyukChoi_resume_2.png)
+## Experience
 
+### Machine Learning Engineer | AI Engineer
+**Walmart Global Tech** · Oct 2023 – Present
 
-## What is the blog for?
+- Led design and rollout of **standardized MLOps template** integrating multimodal RAG and data-centric chatbots (Llama, GPT, Gemini-Pro)
+- Established **continuous learning feedback layer** to monitor metrics, capture inference data, and automate retraining
+- **Impact:** Cut development time by 38%, improved team efficiency by 30%, achieved **$250K+ annual savings** across 15+ production projects
 
-It is easily forgettable that we are running into death from birth. This blog is about reflections, insights, thoughts, and  realizations, based on my experience. Happy to be criticized to be mature.
+### Data Scientist
+**Walmart Global Tech** · May 2021 – Oct 2023
 
-> For contact, please visit my [LinkedIn profile](https://www.linkedin.com/in/jaechoi2357/)
+- Architected **Kubernetes-based automated pipeline** integrating model logic, monitoring, and CI/CD with testing and code reviews
+- Transformed model adoption from 8% to 14%, improved predictive accuracy by 15%, driving **$1.5M additional annual revenue**
+- Eliminated critical downtimes, reduced manual effort by 40%, cut cloud costs by 20% — **saving $120K annually**
 
-[Azure Certification Exams](https://www.microsoft.com/en-us/learning/azure-exams.aspx).
+### Machine Learning Engineer Lead
+**Mozzine** · Sept 2020 – Feb 2021
+
+- Built large-scale, high-quality dataset via custom scraping and cleaning pipelines with novel reconstruction algorithms
+- Improved core model accuracy by 20%, driving **5% boost in customer conversions** and enabling higher-value pricing tier
+
+---
+
+## Featured Projects
+
+### 🎙️ Voice-to-Voice Health Insurance Agent
+*Real-time voice AI for health insurance inquiries*
+
+- Engineered streaming **ASR-to-LLM pipeline** with multimodel routing (GPT, Llama3, Qwen, Gemma) and LoRA-based domain adaptation
+- **Results:** p95 latency of 2-4s, 92% QA accuracy, 80-88% multi-turn task completion
+- **Cost:** Only $0.05-$0.35 per five-turn conversation
+
+### 🧠 KB Agent (Knowledge Base Assistant)
+*Enterprise multimodal knowledge agent*
+
+- Designed modular **RAG architecture** with dual embeddings (text + CLIP), HNSW + IVF vector search, and validity-gated answer generation
+- **Results:** 60% reduction in lookup time, answer accuracy improved from 32% to 92%
+- **Scale:** Supported 10K daily users, driving **$53K in revenue**
+
+---
+
+## Technical Skills
+
+**Languages & Frameworks**
+```
+Python · C++ · Java · Flask · FastAPI
+```
+
+**AI / ML / Deep Learning**
+```
+GPT · Llama · Gemini · Qwen · LangChain · LlamaIndex
+TensorFlow · PyTorch · Keras · Scikit-Learn · OpenCV
+```
+
+**MLOps & Cloud Platforms**
+```
+Kubeflow · Vertex AI · MLflow · Databricks · Airflow
+Azure · GCP · AWS · Kubernetes · Docker · Git
+```
+
+**Data & Storage**
+```
+PostgreSQL · MySQL · BigQuery · Redis · Cosmos DB
+Spark · Dask · Ray · Milvus · Chroma
+```
+
+---
+
+## Education
+
+🎓 **M.S. Robotics & Autonomous Systems** (AI & CS concentration)  
+Arizona State University · **GPA 4.0/4.0** · Dec 2020
+
+---
+
+## Awards & Recognition
+
+| Award | Year |
+|-------|------|
+| 🥇 **1st Place** — AWS \| State Farm Hackathon | 2020 |
+| 🥇 **1st Place** — MESCON | 2014 |
+| 🎖️ **Engineering Graduate Fellowship** — ASU | 2019-2020 |
+| 📚 **Academic Scholarship** — UE | 2010-2015 |
+
+---
+
+## Publications
+
+📄 **Scan & Go** — [US Patent No. 20240029119](https://patents.google.com/patent/US20240029119A1) (USPTO)
+
+📄 **Production And Measurement Of Four Degree Of Freedom Photonic States** — [Semantic Scholar](https://www.semanticscholar.org/)
+
+---
+
+## Let's Connect
+
+I'm always open to discussing **ML engineering roles**, **AI architecture consulting**, or **collaboration opportunities**.
+
+<div class="notice--warning">
+<h4>📬 Get in Touch</h4>
+<p>
+📧 <a href="mailto:jaehyuk0325@gmail.com">jaehyuk0325@gmail.com</a><br>
+💼 <a href="https://www.linkedin.com/in/jaechoi2357/">LinkedIn</a><br>
+🐙 <a href="https://github.com/pnut2357">GitHub</a>
+</p>
+</div>
+
+---
+
+## Support This Blog ☕
+
+If you've found my articles, tutorials, or insights helpful in your ML journey, consider buying me a coffee! Your support helps me continue creating quality content.
+
+<div class="notice--success">
+<h4>💝 Ways to Support</h4>
+<p>
+<a href="https://www.buymeacoffee.com/..." class="btn btn--warning btn--large">☕ Buy Me a Coffee</a>
+</p>
+<p><em>Every contribution, no matter how small, is deeply appreciated and goes directly toward creating more helpful content for the ML community.</em></p>
+</div>
+
+---
+
+## About This Blog
+
+> *"It is easily forgettable that we are running into death from birth."*
+
+This blog is my space for **reflections**, **technical deep-dives**, and **lessons learned** from 8+ years in the trenches of production ML. I share what I wish I had known earlier — the failures, the wins, and everything in between.
+
+**Topics I write about:**
+- 🧠 LLM fine-tuning & prompt engineering
+- 🔧 MLOps best practices & war stories
+- 📊 System design for ML at scale
+- 💡 Career advice for ML engineers
+
+*Happy to be criticized to mature. Iron sharpens iron.*
