@@ -103,8 +103,9 @@ Python · C++ · Java · Flask · FastAPI
 
 **AI / ML / Deep Learning**
 ```
-GPT · Llama · Gemini · Qwen · LangChain · LlamaIndex
+Claude · GPT · Llama · Gemini · Qwen · LangChain · LlamaIndex
 TensorFlow · PyTorch · Keras · Scikit-Learn · OpenCV
+Hugging Face PEFT · LoRA · Whisper
 ```
 
 **MLOps & Cloud Platforms**
