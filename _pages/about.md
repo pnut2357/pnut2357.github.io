@@ -1,9 +1,9 @@
 ---
 permalink: /about/
 title: "Jae Choi"
-excerpt: "ML Engineer & AI Specialist | 8+ Years in Production ML Systems"
+excerpt: "ML Engineer & AI Specialist · 8+ Years in Production ML Systems"
 header:
-  image: "/assets/images/pomme_leo.jpg"
+  overlay_image: "/assets/images/pomme_leo_banner.jpg"
   overlay_filter: 0.3
 toc: true
 toc_sticky: true

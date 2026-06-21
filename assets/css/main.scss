@@ -6,3 +6,11 @@
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
+
+/* Header banner sizing for overlay hero images */
+.page__hero--overlay {
+  min-height: 45vh;                    /* banner height: raise/lower this (e.g. 35vh, 50vh, or 350px) */
+  background-position: center 65%;     /* keep the dogs' faces (lower half of the banner crop) in view */
+  display: flex;
+  align-items: center;
+}
