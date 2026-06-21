@@ -208,7 +208,7 @@ sentiment_scores
 The score goes from -1 (negative) to 1 (positive). That tells how each tweeter feel on the keyword 'superman'. The 9th tweet 'Great Moments in Villainy' was scored 0.8, which means that the tweeter felt extremely positive on 'superman' at that time. However, (s)he actually talks about 'villainy', not 'superman'. Now, we know that it is misclassified. Practice2 will show performance of sentiment analysis between TextBlob and NLTK Vader. I chose these two packages because they are fast and accurate enough for a tremendous amount of text data. If you interested in more details on performance comparison over Vader, IBM Watson, or TextBlob, check [here](https://medium.com/@Intellica.AI/vader-ibm-watson-or-textblob-which-is-better-for-unsupervised-sentiment-analysis-db4143a39445).
 
 If you want to see the code, check [here]()
-
+<!-- 
 # Practice2: Twitter Streaming and Visualizing (Trump)
 Practice2 is to see how live twitters think about the keyword and we will compare performance of NLTK Vader and TextBlob. The program captures the real-time tweets related to the keyword that you can set up. In this time, let's check how people think of President Trump (i.e. keyword='Trump').
 
@@ -1008,4 +1008,4 @@ plt.axis("off")
 ![Wordcloud](/assets/images/Data-Crawling-TwitterAPI/output_33_1.png){:height="800px" width="650px"}  
 | Fig4. Wordcloud of a specific Twitter User about Trump|
 
-Likewise, you can use any cases to know what people think and contact them via Twitter, changing 'KEYWORDS' and 'THRESHOLD'.
+Likewise, you can use any cases to know what people think and contact them via Twitter, changing 'KEYWORDS' and 'THRESHOLD'. -->

@@ -159,14 +159,14 @@ I'm always open to discussing **ML engineering roles**, **AI architecture consul
 
 ## Support This Blog ☕
 
-If you've found my articles, tutorials, or insights helpful in your ML journey, consider buying me a coffee! Your support helps me continue creating quality content.
+This blog is my open notebook — where I write to remember, to share freely, and hopefully to save someone else the hard way. As a Christian, I believe every good gift comes from above (James 1:17), so I try to give back what I've been given: honest, ad-free content. If something here has helped you, a coffee keeps me writing.
 
 <div class="notice--success">
 <h4>💝 Ways to Support</h4>
 <p>
-<a href="https://www.buymeacoffee.com/..." class="btn btn--warning btn--large">☕ Buy Me a Coffee</a>
+<a href="https://www.buymeacoffee.com/pnut2357" class="btn btn--warning btn--large">☕ Buy Me a Coffee</a>
 </p>
-<p><em>Every contribution, no matter how small, is deeply appreciated and goes directly toward creating more helpful content for the ML community.</em></p>
+<p><em>Every contribution, no matter how small, is deeply appreciated — and goes right back into more notes, tutorials, and deep-dives for the community.</em></p>
 </div>
 
 ---
