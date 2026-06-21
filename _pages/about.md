@@ -17,7 +17,7 @@ toc_sticky: true
 
 **Machine Learning Engineer & AI Specialist** with **8+ years** of experience delivering production-grade ML systems. I specialize in **LLM fine-tuning**, **RAG architectures**, and **MLOps** at scale.
 
-Currently at **Walmart Global Tech**, I lead initiatives that have:
+Currently a **Research / Machine Learning Engineer at Meta**. Across my career, I've led initiatives that have:
 
 | Impact | Metric |
 |--------|--------|
@@ -49,8 +49,13 @@ Currently at **Walmart Global Tech**, I lead initiatives that have:
 
 ## Experience
 
+### Research / Machine Learning Engineer
+**Meta** · Jan 2026 – Present
+
+- *More details coming soon.*
+
 ### Machine Learning Engineer | AI Engineer
-**Walmart Global Tech** · Oct 2023 – Present
+**Walmart Global Tech** · Oct 2023 – Jan 2026
 
 - Led design and rollout of **standardized MLOps template** integrating multimodal RAG and data-centric chatbots (Llama, GPT, Gemini-Pro)
 - Established **continuous learning feedback layer** to monitor metrics, capture inference data, and automate retraining
