@@ -7,10 +7,12 @@
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
 
-/* Header banner sizing for overlay hero images */
+/* Header banner: match the photo's aspect ratio so both dogs stay fully visible on every screen size */
 .page__hero--overlay {
-  min-height: 45vh;                    /* banner height: raise/lower this (e.g. 35vh, 50vh, or 350px) */
-  background-position: center 65%;     /* keep the dogs' faces (lower half of the banner crop) in view */
+  aspect-ratio: 1190 / 586;            /* same ratio as pomme_leo_banner.jpg; prevents side-cropping on mobile */
+  min-height: 0;
+  background-position: center;
+  background-size: cover;
   display: flex;
   align-items: center;
 }
