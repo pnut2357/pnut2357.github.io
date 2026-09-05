@@ -170,6 +170,8 @@ include:
 exclude:
   - "*.sublime-project"
   - "*.sublime-workspace"
+  - example_of_jekyll
+  - scripts
   - vendor
   - .asset-cache
   - .bundle
