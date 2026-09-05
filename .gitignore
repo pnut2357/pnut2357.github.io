@@ -153,3 +153,9 @@ package-lock.json
 
 # Ruby
 Gemfile.lock
+
+# yt_summarize pipeline
+scripts/yt_summarize/.venv/
+scripts/yt_summarize/state.json.tmp
+scripts/yt_summarize/yt-summary.log
+scripts/yt_summarize/.env

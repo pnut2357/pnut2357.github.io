@@ -1,0 +1,111 @@
+# Configuration for the YouTube -> Jekyll summarizer pipeline.
+
+# Source content
+channel_handle: "@ByteByteGo"
+# Default playlist used for the initial backfill run (overridable via --backfill).
+backfill_playlist_url: "https://www.youtube.com/playlist?list=PLCRMIe5FDPsd0gVs500xeOewfySTsmEjf"
+
+# Filtering
+# Skip anything shorter than this (filters out Shorts / teasers). In seconds.
+min_duration_seconds: 300
+# Maximum videos to process in a single run (safety cap to respect free-tier limits).
+max_videos_per_run: 25
+
+# Transcripts
+# Preferred transcript languages, in priority order. Falls back to any available.
+transcript_languages:
+  - en
+  - en-US
+  - en-GB
+
+# YouTube caption access. The caption endpoint is aggressively rate-limited per
+# IP (HTTP 429). Authenticating with your browser's YouTube cookies raises the
+# limit dramatically and is the best free fix. Set ONE of these (leave both
+# empty to fetch anonymously, which works only at a slow, throttled pace):
+#   cookies_from_browser: "chrome" | "safari" | "firefox" | "edge" | "brave"
+#     (reads cookies from that browser on THIS machine; be logged into YouTube)
+#   cookies_file: absolute path to a cookies.txt (Netscape format) export
+# IMPORTANT: leave BOTH empty. YouTube's current logged-in flow (SABR / PO
+# token rollout) is broken in yt-dlp -- passing cookies triggers the fatal
+# "The page needs to be reloaded" error on every video. Anonymous access fetches
+# metadata + captions reliably; the only downside is a lower caption rate limit,
+# which we handle with request_delay_seconds + the consecutive-failure breaker.
+# Only set a browser here if you KNOW your yt-dlp version has a working PO-token
+# provider configured.
+cookies_from_browser: ""
+cookies_file: ""
+# yt-dlp player client(s). Only needed to override the broken "tv_downgraded"
+# client that cookies select. With cookies disabled, leave empty (anonymous
+# default clients work). Example if you must use cookies: "default,web_embedded".
+youtube_player_client: ""
+# Optional proxy for ALL YouTube requests (metadata + captions). Use this to
+# route through a DIFFERENT IP than your machine's, bypassing a caption IP ban
+# WITHOUT changing your whole network. Applies to both yt-dlp and
+# youtube-transcript-api. Leave empty to use your machine's own IP.
+# Formats:
+#   http://HOST:PORT
+#   http://USER:PASS@HOST:PORT
+#   socks5://HOST:PORT   (e.g. socks5://127.0.0.1:9050 for a local Tor daemon)
+proxy: "socks5h://127.0.0.1:9050"
+
+# Text summarization provider (OpenAI-compatible chat API).
+# Default: Groq free tier. Groq requires NO credit card, so it can never bill
+# you -- when you hit a rate limit it simply refuses the request.
+#
+# Model choice (all confirmed in Groq's current catalog):
+#   - "openai/gpt-oss-120b"  : strong, Apache-2.0, clean output (default).
+#   - "qwen/qwen3.8-27b"     : reasoning model, deepest insight. If you use it,
+#                              set reasoning_format: "hidden" below so its
+#                              chain-of-thought does not leak into posts.
+#   - "qwen/qwen3.6-27b"     : reasoning model (only supports effort none/default).
+# NOTE: "llama-3.3-70b-versatile" is NOT available on all keys (may 404).
+text_base_url: "https://api.groq.com/openai/v1"
+text_model: "openai/gpt-oss-120b"
+text_api_key_env: "GROQ_API_KEY"
+# Reasoning controls (used by reasoning-capable models; ignored otherwise).
+# reasoning_effort: none | default | low | medium | high
+#   NOTE: for qwen3.8-27b, "medium" gave fuller summaries with FEWER tokens than
+#   "high" in testing (high spends more budget on hidden reasoning).
+# reasoning_format: hidden | parsed | raw  (use "hidden" for Qwen to keep posts clean)
+reasoning_effort: "medium"
+reasoning_format: "hidden"
+# Max completion tokens. REQUIRED for reasoning models: without a generous cap,
+# hidden reasoning eats the default 2048 budget and the answer comes back empty.
+max_tokens: 16384
+# Throttle between calls. Groq's free tier caps output-tokens-per-minute (OTPM);
+# for qwen3.8-27b that free OTPM is low (~1000), and a detailed summary emits
+# ~2000+ tokens, so raise this if you see 429 rate-limit errors on backfills.
+# (openai/gpt-oss-120b has a much higher OTPM and needs no special tuning.)
+request_delay_seconds: 8
+# Safety limits: stop a run early if things are failing (bad key/model or a
+# YouTube IP block) instead of walking the whole channel.
+max_attempts_per_run: 25
+consecutive_failure_limit: 5
+
+# Hero image generation.
+# When true, a hero/illustration image is generated per post *if* the summary
+# model decides one adds value (see the HERO directive in prompt.md).
+generate_images: true
+# Provider: "pollinations" (no key, no account, no cost) | "huggingface" | "none".
+image_provider: "pollinations"
+image_width: 1280
+image_height: 720
+# Generated images are saved here (relative to repo root) and referenced in the
+# post's Minimal Mistakes `header.image` / `header.teaser`.
+image_dir: "assets/images/bbg"
+# Only used when image_provider is "huggingface" (free tier, needs a free token).
+hf_image_model: "black-forest-labs/FLUX.1-schnell"
+hf_api_key_env: "HF_TOKEN"
+
+# Jekyll output
+output_dir: "_posts"
+# Prefix added to generated post filenames: _posts/<date>-<filename_prefix>-<slug>.md
+filename_prefix: "bbg"
+categories:
+  - system-design
+default_tags:
+  - youtube
+  - bytebytego
+  - system-design
+# Include the raw transcript (collapsed) at the bottom of each post.
+include_transcript: true

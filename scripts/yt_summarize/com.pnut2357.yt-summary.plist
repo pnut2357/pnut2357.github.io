@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Local (macOS) daily runner for the YouTube -> Jekyll summarizer.
+  This is the reliable fallback for the GitHub Actions workflow, since YouTube
+  does not block transcript requests from a residential IP.
+
+  Install:
+    cp scripts/yt_summarize/com.pnut2357.yt-summary.plist ~/Library/LaunchAgents/
+    launchctl load ~/Library/LaunchAgents/com.pnut2357.yt-summary.plist
+
+  Uninstall:
+    launchctl unload ~/Library/LaunchAgents/com.pnut2357.yt-summary.plist
+
+  The job runs run.sh, which loads GROQ_API_KEY from
+  scripts/yt_summarize/.env (create it as:  GROQ_API_KEY=your_key_here).
+  Hero images use Pollinations (no key). If you switch image_provider to
+  "huggingface", also add HF_TOKEN to the .env file.
+  Adjust the absolute paths below if you move the repo.
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.pnut2357.yt-summary</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/jaehyukchoi/Projects/pnut2357.github.io/scripts/yt_summarize/run.sh</string>
+        <string>--channel</string>
+        <string>--commit</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/jaehyukchoi/Projects/pnut2357.github.io/scripts/yt_summarize</string>
+
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>8</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+
+    <key>StandardOutPath</key>
+    <string>/Users/jaehyukchoi/Projects/pnut2357.github.io/scripts/yt_summarize/yt-summary.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/jaehyukchoi/Projects/pnut2357.github.io/scripts/yt_summarize/yt-summary.log</string>
+</dict>
+</plist>

@@ -2,4 +2,28 @@
 
 <!-- insert favicons. use https://realfavicongenerator.net/ -->
 
+<!-- Mermaid diagram rendering (used by auto-generated YouTube summary posts) -->
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ startOnLoad: false, theme: "default", securityLevel: "loose" });
+  document.addEventListener("DOMContentLoaded", () => {
+    // Kramdown/Rouge wraps ```mermaid fences in .language-mermaid; convert them
+    // into the <pre class="mermaid"> nodes that mermaid.run() expects.
+    const blocks = document.querySelectorAll(
+      "div.language-mermaid, code.language-mermaid, pre > code.language-mermaid"
+    );
+    blocks.forEach((el) => {
+      const source = el.textContent;
+      const pre = document.createElement("pre");
+      pre.className = "mermaid";
+      pre.textContent = source;
+      const target = el.closest("div.language-mermaid, pre") || el;
+      target.replaceWith(pre);
+    });
+    if (document.querySelector("pre.mermaid")) {
+      mermaid.run({ querySelector: "pre.mermaid" });
+    }
+  });
+</script>
+
 <!-- end custom head snippets -->
