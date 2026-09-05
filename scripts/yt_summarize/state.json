@@ -33,6 +33,141 @@
       "date": "2023-03-06",
       "post_path": "_posts/2023-03-06-bbg-but-what-is-cloud-native-really-all-about.md",
       "processed_at": "2026-09-05T06:44:26.735939+00:00"
+    },
+    "ouipSd_5ivQ": {
+      "title": "10 Key Data Structures We Use Every Day",
+      "date": "2023-05-01",
+      "post_path": "_posts/2023-05-01-bbg-10-key-data-structures-we-use-every-day.md",
+      "processed_at": "2026-09-05T07:27:17.833656+00:00"
+    },
+    "dGAgxozNWFE": {
+      "title": "Cache Systems Every Developer Should Know",
+      "date": "2023-04-04",
+      "post_path": "_posts/2023-04-04-bbg-cache-systems-every-developer-should-know.md",
+      "processed_at": "2026-09-05T07:28:03.570351+00:00"
+    },
+    "J8uAiZJMfzQ": {
+      "title": "Debugging Like A Pro",
+      "date": "2023-02-24",
+      "post_path": "_posts/2023-02-24-bbg-debugging-like-a-pro.md",
+      "processed_at": "2026-09-05T07:28:48.515045+00:00"
+    },
+    "a4yX7RUgTxI": {
+      "title": "Top 5 Redis Use Cases",
+      "date": "2023-02-16",
+      "post_path": "_posts/2023-02-16-bbg-top-5-redis-use-cases.md",
+      "processed_at": "2026-09-05T07:29:33.261288+00:00"
+    },
+    "42UP1fxi2SY": {
+      "title": "CI/CD In 5 Minutes | Is It Worth The Hassle: Crash Course System Design #2",
+      "date": "2023-01-18",
+      "post_path": "_posts/2023-01-18-bbg-ci-cd-in-5-minutes-is-it-worth-the-hassle-crash-course-2.md",
+      "processed_at": "2026-09-05T07:30:18.652702+00:00"
+    },
+    "TlHvYWVUZyc": {
+      "title": "Kubernetes Explained in 6 Minutes | k8s Architecture",
+      "date": "2023-01-11",
+      "post_path": "_posts/2023-01-11-bbg-kubernetes-explained-in-6-minutes-k8s-architecture.md",
+      "processed_at": "2026-09-05T07:31:03.118961+00:00"
+    },
+    "BHqjEjzAicA": {
+      "title": "CAP Theorem Simplified",
+      "date": "2023-01-03",
+      "post_path": "_posts/2023-01-03-bbg-cap-theorem-simplified.md",
+      "processed_at": "2026-09-05T07:31:48.127828+00:00"
+    },
+    "0y6FtKsg6J4": {
+      "title": "What is OSI Model | Real World Examples",
+      "skipped": "too_short",
+      "processed_at": "2026-09-05T07:32:00.702844+00:00"
+    },
+    "RI9np1LWzqw": {
+      "title": "What Is A CDN? How Does It Work?",
+      "skipped": "too_short",
+      "processed_at": "2026-09-05T07:32:13.213920+00:00"
+    },
+    "gnchfOojMk4": {
+      "title": "What is RPC? gRPC Introduction.",
+      "date": "2022-12-01",
+      "post_path": "_posts/2022-12-01-bbg-what-is-rpc-grpc-introduction.md",
+      "processed_at": "2026-09-05T07:32:39.350042+00:00"
+    },
+    "yWzKJPw_VzM": {
+      "title": "What Is GraphQL? REST vs. GraphQL",
+      "date": "2022-11-10",
+      "post_path": "_posts/2022-11-10-bbg-what-is-graphql-rest-vs-graphql.md",
+      "processed_at": "2026-09-05T07:33:24.502364+00:00"
+    },
+    "6ULyxuHKxg8": {
+      "title": "What is API Gateway?",
+      "skipped": "too_short",
+      "processed_at": "2026-09-05T07:33:37.222882+00:00"
+    },
+    "4NB0NDtOwIQ": {
+      "title": "Proxy vs Reverse Proxy (Real-world Examples)",
+      "date": "2022-10-25",
+      "post_path": "_posts/2022-10-25-bbg-proxy-vs-reverse-proxy-real-world-examples.md",
+      "processed_at": "2026-09-05T07:34:09.195419+00:00"
+    },
+    "lTAcCNbJ7KE": {
+      "title": "What Are Microservices Really All About? (And When Not To Use It)",
+      "skipped": "too_short",
+      "processed_at": "2026-09-05T07:34:21.851951+00:00"
+    },
+    "UNUz1-msbOM": {
+      "title": "System Design: Why is Kafka fast?",
+      "date": "2022-06-29",
+      "post_path": "_posts/2022-06-29-bbg-system-design-why-is-kafka-fast.md",
+      "processed_at": "2026-09-05T07:34:54.444724+00:00"
+    },
+    "zt8Cocdy15c": {
+      "title": "System Design: How to store passwords in the database?",
+      "skipped": "too_short",
+      "processed_at": "2026-09-05T07:35:07.055846+00:00"
+    },
+    "Jz8Gs4UHTO8": {
+      "title": "Big Misconceptions about Bare Metal, Virtual Machines, and Containers",
+      "date": "2022-07-14",
+      "post_path": "_posts/2022-07-14-bbg-big-misconceptions-about-bare-metal-virtual-machines-and.md",
+      "processed_at": "2026-09-05T07:35:40.676799+00:00"
+    },
+    "a-sBfyiXysI": {
+      "title": "HTTP/1 to HTTP/2 to HTTP/3",
+      "skipped": "too_short",
+      "processed_at": "2026-09-05T07:35:53.356916+00:00"
+    },
+    "5TRFpFBccQM": {
+      "title": "System Design: Why is single-threaded Redis so fast?",
+      "skipped": "too_short",
+      "processed_at": "2026-09-05T07:36:06.433629+00:00"
+    },
+    "nH4qjmP2KEE": {
+      "title": "Top 7 Most-Used Distributed System Patterns",
+      "date": "2023-05-09",
+      "post_path": "_posts/2023-05-09-bbg-top-7-most-used-distributed-system-patterns.md",
+      "processed_at": "2026-09-05T07:36:33.531147+00:00"
+    },
+    "JTp0TY_2hXM": {
+      "title": "Amazon Prime Video Ditches AWS Serverless, Saves 90%",
+      "skipped": "too_short",
+      "processed_at": "2026-09-05T07:37:11.476794+00:00"
+    },
+    "4vLxWqE94l4": {
+      "title": "Top 6 Most Popular API Architecture Styles",
+      "skipped": "too_short",
+      "processed_at": "2026-09-05T07:37:24.206829+00:00"
+    },
+    "AWVTKBUnoIg": {
+      "title": "Top 5 Most-Used Deployment Strategies",
+      "date": "2023-06-06",
+      "post_path": "_posts/2023-06-06-bbg-top-5-most-used-deployment-strategies.md",
+      "processed_at": "2026-09-05T07:37:51.493132+00:00"
+    },
+    "O3PwuzCvAjI": {
+      "title": "How Discord Stores TRILLIONS of Messages",
+      "date": "2023-06-15",
+      "post_path": "_posts/2023-06-15-bbg-how-discord-stores-trillions-of-messages.md",
+      "processed_at": "2026-09-05T07:38:37.024431+00:00"
     }
   }
 }
