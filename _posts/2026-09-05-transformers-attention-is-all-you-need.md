@@ -937,5 +937,4 @@ Not a memorization list — a checklist that each symbol and bottleneck is clear
 
 - [ByteByteGo — Transformers Step-by-Step Explained (Attention Is All You Need)](https://www.youtube.com/watch?v=avjX3QrYkls) (2025-12-11, ~10 min).
 - [Stanford CS25 V2 — Introduction to Transformers w/ Andrej Karpathy](https://www.youtube.com/watch?v=XfpMkf4rD6E) (official, 2023-05-19, ~72 min). [Same recording on GrokVerse](https://www.youtube.com/watch?v=KizGcORD-KA).
-- Daily Dose of DS, *LLMOps* crash course Parts 1–14 (Avi Chawla, [dailydoseofds.com](https://www.dailydoseofds.com/)) — chapter sequence and worked examples; copyrighted, so this post is a study reconstruction, not a reprint. Attached locally: Parts 1, 2, 3, 6, 10, 11, 12. Parts 4–5, 7–9, 13–14 were covered from the study-guide notes, not from those PDF files.
 - Notion (login-walled; not fetched): [Gen-AI Concepts](https://app.notion.com/p/Gen-AI-Concepts-1366b7f954a280ddbc11c22340d7ecb2), [NLP Topics](https://app.notion.com/p/NLP-Topics-Main-Study-Group-fde9706b244f4d6e8d15204f41483ec3).
